@@ -123,6 +123,7 @@ try {
         httpOnly:true,
         sameSite: "strict",
         secure:process.env.NODE_ENV||'development',
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
      }) .status(200).json({
         success:true,
         existUser,
@@ -271,6 +272,7 @@ exports.googleLogin = async(req,res) =>{
                 httpOnly:true,
                 sameSite: "strict",
                 secure:process.env.NODE_ENV||'development',
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
              }) .status(200).json({
                 success:true,
                 existUser,
@@ -330,6 +332,7 @@ exports.login = async(req,res) =>{
                 httpOnly:true,
                 sameSite: "strict",
                 secure:process.env.NODE_ENV||'development',
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
              }) .status(200).json({
                 success:true,
                 existUser,
