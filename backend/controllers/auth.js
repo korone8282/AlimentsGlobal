@@ -327,18 +327,16 @@ exports.login = async(req,res) =>{
             existUser.token = token;
             existUser.password=" ";
 
-              res.cookie("cookie1",token,
-            { 
-                httpOnly:true,
-                // sameSite: "lax",
-                // secure:process.env.NODE_ENV||'development',
+            const options = {
                 expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-             }) .status(200).json({
-                success:true,
-                existUser,
+                httpOnly: true,
+              }
+              res.cookie("cookie1", token, options).status(200).json({
+                success: true,
                 token,
-                message:"logged in"
-            });
+                message: `User Login Success`,
+              })
+        
         }
         else{
             res.status(403).json({
