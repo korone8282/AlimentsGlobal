@@ -32,9 +32,12 @@ app.use("/uploads",express.static(path.join(__dirname + '/uploads')));
 
 port = 4000||process.env.PORT;
 
-app.get('./api/config/paypal',(req,res)=>{
-	res.send({ clientId: process.env.PAYPAL_CLIENT_ID })
-})
+app.get("/", (req, res) => {
+	return res.json({
+		success: true,
+		message: "Your server is up and running ...",
+	});
+});
 
 app.listen(port,()=>{	
     console.log(`listening at port: ${port}`);
