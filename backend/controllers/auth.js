@@ -339,7 +339,6 @@ exports.login = async(req,res) =>{
                 token,
                 message:"logged in"
             });
-
         }
         else{
             res.status(403).json({
