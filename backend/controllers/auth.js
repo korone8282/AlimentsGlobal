@@ -336,7 +336,6 @@ exports.login = async(req,res) =>{
                 token,
                 message: `User Login Success`,
               })
-        
         }
         else{
             res.status(403).json({
