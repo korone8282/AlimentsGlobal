@@ -83,7 +83,7 @@ const SignUp = () => {
   }
   
     return (
-     <div className='h-100vh'>
+     <div className='h-[100vh]'>
       {!showOtp?(
         <div className="overflow-hidden">
       <div className='h-[100vh] flex items-center justify-center'>
