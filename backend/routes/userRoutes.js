@@ -1,0 +1,27 @@
+const express = require('express');
+const router = express.Router();
+require("dotenv").config();
+const {signup,login,logout,
+       getAllUsers,
+       getCurrentUser,
+       updateProfile,
+       deleteUser,
+       userId,
+       sendOtp,
+       loginOtp,
+       sendVerifyOtp, 
+       googleLogin} = require('../controllers/auth');
+const {authorization,authAdmin} = require('../middlewares/authorization');
+
+router.post('/login',login);
+router.post("/googleLogin",googleLogin)
+router.route("/signup").post(signup);
+router.post("/logout",logout);
+router.route("/getAllUsers").get(authorization,authAdmin,getAllUsers);
+router.get("/profile",authorization,getCurrentUser).put("/profile",authorization,updateProfile);
+router.route("/:id").delete(authorization,authAdmin,deleteUser).get(userId);
+router.post("/otpEntry",sendOtp);
+router.post("/otpLogin",loginOtp);
+router.post("/verifyOtp",sendVerifyOtp);
+
+module.exports = router;
