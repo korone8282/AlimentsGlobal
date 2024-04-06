@@ -78,6 +78,7 @@ const Login = () => {
                id="email" 
                {...register("email",{required:true})}
                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                autoComplete='on'
                />
         {errors.email && (
             <span>

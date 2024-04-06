@@ -330,8 +330,8 @@ exports.login = async(req,res) =>{
               res.cookie("cookie1",token,
             { 
                 httpOnly:true,
-                sameSite: "none",
-                // secure:process.env.NODE_ENV||'development',
+                sameSite: "Lax",
+                secure:process.env.NODE_ENV||'development',
                 expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
              }) .status(200).json({
                 success:true,

@@ -18,7 +18,6 @@ app.use(
 	cors({
 		origin: "https://alimentsglobal.netlify.app",
 		credentials: true,
-		exposedHeaders: ["set-cookie"],
 	})
 );
 app.use(express.urlencoded({ extended: true }));
