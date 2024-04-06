@@ -45,8 +45,16 @@ const OtpLogin = () => {
 
     const submitHandle = async() =>{
         try {
+
+          const toastId = toast.loading("Loading...",{
+            position: 'top-center',
+          });
+          
           await apiConnector(GENOTP_URL,"POST",formData);
+
+          toast.dismiss(toastId);
           toast("Otp sent to email");
+
           setshowOtp(1);
         } catch (error) {
           console.log("error sending otp",error);
@@ -55,11 +63,19 @@ const OtpLogin = () => {
 
     const loginHandler = async() =>{
       try {
+
+        const toastId = toast.loading("Loading...",{
+          position: 'top-center',
+        });
+
         const res = await apiConnector(OTPLOG_URL,"POST",formData),
               userinfo = res.data.existUser;
         
         dispatch(setcredentials(userinfo));
+
+        toast.dismiss(toastId);
         toast("logged in");
+
         navigate("/");
       } catch (error) {
         toast.error(error.message);

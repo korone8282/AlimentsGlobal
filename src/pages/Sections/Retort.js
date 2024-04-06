@@ -4,7 +4,6 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import { DATA_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader'
-import { useSelector } from 'react-redux';
 
 const Retort = () => {
 
@@ -17,6 +16,7 @@ const Retort = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   useEffect(() => {
+    
     async function getData(){
       try {
         const res = await apiConnector(`${DATA_URL}/${date.date}/${date.month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
@@ -29,7 +29,7 @@ const Retort = () => {
     }
 
   getData();
-  }, [date]);
+  }, [date,userinfo.token]);
 
   const sectionData = data.length ? data.filter( item => item.sectionMain === "Retort") : [];
 

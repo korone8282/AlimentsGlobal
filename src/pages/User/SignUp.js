@@ -58,8 +58,15 @@ const SignUp = () => {
   
     const submitHandle = async() =>{
         try {
+          const toastId = toast.loading("Loading...",{
+            position: 'top-center',
+          });
+
           await apiConnector(VERIFY_URL,"POST",formData);
+
+          toast.dismiss(toastId);
           toast("Otp sent to email");
+          
           setshowOtp(1);
         } catch (error) {
           console.log("error sending otp",error);
@@ -74,8 +81,15 @@ const SignUp = () => {
     
   const registerHandler = async() =>{
   try {
+    const toastId = toast.loading("Loading...",{
+      position: 'top-center',
+    });
+
   await apiConnector(REGISTER_API,"POST",formData);
+
+  toast.dismiss(toastId);
   toast.success("successfully signed up");
+
   navigate("/Login");
   } catch (error) {
   toast.error(error.message);

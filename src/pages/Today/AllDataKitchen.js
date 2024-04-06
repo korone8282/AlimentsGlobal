@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
-import { useSelector } from 'react-redux';
 
 const AllDataKitchen = () => {
 
@@ -24,16 +23,17 @@ const AllDataKitchen = () => {
 
   const [categories, setcategories] = useState([]); 
 
-  async function getCategories(){
-    try {
-     const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
-     setcategories(res.data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   useEffect(() => {
+
+    async function getCategories(){
+      try {
+       const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+       setcategories(res.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
     getCategories();
   }, []);
 
@@ -70,9 +70,18 @@ const AllDataKitchen = () => {
 
   const submitHandler = async() =>{
    try {
+
+    const toastId = toast.loading("Loading...",{
+      position: 'top-center',
+    });
+
     await apiConnector(`${DATA_URL}/Kitchen`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+
     dispatch(emptyData(val));
+
+    toast.dismiss(toastId);
     toast("Successfully Submited");
+    
     navigate("/");
    } catch (error) {
     toast("Check Buyer / Product Name ");

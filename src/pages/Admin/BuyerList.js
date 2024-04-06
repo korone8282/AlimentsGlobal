@@ -22,18 +22,27 @@ const BuyerList = () => {
   const [currentCategory, setcurrentCategory] = useState();
   const [loading, setLoading] = useState(1);
 
-  async function getCategories(){
-    try {
-  const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-  setcategories(res.data.data);
-  setLoading(0);
-    } catch (error) {
-      
-    }
-    }
-
   useEffect(() => {
+
+    async function getCategories(){
+      try {
+        const toastId = toast.loading("Loading...",{
+          position: 'top-center',
+        });
+
+    const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+    setcategories(res.data.data);
+
+    toast.dismiss(toastId);
+    
+    setLoading(0);
+      } catch (error) {
+        
+      }
+      }
+
     getCategories();
+
     if(isSubmitSuccessful){
       reset({
         name:"",
