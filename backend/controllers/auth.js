@@ -326,12 +326,12 @@ exports.login = async(req,res) =>{
             existUser = existUser.toObject();
             existUser.token = token;
             existUser.password=" ";
-
+            
               res.cookie("cookie1",token,
             { 
-                httpOnly:false,
-                sameSite: "strict",
-                secure:process.env.NODE_ENV||'development',
+                httpOnly:true,
+                // sameSite: "strict",
+                // secure:process.env.NODE_ENV||'development',
                 expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
              }) .status(200).json({
                 success:true,
