@@ -4,6 +4,7 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import { DATA_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader'
+import { useSelector } from 'react-redux';
 
 const Dispatch = () => {
 
@@ -13,10 +14,12 @@ const Dispatch = () => {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
 
+  const {userinfo} = useSelector(state=>state.auth);
+
   useEffect(() => {
     async function getData(){
       try {
-        const res = await apiConnector(`${DATA_URL}/${date.date}/${date.month}`,"GET");
+        const res = await apiConnector(`${DATA_URL}/${date.date}/${date.month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
         setData(res.data.data);
         setLoading(0);
       } catch (error) {

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate} from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 const AllDataFilling = () => {
   
@@ -65,9 +66,11 @@ const AllDataFilling = () => {
   other:""
   });
 
+  const {userinfo} = useSelector(state=>state.auth);
+
   const submitHandler = async() =>{
    try {
-    await apiConnector(`${DATA_URL}/Filling`,"POST",initalData[val]);
+    await apiConnector(`${DATA_URL}/Filling`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
     dispatch(emptyData(val));
     toast("Successfully Submited");
     navigate("/");

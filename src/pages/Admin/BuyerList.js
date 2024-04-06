@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import {toast} from 'react-toastify';
 import { useState , useEffect} from 'react';
 import Loader from '../../components/Loader';
+import { useSelector } from 'react-redux';
 
 const BuyerList = () => {
 
@@ -14,6 +15,8 @@ const BuyerList = () => {
     formState: {isSubmitSuccessful} 
   }  = useForm();
 
+  const {userinfo} = useSelector(state=>state.auth);
+  
   const [openBox, setopenBox] = useState(0);
   const [categories, setcategories] = useState([]); 
   const [currentCategory, setcurrentCategory] = useState();
@@ -21,7 +24,7 @@ const BuyerList = () => {
 
   async function getCategories(){
     try {
-  const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+  const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
   setcategories(res.data.data);
   setLoading(0);
     } catch (error) {
