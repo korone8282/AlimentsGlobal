@@ -2,20 +2,20 @@ import React from 'react'
 import { CATEGORIES_URL  } from '../../redux/Utils/constants';
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useForm } from "react-hook-form";
-import {toast} from 'react-toastify';
 import { useState , useEffect} from 'react';
+import {toast} from 'react-toastify';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
 
 const BuyerList = () => {
+
+  const {userinfo} = useSelector(state=>state.auth);
 
   const { register, 
     handleSubmit,
     reset, 
     formState: {isSubmitSuccessful} 
   }  = useForm();
-
-  const {userinfo} = useSelector(state=>state.auth);
   
   const [openBox, setopenBox] = useState(0);
   const [categories, setcategories] = useState([]); 
@@ -26,15 +26,10 @@ const BuyerList = () => {
 
     async function getCategories(){
       try {
-        const toastId = toast.loading("Loading...",{
-          position: 'top-center',
-        });
 
     const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
     setcategories(res.data.data);
 
-    toast.dismiss(toastId);
-    
     setLoading(0);
       } catch (error) {
         
@@ -54,19 +49,19 @@ const BuyerList = () => {
 
 
 async function handleDelete(){
-  await apiConnector(`${CATEGORIES_URL}/${currentCategory._id}`,"DELETE")
+  await apiConnector(`${CATEGORIES_URL}/${currentCategory._id}`,"DELETE",null,{Authorization: `Bearer ${userinfo.token}`})
   .then(toast("deleted successfully"),setcurrentCategory(""),setopenBox(0))
   .catch((e)=>toast(e.message));
 }
 
 async function handleCreate(data){
-  await apiConnector(`${CATEGORIES_URL}`,"POST",data)
+  await apiConnector(`${CATEGORIES_URL}`,"POST",data,null,{Authorization: `Bearer ${userinfo.token}`})
   .then(toast("created successfully"),setcurrentCategory(""),setopenBox(0))
   .catch((e)=>toast(e.message));
 }
 
 const handleUpdate = async(data) =>{
-await apiConnector(`${CATEGORIES_URL}/${currentCategory._id}`,"POST",data)
+await apiConnector(`${CATEGORIES_URL}/${currentCategory._id}`,"POST",data,null,{Authorization: `Bearer ${userinfo.token}`})
 .then(toast("updated successfully"),setcurrentCategory(""),setopenBox(0))
 .catch((e)=>toast(e.message));
 }

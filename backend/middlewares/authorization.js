@@ -5,7 +5,7 @@ require("dotenv").config();
 //authentication
 exports.authorization = async(req,res,next)=>{
 try{
-                           //cookie-name
+                           
     const token =  req.header("Authorization").replace("Bearer ", "") || req.cookies.cookie1;
 
     if(!token){
