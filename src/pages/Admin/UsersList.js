@@ -4,6 +4,7 @@ import { USERINFO_URL } from '../../redux/Utils/constants';
 import { FaRegEdit } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Loader from '../../components/Loader';
 
 const UserList = () => {
 
@@ -11,6 +12,8 @@ const UserList = () => {
   const navigate = useNavigate();
 
   const {userinfo} = useSelector(state=>state.auth);
+
+  const [loading, setLoading] = useState(1);
   
   useEffect(() => {
 
@@ -18,6 +21,7 @@ const UserList = () => {
       try {
         const res = await apiConnector(USERINFO_URL,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
         setUsers(res.data.users);
+        setLoading(0);
       } catch (error) {
         console.log(error);
       }
@@ -32,8 +36,10 @@ const UserList = () => {
  
   return (
     <div className='text-3xl flex justify-center mt-12'>
-
-<table className=' border-2 border-black'>
+    {
+      loading ? (<Loader/>
+      ) : (
+        <table className=' border-2 border-black'>
 <thead>
 <tr className='border-2 text-start'>
    <th className='border-2 w-48 p-2'>S No.</th>
@@ -61,7 +67,8 @@ const UserList = () => {
      
 
 </table>
-
+      )
+    }
     </div>
 
   )
