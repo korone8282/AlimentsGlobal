@@ -89,7 +89,7 @@ try {
     const {email,otp} = req.body
     const newOtp = otp.join("");
  
-    const existUser = await User.findOne({email});
+    let existUser = await User.findOne({email});
 
     const recentOtp = await OtpModel.findOne({email}).sort({createdAt:-1}).limit(1);
 
