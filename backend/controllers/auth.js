@@ -107,7 +107,7 @@ try {
         })
     }
 
-    var token = jwt.sign({
+    var token1 = jwt.sign({
         email:existUser.email,
         id:existUser.id,
         isAdmin:existUser.isAdmin,
@@ -117,10 +117,10 @@ try {
     );
 
     existUser = existUser.toObject();
-    existUser.token = token;
+    existUser.token = token1;
     existUser.password=" ";
 
-      res.cookie("cookie1",token,
+      res.cookie("cookie1",token1,
     { 
         httpOnly:true,
         sameSite: "strict",
