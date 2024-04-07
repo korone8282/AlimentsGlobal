@@ -129,7 +129,7 @@ try {
      }) .status(200).json({
         success:true,
         existUser,
-        token,
+        token1,
         message:"logged in"
     });
 
