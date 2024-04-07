@@ -23,6 +23,7 @@ import AllDataDispatch from './pages/Today/AllDataDispatch'
 import AllDataFilling from './pages/Today/AllDataFilling'
 import AllDataRetort from './pages/Today/AllDataRetort'
 import Navbar from './components/Navbar'
+import UpdateProfile from "./pages/User/UpdateProfile";
 
 const App = () => {
   
@@ -49,6 +50,7 @@ const App = () => {
      <Route path='Date' element={<Date/>} />
      <Route path=':section/:month' element={<DataLog/>} />
      <Route path='Profile/:id' element={<Profile/>} />
+     <Route path='updateProfile/:id' element={<UpdateProfile/>} />
   </Route>
 
   <Route path="/admin" element={<AdminRoute/>}>
