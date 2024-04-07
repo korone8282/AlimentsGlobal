@@ -117,7 +117,7 @@ const ProfileMenu = () => {
             <li>
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
-                to="/user/Profile"
+                to={`/user/Profile/${userinfo._id}`}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#FB2E86",
                 })}
