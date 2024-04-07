@@ -116,6 +116,8 @@ try {
     {expiresIn:"3h"}
     );
 
+    existUser = existUser.toObject();
+    existUser.token = token;
     existUser.password=" ";
 
       res.cookie("cookie1",token,
