@@ -97,10 +97,10 @@ const SignUp = () => {
   }
   
     return (
-     <div className='h-[full]'>
+     <div >
       {!showOtp?(
         <div className="overflow-hidden">
-      <div className='h-[100vh] flex items-center justify-center'>
+      <div className='h-[90vh] flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80'
         alt=''
         className='h-[40rem] w-[35rem]' />
@@ -197,31 +197,32 @@ const SignUp = () => {
       </div>
     </div>
       ):(
-        <div className='flex flex-col justify-center items-center text-3xl gap-8'>
-  <div>
-  Enter OTP sent to 
-  </div>
-          <div className='flex gap-4 text-black '>
-          {
-              formData.otp.map((key,index)=>(
-                  <input type='text'
-                         name='otp'
-                         ref={input=>(inputRef.current[index]=input)}
-                         key={index}
-                         maxLength='1'
-                         className='h-12 w-12 text-center'
-                         placeholder='-'
-                         onChange={(e)=>indexHandler(index,e)}
-                         onClick={()=>keyHandler(index)} 
-                         onKeyDown={(e)=>editHandle(e,index)}
-                         />
-              ))
-          
-          } 
-          </div>
-          <div onClick={()=>setshowOtp(0)}>
-              Edit Details?
-          </div>
+        <div className='flex flex-col justify-center items-center text-3xl gap-12 h-[90vh]'>
+<div>
+Enter OTP sent to 
+</div>
+        <div className='flex gap-4'>
+        {
+            formData.otp.map((key,index)=>(
+                <input type='text'
+                       name='otp'
+                       ref={input=>(inputRef.current[index]=input)}
+                       key={index}
+                       maxLength='1'
+                       className='h-12 w-12 text-center bg-transparent'
+                       placeholder='-'
+                       onChange={(e)=>indexHandler(index,e)}
+                       onClick={()=>keyHandler(index)} 
+                       onKeyDown={(e)=>editHandle(e,index)}
+                       />
+            ))
+        
+        } 
+        </div>
+        <div onClick={()=>setshowOtp(0)}
+        className='text-2xl font-semibold h-16 w-[14rem] flex items-center justify-center border-4 rounded-md border-[#2e1065] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065]'>
+            Edit Details?
+        </div>
   </div>
       )}
      </div>
