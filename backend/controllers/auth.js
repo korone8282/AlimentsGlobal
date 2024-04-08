@@ -401,7 +401,7 @@ exports.getAllUsers = async(req,res) =>{
 exports.getCurrentUser = async(req,res) =>{
 
     try{
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.params.id);
 
         if(!user){
            res.status(404).json({
@@ -429,28 +429,32 @@ exports.getCurrentUser = async(req,res) =>{
 exports.updateProfile = async(req,res) =>{
 try{
 
-    const user = await User.findById(req.user.id);
+   
+    const user = await User.findById(req.params.id);
 
-    if(!user){
-        res.status(404).json({
-            success:false,
-            data:"no user exists",
-        }); 
-        return;
-    }
+    const {fname,dob,gender,image,about} = req.fields;
 
-    user.email = req.body.email || user.email;
-    user.fname = req.body.fname || user.fname;
-    user.gender = req.body.gender || "";
-    user.about = req.body.about || "";
-    user.dob = req.body.dob || "";
+        if(!user){
+            return res.status(404).json({
+                success:false,
+                data:"no user exists",
+            }); 
+        }
+
+        user.fname = fname || user.fname;
+        user.dob = dob || user.dob;
+        user.gender = gender || user.gender;
+        user.image = image || user.image;
+        user.about = about || user.about;
 
 
-    const updatedUser = await user.save();
+        const updatedUser  = await user.save();
 
-    res.json({
-        updatedUser,
-    });
+        res.status(200).json({
+            success:true,
+            message:"product succesfully updated",
+            updatedUser
+        })
 
 }catch(e){
     console.log(e);
