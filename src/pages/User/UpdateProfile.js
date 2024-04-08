@@ -19,7 +19,6 @@ const UpdateProfile = () => {
        try{
          const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
          setUser(res.data.data);
-         console.log(res);
      
        } catch (e) {
          console.log(e);

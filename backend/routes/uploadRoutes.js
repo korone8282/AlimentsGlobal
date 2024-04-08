@@ -40,7 +40,7 @@ router.post("/",(req,res)=>{
                 image:`${req.file.path}`,
                 message:"successfull image upload"})
         } else {
-            res.status(400).json({message:"No image file provided"});
+            res.status(401).json({message:"No image file provided"});
         }
 
     })
