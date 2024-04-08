@@ -70,7 +70,7 @@ async function handleSubmit(){
   file.append('about',data.about);
 
   try{
-    await apiConnector(`${PROFILE_URL}/${id}`,"PUT",file,null,{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${PROFILE_URL}/${id}`,"PUT",file,{Authorization: `Bearer ${userinfo.token}`});
     toast("User successfully updated");
     navigate("/");
 
