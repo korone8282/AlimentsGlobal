@@ -17,7 +17,7 @@ const UpdateProfile = () => {
 
     const profileFetcher = async() => {
        try{
-         const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,null,{Authorization: `Bearer ${userinfo.token}`});
+         const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
          setUser(res.data.data);
          console.log(res);
      

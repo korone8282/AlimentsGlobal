@@ -12,6 +12,7 @@ const Profile = () => {
     const [user, setUser] = useState({});
     
     const {userinfo} = useSelector(state => state.auth);
+    
     const [loading, setLoading] = useState(1);
 
     const {id} = useParams();
@@ -21,7 +22,7 @@ const Profile = () => {
      const profileFetcher = async() => {
         try{
 
-          const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,null,{Authorization: `Bearer ${userinfo.token}`});
+          const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
           setUser(res.data.data);
           setLoading(0);
 
