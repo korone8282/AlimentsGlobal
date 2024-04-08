@@ -9,6 +9,7 @@ const Home = () => {
   const [date, setDate] = useState(new Date());
 
   const {userinfo} = useSelector(state => state.auth);
+  console.log(userinfo);
 
   useEffect(() => {
     const interval = setInterval(()=>{
