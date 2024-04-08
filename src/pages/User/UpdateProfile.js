@@ -95,7 +95,7 @@ async function handleSubmit(){
               <img
                 src={imageUrl ? imageUrl : user.image}
                 alt="product"
-                className="rounded-full h-24 w-24"
+                className="rounded-full h-24 w-24 object-cover"
               />
             <label className="border text-white px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
             {imageUrl ? "" : "Upload Image"} 

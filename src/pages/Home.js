@@ -24,7 +24,7 @@ const Home = () => {
     <div className='font-bold text-2xl my-4 w-full justify-between flex px-32 items-center'>
       <div className='flex gap-6 items-center'>
       
-        <img src={userinfo.image} alt='Profile' className='h-24 w-24 rounded-full'/>
+        <img src={userinfo.image} alt='Profile' className='h-24 w-24 rounded-full object-cover'/>
         <div>{userinfo.fname}</div>
         
       </div>
