@@ -21,10 +21,10 @@ const Home = () => {
   return (
     <div className= 'flex flex-col text-white h-[90vh]'>
       
-      <div className='font-bold text-2xl my-4 w-full justify-between flex mx-12'>
-      <div className='flex gap-6'>
+    <div className='font-bold text-2xl my-4 w-full justify-between flex px-32 items-center'>
+      <div className='flex gap-6 items-center'>
       
-        <img src={userinfo.image} alt='Profile' className='h-48 w-48 rounded-full'/>
+        <img src={userinfo.image} alt='Profile' className='h-24 w-24 rounded-full'/>
         <div>{userinfo.fname}</div>
         
       </div>
@@ -33,7 +33,7 @@ const Home = () => {
       {date.toLocaleString()}
       </div>
 
-      </div>
+    </div>
      
 
       <div className='w-full bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] h-10 font-bold text-3xl my-8 text-center'>
