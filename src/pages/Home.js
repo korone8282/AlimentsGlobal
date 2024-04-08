@@ -2,10 +2,13 @@ import React from 'react'
 import ItemCards from '../components/ItemCards'
 import { useState ,useEffect } from 'react';
 import DailyCard from '../components/DailyCard';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
 
   const [date, setDate] = useState(new Date());
+
+  const {userinfo} = useSelector(state => state.auth);
 
   useEffect(() => {
     const interval = setInterval(()=>{
@@ -17,10 +20,21 @@ const Home = () => {
 
   return (
     <div className= 'flex flex-col text-white h-[90vh]'>
+      
+      <div className='font-bold text-2xl my-4 w-full justify-between flex mx-12'>
+      <div className='flex gap-6'>
+      
+        <img src={userinfo.image} alt='Profile' className='h-48 w-48 rounded-full'/>
+        <div>{userinfo.fname}</div>
+        
+      </div>
 
-      <div className='font-bold text-2xl text-end my-4'>
+      <div>
       {date.toLocaleString()}
       </div>
+
+      </div>
+     
 
       <div className='w-full bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] h-10 font-bold text-3xl my-8 text-center'>
       Today's Data
