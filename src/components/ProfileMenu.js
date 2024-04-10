@@ -71,6 +71,17 @@ const ProfileMenu = () => {
             <li>
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                to="/admin/BuyerProducts"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "#FB2E86",
+                })}
+              >
+                Buyers Products
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
                 to="/admin/BuyerList"
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#FB2E86",
