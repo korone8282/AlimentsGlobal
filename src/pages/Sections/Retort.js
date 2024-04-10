@@ -53,6 +53,7 @@ const Retort = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch/cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -68,6 +69,7 @@ const Retort = () => {
           <td className='border-4 border-black px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
+          <td className='border-4 border-black'>{val.batch}</td>
           <td className='border-4 border-black'>{val.retortCycle}</td>
           <td className='border-4 border-black'>{val.pouchPerCycle}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>

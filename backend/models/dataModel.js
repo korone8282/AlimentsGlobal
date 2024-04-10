@@ -11,6 +11,10 @@ const dataSchema = new mongoose.Schema({
             type: String,
             required : true
         },
+        batch:{
+            type: String,
+            required : true
+        },
         buyer:{
             type: mongoose.Schema.Types.ObjectId,
             required: true,

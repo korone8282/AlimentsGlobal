@@ -43,6 +43,7 @@ const AllDataRetort = () => {
 
   const [formData, setformData] = useState({
   section:"",
+  batch:"",
   buyer:"",
   buyerName:"",
   productName:"",
@@ -69,11 +70,12 @@ const AllDataRetort = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   const submitHandler = async() =>{
-   try {
 
     const toastId = toast.loading("Loading...",{
       position: 'top-center',
     });
+
+   try {
 
     await apiConnector(`${DATA_URL}/Retort`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
@@ -84,6 +86,7 @@ const AllDataRetort = () => {
     
     navigate("/");
    } catch (error) {
+    toast.dismiss(toastId);
     toast("Check Buyer / Product Name ");
     console.log(error);
    }
@@ -113,6 +116,7 @@ const AllDataRetort = () => {
     
     setformData({
       section:"",
+      batch:"",
       buyer:"",
       buyerName:"",
       productName:"",
@@ -173,6 +177,7 @@ const AllDataRetort = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch/cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -189,6 +194,7 @@ const AllDataRetort = () => {
           <td className='border-4 border-black px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
+          <td className='border-4 border-black'>{val.batch}</td>
           <td className='border-4 border-black'>{val.retortCycle}</td>
           <td className='border-4 border-black'>{val.pouchPerCycle}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
@@ -227,6 +233,14 @@ const AllDataRetort = () => {
           </td>
           <td className='border-4 border-black'>
           <input type='text'
+                 name='batch'
+                 value={formData.batch}
+                 className='w-32 bg-transparent'
+                 onChange={ e => inputHandler(e) }
+            ></input>
+          </td>
+          <td className='border-4 border-black'>
+          <input type='number'
                  name='retortCycle'
                  value={formData.retortCycle}
                  className='w-full bg-transparent'
@@ -234,7 +248,7 @@ const AllDataRetort = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.pouchPerCycle}
                  name='pouchPerCycle'
                  className='w-full bg-transparent'
@@ -242,7 +256,7 @@ const AllDataRetort = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
                  className='w-full bg-transparent'

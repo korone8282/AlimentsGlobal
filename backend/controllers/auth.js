@@ -120,13 +120,7 @@ try {
     existUser.token = token1;
     existUser.password=" ";
 
-      res.cookie("cookie1",token1,
-    { 
-        httpOnly:true,
-        sameSite: "strict",
-        secure:process.env.NODE_ENV||'development',
-        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-     }) .status(200).json({
+      res.status(200).json({
         success:true,
         existUser,
         token1,
@@ -250,6 +244,7 @@ exports.googleLogin = async(req,res) =>{
                 password:hashPass,
                 image: picture ? picture : `https://api.dicebear.com/7.x/initials/svg?seed=${name} ${name}`
             })
+            
             return res.status(200).json({
                 success:true,
                 data:newUser,
@@ -269,13 +264,7 @@ exports.googleLogin = async(req,res) =>{
             existUser.token = token1;
             existUser.password=" ";
 
-              res.cookie("cookie1",token1,
-            { 
-                httpOnly:true,
-                sameSite: "strict",
-                secure:process.env.NODE_ENV||'development',
-                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-             }) .status(200).json({
+              res.status(200).json({
                 success:true,
                 existUser,
                 token1,
@@ -329,13 +318,7 @@ exports.login = async(req,res) =>{
             existUser.token = token;
             existUser.password=" ";
             
-              res.cookie("cookie1",token,
-            { 
-                httpOnly:true,
-                sameSite: "Lax",
-                secure:process.env.NODE_ENV||'development',
-                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-             }) .status(200).json({
+              res.status(200).json({
                 success:true,
                 existUser,
                 token,

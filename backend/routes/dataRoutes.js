@@ -5,9 +5,9 @@ const { createData,
         deleteData,
         readData } = require('../controllers/dailyData');
 
-router.route("/:section").post(authorization,createData);
+router.route("/:section").post(authorization,authAdmin,createData);
 
-router.route("/:date/:month").get(authorization,readData);
+router.route("/:date/:month").get(authorization,authAdmin,readData);
 router.route("/:id").delete(authorization,authAdmin,deleteData)
                     
 

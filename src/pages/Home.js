@@ -1,22 +1,24 @@
-import React from 'react'
-import ItemCards from '../components/ItemCards'
-import { useState ,useEffect } from 'react';
+import React,  { useEffect } from 'react'
+import ItemCards from '../components/ItemCards';
 import DailyCard from '../components/DailyCard';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
 
-  const [date, setDate] = useState(new Date());
+  const date = new Date();
 
   const {userinfo} = useSelector(state => state.auth);
 
-  useEffect(() => {
-    const interval = setInterval(()=>{
-      setDate(new Date());
-    },1000);
-    return () => clearInterval(interval);
-  }, []);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+   
+    if(!userinfo){
+      navigate("/Login")
+    }
+  }, [userinfo,navigate]);
+ 
 
   return (
     <div className= 'flex flex-col text-white h-[90vh]'>
@@ -24,13 +26,13 @@ const Home = () => {
     <div className='font-bold text-2xl my-4 w-full justify-between flex px-32 items-center'>
       <div className='flex gap-6 items-center'>
       
-        <img src={userinfo.image} alt='Profile' className='h-24 w-24 rounded-full object-cover'/>
-        <div>{userinfo.fname}</div>
+        <img src={userinfo?.image} alt='Profile' className='h-24 w-24 rounded-full object-cover'/>
+        <div>{userinfo?.fname}</div>
         
       </div>
 
       <div>
-      {date.toLocaleString()}
+      {date.toLocaleString().substring(0,10)}
       </div>
 
     </div>

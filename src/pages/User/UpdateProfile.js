@@ -1,4 +1,4 @@
-import React, { useState,useEffect }  from 'react'
+import React, { useState}  from 'react'
 import { useSelector } from 'react-redux'; 
 import { toast } from 'react-toastify'
 import { apiConnector } from '../../redux/Utils/apiConnector'
@@ -9,24 +9,7 @@ const UpdateProfile = () => {
 
   const {userinfo} = useSelector(state => state.auth);
 
-  const [user, setUser] = useState({});
-
   const {id} = useParams();
-
-  useEffect(() => {
-
-    const profileFetcher = async() => {
-       try{
-         const res = await apiConnector(`${PROFILE_URL}/${id}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-         setUser(res.data.data);
-     
-       } catch (e) {
-         console.log(e);
-       }
-     }
-
-     profileFetcher();
-   }, [id,userinfo.token]);
 
   const [imageUrl, setimageUrl] = useState("");
 
@@ -93,7 +76,7 @@ async function handleSubmit(){
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
               <img
-                src={imageUrl ? imageUrl : user.image}
+                src={imageUrl ? imageUrl : "image here"}
                 alt="product"
                 className="rounded-full h-24 w-24 object-cover"
               />

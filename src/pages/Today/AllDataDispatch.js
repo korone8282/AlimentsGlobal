@@ -43,6 +43,7 @@ const AllDataDispatch = () => {
 
   const [formData, setformData] = useState({
   section:"",
+  batch:"",
   buyer:"",
   buyerName:"",
   productName:"",
@@ -69,11 +70,13 @@ const AllDataDispatch = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   const submitHandler = async() =>{
-   try {
 
+    
     const toastId = toast.loading("Loading...",{
       position: 'top-center',
-    });
+    }); 
+
+   try {
 
     await apiConnector(`${DATA_URL}/Dispatch`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
@@ -84,6 +87,7 @@ const AllDataDispatch = () => {
     
     navigate("/");
    } catch (error) {
+    toast.dismiss(toastId);
     toast("Check Buyer / Product Name ");
     console.log(error);
    }
@@ -112,6 +116,7 @@ const AllDataDispatch = () => {
     
     setformData({
       section:"",
+      batch:"",
       buyer:"",
       buyerName:"",
       productName:"",
@@ -172,6 +177,7 @@ const AllDataDispatch = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
           <th colSpan={4} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -194,6 +200,7 @@ const AllDataDispatch = () => {
           <td className='border-4 border-black px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
+          <td className='border-4 border-black'>{val.batch}</td>
           <td className='border-4 border-black'>{val.pouchPacked}</td>
           <td className='border-4 border-black'>{val.leaked}</td>
           <td className='border-4 border-black'>{val.bloated}</td>
@@ -235,6 +242,14 @@ const AllDataDispatch = () => {
           </td>
           <td className='border-4 border-black'>
           <input type='text'
+                 name='batch'
+                 value={formData.batch}
+                 className='w-32 bg-transparent'
+                 onChange={ e => inputHandler(e) }
+            ></input>
+          </td>
+          <td className='border-4 border-black'>
+          <input type='number'
                  name='pouchPacked'
                  value={formData.pouchPacked}
                  className='w-40 bg-transparent'
@@ -242,7 +257,7 @@ const AllDataDispatch = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.leaked}
                  name='leaked'
                  className='w-24 bg-transparent'
@@ -250,7 +265,7 @@ const AllDataDispatch = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.bloated}
                  name='bloated'
                  className='w-24 bg-transparent'
@@ -258,7 +273,7 @@ const AllDataDispatch = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.foreignMatter}
                  name='foreignMatter'
                  className='w-24 bg-transparent'
@@ -266,7 +281,7 @@ const AllDataDispatch = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  name='other'
                  value={formData.other}
                  className='w-24 bg-transparent'
@@ -274,7 +289,7 @@ const AllDataDispatch = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
                  className='w-32 bg-transparent'

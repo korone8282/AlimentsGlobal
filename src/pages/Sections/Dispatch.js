@@ -53,6 +53,7 @@ const Dispatch = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
           <th colSpan={4} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -74,6 +75,7 @@ const Dispatch = () => {
           <td className='border-4 border-black px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
+          <td className='border-4 border-black'>{val.batch}</td>
           <td className='border-4 border-black'>{val.pouchPacked}</td>
           <td className='border-4 border-black'>{val.leaked}</td>
           <td className='border-4 border-black'>{val.bloated}</td>

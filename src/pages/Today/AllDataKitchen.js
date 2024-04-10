@@ -43,6 +43,7 @@ const AllDataKitchen = () => {
 
   const [formData, setformData] = useState({
   section:"",
+  batch:"",
   buyer:"",
   buyerName:"",
   productName:"",
@@ -69,11 +70,12 @@ const AllDataKitchen = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   const submitHandler = async() =>{
-   try {
 
     const toastId = toast.loading("Loading...",{
       position: 'top-center',
     });
+    
+   try {
 
     await apiConnector(`${DATA_URL}/Kitchen`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
@@ -84,6 +86,7 @@ const AllDataKitchen = () => {
     
     navigate("/");
    } catch (error) {
+    toast.dismiss(toastId);
     toast("Check Buyer / Product Name ");
     console.log(error);
    }
@@ -112,6 +115,7 @@ const AllDataKitchen = () => {
     
     setformData({
       section:"",
+      batch:"",
       buyer:"",
       buyerName:"",
       productName:"",
@@ -172,6 +176,7 @@ const AllDataKitchen = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Batch</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Batch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (kg)</th>
@@ -190,6 +195,7 @@ const AllDataKitchen = () => {
           <td className='border-4 border-black px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
+          <td className='border-4 border-black'>{val.batch}</td>
           <td className='border-4 border-black'>{val.batchQuantity}</td>
           <td className='border-4 border-black'>{val.batchSize}</td>
           <td className='border-4 border-black'>{val.yield}</td>
@@ -230,6 +236,14 @@ const AllDataKitchen = () => {
           </td>
           <td className='border-4 border-black'>
           <input type='text'
+                 name='batch'
+                 value={formData.batch}
+                 className='w-32 bg-transparent'
+                 onChange={ e => inputHandler(e) }
+            ></input>
+          </td>
+          <td className='border-4 border-black'>
+          <input type='number'
                  name='batchQuantity'
                  value={formData.batchQuantity}
                  className='w-40 bg-transparent'
@@ -237,7 +251,7 @@ const AllDataKitchen = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.batchSize}
                  name='batchSize'
                  className='w-32 bg-transparent'
@@ -245,7 +259,7 @@ const AllDataKitchen = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.yield}
                  name='yield'
                  className='w-32 bg-transparent'
@@ -253,7 +267,7 @@ const AllDataKitchen = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  value={formData.yieldLoss}
                  name='yieldLoss'
                  className='w-32 bg-transparent'
@@ -261,7 +275,7 @@ const AllDataKitchen = () => {
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
                  className='w-32 bg-transparent'
