@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const formidable = require("express-formidable")
+const formidable = require("express-formidable");
 require("dotenv").config();
 const {signup,login,logout,
        getAllUsers,

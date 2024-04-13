@@ -30,11 +30,11 @@ const Dropdown = ({val}) => {
     <div className='absolute'>
       {
         val === 1 ? (
-            <div className='absolute bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] top-10 w-48 h-36 rounded-xl flex gap-3 flex-wrap justify-center items-center'>
+            <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b]  top-10 w-48 h-36 flex gap-3 flex-wrap justify-center items-center'>
               {
             sections.map((val,index)=>(
               <div key={index}
-              className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
+              className='text-sm font-bold h-12 w-[4.8rem] bg-black  border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
               onClick={()=>{
                 dispatch(setSection(val));
                 navigate(`/user/${val}/${data.month}`);  
@@ -48,11 +48,11 @@ const Dropdown = ({val}) => {
             <div>
                 {
                     val === 2 ? (
-              <div className='absolute bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] top-10 w-72 h-72 rounded-xl flex gap-3 flex-wrap justify-center items-center'>
+              <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b] top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
               {
             months.map((val,index)=>(
               <div key={index}
-              className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
+              className='text-sm font-bold h-12 w-[4.8rem] bg-black border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
               onClick={()=>{
                 dispatch(setMonth(index+1));
                 dispatch(setDays(val.days));
@@ -64,14 +64,14 @@ const Dropdown = ({val}) => {
           }
             </div>
                     ) : (
-            <div className='absolute bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] top-10 w-[30rem] h-[30rem] rounded-xl flex gap-3 flex-wrap justify-center items-center'>
+            <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b]  top-10 w-[30rem] h-[30rem] flex gap-3 flex-wrap justify-center items-center'>
               {[...Array(data.days).keys()].map((_, i) => (
                 <div key={i} 
                 onClick={()=>{
                 dispatch(setDate(i+1));
                 navigate(`/user/${data.section}/${data.month}`);
                 }} 
-                className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'>
+                className='text-sm font-bold h-12 w-[4.8rem] bg-black border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'>
                   Day {i + 1}
                 </div>
               ))}

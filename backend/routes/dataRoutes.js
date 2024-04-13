@@ -3,12 +3,14 @@ const router = express.Router();
 const {authorization,authAdmin} = require('../middlewares/authorization');
 const { createData,
         deleteData,
-        readData } = require('../controllers/dailyData');
+        readData, 
+        readBuyerData} = require('../controllers/dailyData');
 
-router.route("/:section").post(authorization,authAdmin,createData);
+router.post("/:section",authorization,createData);
 
-router.route("/:date/:month").get(authorization,authAdmin,readData);
-router.route("/:id").delete(authorization,authAdmin,deleteData)
+router.route("/:date/:month").get(authorization,readData);
+router.route("/:id").delete(authorization,authAdmin,deleteData);
+router.put("/List",authorization,authAdmin,readBuyerData);
                     
 
 

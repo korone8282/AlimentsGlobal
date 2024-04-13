@@ -52,12 +52,13 @@ const AllDataKitchen = () => {
   yield:"",
   yieldLoss:"",
   workersQuantity:"",
-  avgCost:"",
   retortCycle:"",
   pouchPerCycle:"",
   empty:"",
   filled:"",
   pouchPacked:"",
+  box:"",
+  packSize:"",
   pouchQuantity:"",
   materialLoss:"",
   pouchLoss:"",
@@ -99,45 +100,38 @@ const AllDataKitchen = () => {
     }));
   }
 
-  function calc(){
-    const cost = (formData.workersQuantity * 500 ) 
-    / ( Number(formData.yield) * Number(formData.batchQuantity)) ;
-    return cost.toFixed(3);
-  }
   const rowDataHandler = () =>{
 
     formData.section = currentSection;
-    formData.avgCost = calc();
     formData.buyer = formData.buyerName.split("-")[0];
     formData.buyerName = formData.buyerName.split("-")[1];
     
     dispatch(setData({formData,val}));
     
-    setformData({
-      section:"",
-      batch:"",
-      buyer:"",
-      buyerName:"",
-      productName:"",
-      batchQuantity:"",
-      batchSize:"",
-      yield:"",
-      yieldLoss:"",
-      workersQuantity:"",
-      avgCost:"",
-      retortCycle:"",
-      pouchPerCycle:"",
-      empty:"",
-      filled:"",
-      pouchPacked:"",
-      pouchQuantity:"",
-      materialLoss:"",
-      pouchLoss:"",
-      leaked:"",
-      bloated:"",
-      foreignMatter:"",
-      other:""
-  });
+    setformData((prevData) => ({
+      ...prevData,
+    batch:"",
+    productName:"",
+    batchQuantity:"",
+    batchSize:"",
+    yield:"",
+    yieldLoss:"",
+    retortCycle:"",
+    pouchPerCycle:"",
+    empty:"",
+    filled:"",
+    pouchPacked:"",
+    box:"",
+    packSize:"",
+    pouchQuantity:"",
+    materialLoss:"",
+    pouchLoss:"",
+    leaked:"",
+    bloated:"",
+    foreignMatter:"",
+    other:""
+}));
+
   }
 
   function deleteRow(index){
@@ -150,17 +144,17 @@ const AllDataKitchen = () => {
 
       <select 
       name="section"
-      className='text-xl font-semibold bg-transparent border-4 rounded-md p-3 border-[#2e1065] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065]'
+      className='text-xl font-semibold bg-transparent bg-[#f59e0b] rounded-xl hover:text-white p-3 hover:bg-black'
       onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
-      <option className='bg-[#2e1065] '>Select Section</option>
+      <option className='bg-[#f59e0b]'>Select Section</option>
         {
           sections.map((val,index)=>(
-            <option key={index} className=' bg-[#2e1065]'>{val}</option>
+            <option key={index} className=' bg-[#f59e0b] font-semibold'>{val}</option>
           ))
         }
       </select>
 
-      <button className='text-xl font-semibold h-16 w-[9.6rem] text-center border-4 rounded-md border-[#2e1065] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065]'
+      <button className='text-xl font-semibold h-16 w-[9.6rem] text-center bg-[#f59e0b] rounded-xl hover:text-white hover:bg-black'
               onClick={submitHandler}>
             Submit
       </button>
@@ -170,7 +164,7 @@ const AllDataKitchen = () => {
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
         
          <div>
-            <table className='w-[80rem] mx-auto'>
+            <table className='w-[80rem] mx-auto my-12'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
@@ -182,7 +176,6 @@ const AllDataKitchen = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Cost/Kg</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Remarks</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Delete</th>
         </tr>
@@ -201,7 +194,6 @@ const AllDataKitchen = () => {
           <td className='border-4 border-black'>{val.yield}</td>
           <td className='border-4 border-black'>{val.yieldLoss}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
-          <td className='border-4 border-black'>{val.avgCost}</td>
           <td className='border-4 border-black px-8 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
           <td className='border-4 border-black px-8 hover:bg-red-500'
               onClick={()=>deleteRow(index)}><FaTrash/></td>
@@ -218,11 +210,12 @@ const AllDataKitchen = () => {
           <select
                  name='buyerName'
                  className='w-32 bg-transparent'
+                 value={formData.buyerName}
                  onChange={ e => inputHandler(e) }
             >
-            <option className=' bg-[#2e1065]'>Select Buyer</option>
+            <option className=' bg-[#f59e0b]'>Select Buyer</option>
             {
-                categories.map((val,index)=>(<option className=' bg-[#2e1065]' value={`${val._id}-${val.name}`} key={index}>{val.name}</option>))
+                categories.map((val,index)=>(<option className=' bg-[#f59e0b]' value={`${val._id}-${val.name}`} key={index}>{val.name}</option>))
             }
             </select>
           </td>
@@ -282,7 +275,6 @@ const AllDataKitchen = () => {
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
-          <td className='border-4 border-black'></td>
           <td className='border-4 border-black px-8 hover:bg-green-200'
               onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
           <td className='border-4 border-black px-8'>-</td>

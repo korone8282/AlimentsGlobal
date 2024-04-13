@@ -55,14 +55,14 @@ const ProfileMenu = () => {
         <>  
         {
             userinfo.isAdmin ? (
-         <section className=" bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] p-4">
+         <section className="bg-black rounded-b-3xl p-4">
           <ul className="list-none mt-2">
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to={`/user/Profile/${userinfo._id}`}
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 Profile
@@ -70,10 +70,10 @@ const ProfileMenu = () => {
             </li>
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/BuyerProducts"
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 Buyers Products
@@ -81,10 +81,10 @@ const ProfileMenu = () => {
             </li>
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/BuyerList"
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 Buyers Info
@@ -92,10 +92,10 @@ const ProfileMenu = () => {
             </li>
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Userlist"
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 Manage Users
@@ -103,10 +103,10 @@ const ProfileMenu = () => {
             </li>
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Dashboard"
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 DashBoard
@@ -114,7 +114,7 @@ const ProfileMenu = () => {
             </li>
             <li>
             <div
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm text-[#FB2E86]"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm text-[#FB2E86]"
                 onClick={logouthandler}
               >
                 Logout
@@ -123,14 +123,14 @@ const ProfileMenu = () => {
           </ul>
         </section>
         ) : (
-             <section className="bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] rounder-xl p-4  right-7 top-5">
+             <section className="bg-black rounder-xl p-4  right-7 top-5">
           <ul className="list-none mt-2">
             <li>
               <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to={`/user/Profile/${userinfo._id}`}
                 style={({ isActive }) => ({
-                  color: isActive ? "white" : "#FB2E86",
+                  color: isActive ? "white" : "#f59e0b",
                 })}
               >
                 Profile

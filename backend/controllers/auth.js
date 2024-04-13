@@ -244,7 +244,6 @@ exports.googleLogin = async(req,res) =>{
                 password:hashPass,
                 image: picture ? picture : `https://api.dicebear.com/7.x/initials/svg?seed=${name} ${name}`
             })
-            
             return res.status(200).json({
                 success:true,
                 data:newUser,
@@ -384,7 +383,7 @@ exports.getAllUsers = async(req,res) =>{
 exports.getCurrentUser = async(req,res) =>{
 
     try{
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.user.id);
 
         if(!user){
            res.status(404).json({
@@ -412,7 +411,6 @@ exports.getCurrentUser = async(req,res) =>{
 exports.updateProfile = async(req,res) =>{
 try{
 
-   
     const user = await User.findById(req.params.id);
 
     const {fname,dob,gender,image,about} = req.fields;
@@ -438,6 +436,7 @@ try{
             message:"product succesfully updated",
             updatedUser
         })
+
 
 }catch(e){
     console.log(e);

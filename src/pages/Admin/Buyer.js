@@ -32,7 +32,7 @@ const Buyer = () => {
 
     setLoading(0);
       } catch (error) {
-        
+        console.log(error);
       }
       }
 
@@ -91,7 +91,7 @@ const handleUpdate = async(data) =>{
 }
 
   return (
-    <div className="justify-center flex flex-col md:flex-row ">
+    <div className="justify-center flex flex-col md:flex-row">
     <div className="md:w-3/4 p-3">
 
     <div className="h-12 font-bold text-3xl my-4 text-center">Manage Buyers</div>
@@ -102,7 +102,7 @@ const handleUpdate = async(data) =>{
       <br />
       <button 
       onClick={handleSubmit(data=>handleCreate(data))}
-      className='my-6 h-10 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
+      className='my-6 h-10 text-[#f59e0b] bg-black w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
       <hr className='mt-2'/>
  
     {
@@ -113,7 +113,7 @@ const handleUpdate = async(data) =>{
         {categories?.map((category) => (
           <div key={category._id}>
             <button
-              className="py-2 px-4 rounded-lg m-3 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] hover:scale-105"
+              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-black font-semibold hover:scale-105"
               onClick={() => {
                   setopenBox(true);
                   setcurrentCategory(category);
@@ -135,12 +135,12 @@ const handleUpdate = async(data) =>{
         <input
           type="name"
           {...register("updatedName")}
-          className="py-3 px-4 border-2 border-black rounded-lg w-full text-black"
+          className="py-3 px-4 border-2 border-black rounded-lg w-full"
           placeholder= {`${currentCategory.name}`}
         />
 
         <div className="flex justify-between gap-4">
-          <button className=" py-2 px-4 rounded-lg bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] hover:scale-105"
+          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
           onClick={()=>setopenBox(0)}> 
             Cancel
           </button>
@@ -148,14 +148,14 @@ const handleUpdate = async(data) =>{
           <button
           type='submit'
           onClick={handleSubmit(data=>handleUpdate(data))}
-              className=" py-2 px-4 rounded-lg bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
             >
               Update
             </button>
 
             <button
               onClick={handleDelete}
-              className=" py-2 px-4 rounded-lg bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
             >
               Delete
             </button>

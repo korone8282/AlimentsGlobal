@@ -11,7 +11,7 @@ export default function IconBtn({
       <button
         disabled={disabled}
         onClick={onclick}
-        className={`flex items-center bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold text-white ${customClasses}`}
+        className={`flex items-center bg-[#f59e0b] text-black cursor-pointer gap-x-2 rounded-md py-2 px-5 font-semibold ${customClasses}`}
         type={type}
       >
         {children ? (

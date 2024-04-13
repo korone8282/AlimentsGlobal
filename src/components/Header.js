@@ -8,17 +8,33 @@ const Header = () => {
 
   const [mode, setMode] = useState(1);
 
+  const date = new Date().toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  })
+
   const {userinfo} = useSelector(state=>state.auth);
 
-  return (
-      <div className='w-full h-14 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] flex items-center justify-between'>
+  return ( 
+      <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between '>
        
-       <Link to="/" className='flex items-center gap-4 text-2xl font-bold mx-24'>
+       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-8'>
         Aliments Global Foods
        </Link>
-       
+      
   
         <div className='flex text-xl gap-16 items-center font-bold mx-8'>
+      <div className='flex gap-6 items-center'>
+      
+        <img src={userinfo?.image} alt='Profile' className='h-12 w-12 border-2 rounded-full object-cover'/>
+        <div>{userinfo?.fname}</div>
+        
+      </div>
+
+      <div>
+      {date}
+      </div>
 
         <div>
     {

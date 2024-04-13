@@ -71,17 +71,16 @@ async function handleSubmit(){
   return (
     <div className='flex justify-center items-center h-[90vh]'>
 
-    <div className='w-[40rem] border-2 h-[40rem]'>
+    <div className='w-[40rem] border-2 h-[40rem] text-[#f59e0b] bg-black rounded-3xl'>
     <div className=' flex flex-col p-12 gap-10'>
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
               <img
                 src={imageUrl ? imageUrl : "image here"}
-                alt="product"
+                alt="Profile"
                 className="rounded-full h-24 w-24 object-cover"
               />
-            <label className="border text-white px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
-            {imageUrl ? "" : "Upload Image"} 
+            <label className="border border-[#f59e0b] max-w-96 px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
               <input
                 type="file"
                 name="image"
@@ -89,7 +88,6 @@ async function handleSubmit(){
                 onChange={e=>{
                     uploadFileHandler(e);
                 }}
-                className={!data.image ? "hidden" : "text-white"}
               />
             </label>
     </div>
@@ -97,7 +95,7 @@ async function handleSubmit(){
     <div className='flex w-full justify-between text-2xl font-bold'>
     <label>Name: </label>
         <input  type='text'
-                className='bg-transparent border-2 p-1'
+                className='bg-transparent border-2 border-[#f59e0b] p-1'
                 name='fname'
                 onChange={(e)=>inputHandler(e)}
                 />
@@ -106,21 +104,21 @@ async function handleSubmit(){
     <div className='flex w-full justify-between text-2xl font-bold'>
     <label>Gender: </label>
         <select type='text'
-                className='bg-transparent border-2 p-3 text-xl font-semibold rounded-md border-[#2e1065] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065]'
+                className=' border-2 border-black p-3 bg-[#f59e0b] text-black text-xl font-semibold rounded-md'
                 name='gender'
                 onChange={(e)=>inputHandler(e)}
                 >
-                <option className='bg-[#2e1065]' value={"Male"}>Select</option>
-                <option className='bg-[#2e1065]' value={"Male"}>Male  </option>
-                <option className='bg-[#2e1065]' value={"Female"}>Female  </option>
-                <option className='bg-[#2e1065]' value={"Others"}>Others  </option>
+                <option className='bg-[#f59e0b] font-semibold' value={"Male"}>Select</option>
+                <option className='bg-[#f59e0b] font-semibold' value={"Male"}>Male  </option>
+                <option className='bg-[#f59e0b] font-semibold' value={"Female"}>Female  </option>
+                <option className='bg-[#f59e0b] font-semibold' value={"Others"}>Others  </option>
         </select> 
     </div>
 
     <div className='flex w-full justify-between text-2xl font-bold'>
     <label>About: </label>
         <input  type='text'
-                className='bg-transparent border-2 p-1'
+                className='bg-transparent border-2 border-[#f59e0b] p-1'
                 name='about'
                 onChange={(e)=>inputHandler(e)}
                 />
@@ -129,14 +127,14 @@ async function handleSubmit(){
     <div className='flex w-full justify-between text-2xl font-bold'>
     <label>DOB: </label>
         <input  type='date'
-                className='bg-transparent border-2 p-1'
+                className='bg-transparent border-2 border-[#f59e0b] p-1'
                 name='dob'
                 onChange={(e)=>inputHandler(e)}
                 />
     </div>
 
         <button  onClick={handleSubmit}
-                className=' hover:scale-95 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] w-1/2 h-12 rounded-md mx-auto text-xl font-bold'>Update Profile</button>
+                className=' hover:scale-95 bg-[#f59e0b] text-black w-1/2 h-12 rounded-md mx-auto text-xl font-bold'>Update Profile</button>
       </div>
     </div>
 

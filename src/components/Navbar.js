@@ -11,14 +11,15 @@ const Navbar = () => {
 
   return (
     <div
-      style={{ zIndex: 9999 }}
-      className=" flex-col justify-between p-4 text-white bg-[#1e1b4b] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] w-[4%] hover:w-[15%] h-[100vh]  fixed"
+      style={{ zIndex: 20 }}
+      className=" flex-col justify-between p-4 font-semibold text-xl bg-black text-[#f59e0b] w-14 hover:w-[15%] h-[100vh] top-0 fixed"
       id="navigation-container"
     >
-      <div className="flex flex-col justify-center space-y-4">
+
+      <div className="flex flex-col justify-center space-y-8">
        <Link
           to="/"
-          className="flex items-center transition-transform transform hover:translate-x-2"
+          className="flex mt-12 items-center transition-transform transform hover:translate-x-2"
         >
           <AiOutlineHome className="mr-2 mt-[3rem]" size={26} />
           <span className="hidden nav-item-name mt-[3rem]">Home</span>{" "}

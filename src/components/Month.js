@@ -34,17 +34,17 @@ const Month = ({val}) => {
 
 <div className='flex items-center mx-32 gap-2 mt-4 relative w-fit'
 onClick={()=>setDrop(!drop)}>
-  <div className=' text-center text-white text-3xl font-bold'>
+  <div className=' text-center text-3xl font-bold'>
     {months[data.month-1].month}
   </div>
-<MdArrowDropDownCircle color='white' size={24} className='mt-2'/>
+<MdArrowDropDownCircle color='black' size={24} className='mt-2'/>
 {
   drop ? (
-    <div className='absolute top-10 w-72 h-72 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] rounded-xl text-white flex gap-3 flex-wrap justify-center items-center'>
+    <div className='absolute top-10 w-72 h-72 bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b] flex gap-3 flex-wrap justify-center items-center z-10'>
     {
   months.map((val,index)=>(
     <div key={index}
-    className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
+    className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg bg-black hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
     onClick={()=>{
       dispatch(setMonth(index+1));
       dispatch(setDays(val.days));  
@@ -69,7 +69,7 @@ onClick={()=>setDrop(!drop)}>
       dispatch(setDate(i+1));
       navigate(`/user/${val}/${data.month}`);
       }} 
-      className="text-2xl font-bold h-28 w-36 bg-gradient-to-r from-[#1e1b4b] to-[#2e1065] hover-border-4 rounded-lg hover:translate-y-2 text-center pt-10 cursor-auto">
+      className="text-2xl font-bold h-28 w-36 text-[#f59e0b] bg-black hover-border-4 rounded-lg hover:translate-y-2 text-center pt-10 cursor-auto">
         Day {i + 1}
       </div>
     ))}

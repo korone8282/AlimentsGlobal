@@ -47,13 +47,14 @@ const Retort = () => {
     loading ? (<Loader/> 
     ) : (
       <div>
-      <table className='w-[80rem] mx-auto text-center'>
+      <table className='w-[80rem] mx-auto text-center bg-[#f59e0b] text-black my-12'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch/cycle</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -66,17 +67,27 @@ const Retort = () => {
             {
               sectionData[0].dataList.map((val,index)=>(
               <tr key={index}>
-          <td className='border-4 border-black px-4 p-2'>{index+1}</td>
-          <td className='border-4 border-black'>{val.buyerName}</td>
-          <td className='border-4 border-black'>{val.productName}</td>
-          <td className='border-4 border-black'>{val.batch}</td>
-          <td className='border-4 border-black'>{val.retortCycle}</td>
-          <td className='border-4 border-black'>{val.pouchPerCycle}</td>
-          <td className='border-4 border-black'>{val.workersQuantity}</td>
-          <td className='border-4 border-black'>{val.avgCost}</td>
+          <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
+          <td className='border-4 border-black font-bold '>{val.buyerName}</td>
+          <td className='border-4 border-black font-bold '>{val.productName}</td>
+          <td className='border-4 border-black font-bold '>{val.batch}</td>
+          <td className='border-4 border-black font-bold '>{val.packSize}</td>
+          <td className='border-4 border-black font-bold '>{val.retortCycle}</td>
+          <td className='border-4 border-black font-bold '>{val.pouchPerCycle}</td>
+          {
+        !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{val.workersQuantity}</td>) : (<td></td>)
+       }   
+       {
+        !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{((val.workersQuantity*500)/(sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPerCycle,0))).toFixed(3)}</td>) : (<td></td>)
+       }   
               </tr>
             ))
             }
+            <tr >
+          <td className='border-4 border-black font-bold' colSpan={5}>Total: </td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.retortCycle,0)}</td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPerCycle,0)}</td>
+              </tr>
           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
         }
     </table>
