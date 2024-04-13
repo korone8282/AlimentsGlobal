@@ -28,7 +28,7 @@ import UpdateProfile from "./pages/User/UpdateProfile";
 const App = () => {
   
   return (
-<div className='bg-gradient-to-r from-[#3730a3] to-[#1e1b4b] text-white h-[100vh]'>
+<div>
 
 <Header/>
 <Navbar/>
