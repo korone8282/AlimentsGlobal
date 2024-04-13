@@ -12,7 +12,8 @@ import DataLog from './components/DataLog'
 import Date from './pages/Date'
 import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
-import BuyerList from './pages/Admin/BuyerList'
+import Buyer from './pages/Admin/Buyer'
+import BuyerProducts from './pages/Admin/BuyerProducts';
 import UsersList from './pages/Admin/UsersList'
 import Dashboard from './pages/Admin/Dashboard'
 import OtpLogin from './pages/User/OtpLogin'
@@ -56,8 +57,10 @@ const App = () => {
   <Route path="/admin" element={<AdminRoute/>}>
       <Route path='Dashboard' element={<Dashboard/>}></Route>
       <Route path='UserList' element={<UsersList/>}></Route>
-      <Route path='BuyerList' element={<BuyerList/>}></Route>
+      <Route path='BuyerList' element={<Buyer/>}></Route>
+      <Route path='BuyerProducts' element={<BuyerProducts/>}></Route>
   </Route>
+
 
   <Route path='Login' element={<Login/>} />
   <Route path='SignUp' element={<SignUp/>}/>
