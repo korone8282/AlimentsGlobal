@@ -12,8 +12,6 @@ import DataLog from './components/DataLog'
 import Date from './pages/Date'
 import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
-import Buyer from './pages/Admin/Buyer'
-import BuyerProducts from './pages/Admin/BuyerProducts';
 import UsersList from './pages/Admin/UsersList'
 import Dashboard from './pages/Admin/Dashboard'
 import OtpLogin from './pages/User/OtpLogin'
@@ -24,7 +22,9 @@ import AllDataDispatch from './pages/Today/AllDataDispatch'
 import AllDataFilling from './pages/Today/AllDataFilling'
 import AllDataRetort from './pages/Today/AllDataRetort'
 import Navbar from './components/Navbar'
-import UpdateProfile from "./pages/User/UpdateProfile";
+import UpdateProfile from './pages/User/UpdateProfile'
+import Buyer from './pages/Admin/Buyer'
+import BuyerProducts from './pages/Admin/BuyerProducts'
 
 const App = () => {
   
@@ -61,7 +61,6 @@ const App = () => {
       <Route path='BuyerProducts' element={<BuyerProducts/>}></Route>
   </Route>
 
-
   <Route path='Login' element={<Login/>} />
   <Route path='SignUp' element={<SignUp/>}/>
   <Route path='OtpLogin' element={<OtpLogin/>}/>
@@ -74,3 +73,4 @@ const App = () => {
 }
 
 export default App
+
