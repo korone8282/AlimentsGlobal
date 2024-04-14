@@ -1,74 +1,74 @@
-import React, {useState, useEffect} from 'react'
-import Loader from '../../components/Loader';
-import { apiConnector } from '../../redux/Utils/apiConnector';
-import { useSelector } from 'react-redux';
-import { CATEGORIES_URL  } from '../../redux/Utils/constants';
-import { DATA_URL } from '../../redux/Utils/constants';
+// import React, {useState, useEffect} from 'react'
+// import Loader from '../../components/Loader';
+// import { apiConnector } from '../../redux/Utils/apiConnector';
+// import { useSelector } from 'react-redux';
+// import { CATEGORIES_URL  } from '../../redux/Utils/constants';
+// import { DATA_URL } from '../../redux/Utils/constants';
 
 const BuyerProducts = () => {
 
 
-    const [sectionData, setSectionData] = useState([]);
-    const [loading, setLoading] = useState(0);
-    const [error, setError] = useState(0);
-    const [data, setData] = useState([]);
-    const [categories, setcategories] = useState([]);
-    const [info, setInfo] = useState({
-        start:"",
-        end:"",
-        buyer:"",
-    });
+    // const [sectionData, setSectionData] = useState([]);
+    // const [loading, setLoading] = useState(0);
+    // const [error, setError] = useState(0);
+    // const [data, setData] = useState([]);
+    // const [categories, setcategories] = useState([]);
+    // const [info, setInfo] = useState({
+    //     start:"",
+    //     end:"",
+    //     buyer:"",
+    // });
 
-    const {userinfo} = useSelector(state => state.auth);
+    // const {userinfo} = useSelector(state => state.auth);
 
-      async function getData(){
-        try {
+    //   async function getData(){
+    //     try {
 
-          const res = await apiConnector(`${DATA_URL}/List`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+    //       const res = await apiConnector(`${DATA_URL}/List`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
 
-          setData(res.data.data);
+    //       setData(res.data.data);
 
-          data.forEach(e=>{
-            sectionData.push( e.dataList.filter( buyer => buyer.buyerName === info.buyer) );
-           });
+    //       data.forEach(e=>{
+    //         sectionData.push( e.dataList.filter( buyer => buyer.buyerName === info.buyer) );
+    //        });
 
-        setLoading(0);
+    //     setLoading(0);
 
-        } catch (e) {
-          setError(1);
-          console.log(e);
-        }
-      }
+    //     } catch (e) {
+    //       setError(1);
+    //       console.log(e);
+    //     }
+    //   }
    
-    useEffect(() => {
+    // useEffect(() => {
 
-        async function getCategories(){
-          try {
+    //     async function getCategories(){
+    //       try {
     
-        const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
-        setcategories(res.data.data);
+    //     const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+    //     setcategories(res.data.data);
     
-        setLoading(0);
-          } catch (e) {
-            console.log(e)
-          }
-          }
+    //     setLoading(0);
+    //       } catch (e) {
+    //         console.log(e)
+    //       }
+    //       }
     
-        getCategories();
+    //     getCategories();
 
-      }, []);
+    //   }, []);
 
-    const inputHandler = async(e) =>{
-        setInfo((prevData) => ({
-          ...prevData,
-          [e.target.name]: e.target.value
-        }));
-      }
+    // const inputHandler = async(e) =>{
+    //     setInfo((prevData) => ({
+    //       ...prevData,
+    //       [e.target.name]: e.target.value
+    //     }));
+    //   }
 
   return (
     <div>
     
-    <div className='flex justify-center my-8 text-2xl font-bold gap-24'>
+    {/* <div className='flex justify-center my-8 text-2xl font-bold gap-24'>
         <div>
         <select
                  name='buyer'
@@ -156,7 +156,7 @@ const BuyerProducts = () => {
     
     </div>
           )
-     }
+     } */}
     
    </div>
   )
