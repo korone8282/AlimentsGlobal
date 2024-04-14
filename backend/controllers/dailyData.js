@@ -4,7 +4,7 @@ const Data = require('../models/dataModel');
 exports.createData = async(req,res) => {
 try {
 
-    const {section} = req.params;
+    const {section,dayTime} = req.params;
 
     const dataItems = req.body;
     
@@ -19,6 +19,7 @@ try {
     const newData = await Data.create({
         sectionMain: section,
         dataList: dataItems,
+        dayTime:dayTime
     })
 
     res.status(200).json({

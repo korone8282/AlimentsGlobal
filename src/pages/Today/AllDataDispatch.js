@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
+import { MdLightMode,MdModeNight } from "react-icons/md";
 
 const AllDataDispatch = () => {
 
   const sections = ["Dispatch","Kitchen","Filling","Retort"];
+
+  const [mode, setMode] = useState(0);
+  const dayArray = ["Day","Night"];
 
   const section = useLocation();
 
@@ -79,7 +83,7 @@ const AllDataDispatch = () => {
 
    try {
 
-    await apiConnector(`${DATA_URL}/Dispatch`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DATA_URL}/Dispatch/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
     dispatch(emptyData(val));
 
@@ -141,7 +145,7 @@ const AllDataDispatch = () => {
 
   return (
     <div>
-      <div className='my-8 rounded-xl w-full h-12 flex justify-around items-center'>
+      <div className='my-8 rounded-xl w-full h-12 flex justify-center gap-72 items-center'>
 
       <select 
       name="section"
@@ -154,6 +158,16 @@ const AllDataDispatch = () => {
           ))
         }
       </select>
+
+      <div  onClick={()=>setMode(!mode)}>
+    {
+      !mode ? (
+        <MdLightMode color='black' size={36}/>
+      ) : (
+        <MdModeNight  size={36}/>
+      )
+    }
+        </div>
 
       <button className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
               onClick={submitHandler}>

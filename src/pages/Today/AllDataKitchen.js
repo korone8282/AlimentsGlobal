@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
+import { MdLightMode,MdModeNight } from "react-icons/md";
 
 const AllDataKitchen = () => {
 
   const sections = ["Dispatch","Kitchen","Filling","Retort"];
+
+  const [mode, setMode] = useState(0);
+  const dayArray = ["Day","Night"];
 
   const section = useLocation();
 
@@ -78,7 +82,7 @@ const AllDataKitchen = () => {
     
    try {
 
-    await apiConnector(`${DATA_URL}/Kitchen`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DATA_URL}/Kitchen/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
     dispatch(emptyData(val));
 
@@ -153,6 +157,16 @@ const AllDataKitchen = () => {
           ))
         }
       </select>
+
+      <div  onClick={()=>setMode(!mode)}>
+    {
+      !mode ? (
+        <MdLightMode color='black' size={36}/>
+      ) : (
+        <MdModeNight  size={36}/>
+      )
+    }
+        </div>
 
       <button className='text-xl font-semibold h-16 w-[9.6rem] text-center bg-[#f59e0b] rounded-xl hover:text-white hover:bg-black'
               onClick={submitHandler}>

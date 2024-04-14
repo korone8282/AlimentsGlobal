@@ -7,10 +7,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate} from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
+import { MdLightMode,MdModeNight } from "react-icons/md";
 
 const AllDataFilling = () => {
   
   const section = useLocation();
+
+  const [mode, setMode] = useState(0);
+  const dayArray = ["Day","Night"];
 
   const currentSection = section.pathname.split("/")[2].split("-")[2];
 
@@ -79,7 +83,7 @@ const AllDataFilling = () => {
 
    try {
 
-    await apiConnector(`${DATA_URL}/Filling`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DATA_URL}/Filling/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
     dispatch(emptyData(val));
 
@@ -155,6 +159,16 @@ const AllDataFilling = () => {
           ))
         }
       </select>
+
+      <div  onClick={()=>setMode(!mode)}>
+    {
+      !mode ? (
+        <MdLightMode color='black' size={36}/>
+      ) : (
+        <MdModeNight  size={36}/>
+      )
+    }
+        </div>
 
       <button className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
               onClick={submitHandler}>
