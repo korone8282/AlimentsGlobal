@@ -38,7 +38,7 @@ try {
 
 exports.readData = async(req,res) => {
     try {
-        
+    
         const {date,month} = req.params;
         
         const start = new Date(`2024-${month}-${date}`);
@@ -113,7 +113,7 @@ exports.readBuyerData = async(req,res) => {
             $gte:startDate,
             $lte:endDate
         },dataList:{ $elemMatch: { buyerName:buyer } } });
- 
+
             if(!existData.length){
              return res.status(404).json({
              message:"data doesn't exists",
