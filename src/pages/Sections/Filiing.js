@@ -3,7 +3,7 @@ import DataLog from '../../components/DataLog'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { DATA_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
-import Loader from '../../components/Loader'
+import Loader from '../../components/Loader';
 import { MdLightMode,MdModeNight } from "react-icons/md";
 
 const Filiing = () => {
