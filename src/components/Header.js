@@ -1,12 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link} from 'react-router-dom'
-import { MdLightMode,MdModeNight } from "react-icons/md";
 import { useSelector } from 'react-redux';
 import ProfileMenu from './ProfileMenu';
 
 const Header = () => {
-
-  const [mode, setMode] = useState(1);
 
   const date = new Date().toLocaleDateString("en-US", {
     month: "long",
@@ -36,15 +33,7 @@ const Header = () => {
       {date}
       </div>
 
-        <div>
-    {
-      mode ? (
-        <MdLightMode color='white' onClick={()=>setMode(!mode)} size={32}/>
-      ) : (
-        <MdModeNight onClick={()=>setMode(!mode)} size={32}/>
-      )
-    }
-        </div>
+       
 
         <div>
           {
