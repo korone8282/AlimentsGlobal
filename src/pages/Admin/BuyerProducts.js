@@ -7,15 +7,15 @@ import { DATA_URL } from '../../redux/Utils/constants';
 
 const BuyerProducts = () => {
 
-    const sectionData = [];
 
+    const [sectionData, setSectionData] = useState([]);
     const [loading, setLoading] = useState(0);
     const [error, setError] = useState(0);
     const [data, setData] = useState([]);
     const [categories, setcategories] = useState([]);
     const [info, setInfo] = useState({
-        start:"2024-04-01",
-        end:"2024-04-07",
+        start:"",
+        end:"",
         buyer:"",
     });
 
@@ -27,10 +27,10 @@ const BuyerProducts = () => {
           const res = await apiConnector(`${DATA_URL}/List`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
 
           setData(res.data.data);
-                
+
           data.forEach(e=>{
-           sectionData.push( e.dataList.filter( buyer => buyer.buyerName === info.buyer) );
-          });
+            sectionData.push( e.dataList.filter( buyer => buyer.buyerName === info.buyer) );
+           });
 
         setLoading(0);
 
@@ -64,7 +64,7 @@ const BuyerProducts = () => {
           [e.target.name]: e.target.value
         }));
       }
-   console.log("hi",sectionData);
+
   return (
     <div>
     
@@ -106,7 +106,7 @@ const BuyerProducts = () => {
      loading ? ( <Loader/>
      ) : (
        <div>
-       {/* <table className='w-[80rem] mx-auto text-center bg-[#f59e0b] text-black '>
+       <table className='w-[80rem] mx-auto text-center bg-[#f59e0b] text-black '>
        <thead>
          <tr>
            <th rowSpan={2} className='border-4 border-black p-1'>S no.</th>
@@ -119,18 +119,18 @@ const BuyerProducts = () => {
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Packed</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Rejected(Filling)</th>
            <th rowSpan={2} className='border-4 border-black p-4'>Retort Cycles</th>
-           <th rowSpan={2} className='border-4 border-black p-4'>No. Of Unit Rejected</th>
+           <th rowSpan={2} className='border-4 border-black p-4'>No. Of Unit Rejected (X-Ray)</th>
            <th rowSpan={2} className='border-4 border-black p-1'>Leakage/Others</th>
            <th rowSpan={2} className='border-4 border-black p-1'>No. Of Box Packed</th>
-           <th rowSpan={2} className='border-4 border-black p-1'>Remarks</th>
          </tr>
        </thead>
  
        { 
            sectionData.length ? (<tbody>
              {
-               sectionData[0].dataList.map((val,index)=>(
-               <tr key={index}>
+               sectionData.map((value,index)=>(
+                value.map((val,index)=>(  
+           <tr key={index}>
            <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
            <td className='border-4 border-black font-bold '>{val.buyerName}</td>
            <td className='border-4 border-black font-bold '>{val.productName}</td>
@@ -142,13 +142,15 @@ const BuyerProducts = () => {
            <td className='border-4 border-black font-bold '>{val.other}</td>
            <td className='border-4 border-black font-bold '>{val.workersQuantity}</td>
            <td className='border-4 border-black font-bold '>{val.avgCost}</td>
-               </tr>
+           <td className='border-4 border-black font-bold '>{val.avgCost}</td>
+           <td className='border-4 border-black font-bold '>{val.avgCost}</td>
+          </tr>))
              ))
              }
-           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
+           </tbody>) : (<tbody className='font-bold text-3xl'><tr><td colSpan={7}>No Data Entry Found</td></tr></tbody>)
           
          }
-                     </table> */}
+                     </table>
      </div>)
     }
     

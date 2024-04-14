@@ -188,6 +188,7 @@ const AllDataRetort = () => {
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
           <td className='border-4 border-black'>{val.batch}</td>
+          <td className='border-4 border-black'>{val.packSize}</td>
           <td className='border-4 border-black'>{val.retortCycle}</td>
           <td className='border-4 border-black'>{val.pouchPerCycle}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>

@@ -194,6 +194,7 @@ const AllDataFilling = () => {
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
           <td className='border-4 border-black'>{val.batch}</td>
+          <td className='border-4 border-black'>{val.packSize}</td>
           <td className='border-4 border-black'>{val.pouchQuantity}</td>
           <td className='border-4 border-black'>{val.empty}</td>
           <td className='border-4 border-black'>{val.filled}</td>

@@ -197,6 +197,7 @@ const AllDataDispatch = () => {
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
           <td className='border-4 border-black'>{val.batch}</td>
+          <td className='border-4 border-black'>{val.packSize}</td>
           <td className='border-4 border-black'>{val.pouchPacked}</td>
           <td className='border-4 border-black'>{val.leaked}</td>
           <td className='border-4 border-black'>{val.bloated}</td>

@@ -4,14 +4,17 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import { DATA_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader'
+import { MdLightMode,MdModeNight } from "react-icons/md";
 
 const Dispatch = () => {
 
   const date = useSelector(state=>state.data);
 
   const [data, setData] = useState([]);
+  const dayArray = ["Day","Night"];
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
+  const [mode, setMode] = useState(0);
 
   const {userinfo} = useSelector(state=>state.auth);
 
@@ -31,11 +34,23 @@ const Dispatch = () => {
   getData();
   }, [date,userinfo.token]);
 
-  const sectionData = data.length !==0 ? data.filter( item => item.sectionMain === "Dispatch") : [];
+  const sectionData = data.length !==0 ? data.filter( item => item.sectionMain === "Dispatch" && item.dayTime === `${dayArray[+mode]}`) : [];
 
   return (
     <div>
-   <DataLog/>
+    <div className='flex justify-center items-center h-24'>
+    <DataLog/>
+    <div className='mt-5' onClick={()=>setMode(!mode)}>
+    {
+      !mode ? (
+        <MdLightMode color='black' size={36}/>
+      ) : (
+        <MdModeNight  size={36}/>
+      )
+    }
+        </div>
+    </div>
+
 
     {
       error ? (<div className='text-center font-bold text-7xl mt-64'>No Data Entry Found</div>
