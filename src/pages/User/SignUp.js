@@ -103,12 +103,12 @@ const SignUp = () => {
       <div className='h-[90vh] flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80'
         alt=''
-        className='h-[40rem] w-[35rem]' />
-        <section className='flex flex-col h-[40rem] w-[35rem]'>
-        <p className='ml-6 mt-16 text-5xl font-semibold'>Register Now..</p>
+        className='h-[40rem] w-[35rem] sm:max-lg:h-80 sm:max-lg:w-64' />
+        <section className='flex flex-col h-[40rem] w-[35rem] sm:max-lg:w-80 sm:max-lg:mt-20'>
+        <p className='ml-6 mt-16 text-5xl font-semibold sm:max-lg:text-sm'>Register Now..</p>
         <div className='flex flex-col ml-6 mt-8'>
   
-        <label htmlFor="name" className='mb-2 text-xl'>
+        <label htmlFor="name" className='mb-2 text-xl sm:max-lg:text-sm'>
               Name
         </label>
         <input type='name' 
@@ -118,7 +118,7 @@ const SignUp = () => {
                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
                />
   
-        <label htmlFor="email" className='mb-2 text-xl'>
+        <label htmlFor="email" className='mb-2 text-xl sm:max-lg:text-sm'>
               Email
         </label>
         <input type='email' 
@@ -128,7 +128,7 @@ const SignUp = () => {
                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
                />
   
-          <label htmlFor="pass" className='relative mb-2 text-xl mt-2'>
+          <label htmlFor="pass" className='relative mb-2 text-xl mt-2 sm:max-lg:text-lg'>
               Password
               <span
             onClick={() => setShowPassword((prev) => !prev)}
@@ -148,7 +148,7 @@ const SignUp = () => {
                  className='h-8 border-2 border-gray-300 rounded-sm text-black'
                        />
   
-          <label htmlFor="confirPassword" className='relative mb-2 text-xl mt-2'>
+          <label htmlFor="confirPassword" className='relative mb-2 text-xl mt-2 sm:max-lg:text-lg'>
              Confirm Password
              <span
             onClick={() => setShowPassword((prev) => !prev)}
@@ -175,9 +175,9 @@ const SignUp = () => {
           </button>
         </div>
 
-        <div className='flex justify-between mx-5 text-xl mt-6'>
+        <div className='flex justify-between mx-5 text-xl mt-6 sm:max-lg:-mt-9 sm:max-lg:ml-24'>
 
-          <h2>SignUp with Google : </h2>
+          <h2 className='sm:max-lg:text-white'>SignUp with Google : </h2>
              <GoogleLogin
                  onSuccess={credentialResponse => { googleLogin(credentialResponse.credential) }}
                  onError={() => {console.log('Login Failed')}}

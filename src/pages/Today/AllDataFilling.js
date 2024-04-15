@@ -180,7 +180,7 @@ const AllDataFilling = () => {
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
         
          <div>
-                  <table className='w-[80rem] mx-auto my-12'>
+                  <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>

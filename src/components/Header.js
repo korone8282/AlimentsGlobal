@@ -16,12 +16,12 @@ const Header = () => {
   return ( 
       <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between '>
        
-       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-8'>
+       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-8 sm:max-lg:text-lg sm:max-lg:mx-14'>
         Aliments Global Foods
        </Link>
       
   
-        <div className='flex text-xl gap-16 items-center font-bold mx-8'>
+        <div className='flex text-xl gap-16 items-center font-bold mx-8 sm:max-lg:gap-8'>
       <div className='flex gap-6 items-center'>
       
         <img src={userinfo?.image} alt='Profile' className='h-12 w-12 border-2 rounded-full object-cover'/>
@@ -29,7 +29,7 @@ const Header = () => {
         
       </div>
 
-      <div>
+      <div className='sm:max-lg:text-sm sm:max-lg:w-32'>
       {date}
       </div>
 

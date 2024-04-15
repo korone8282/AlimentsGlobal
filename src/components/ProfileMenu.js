@@ -55,7 +55,7 @@ const ProfileMenu = () => {
         <>  
         {
             userinfo.isAdmin ? (
-         <section className="bg-black rounded-b-3xl p-4">
+         <section className="bg-black rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
           <ul className="list-none mt-2">
             <li>
               <NavLink

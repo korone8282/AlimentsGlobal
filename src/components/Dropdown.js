@@ -48,7 +48,7 @@ const Dropdown = ({val}) => {
             <div>
                 {
                     val === 2 ? (
-              <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b] top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
+              <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b] sm:max-lg:top-6 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
               {
             months.map((val,index)=>(
               <div key={index}
@@ -64,14 +64,14 @@ const Dropdown = ({val}) => {
           }
             </div>
                     ) : (
-            <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b]  top-10 w-[30rem] h-[30rem] flex gap-3 flex-wrap justify-center items-center'>
+            <div className='absolute bg-[#f59e0b] border-black border-4 rounded-xl text-[#f59e0b] sm:max-lg:-top-12 sm:max-lg:h-fit sm:max-lg:w-80 top-10 w-[30rem] h-[30rem] flex gap-3 flex-wrap justify-center items-center'>
               {[...Array(data.days).keys()].map((_, i) => (
                 <div key={i} 
                 onClick={()=>{
                 dispatch(setDate(i+1));
                 navigate(`/user/${data.section}/${data.month}`);
                 }} 
-                className='text-sm font-bold h-12 w-[4.8rem] bg-black border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'>
+                className='text-sm font-bold h-12 w-[4.8rem] sm:max-lg:h-10 sm:max-lg:text-xs sm:max-lg:w-12 bg-black border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'>
                   Day {i + 1}
                 </div>
               ))}

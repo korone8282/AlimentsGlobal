@@ -69,7 +69,7 @@ onClick={()=>setDrop(!drop)}>
       dispatch(setDate(i+1));
       navigate(`/user/${val}/${data.month}`);
       }} 
-      className="text-2xl font-bold h-28 w-36 text-[#f59e0b] bg-black hover-border-4 rounded-lg hover:translate-y-2 text-center pt-10 cursor-auto">
+      className="text-2xl font-bold h-28 w-36 sm:max-lg:w-24 sm:max-lg:h-20 sm:max-lg:text-base sm:max-lg:mb-4 flex items-center justify-center text-[#f59e0b] bg-black hover-border-4 rounded-lg hover:translate-y-2 cursor-auto">
         Day {i + 1}
       </div>
     ))}
