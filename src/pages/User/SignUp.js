@@ -80,11 +80,10 @@ const SignUp = () => {
     }
     
   const registerHandler = async() =>{
-  try {
     const toastId = toast.loading("Loading...",{
       position: 'top-center',
     });
-
+  try {
   await apiConnector(REGISTER_API,"POST",formData);
 
   toast.dismiss(toastId);
@@ -92,6 +91,7 @@ const SignUp = () => {
 
   navigate("/Login");
   } catch (error) {
+  toast.dismiss(toastId);
   toast.error(error.message);
   }
   }

@@ -62,12 +62,10 @@ const OtpLogin = () => {
     }
 
     const loginHandler = async() =>{
+      const toastId = toast.loading("Loading...",{
+        position: 'top-center',
+      });
       try {
-
-        const toastId = toast.loading("Loading...",{
-          position: 'top-center',
-        });
-
         const res = await apiConnector(OTPLOG_URL,"POST",formData),
               userinfo = res.data.existUser;
         
@@ -78,6 +76,7 @@ const OtpLogin = () => {
 
         navigate("/");
       } catch (error) {
+        toast.dismiss(toastId);
         toast.error(error.message);
       }
     }

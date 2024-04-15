@@ -51,12 +51,19 @@ async function handleSubmit(){
   file.append('image',data.image);
   file.append('about',data.about);
 
+  const toastId = toast.loading("Loading...",{
+    position: 'top-center',
+  });
+
   try{
     await apiConnector(`${PROFILE_URL}/${id}`,"PUT",file,{Authorization: `Bearer ${userinfo.token}`});
+    
+    toast.dismiss(toastId);
     toast("User successfully updated");
     navigate("/");
 
   } catch (e) {
+    toast.dismiss(toastId);
     console.log(e);
   }
       }

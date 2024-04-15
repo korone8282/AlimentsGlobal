@@ -37,11 +37,11 @@ const Login = () => {
 
   
     const loginHandler = async(data,e) =>{
-      e.preventDefault()
+      e.preventDefault();
+      const toastId = toast.loading("Loading...",{
+        position: 'top-center',
+      });
       try {
-        const toastId = toast.loading("Loading...",{
-          position: 'top-center',
-        });
         const res = await apiConnector(LOGIN_API,"POST",data),
               userinform = res.data.existUser;
 
@@ -52,17 +52,17 @@ const Login = () => {
 
         navigate("/")
       } catch (error) {
+        toast.dismiss(toastId);
         toast.error(error.message);
       }
     }
 
     const googleLogin = async(token) =>{
+      const toastId = toast.loading("Loading...",{
+        position: 'top-center',
+      });
+      
       try {
-
-        const toastId = toast.loading("Loading...",{
-          position: 'top-center',
-        });
-        
         const res = await apiConnector(GOOGLE_API,"POST",{token}),
               userinform = res.data.existUser;
         
@@ -71,6 +71,7 @@ const Login = () => {
         toast.dismiss(toastId);
         toast("logged in");
       } catch (error) {
+        toast.dismiss(toastId);
         toast.error(error.message);
       }
     }
