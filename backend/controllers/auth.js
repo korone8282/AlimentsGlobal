@@ -242,7 +242,7 @@ exports.googleLogin = async(req,res) =>{
                 fname:name,
                 email:email,
                 password:hashPass,
-                image: picture ? picture : `https://api.dicebear.com/7.x/initials/svg?seed=${name} ${name}`
+                image:`https://api.dicebear.com/7.x/initials/svg?seed=${name} ${name}`
             })
             return res.status(200).json({
                 success:true,
