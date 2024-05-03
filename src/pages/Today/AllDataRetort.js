@@ -148,7 +148,7 @@ const AllDataRetort = () => {
 
       <select 
       name="section"
-      className='text-xl font-semibold bg-transparent rounded-xl p-3 bg-[#f59e0b]'
+      className='text-xl font-semibold bg-transparent rounded-xl p-3 bg-[#f59e0b] hover:text-white hover:bg-black'
       onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
       <option className='bg-[#f59e0b]'>Select Section</option>
         {

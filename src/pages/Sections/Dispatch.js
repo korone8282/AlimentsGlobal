@@ -71,16 +71,14 @@ const Dispatch = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
-          <th colSpan={4} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
+          <th colSpan={2} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Cost/ Pouch</th>
         </tr>
         <tr>
           <th className='border-4 border-black p-1'>Leaked</th>
-          <th className='border-4 border-black p-1'>Bloated</th>
           <th className='border-4 border-black p-1'>X-Ray</th>
-          <th className='border-4 border-black p-1'>Others</th>
         </tr>
       </thead>
 
@@ -97,9 +95,7 @@ const Dispatch = () => {
           <td className='border-4 border-black font-bold '>{val.packSize}</td>
           <td className='border-4 border-black font-bold '>{val.pouchPacked}</td>
           <td className='border-4 border-black font-bold '>{val.leaked}</td>
-          <td className='border-4 border-black font-bold '>{val.bloated}</td>
           <td className='border-4 border-black font-bold '>{val.foreignMatter}</td>
-          <td className='border-4 border-black font-bold '>{val.other}</td>
           <td className='border-4 border-black font-bold '>{val.box}</td>
        {
         !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{val.workersQuantity}</td>) : (<td></td>)
@@ -113,10 +109,8 @@ const Dispatch = () => {
             <tr >
           <td className='border-4 border-black font-bold' colSpan={5}>Total: </td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0)}</td>
-          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0)}</td>
-          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.bloated,0)}</td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0)}</td>  
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0)}</td>
-          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.other,0)}</td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.box,0)}</td>
               </tr>
           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)

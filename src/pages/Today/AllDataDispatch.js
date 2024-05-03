@@ -149,7 +149,7 @@ const AllDataDispatch = () => {
 
       <select 
       name="section"
-      className='text-xl font-semibold bg-transparent rounded-xl p-3 bg-[#f59e0b]'
+      className='text-xl font-semibold bg-transparent rounded-xl hover:text-white p-3 hover:bg-black bg-[#f59e0b]'
       onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
       <option className='bg-[#f59e0b]'>Select Section</option>
         {
@@ -179,7 +179,7 @@ const AllDataDispatch = () => {
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
 
             <div>
-                    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
+                    <table className='w-[80rem] mx-20 my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
@@ -188,7 +188,7 @@ const AllDataDispatch = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
-          <th colSpan={4} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
+          <th colSpan={2} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
 
@@ -197,9 +197,7 @@ const AllDataDispatch = () => {
         </tr>
         <tr>
           <th className='border-4 border-black p-1'>Leaked</th>
-          <th className='border-4 border-black p-1'>Bloated</th>
           <th className='border-4 border-black p-1'>X-Ray</th>
-          <th className='border-4 border-black p-1'>Others</th>
         </tr>
       </thead>
 
@@ -214,9 +212,8 @@ const AllDataDispatch = () => {
           <td className='border-4 border-black'>{val.packSize}</td>
           <td className='border-4 border-black'>{val.pouchPacked}</td>
           <td className='border-4 border-black'>{val.leaked}</td>
-          <td className='border-4 border-black'>{val.bloated}</td>
           <td className='border-4 border-black'>{val.foreignMatter}</td>
-          <td className='border-4 border-black'>{val.other}</td>
+          <td className='border-4 border-black'>{val.box}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
           <td className='border-4 border-black px-8 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
           <td className='border-4 border-black px-8 hover:bg-red-500'
@@ -285,24 +282,8 @@ const AllDataDispatch = () => {
           </td>
           <td className='border-4 border-black'>
           <input type='number'
-                 value={formData.bloated}
-                 name='bloated'
-                 className='w-24 bg-transparent'
-                 onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 border-black'>
-          <input type='number'
                  value={formData.foreignMatter}
                  name='foreignMatter'
-                 className='w-24 bg-transparent'
-                 onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 border-black'>
-          <input type='number'
-                 name='other'
-                 value={formData.other}
                  className='w-24 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
