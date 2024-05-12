@@ -55,7 +55,7 @@ const ProfileMenu = () => {
         <>  
         {
             userinfo.isAdmin ? (
-         <section className="bg-black rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
+         <section className="bg-gradient-to-br from-30% from-black to-red-700 rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
           <ul className="list-none mt-2">
             <li>
               <NavLink
@@ -66,17 +66,6 @@ const ProfileMenu = () => {
                 })}
               >
                 Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/BuyerProducts"
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Buyers Products
               </NavLink>
             </li>
             <li>
@@ -99,17 +88,6 @@ const ProfileMenu = () => {
                 })}
               >
                 Manage Users
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/Dashboard"
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                DashBoard
               </NavLink>
             </li>
             <li>

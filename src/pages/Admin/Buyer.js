@@ -102,7 +102,7 @@ const handleUpdate = async(data) =>{
       <br />
       <button 
       onClick={handleSubmit(data=>handleCreate(data))}
-      className='my-6 h-10 text-[#f59e0b] bg-black w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
+      className='my-6 h-10 text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
       <hr className='mt-2'/>
  
     {
@@ -113,7 +113,7 @@ const handleUpdate = async(data) =>{
         {categories?.map((category) => (
           <div key={category._id}>
             <button
-              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-black font-semibold hover:scale-105"
+              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
               onClick={() => {
                   setopenBox(true);
                   setcurrentCategory(category);
@@ -130,7 +130,7 @@ const handleUpdate = async(data) =>{
           
           {
             openBox ? (
-              <div className="flex justify-center">
+              <div className="flex justify-center my-12">
       <div className="space-y-3">
         <input
           type="name"
@@ -140,7 +140,7 @@ const handleUpdate = async(data) =>{
         />
 
         <div className="flex justify-between gap-4">
-          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
+          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
           onClick={()=>setopenBox(0)}> 
             Cancel
           </button>
@@ -148,14 +148,14 @@ const handleUpdate = async(data) =>{
           <button
           type='submit'
           onClick={handleSubmit(data=>handleUpdate(data))}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
             >
               Update
             </button>
 
             <button
               onClick={handleDelete}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
             >
               Delete
             </button>

@@ -133,3 +133,38 @@ exports.readBuyerData = async(req,res) => {
         })
                 }
          }
+
+
+exports.readMonthlyData = async(req,res) => {
+            try {
+       
+                const {month} = req.params;
+        
+                const startDate = new Date(`2024-${month}-01`);
+                startDate.setHours(0, 0, 0, 0);
+                const endDate = new Date(`2024-${month}-31`);
+                endDate.setHours(23, 59, 59, 999);
+
+                const existData = await Data.find({createdAt:{
+                    $gte:startDate,
+                    $lte:endDate
+                } });
+        
+                    if(!existData.length){
+                     return res.status(404).json({
+                     message:"data doesn't exists",
+                     })
+                }
+  
+                 res.status(200).json({
+                    success:true,
+                    data:existData,
+                })
+                        
+                } catch (error) {
+                    console.log(error);
+                    res.status(400).json({
+                     message:error
+                })
+                        }
+                }

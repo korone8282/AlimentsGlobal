@@ -2,6 +2,7 @@ import React from "react";
 import { AiOutlineHome} from "react-icons/ai";
 import { TbToolsKitchen, TbWashMachine } from "react-icons/tb";
 import { FaBox } from "react-icons/fa";
+import { LuUtilityPole } from "react-icons/lu";
 import { MdFormatColorFill } from "react-icons/md";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
@@ -11,7 +12,7 @@ const Navbar = () => {
   return (
     <div
       style={{ zIndex: 20 }}
-      className=" flex-col justify-between p-4 font-semibold text-xl sm:max-lg:text-sm bg-black text-[#f59e0b] w-14 hover:w-[15%] h-[100vh] top-0 fixed"
+      className=" flex-col justify-between p-4 font-semibold text-xl sm:max-lg:text-sm bg-gradient-to-br from-10% from-black to-red-700 text-[#f59e0b] w-14 hover:w-[15%] h-[100vh] top-0 fixed"
       id="navigation-container"
     >
 
@@ -25,7 +26,7 @@ const Navbar = () => {
         </Link>
 
         <Link
-          to="/user/Create-Data-Retort"
+          to="/admin/Create-Data-Retort"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <TbWashMachine className="mr-2 mt-[3rem]" size={28} />
@@ -33,27 +34,36 @@ const Navbar = () => {
         </Link>
 
         <Link
-          to="/user/Create-Data-Filling"
+          to="/admin/Create-Data-Filling"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
           <MdFormatColorFill className="mr-2 mt-[3rem]" size={26} />
           <span className="hidden nav-item-name mt-[3rem]">Filling/Sealing</span>{" "}
         </Link>
 
-        <Link to="/user/Create-Data-Kitchen" className="flex relative">
+        <Link to="/admin/Create-Data-Kitchen" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
             <TbToolsKitchen className="mt-[3rem] mr-2" size={18} />
             <span className="hidden nav-item-name mt-[3rem]">Kitchen</span>{" "}
           </div>
         </Link>
 
-        <Link to="/user/Create-Data-Dispatch" className="flex relative">
+        <Link to="/admin/Create-Data-Dispatch" className="flex relative">
           <div className="flex justify-center items-center transition-transform transform hover:translate-x-2">
           <FaBox className="mt-[3rem] mr-2" size={16} />
             <span className="hidden nav-item-name mt-[3rem]">
               Dispatch
             </span>{" "}
           </div>
+        </Link>
+
+        
+        <Link
+          to="/admin/Create-Data-Utility"
+          className="flex items-center transition-transform transform hover:translate-x-2"
+        >
+          <LuUtilityPole className="mr-2 mt-[3rem]" size={28} />
+          <span className="hidden nav-item-name mt-[3rem]">Utility</span>{" "}
         </Link>
       </div>
     </div>

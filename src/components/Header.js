@@ -14,9 +14,9 @@ const Header = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   return ( 
-      <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between '>
+      <div className='w-full h-14 text-[#f59e0b] bg-gradient-to-br from-10% from-black to-red-700 flex items-center justify-between '>
        
-       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-8 sm:max-lg:text-lg sm:max-lg:mx-14'>
+       <Link to="/" className='flex items-center w-[30rem] text-2xl ml-20 font-bold mx-8 sm:max-lg:text-lg sm:max-lg:mx-14'>
         Aliments Global Foods
        </Link>
       

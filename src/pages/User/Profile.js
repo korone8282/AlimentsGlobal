@@ -45,7 +45,7 @@ const Profile = () => {
           <h1 className="my-8  text-3xl font-medium">
             My Profile
           </h1>
-          <div className="flex items-center justify-between  rounded-md border-[1px] text-[#f59e0b] bg-black p-8 px-12">
+          <div className="flex items-center justify-between  rounded-md border-[1px] text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 p-8 px-12">
             <div className="flex items-center justify-between w-full">
             <div className='flex items-center gap-4'>
             <img
@@ -70,7 +70,7 @@ const Profile = () => {
           </IconBtn>
             </div>
           </div>
-          <div className="my-4 flex flex-col gap-y-6 rounded-md text-[#f59e0b] bg-black border-[1px] p-8 px-12">
+          <div className="my-4 flex flex-col gap-y-6 rounded-md text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 border-[1px] p-8 px-12">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg font-semibold">About</p>
               <IconBtn
@@ -88,7 +88,7 @@ const Profile = () => {
               {user?.about ?? "Write Something About Yourself"}
             </p>
           </div>
-          <div className="my-4 flex flex-col gap-y-6 rounded-md border-[1px] text-[#f59e0b] bg-black p-8 px-12">
+          <div className="my-4 flex flex-col gap-y-6 rounded-md border-[1px] text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 p-8 px-12">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg font-semibold">
                 Personal Details

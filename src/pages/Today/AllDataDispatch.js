@@ -13,6 +13,12 @@ const AllDataDispatch = () => {
 
   const sections = ["Dispatch","Kitchen","Filling","Retort"];
 
+  const products = [
+  ["",""],
+  ["Red Chilli Sauce","Hot Garlic Sauce"," Chilli Plum Sauce","Chilli Garlic Sauce","Manchurian Gravy","Indo Chilli Sauce","Chilli Chicken And Paneer Sauce","Schezwan Sauce","Burma Sauce","Honey Chilli Sauce"],
+  []
+]
+
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
 
@@ -64,12 +70,9 @@ const AllDataDispatch = () => {
   box:"",
   packSize:"",
   pouchQuantity:"",
-  materialLoss:"",
   pouchLoss:"",
   leaked:"",
-  bloated:"",
   foreignMatter:"",
-  other:""
   });
 
   const {userinfo} = useSelector(state=>state.auth);
@@ -115,26 +118,23 @@ const AllDataDispatch = () => {
     
     setformData((prevData) => ({
         ...prevData,
-      batch:"",
-      productName:"",
-      batchQuantity:"",
-      batchSize:"",
-      yield:"",
-      yieldLoss:"",
-      retortCycle:"",
-      pouchPerCycle:"",
-      empty:"",
-      filled:"",
-      pouchPacked:"",
-      box:"",
-      packSize:"",
-      pouchQuantity:"",
-      materialLoss:"",
-      pouchLoss:"",
-      leaked:"",
-      bloated:"",
-      foreignMatter:"",
-      other:""
+        batch:"",
+        productName:"",
+        batchQuantity:"",
+        batchSize:"",
+        yield:"",
+        yieldLoss:"",
+        retortCycle:"",
+        pouchPerCycle:"",
+        empty:"",
+        filled:"",
+        pouchPacked:"",
+        box:"",
+        packSize:"",
+        pouchQuantity:"",
+        pouchLoss:"",
+        leaked:"",
+        foreignMatter:"",
   }));
 
   }

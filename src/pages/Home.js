@@ -25,9 +25,10 @@ const Home = () => {
       View Data
       </div>
       
-      <div className='flex gap-16 justify-center w-full px-64 flex-wrap sm:max-lg:px-32'>
-        <DailyCard text={"Today Data"}/>
-        <DailyCard text={"Production Plan"}/>
+      <div className='flex gap-16 justify-center w-full px-48 flex-wrap sm:max-lg:px-32'>
+        <DailyCard text={"Utility"}/>
+        <DailyCard text={"Monthly Data"}/>
+        <DailyCard text={"Product Data"}/>
         <ItemCards text={"Retort"}/>
         <ItemCards text={"Filling"}/>
         <ItemCards text={"Dispatch"}/>

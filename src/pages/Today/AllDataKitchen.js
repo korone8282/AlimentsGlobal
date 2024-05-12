@@ -46,30 +46,27 @@ const AllDataKitchen = () => {
   const date = new Date();
 
   const [formData, setformData] = useState({
-  section:"",
-  batch:"",
-  buyer:"",
-  buyerName:"",
-  productName:"",
-  batchQuantity:"",
-  batchSize:"",
-  yield:"",
-  yieldLoss:"",
-  workersQuantity:"",
-  retortCycle:"",
-  pouchPerCycle:"",
-  empty:"",
-  filled:"",
-  pouchPacked:"",
-  box:"",
-  packSize:"",
-  pouchQuantity:"",
-  materialLoss:"",
-  pouchLoss:"",
-  leaked:"",
-  bloated:"",
-  foreignMatter:"",
-  other:""
+    section:"",
+    batch:"",
+    buyer:"",
+    buyerName:"",
+    productName:"",
+    batchQuantity:"",
+    batchSize:"",
+    yield:"",
+    yieldLoss:"",
+    workersQuantity:"",
+    retortCycle:"",
+    pouchPerCycle:"",
+    empty:"",
+    filled:"",
+    pouchPacked:"",
+    box:"",
+    packSize:"",
+    pouchQuantity:"",
+    pouchLoss:"",
+    leaked:"",
+    foreignMatter:"",
   });
 
   const {userinfo} = useSelector(state=>state.auth);
@@ -114,7 +111,7 @@ const AllDataKitchen = () => {
     
     setformData((prevData) => ({
       ...prevData,
-    batch:"",
+  batch:"",
     productName:"",
     batchQuantity:"",
     batchSize:"",
@@ -128,12 +125,9 @@ const AllDataKitchen = () => {
     box:"",
     packSize:"",
     pouchQuantity:"",
-    materialLoss:"",
     pouchLoss:"",
     leaked:"",
-    bloated:"",
     foreignMatter:"",
-    other:""
 }));
 
   }

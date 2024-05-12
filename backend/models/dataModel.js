@@ -72,22 +72,13 @@ const dataSchema = new mongoose.Schema({
         pouchQuantity:{
             type: Number,
         },
-        materialLoss:{
-            type: Number,
-        },
         pouchLoss:{
             type: Number,
         },
         leaked:{
             type: Number,
         },
-        bloated:{
-            type: Number,
-        },
         foreignMatter:{
-            type: Number,
-        },
-        other:{
             type: Number,
         },
     }],

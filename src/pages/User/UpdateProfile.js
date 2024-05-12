@@ -78,7 +78,7 @@ async function handleSubmit(){
   return (
     <div className='flex justify-center items-center h-[90vh]'>
 
-    <div className='w-[40rem] border-2 h-[40rem] text-[#f59e0b] bg-black rounded-3xl sm:max-lg:h-fit sm:max-lg:mt-96'>
+    <div className='w-[40rem] border-2 h-[40rem] text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 rounded-3xl sm:max-lg:h-fit sm:max-lg:mt-96'>
     <div className=' flex flex-col p-12 gap-10'>
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
