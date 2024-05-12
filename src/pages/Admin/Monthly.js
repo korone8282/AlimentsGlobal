@@ -33,11 +33,12 @@ const Monthly = () => {
                   
                   async function getData(){
                     try {
-              
+                      
+                      setError(0);
                       const res = await apiConnector(`${DATA_URL}/List/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-                
+                      
                       setData(res.data.data);          
-                
+                      
                     setLoading(0);
                 
                     } catch (e) {
@@ -47,7 +48,7 @@ const Monthly = () => {
                   }
 
                   getData();
-                 }, [month]);
+                 }, [month,userinfo.token]);
  
   return (
     <div>
@@ -75,8 +76,13 @@ const Monthly = () => {
           }
       </div>
 
-
-      <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
+      {
+        error ? (<div className='text-3xl font-bold text-center my-96'> No Data Entry Found For {months[month-1].month}</div>
+        ) : (
+         <div>
+         {
+  loading ? (<div><Loader/></div>) : (  
+    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
@@ -130,7 +136,14 @@ const Monthly = () => {
   }</td>
       </tr> 
       </tbody>
-      </table>
+      </table>)
+}
+         </div> 
+        )
+      }
+
+
+    
     </div>
   )
 }

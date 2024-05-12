@@ -13,11 +13,11 @@ const AllDataDispatch = () => {
 
   const sections = ["Dispatch","Kitchen","Filling","Retort"];
 
-  const products = [
-  ["",""],
-  ["Red Chilli Sauce","Hot Garlic Sauce"," Chilli Plum Sauce","Chilli Garlic Sauce","Manchurian Gravy","Indo Chilli Sauce","Chilli Chicken And Paneer Sauce","Schezwan Sauce","Burma Sauce","Honey Chilli Sauce"],
-  []
-]
+//   const products = [
+//   ["",""],
+//   ["Red Chilli Sauce","Hot Garlic Sauce"," Chilli Plum Sauce","Chilli Garlic Sauce","Manchurian Gravy","Indo Chilli Sauce","Chilli Chicken And Paneer Sauce","Schezwan Sauce","Burma Sauce","Honey Chilli Sauce"],
+//   []
+// ]
 
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
