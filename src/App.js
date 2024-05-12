@@ -13,10 +13,8 @@ import Date from './pages/Date'
 import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
 import UsersList from './pages/Admin/UsersList'
-import Dashboard from './pages/Admin/Dashboard'
 import OtpLogin from './pages/User/OtpLogin'
 import Profile from './pages/User/Profile'
-import ProductionPlan from './pages/Today/ProductionPlan'
 import AllDataKitchen from './pages/Today/AllDataKitchen'
 import AllDataDispatch from './pages/Today/AllDataDispatch'
 import AllDataFilling from './pages/Today/AllDataFilling'
@@ -25,6 +23,9 @@ import Navbar from './components/Navbar'
 import UpdateProfile from './pages/User/UpdateProfile'
 import Buyer from './pages/Admin/Buyer'
 import BuyerProducts from './pages/Admin/BuyerProducts'
+import Monthly from './pages/Admin/Monthly'
+import Utility from './pages/Admin/Utility'
+import AllDataUtility from './pages/Today/AllDataUtility'
 
 const App = () => {
   
@@ -43,11 +44,6 @@ const App = () => {
      <Route path='Kitchen/:month' element={<Kitchen/>} />
      <Route path='Filling/:month' element={<Filiing/>} />
      <Route path='Dispatch/:month' element={<Dispatch/>} />
-     <Route path='Production-Plan' element={<ProductionPlan/>} />
-     <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
-     <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
-     <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
-     <Route path='Create-Data-Retort' element={<AllDataRetort/>} />
      <Route path='Date' element={<Date/>} />
      <Route path=':section/:month' element={<DataLog/>} />
      <Route path='Profile/:id' element={<Profile/>} />
@@ -55,10 +51,16 @@ const App = () => {
   </Route>
 
   <Route path="/admin" element={<AdminRoute/>}>
-      <Route path='Dashboard' element={<Dashboard/>}></Route>
-      <Route path='UserList' element={<UsersList/>}></Route>
-      <Route path='BuyerList' element={<Buyer/>}></Route>
-      <Route path='BuyerProducts' element={<BuyerProducts/>}></Route>
+     <Route path='Monthly-Data' element={<Monthly/>} />
+     <Route path='Utility' element={<Utility/>} />
+     <Route path='Create-Data-Utility' element={<AllDataUtility/>} />
+     <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
+     <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
+     <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
+     <Route path='Create-Data-Retort' element={<AllDataRetort/>} />
+     <Route path='UserList' element={<UsersList/>}></Route>
+     <Route path='BuyerList' element={<Buyer/>}></Route>
+     <Route path='Product-Data' element={<BuyerProducts/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />
