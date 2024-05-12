@@ -4,7 +4,8 @@ const {authorization,authAdmin} = require('../middlewares/authorization');
 const { createData,
         deleteData,
         readData, 
-        readBuyerData} = require('../controllers/dailyData');
+        readBuyerData,
+        readMonthlyData} = require('../controllers/dailyData');
 
 router.post("/:section/:dayTime",authorization,createData);
 router.get("/List/:month",authorization,authAdmin,readMonthlyData);
