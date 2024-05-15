@@ -45,7 +45,7 @@ const AllDataUtility = () => {
 
   return (
     <div>
-      <div className='my-8 rounded-xl w-full h-12 flex justify-center gap-32 items-center'>
+      <div className='my-6 rounded-xl w-full h-12 flex justify-center gap-32 items-center'>
 
       <button className='text-xl font-semibold h-16 w-[9.6rem] text-center bg-[#f59e0b] rounded-xl border-[#2e1065] hover:bg-black hover:text-white'
               onClick={()=>{
@@ -64,10 +64,10 @@ const AllDataUtility = () => {
 
       </div>
 
-         <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
+         <h2 className='text-center text-2xl font-bold my-4'>DataSheet for : {date.toLocaleDateString()}</h2>
       
          <div>
-                    <table className='w-[80rem] mx-auto my-12'>
+                    <table className='w-[80rem] mx-auto -my-2'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>
@@ -90,51 +90,51 @@ const AllDataUtility = () => {
           <td className='border-4 border-black w-24'>
           <input type='number'
                  value={initalData.BoilerRh}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'BoilerRh',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='text'
                  value={initalData.BoilerCN}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'BoilerCN',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='number'
                  value={initalData.BoilerSD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'BoilerSD',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='number'
                  value={initalData.BoilerAD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'BoilerAD',val:e.target.value}))}
             ></input>
           </td>
           <td rowSpan={3} className='border-4 row-span-4 border-black'>
           <input type='number'
                  value={initalData.Cylinder}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-96'
                  onChange={ e => dispatch(setUtil({name:'Cylinder',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.BoilerBD}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'BoilerBD',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.BoilerR}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'BoilerR',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
         </tr>
 
@@ -143,44 +143,44 @@ const AllDataUtility = () => {
           <td className='border-4 border-black w-24'>
           <input type='number'
                  value={initalData.RoRh}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'RoRh',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='text'
                  value={initalData.RoCN}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'RoCN',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='number'
                  value={initalData.RoSD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'RoSD',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='number'
                  value={initalData.RoAD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'RoAD',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.RoBD}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'RoBD',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.RoR}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'RoR',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
         </tr>
 
@@ -189,44 +189,44 @@ const AllDataUtility = () => {
           <td className='border-4 border-black w-24'>
           <input type='number'
                  value={initalData.EtpRh}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'EtpRh',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='text'
                  value={initalData.EtpCN}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'EtpCN',val:e.target.value}))}
             ></input>
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black h-28'>
           <input type='number'
                  value={initalData.EtpSD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'EtpSD',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
           <input type='number'
                  value={initalData.EtpAD}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-28'
                  onChange={ e => dispatch(setUtil({name:'EtpAD',val:e.target.value}))}
             ></input>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.EtpBD}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'EtpBD',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <textarea rows={5} cols={40}
                  value={initalData.EtpR}
                  className='w-full bg-transparent'
                  onChange={ e => dispatch(setUtil({name:'EtpR',val:e.target.value}))}
-            ></input>
+            ></textarea>
           </td>
         </tr>
 
@@ -235,7 +235,7 @@ const AllDataUtility = () => {
           <td className='border-4 border-black w-24'>
           <input type='number'
                  value={initalData.DGRh}
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-16'
                  onChange={ e => dispatch(setUtil({name:'DGRh',val:e.target.value}))}
             ></input>
           </td>
@@ -243,7 +243,7 @@ const AllDataUtility = () => {
           <input type='number'
                  value={initalData.Diesel}
                  placeholder='Diesel: '
-                 className='w-full bg-transparent'
+                 className='w-full bg-transparent h-16'
                  onChange={ e => dispatch(setUtil({name:'Diesel',val:e.target.value}))}
             ></input>
           </td>

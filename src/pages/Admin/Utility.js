@@ -31,7 +31,6 @@ const Utility = () => {
   getData();
   }, [date,userinfo.token]);
 
-console.log(data);
   return (
     <div>
       
@@ -42,7 +41,7 @@ console.log(data);
         loading ? (<Loader/>
         ) : (
           <div>
-                    <table className='w-[80rem] mx-auto my-12'>
+                    <table className='w-[80rem] mx-32 my-10'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>
@@ -54,88 +53,88 @@ console.log(data);
         </tr>
         <tr>
           <th rowSpan={2} className='border-4 border-black px-8'>Name</th>
-          <th rowSpan={2} className='border-4 border-black p-0'>Standard Doses</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Actual Doses</th>
+          <th rowSpan={2} className='border-4 border-black px-4'>Standard Doses</th>
+          <th rowSpan={2} className='border-4 border-black px-4'>Actual Doses</th>
         </tr>
       </thead>
 
       <tbody className='font-semibold'>
      <tr>
           <th  className='border-4 border-black py-3'>Boiler</th>
-          <td className='border-4 border-black w-24'>
+          <td className='border-4 border-black w-24 text-center'>
           {data[0].BoilerRh}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].BoilerCN}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].BoilerSD}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].BoilerAD}
           </td>
-          <td rowSpan={3} className='border-4 row-span-4 border-black'>
+          <td rowSpan={3} className='border-4 row-span-4 text-center border-black'>
           {data[0].Cylinder}
           </td>
-          <td className='border-4 border-black px-4 w-32 overflow-x-hidden'>
-          {data[0].BoilerBD}
+          <td className='border-4 border-black'>
+          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].BoilerBD}</div>
           </td>
-          <td className='border-4 border-black max-w-32 scroll-m-1 text-clip  overflow-scroll'>
-          {data[0].BoilerR}
+          <td className='border-4 border-black'>
+          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].BoilerR}</div>
           </td>
         </tr>
 
         <tr>
           <th  className='border-4 border-black py-3'>RO</th>
-          <td className='border-4 border-black w-24'>
+          <td className='border-4 border-black w-24 text-center'>
           {data[0].RoRh}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].RoCN}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].RoSD}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].RoAD}
           </td>
           <td className='border-4 border-black'>
-          {data[0].RoBD}
+          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].RoBD}</div>
           </td>
           <td className='border-4 border-black'>
-          {data[0].RoR}
+          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].RoR}</div>
           </td>
         </tr>
 
         <tr>
           <th  className='border-4 border-black py-3'>ETP</th>
-          <td className='border-4 border-black w-24'>
+          <td className='border-4 border-black w-24 text-center'>
           {data[0].EtpRh}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].EtpCN}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].EtpSD}
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 border-black text-center'>
           {data[0].EtpAD}
           </td>
           <td className='border-4 border-black'>
-          {data[0].EtpBD}
+          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].EtpBD}</div>
           </td>
           <td className='border-4 border-black text-ellipsis'>
-          {data[0].EtpR}
+          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].ETpR}</div>
           </td>
         </tr>
 
         <tr>
           <th  className='border-4 border-black py-3'>Digital Generator</th>
-          <td className='border-4 border-black w-24'>
+          <td className='border-4 border-black w-24 text-center'>
           {data[0].DGRh}
           </td>
-          <td colSpan={6} className='border-4 border-black'>
-          {data[0].Diesel}
+          <td colSpan={6} className='border-4 text-center border-black'>
+           Diesel Used : {data[0].Diesel}
           </td>
         </tr>
        
