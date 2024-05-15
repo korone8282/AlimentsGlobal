@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { toast } from 'react-toastify';
-import { DATA_URL, CATEGORIES_URL } from '../../redux/Utils/constants';
+import { DATA_URL, CATEGORIES_URL, PRODUCT_URL } from '../../redux/Utils/constants';
 import { setData, deleteData, emptyData } from '../../redux/Slices/localSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -12,17 +12,14 @@ import { MdLightMode,MdModeNight } from "react-icons/md";
 const AllDataDispatch = () => {
 
   const sections = ["Dispatch","Kitchen","Filling","Retort"];
-
-//   const products = [
-//   ["",""],
-//   ["Red Chilli Sauce","Hot Garlic Sauce"," Chilli Plum Sauce","Chilli Garlic Sauce","Manchurian Gravy","Indo Chilli Sauce","Chilli Chicken And Paneer Sauce","Schezwan Sauce","Burma Sauce","Honey Chilli Sauce"],
-//   []
-// ]
-
+  
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
 
   const section = useLocation();
+
+  const [products, setproducts] = useState([]);
+  const [buyer, setbuyer] = useState("");
 
   const currentSection = section.pathname.split("/")[2].split("-")[2];
 
@@ -42,7 +39,20 @@ const AllDataDispatch = () => {
       }
     }
 
+    async function getProducts(){
+      try {
+
+    const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
+    setproducts(res.data.data);
+
+      } catch (error) {
+        console.log(error);
+      }
+      }
+
     getCategories();
+    getProducts();
+
   }, []);
 
   const val = 0;
@@ -118,8 +128,10 @@ const AllDataDispatch = () => {
     
     setformData((prevData) => ({
         ...prevData,
-        batch:"",
+        buyer:"",
+        buyerName:"",
         productName:"",
+        batch:"",
         batchQuantity:"",
         batchSize:"",
         yield:"",
@@ -232,7 +244,10 @@ const AllDataDispatch = () => {
                  name='buyerName'
                  className='w-24 bg-transparent'
                  value={formData.buyerName}
-                 onChange={ e => inputHandler(e) }
+                 onChange={ e =>{
+                   inputHandler(e) 
+                   setbuyer(e.target.value.split("-")[1])
+                   }}
             >
             <option selected={1} className=' bg-[#f59e0b]'>Select Buyer</option>
             {
@@ -241,12 +256,17 @@ const AllDataDispatch = () => {
             </select>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <select
                  name='productName'
+                 className='w-24 bg-transparent'
                  value={formData.productName}
-                 className='w-32 bg-transparent'
                  onChange={ e => inputHandler(e) }
-            ></input>
+            >
+            <option selected={true} className=' bg-[#f59e0b]'>Select Product</option>
+            {
+                products?.filter((product) => product.buyer === buyer).map((val,index)=>(<option className=' bg-[#f59e0b] px-2' value={val.name} key={index}>{val.name}</option>))
+            }
+            </select>
           </td>
           <td className='border-4 border-black'>
           <input type='text'

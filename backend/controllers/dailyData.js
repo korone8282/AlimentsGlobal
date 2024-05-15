@@ -134,7 +134,6 @@ exports.readBuyerData = async(req,res) => {
                 }
          }
 
-
 exports.readMonthlyData = async(req,res) => {
             try {
        

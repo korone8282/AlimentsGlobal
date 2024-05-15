@@ -26,7 +26,7 @@ const Home = () => {
       </div>
       
       <div className='flex gap-16 justify-center w-full px-48 flex-wrap sm:max-lg:px-32'>
-        <DailyCard text={"Utility"}/>
+        <ItemCards text={"Utility"}/>
         <DailyCard text={"Monthly Data"}/>
         <DailyCard text={"Product Data"}/>
         <ItemCards text={"Retort"}/>

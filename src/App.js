@@ -26,6 +26,7 @@ import BuyerProducts from './pages/Admin/BuyerProducts'
 import Monthly from './pages/Admin/Monthly'
 import Utility from './pages/Admin/Utility'
 import AllDataUtility from './pages/Today/AllDataUtility'
+import Product from './pages/Admin/Product'
 
 const App = () => {
   
@@ -44,6 +45,7 @@ const App = () => {
      <Route path='Kitchen/:month' element={<Kitchen/>} />
      <Route path='Filling/:month' element={<Filiing/>} />
      <Route path='Dispatch/:month' element={<Dispatch/>} />
+     <Route path='Utility/:month' element={<Utility/>} />
      <Route path='Date' element={<Date/>} />
      <Route path=':section/:month' element={<DataLog/>} />
      <Route path='Profile/:id' element={<Profile/>} />
@@ -52,7 +54,6 @@ const App = () => {
 
   <Route path="/admin" element={<AdminRoute/>}>
      <Route path='Monthly-Data' element={<Monthly/>} />
-     <Route path='Utility' element={<Utility/>} />
      <Route path='Create-Data-Utility' element={<AllDataUtility/>} />
      <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
      <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
@@ -60,6 +61,7 @@ const App = () => {
      <Route path='Create-Data-Retort' element={<AllDataRetort/>} />
      <Route path='UserList' element={<UsersList/>}></Route>
      <Route path='BuyerList' element={<Buyer/>}></Route>
+     <Route path='ProductList' element={<Product/>}></Route>
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>
   </Route>
 

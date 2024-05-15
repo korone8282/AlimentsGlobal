@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { toast } from 'react-toastify';
-import { DATA_URL, CATEGORIES_URL } from '../../redux/Utils/constants';
+import { DATA_URL, CATEGORIES_URL, PRODUCT_URL } from '../../redux/Utils/constants';
 import { setData, deleteData, emptyData } from '../../redux/Slices/localSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate} from 'react-router-dom';
@@ -12,6 +12,9 @@ import { MdLightMode,MdModeNight } from "react-icons/md";
 const AllDataFilling = () => {
   
   const section = useLocation();
+
+  const [products, setproducts] = useState([]);
+  const [buyer, setbuyer] = useState("");
 
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
@@ -36,7 +39,19 @@ const AllDataFilling = () => {
       }
     }
 
+    async function getProducts(){
+      try {
+
+    const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
+    setproducts(res.data.data);
+
+      } catch (error) {
+        console.log(error);
+      }
+      }
+
     getCategories();
+    getProducts();
   }, []);
 
   const val = 2;
@@ -112,6 +127,8 @@ const AllDataFilling = () => {
     
     setformData((prevData) => ({
       ...prevData,
+    buyer:"",
+    buyerName:"",
     batch:"",
     productName:"",
     batchQuantity:"",
@@ -224,21 +241,29 @@ const AllDataFilling = () => {
                  name='buyerName'
                  className='w-24 bg-transparent'
                  value={formData.buyerName}
-                 onChange={ e => inputHandler(e) }
+                 onChange={ e =>{
+                   inputHandler(e) 
+                   setbuyer(e.target.value.split("-")[1])
+                   }}
             >
-            <option className=' bg-[#f59e0b]'>Select Buyer</option>
+            <option selected={1} className=' bg-[#f59e0b]'>Select Buyer</option>
             {
                 categories.map((val,index)=>(<option className=' bg-[#f59e0b]' value={`${val._id}-${val.name}`} key={index}>{val.name}</option>))
             }
             </select>
           </td>
           <td className='border-4 border-black'>
-          <input type='text'
+          <select
                  name='productName'
+                 className='w-24 bg-transparent'
                  value={formData.productName}
-                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
-            ></input>
+            >
+            <option selected={true} className=' bg-[#f59e0b]'>Select Product</option>
+            {
+                products?.filter((product) => product.buyer === buyer).map((val,index)=>(<option className=' bg-[#f59e0b] px-2' value={val.name} key={index}>{val.name}</option>))
+            }
+            </select>
           </td>
           <td className='border-4 border-black'>
           <input type='text'

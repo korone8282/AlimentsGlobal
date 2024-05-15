@@ -1,30 +1,32 @@
 require("dotenv").config();
-const Category = require('../models/categoryModel');
+const Product = require('../models/productModel');
 
-exports.createCategory = async(req,res) => {
+exports.createProduct = async(req,res) => {
 try {
     const{name} = req.body;
+    const {buyer} = req.params;
 
-    if(!name){
+    if(!name||!buyer){
         return res.json({error:"Name is required"});
     }
 
-    const existCategory = await Category.findOne({name});
+    const existProduct = await Product.findOne({buyer:buyer,name:name});
 
-    if(existCategory){
+    if(existProduct){
       return res.status(500).json({
-            message:"category already exists",
+            message:"Product already exists",
         });
     }
 
 
-    const newCategory = await Category.create({
+    const newProduct = await Product.create({
+        buyer,
         name,
     })
     res.status(200).json({
         success:true,
-        data:newCategory,
-        message:"Category created"
+        data:newProduct,
+        message:"Product created"
     });
 
 
@@ -36,32 +38,31 @@ try {
 }
 }
 
-exports.updateCategory = async(req,res) => {
+exports.updateProduct = async(req,res) => {
     try {
    
-       
         const {updatedName} = req.body;
-        const {categoryId} = req.params;
+        const {productId} = req.params;
  
         if(!updatedName){
             return res.json({error:"Name is required"});
         }
         
-        const existCategory = await Category.findOne({_id:categoryId});
+        const existProduct = await Product.findOne({_id:productId});
 
-        if(!existCategory){
+        if(!existProduct){
           return res.status(500).json({
-                message:"category doesn't exists",
+                message:"Product doesn't exists",
             });
         }
-        
-        existCategory.name = updatedName;
-        const updatedCategory = await existCategory.save();
+
+        existProduct.name = updatedName;
+        const updatedProduct = await existProduct.save();
 
 
         res.status(200).json({
             success:true,
-            data:updatedCategory,
+            data:updatedProduct,
             message:"Category updated"
         });
     
@@ -73,25 +74,24 @@ exports.updateCategory = async(req,res) => {
     }
     }
 
-exports.deleteCategory = async(req,res) => {
+exports.deleteProduct = async(req,res) => {
         try {
 
-            const {categoryId} = req.params;
+            const {productId} = req.params;
        
-        const existCategory = await Category.findOne({_id:categoryId});
+        const existProduct = await Product.findOne({_id:productId});
     
-        if(!existCategory){
+        if(!existProduct){
           return res.status(500).json({
                 message:"category doesn't exists",
             });
         }   
             
-             await Category.findOneAndDelete({_id:categoryId});
+             await Product.findOneAndDelete({_id:productId});
             
             res.status(200).json({
                 success:true,
-
-                message:"Category deleted"
+                message:"Product deleted"
             });
         
         } catch (error) {
@@ -102,14 +102,14 @@ exports.deleteCategory = async(req,res) => {
         }
         }
 
-exports.categoryList = async(req,res) => {
+exports.productList = async(req,res) => {
             try {
     
-                const categories = await Category.find({});
+                const products = await Product.find({});
 
                 res.status(200).json({
                     success:true,
-                    data:categories,    
+                    data:products,    
                 });
             
             } catch (error) {
@@ -120,22 +120,21 @@ exports.categoryList = async(req,res) => {
             }
             }
 
-exports.readCategory = async(req,res) => {
+exports.readProduct = async(req,res) => {
                 try {
                       
-                const existCategory = await Category.findOne({_id:req.params.id});
-                console.log(req.params.id);
+                const existProduct = await Product.findOne({_id:req.params.id});
             
-                if(!existCategory){
+                if(!existProduct){
                   return res.status(500).json({
-                        message:"category doesn't exists",
+                        message:"Product doesn't exists",
                     });
                 }
                     
             
                     res.status(200).json({
                         success:true,
-                        data:existCategory,
+                        data:existProduct,
                     });
                 
                 } catch (error) {
