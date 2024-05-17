@@ -19,7 +19,7 @@ router.post("/googleLogin",googleLogin)
 router.route("/signup").post(signup);
 router.post("/logout",logout);
 router.route("/getAllUsers").get(authorization,authAdmin,getAllUsers);
-router.get("/profile/:id",authorization,getCurrentUser).put("/profile/:id",authorization,formidable(),updateProfile);
+router.get("/profile/:id",authorization,authAdmin,getCurrentUser).put("/profile/:id",authorization,authAdmin,formidable(),updateProfile);
 router.route("/:id").delete(authorization,authAdmin,deleteUser).get(userId);
 router.post("/otpEntry",sendOtp);
 router.post("/otpLogin",loginOtp);

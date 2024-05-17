@@ -16,7 +16,7 @@ const Navbar = () => {
       id="navigation-container"
     >
 
-      <div className="flex flex-col justify-center space-y-8 sm:max-lg:space-y-1 sm:max-lg:-my-[6rem]">
+      <div className="flex flex-col justify-center space-y-8 sm:max-lg:space-y-1 sm:max-lg:-my-[5rem]">
        <Link
           to="/"
           className="flex mt-12 items-center transition-transform transform hover:translate-x-2"
@@ -29,29 +29,29 @@ const Navbar = () => {
           to="/admin/Create-Data-Retort"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <TbWashMachine className="mr-2 mt-[3rem]" size={28} />
-          <span className="hidden nav-item-name mt-[3rem]"> Retort</span>{" "}
+          <TbWashMachine className="mr-2 mt-[3rem] sm:max-lg:mt-[2rem]" size={28} />
+          <span className="hidden nav-item-name sm:max-lg:mt-[2rem] mt-[3rem]"> Retort</span>{" "}
         </Link>
 
         <Link
           to="/admin/Create-Data-Filling"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <MdFormatColorFill className="mr-2 mt-[3rem]" size={26} />
-          <span className="hidden nav-item-name mt-[3rem]">Filling/Sealing</span>{" "}
+          <MdFormatColorFill className="mr-2 mt-[3rem] sm:max-lg:mt-[2rem]" size={26} />
+          <span className="hidden nav-item-name mt-[3rem] sm:max-lg:mt-[2rem]">Filling/Sealing</span>{" "}
         </Link>
 
         <Link to="/admin/Create-Data-Kitchen" className="flex relative">
           <div className="flex items-center transition-transform transform hover:translate-x-2">
-            <TbToolsKitchen className="mt-[3rem] mr-2" size={18} />
-            <span className="hidden nav-item-name mt-[3rem]">Kitchen</span>{" "}
+            <TbToolsKitchen className="mt-[3rem] mr-2 sm:max-lg:mt-[2rem]" size={18} />
+            <span className="hidden nav-item-name mt-[3rem] sm:max-lg:mt-[2rem]">Kitchen</span>{" "}
           </div>
         </Link>
 
         <Link to="/admin/Create-Data-Dispatch" className="flex relative">
           <div className="flex justify-center items-center transition-transform transform hover:translate-x-2">
-          <FaBox className="mt-[3rem] mr-2" size={16} />
-            <span className="hidden nav-item-name mt-[3rem]">
+          <FaBox className="mt-[3rem] mr-2 sm:max-lg:mt-[2rem]" size={16} />
+            <span className="hidden nav-item-name mt-[3rem] sm:max-lg:mt-[2rem]">
               Dispatch
             </span>{" "}
           </div>
@@ -62,8 +62,8 @@ const Navbar = () => {
           to="/admin/Create-Data-Utility"
           className="flex items-center transition-transform transform hover:translate-x-2"
         >
-          <LuUtilityPole className="mr-2 mt-[3rem]" size={28} />
-          <span className="hidden nav-item-name mt-[3rem]">Utility</span>{" "}
+          <LuUtilityPole className="mr-2 mt-[3rem] sm:max-lg:mt-[2rem]" size={28} />
+          <span className="hidden nav-item-name mt-[3rem] sm:max-lg:mt-[2rem]">Utility</span>{" "}
         </Link>
       </div>
     </div>

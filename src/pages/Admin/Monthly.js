@@ -94,6 +94,7 @@ const Monthly = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Total (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
@@ -128,6 +129,11 @@ const Monthly = () => {
   <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
   }</td>
+
+  <td className='border-4 border-black font-bold '> {
+    (ele)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
+  }</td>
+
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
   }</td>

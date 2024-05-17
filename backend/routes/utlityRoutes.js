@@ -5,7 +5,7 @@ const { createUtilData,
         readUtilData} = require('../controllers/utility');
 
 router.post("/data",authorization,authAdmin,createUtilData);
-router.get("/:date/:month",authorization,readUtilData);
+router.get("/:date/:month",authorization,authAdmin,readUtilData);
                     
 
 
