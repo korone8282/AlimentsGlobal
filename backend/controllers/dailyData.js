@@ -137,11 +137,13 @@ exports.readBuyerData = async(req,res) => {
 exports.readMonthlyData = async(req,res) => {
             try {
        
+                const days = [31,29,31,30,31,30,31,31,30,31,30,31];
+
                 const {month} = req.params;
         
                 const startDate = new Date(`2024-${month}-01`);
                 startDate.setHours(0, 0, 0, 0);
-                const endDate = new Date(`2024-${month}-31`);
+                const endDate = new Date(`2024-${month}-${days[month-1]}`);
                 endDate.setHours(23, 59, 59, 999);
 
                 const existData = await Data.find({createdAt:{
