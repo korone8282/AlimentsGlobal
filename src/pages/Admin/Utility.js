@@ -40,8 +40,8 @@ const Utility = () => {
       ) : (
         loading ? (<Loader/>
         ) : (
-          <div>
-                    <table className='w-[80rem] mx-32 my-10'>
+          <div className='sm:max-lg:mr-4 sm:max-lg:ml-16'>
+                    <table className='w-[80rem] mx-32 sm:max-lg:ml-0  bg-[#f59e0b]  my-10 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>
@@ -77,10 +77,10 @@ const Utility = () => {
           {data[0].Cylinder}
           </td>
           <td className='border-4 border-black'>
-          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].BoilerBD}</div>
+          <div className='overflow-y-auto h-32 overflow-x-hidden sm:max-lg:w-28'>{data[0].BoilerBD}</div>
           </td>
           <td className='border-4 border-black'>
-          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].BoilerR}</div>
+          <div className='overflow-y-auto h-32 w-96 sm:max-lg:w-28 overflow-x-hidden'>{data[0].BoilerR}</div>
           </td>
         </tr>
 
@@ -99,10 +99,10 @@ const Utility = () => {
           {data[0].RoAD}
           </td>
           <td className='border-4 border-black'>
-          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].RoBD}</div>
+          <div className='overflow-y-auto h-32 overflow-x-hidden sm:max-lg:w-28'>{data[0].RoBD}</div>
           </td>
           <td className='border-4 border-black'>
-          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].RoR}</div>
+          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden sm:max-lg:w-28'>{data[0].RoR}</div>
           </td>
         </tr>
 
@@ -121,10 +121,10 @@ const Utility = () => {
           {data[0].EtpAD}
           </td>
           <td className='border-4 border-black'>
-          <div className='overflow-y-auto h-32 overflow-x-hidden'>{data[0].EtpBD}</div>
+          <div className='overflow-y-auto h-32 overflow-x-hidden sm:max-lg:w-28'>{data[0].EtpBD}</div>
           </td>
           <td className='border-4 border-black text-ellipsis'>
-          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden'>{data[0].ETpR}</div>
+          <div className='overflow-y-auto h-32 w-96 overflow-x-hidden sm:max-lg:w-28'>{data[0].ETpR}</div>
           </td>
         </tr>
 

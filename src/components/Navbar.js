@@ -16,7 +16,7 @@ const Navbar = () => {
       id="navigation-container"
     >
 
-      <div className="flex flex-col justify-center space-y-8 sm:max-lg:space-y-1 sm:max-lg:-my-16">
+      <div className="flex flex-col justify-center space-y-8 sm:max-lg:space-y-1 sm:max-lg:-my-[6rem]">
        <Link
           to="/"
           className="flex mt-12 items-center transition-transform transform hover:translate-x-2"

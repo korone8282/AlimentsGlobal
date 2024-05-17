@@ -80,12 +80,12 @@ const Monthly = () => {
       </div>
 
       {
-        error ? (<div className='text-3xl font-bold text-center my-96'> No Data Entry Found For {months[month-1].month}</div>
+        error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found For {months[month-1].month}</div>
         ) : (
          <div>
          {
   loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
+    <table className='w-[80rem] sm:max-lg:ml-16 mx-auto my-12 bg-[#f59e0b] sm:max-lg:w-fit'>
       <thead>
         <tr>
         <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (Kg)</th>
