@@ -188,6 +188,11 @@ const Monthly = () => {
   <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
   }</td>
+
+  <td className='border-4 border-black font-bold '> 
+---
+  </td>
+
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
   }</td>
