@@ -10,14 +10,13 @@ try {
         return res.json({error:"Name is required"});
     }
 
-    const existProduct = await Product.findOne({buyer:buyer,name:name});
+    const existProduct = await Product.find({buyer:buyer,name:name});
 
-    if(existProduct){
+    if(existProduct.length){
       return res.status(500).json({
             message:"Product already exists",
         });
     }
-
 
     const newProduct = await Product.create({
         buyer,
