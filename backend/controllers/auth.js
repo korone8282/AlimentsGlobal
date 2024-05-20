@@ -88,7 +88,7 @@ exports.loginOtp = async(req,res) =>{
 try {
     const {email,otp} = req.body
     const newOtp = otp.join("");
- 
+    
     let existUser = await User.findOne({email});
 
     const recentOtp = await OtpModel.findOne({email}).sort({createdAt:-1}).limit(1);
@@ -138,7 +138,7 @@ try {
 exports.signup = async(req,res) => {
 
   try{
-
+    
     let {fname,email,password,confirmPassword,otp} = req.body;
     const newOtp = otp.join("");
 
@@ -486,7 +486,7 @@ exports.deleteUser = async(req,res) =>{
 
 exports.userId = async(req,res) =>{
     try{
-
+       
         const user = await User.findById(req.params.id).select('-password');
 
         if(!user){

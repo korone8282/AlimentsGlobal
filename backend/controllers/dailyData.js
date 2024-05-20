@@ -136,7 +136,7 @@ exports.readBuyerData = async(req,res) => {
 
 exports.readMonthlyData = async(req,res) => {
             try {
-       
+                
                 const days = [31,29,31,30,31,30,31,31,30,31,30,31];
 
                 const {month} = req.params;
