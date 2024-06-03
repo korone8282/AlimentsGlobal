@@ -131,7 +131,7 @@ const Monthly = () => {
   }</td>
 
   <td className='border-4 border-black font-bold '> {
-    (ele)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
+    ((ele)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)).toFixed(2)
   }</td>
 
           <td className='border-4 border-black font-bold '> {
