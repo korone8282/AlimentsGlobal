@@ -178,7 +178,7 @@ const Monthly = () => {
   }</td>
   
          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield,0),0)
+    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0)
   }</td>
 
   <td className='border-4 border-black font-bold '> {
