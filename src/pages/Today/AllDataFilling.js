@@ -156,17 +156,17 @@ const AllDataFilling = () => {
 
  
   return (
-    <div>
+    <div >
       <div className='my-8 rounded-xl w-full h-12 flex justify-around items-center'>
 
       <select 
       name="section"
       className='text-xl font-semibold bg-transparent rounded-xl p-3 bg-[#f59e0b]'
-      onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
+      onChange={e=> navigate(`/admin/Create-Data-${e.target.value}`)}>
       <option className='bg-[#f59e0b] '>Select Section</option>
         {
           sections.map((val,index)=>(
-            <option key={index} className=' bg-[#f59e0b] font-semibold'>{val}</option>
+            <option key={index} className=' bg-[#f59e0b] text-black font-semibold'>{val}</option>
           ))
         }
       </select>

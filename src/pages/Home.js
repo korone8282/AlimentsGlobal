@@ -1,14 +1,20 @@
 import React,  { useEffect } from 'react'
-import ItemCards from '../components/ItemCards';
-import DailyCard from '../components/DailyCard';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { TbToolsKitchen, TbWashMachine } from "react-icons/tb";
+import { FaBox } from "react-icons/fa";
+import { LuUtilityPole } from "react-icons/lu";
+import { MdFormatColorFill } from "react-icons/md";
+import { useDispatch } from 'react-redux'
+import { setSection } from '../redux/Slices/dateSlice'
+import "./Home.css";
 
 const Home = () => {
 
   const {userinfo} = useSelector(state => state.auth);
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
    
@@ -19,21 +25,140 @@ const Home = () => {
  
 
   return (
-    <div className= 'flex flex-col '>
-
-      <div className='w-full  bg-black text-[#f59e0b] h-10 font-bold text-3xl my-8 text-center sm:max-lg:my-2 sm:max-lg:h-6 sm:max-lg:text-base'>
-      View Data
-      </div>
+    <div className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 h-screen'>
+  
+  <div className='flex  gap-10 justify-center py-20'>
+  <div className=' max-w-sm
+    rounded-2xl
+    text-white/35
+    backdrop-blur-lg
+    [ bg-gradient-to-b from-white/35 to-white/5 ]
+    [ border-[3px] border-solid border-white border-opacity-30 ]
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    id="navigation-container">
       
-      <div className='flex gap-16 justify-center w-full px-48 flex-wrap sm:max-lg:px-32'>
-        <ItemCards text={"Utility"}/>
-        <DailyCard text={"Monthly Data"}/>
-        <DailyCard text={"Product Data"}/>
-        <ItemCards text={"Retort"}/>
-        <ItemCards text={"Filling"}/>
-        <ItemCards text={"Dispatch"}/>
-        <ItemCards text={"Kitchen"}/>
-      </div>
+      <div className='item p-12 pt-56'>View Data</div>
+
+      <div className='nav-item-name flex flex-col gap-6 mt-7'>
+
+<div onClick={()=>{
+      dispatch(setSection("Retort"));
+      navigate(`admin/Date`)
+    }}  className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+ Retort 
+ <TbWashMachine className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</div>
+
+<div onClick={()=>{
+      dispatch(setSection("Filling"));
+      navigate(`admin/Date`)
+    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+ Filling 
+ <MdFormatColorFill className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</div>
+
+<div onClick={()=>{
+      dispatch(setSection("Kitchen"));
+      navigate(`admin/Date`)
+    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+ Kitchen 
+ <TbToolsKitchen className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</div>
+
+<div onClick={()=>{
+      dispatch(setSection("Dispatch"));
+      navigate(`admin/Date`)
+    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+ Dispatch 
+ <FaBox className=" mt-2 sm:max-lg:mt-[2rem]" size={36} color='black' />
+</div>
+
+<div onClick={()=>{
+      dispatch(setSection("Utility"));
+      navigate(`admin/Date`)
+    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+ Utility 
+ <LuUtilityPole className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</div>
+
+</div>
+      
+    </div>
+
+    
+    <div className=' max-w-sm
+    rounded-2xl
+    text-white/35
+    backdrop-blur-lg
+    [ bg-gradient-to-b from-white/35 to-white/5 ]
+    [ border-[3px] border-solid border-white border-opacity-30 ]
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    id="navigation-container">
+      
+        <div className='item p-12 pt-56'>View Analytics</div>
+
+        <div className='nav-item-name flex flex-col gap-6 mt-7'>
+
+<Link to="/admin/Monthly-Data" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Monthly Data 
+</Link>
+
+<Link to="/admin/Product-Data" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Product Data
+</Link>
+
+
+</div>
+      
+    </div>
+    
+
+    <div className=' max-w-sm
+    rounded-2xl
+    text-white/35
+    backdrop-blur-lg
+    [ bg-gradient-to-b from-white/35 to-white/5 ]
+    [ border-[3px] border-solid border-white border-opacity-30 ]
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    id="navigation-container"
+    >
+      
+      <div className='item p-12 pt-56'>Create Data</div>
+
+      <div className='nav-item-name flex flex-col gap-6 mt-7'>
+
+<Link to="/admin/Create-Data-Retort" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Retort 
+ <TbWashMachine className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</Link>
+
+<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Filling 
+ <MdFormatColorFill className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</Link>
+
+<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Kitchen 
+ <TbToolsKitchen className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</Link>
+
+<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Dispatch 
+ <FaBox className=" mt-2 sm:max-lg:mt-[2rem]" size={36} color='black' />
+</Link>
+
+<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Utility 
+ <LuUtilityPole className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+</Link>
+
+</div>
+      
+    </div>
+
+  </div>
+ 
+
 
     </div>
 

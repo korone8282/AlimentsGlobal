@@ -1,0 +1,31 @@
+#navigation-container:hover {
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out; 
+  }
+
+  #navigation-container {
+    opacity: 0.85;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+.nav-item-name {
+    opacity: 0;
+    display: none;
+  }
+
+  #navigation-container:hover .nav-item-name {
+    display: flex;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+  }
+
+  .item {
+    display: block;
+    opacity: 1;
+    transition: opacity 1s ease-in-out; 
+  }
+
+  #navigation-container:hover .item {
+    display: none;
+    opacity: 0;
+  }

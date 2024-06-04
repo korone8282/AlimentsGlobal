@@ -156,17 +156,17 @@ const AllDataDispatch = () => {
   }
 
   return (
-    <div>
+    <div >
       <div className='my-8 rounded-xl w-full h-12 flex justify-center gap-72 items-center'>
 
       <select 
       name="section"
       className='text-xl font-semibold bg-transparent rounded-xl hover:text-white p-3 hover:bg-black bg-[#f59e0b]'
-      onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
+      onChange={e=> navigate(`/admin/Create-Data-${e.target.value}`)}>
       <option className='bg-[#f59e0b]'>Select Section</option>
         {
           sections.map((val,index)=>(
-            <option key={index} className=' bg-[#f59e0b] font-semibold'>{val}</option>
+            <option key={index} className=' bg-[#f59e0b] text-black font-semibold'>{val}</option>
           ))
         }
       </select>
@@ -191,7 +191,7 @@ const AllDataDispatch = () => {
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
 
             <div>
-                    <table className='w-[80rem] mx-20 my-12 sm:max-lg:w-fit'>
+                    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>

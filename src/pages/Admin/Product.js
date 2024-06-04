@@ -109,12 +109,12 @@ const handleUpdate = async(data) =>{
     <div className="justify-center flex flex-col md:flex-row">
     <div className="md:w-3/4 p-3">
 
-    <div className="h-12 font-bold text-3xl my-4 text-center">Manage Products</div>
+    <div className="h-12 font-bold text-3xl my-4 text-center text-[#f59e0b]">Manage Products</div>
 
     <div className='flex gap-24'>
             <select
                  name='buyerName'
-                 className='w-32 bg-gradient-to-br from-30% from-black to-red-700 font-bold text-[#f59e0b] rounded-r-xl'
+                 className='w-32 border-[#f59e0b] border-2 bg-black font-bold text-[#f59e0b] rounded-r-xl'
                  onChange={(e)=> setBuyer(e.target.value) }
             >
             <option className='text-lg font-semibold text-black bg-[#f59e0b] '>Select Buyer</option>
@@ -132,7 +132,7 @@ const handleUpdate = async(data) =>{
       <br />
       <button 
       onClick={handleSubmit(data=>handleCreate(data))}
-      className='my-6  mx-56 h-10 text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
+      className='my-6  mx-56 h-10 text-[#f59e0b] border-[#f59e0b] bg-black border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
       <hr className='mt-2'/>
  
     {
@@ -143,7 +143,7 @@ const handleUpdate = async(data) =>{
         {products?.filter(item => item.buyer === buyer).map((product) => (
           <div key={product._id}>
             <button
-              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
+              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
               onClick={() => {
                   setopenBox(true);
                   setcurrentProduct(product);
@@ -170,7 +170,7 @@ const handleUpdate = async(data) =>{
         />
 
         <div className="flex justify-between gap-4">
-          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
+          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
           onClick={()=>setopenBox(0)}> 
             Cancel
           </button>
@@ -178,14 +178,14 @@ const handleUpdate = async(data) =>{
           <button
           type='submit'
           onClick={handleSubmit(data=>handleUpdate(data))}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
             >
               Update
             </button>
 
             <button
               onClick={handleDelete}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
             >
               Delete
             </button>

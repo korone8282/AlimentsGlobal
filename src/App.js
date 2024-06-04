@@ -19,7 +19,6 @@ import AllDataKitchen from './pages/Today/AllDataKitchen'
 import AllDataDispatch from './pages/Today/AllDataDispatch'
 import AllDataFilling from './pages/Today/AllDataFilling'
 import AllDataRetort from './pages/Today/AllDataRetort'
-import Navbar from './components/Navbar'
 import UpdateProfile from './pages/User/UpdateProfile'
 import Buyer from './pages/Admin/Buyer'
 import BuyerProducts from './pages/Admin/BuyerProducts'
@@ -34,20 +33,12 @@ const App = () => {
 <div>
 
 <Header/>
-<Navbar/>
 
 <Routes>
 
   <Route path='/' element={<Home/>}/>
 
   <Route path="/user" element={<PrivateRoute/>}>
-     <Route path='Retort/:month' element={<Retort/>} />
-     <Route path='Kitchen/:month' element={<Kitchen/>} />
-     <Route path='Filling/:month' element={<Filiing/>} />
-     <Route path='Dispatch/:month' element={<Dispatch/>} />
-     <Route path='Utility/:month' element={<Utility/>} />
-     <Route path='Date' element={<Date/>} />
-     <Route path=':section/:month' element={<DataLog/>} />
      <Route path='Profile/:id' element={<Profile/>} />
      <Route path='updateProfile/:id' element={<UpdateProfile/>} />
   </Route>
@@ -60,6 +51,13 @@ const App = () => {
      <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
      <Route path='Create-Data-Retort' element={<AllDataRetort/>} />
      <Route path='UserList' element={<UsersList/>}></Route>
+     <Route path='Retort/:month' element={<Retort/>} />
+     <Route path='Kitchen/:month' element={<Kitchen/>} />
+     <Route path='Filling/:month' element={<Filiing/>} />
+     <Route path='Dispatch/:month' element={<Dispatch/>} />
+     <Route path='Utility/:month' element={<Utility/>} />
+     <Route path='Date' element={<Date/>} />
+     <Route path=':section/:month' element={<DataLog/>} />
      <Route path='BuyerList' element={<Buyer/>}></Route>
      <Route path='ProductList' element={<Product/>}></Route>
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>

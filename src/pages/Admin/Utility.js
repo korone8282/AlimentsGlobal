@@ -32,7 +32,7 @@ const Utility = () => {
   }, [date,userinfo.token]);
 
   return (
-    <div>
+    <div className='bg-white h-screen'>
       
       <DataLog/>
      {

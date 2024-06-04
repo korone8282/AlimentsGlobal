@@ -37,14 +37,14 @@ onClick={()=>setDrop(!drop)}>
   <div className=' text-center text-3xl font-bold'>
     {months[data.month-1].month}
   </div>
-<MdArrowDropDownCircle color='black' size={24} className='mt-2'/>
+<MdArrowDropDownCircle size={24} className='mt-2'/>
 {
   drop ? (
-    <div className='absolute top-10 w-72 h-72 bg-gradient-to-br from-30% from-black to-red-700 border-black border-4 rounded-xl text-[#f59e0b] flex gap-3 flex-wrap justify-center items-center z-10'>
+    <div className='absolute top-10 w-72 h-72 bg-black border-2 rounded-xl border-[#f59e0b] text-[#f59e0b] flex gap-3 flex-wrap justify-center items-center z-10'>
     {
   months.map((val,index)=>(
     <div key={index}
-    className='text-sm font-bold h-12 w-[4.8rem] border-4 rounded-lg bg-gradient-to-br from-30% from-black to-red-700 hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
+    className='text-sm font-bold h-12 w-[4.8rem] rounded-lg bg-black border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto pt-2.5 hover:bg-[#f59e0b] hover:text-black'
     onClick={()=>{
       dispatch(setMonth(index+1));
       dispatch(setDays(val.days));  
@@ -62,14 +62,14 @@ onClick={()=>setDrop(!drop)}>
 }
 </div>
   
-  <div className='flex flex-wrap w-90% justify-center gap-8 mt-8 ml-16'>
+  <div className='flex flex-wrap w-90% justify-center gap-8 mt-8 mx-auto'>
     {[...Array(data.days).keys()].map((_, i) => (
       <div key={i} 
       onClick={()=>{
       dispatch(setDate(i+1));
-      navigate(`/user/${val}/${data.month}`);
+      navigate(`/admin/${val}/${data.month}`);
       }} 
-      className="text-2xl font-bold h-28 w-36 sm:max-lg:w-24 sm:max-lg:h-20 sm:max-lg:text-base sm:max-lg:mb-4 flex items-center justify-center text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 hover-border-4 rounded-lg hover:translate-y-2 cursor-auto">
+      className="text-2xl hover:bg-[#f59e0b] hover:text-black font-bold h-28 w-36 sm:max-lg:w-24 sm:max-lg:h-20 sm:max-lg:text-base sm:max-lg:mb-4 flex items-center justify-center text-[#f59e0b] bg-black border-[#f59e0b] border-2 hover-border-4 rounded-lg hover:translate-y-2 cursor-auto select-none">
         Day {i + 1}
       </div>
     ))}

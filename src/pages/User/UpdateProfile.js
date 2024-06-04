@@ -78,14 +78,14 @@ async function handleSubmit(){
   return (
     <div className='flex justify-center items-center h-[90vh]'>
 
-    <div className='w-[40rem] border-2 h-[40rem] text-[#f59e0b] bg-gradient-to-br from-30% from-black to-red-700 rounded-3xl sm:max-lg:h-fit sm:max-lg:mt-96'>
+    <div className='w-[40rem] border-2 h-[40rem] bg-black text-[#f59e0b] border-[#f59e0b] rounded-3xl sm:max-lg:h-fit sm:max-lg:mt-96'>
     <div className=' flex flex-col p-12 gap-10'>
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
               <img
                 src={imageUrl ? imageUrl : "image here"}
                 alt="Profile"
-                className="rounded-full h-24 w-24 object-cover"
+                className="rounded-full h-24 w-24 object-cover border-[#f59e0b] border-2"
               />
             <label className="border border-[#f59e0b] max-w-96 px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
               <input

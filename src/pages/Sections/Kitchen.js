@@ -38,13 +38,13 @@ const Kitchen = () => {
   const sectionData = data.length ? data.filter( item => item.sectionMain === "Kitchen" && item.dayTime === `${dayArray[+mode]}`) : [];
 
   return (
-  <div className='h-[100vh]'>
+  <div>
         <div className='flex justify-center items-center h-24'>
     <DataLog/>
     <div className='mt-5' onClick={()=>setMode(!mode)}>
     {
       !mode ? (
-        <MdLightMode color='black' size={36}/>
+        <MdLightMode  size={36}/>
       ) : (
         <MdModeNight  size={36}/>
       )
@@ -56,12 +56,12 @@ const Kitchen = () => {
       error ? (<div className='text-center font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
       ) : ( 
         <div>
-   <div className='text-3xl font-bold text-center mt-8 mb-8'>Daily Log</div>
+   <div className='text-3xl font-bold text-center my-8'>Daily Log</div>
    
    {
     loading ? ( <Loader/>
     ) : ( <div className='sm:max-lg:ml-16 sm:max-lg:mr-2'>
-      <table className='w-[80rem] mx-auto text-center bg-[#f59e0b] my-12 text-black sm:max-lg:w-fit'>
+      <table className='w-[80rem] mx-auto text-center my-12 text-black sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
@@ -102,6 +102,9 @@ const Kitchen = () => {
             <tr >
           <td className='border-4 border-black font-bold' colSpan={4}>Total: </td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0)}</td>
+          <td className='border-4 border-black font-bold'>--</td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity*obj.yield,0)}</td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0)}</td>
               </tr>
           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
         }

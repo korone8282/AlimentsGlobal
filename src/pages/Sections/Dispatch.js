@@ -43,7 +43,7 @@ const Dispatch = () => {
     <div className='mt-5' onClick={()=>setMode(!mode)}>
     {
       !mode ? (
-        <MdLightMode color='black' size={36}/>
+        <MdLightMode  size={36}/>
       ) : (
         <MdModeNight  size={36}/>
       )
@@ -53,16 +53,16 @@ const Dispatch = () => {
 
 
     {
-      error ? (<div className='text-center font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
+      error ? (<div className='text-center text-white font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
       ) : (
         <div>
-   <div className='text-3xl font-bold text-center mt-8 mb-8'>Daily Log</div>
+   <div className='text-3xl font-bold text-center my-8 '>Daily Log</div>
 
    {
     loading ? ( <Loader/>
     ) : (
       <div className='sm:max-lg:mr-4 sm:max-lg:ml-16'>
-      <table className='w-[80rem] mx-auto text-center bg-[#f59e0b] text-black my-12 sm:max-lg:w-fit'>
+      <table className='w-[80rem] mx-auto text-center text-black sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>

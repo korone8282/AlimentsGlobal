@@ -161,11 +161,11 @@ const AllDataKitchen = () => {
       <select 
       name="section"
       className='text-xl font-semibold bg-transparent bg-[#f59e0b] rounded-xl hover:text-white p-3 hover:bg-black'
-      onChange={e=> navigate(`/user/Create-Data-${e.target.value}`)}>
+      onChange={e=> navigate(`/admin/Create-Data-${e.target.value}`)}>
       <option className='bg-[#f59e0b]'>Select Section</option>
         {
           sections.map((val,index)=>(
-            <option key={index} className=' bg-[#f59e0b] font-semibold'>{val}</option>
+            <option key={index} className=' bg-[#f59e0b] text-black font-semibold'>{val}</option>
           ))
         }
       </select>

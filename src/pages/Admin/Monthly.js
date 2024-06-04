@@ -15,6 +15,7 @@ const Monthly = () => {
   const [month, setmonth] = useState(1);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
+  
   const [val, setVal] = useState(1);
 
   const months = [{month:"January"},
@@ -51,7 +52,14 @@ const Monthly = () => {
 
                   getData();
                  }, [month,userinfo.token]);
- console.log(data)
+
+  let sum = 0;
+
+  function myFunction(item) {
+    let size = item;
+    sum += item*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === size).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
+  }
+
   return (
     <div>
 
@@ -63,11 +71,11 @@ const Monthly = () => {
       {months[month-1].month}
       </div>
           {
-          val  ? ( <div className='absolute bg-gradient-to-br from-30% from-black to-red-700 border-black border-4 rounded-xl text-[#f59e0b] sm:max-lg:top-6 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
+          val  ? ( <div className='absolute bg-black border-2 rounded-xl border-[#f59e0b] text-[#f59e0b] sm:max-lg:top-6 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
               {
             months.map((val,index)=>(
               <div key={index}
-              className='text-sm font-bold h-12 w-[4.8rem] bg-gradient-to-br from-30% from-black to-red-700 border-4 rounded-lg hover:scale-105 text-center cursor-auto pt-2 hover:bg-red-400'
+              className='text-sm font-bold h-12 w-[4.8rem] bg-black border-2 rounded-lg border-[#f59e0b] text-[#f59e0b] hover:scale-105 text-center cursor-auto pt-2.5 hover:bg-[#f59e0b] hover:text-black'
               onClick={()=>{
                 setmonth(index+1); 
                }}>
@@ -85,7 +93,7 @@ const Monthly = () => {
          <div>
          {
   loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] sm:max-lg:ml-16 mx-auto my-12 bg-[#f59e0b] sm:max-lg:w-fit'>
+    <table className='w-[80rem] sm:max-lg:ml-16 mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
         <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (Kg)</th>
@@ -108,7 +116,7 @@ const Monthly = () => {
       {
         pSize.map((ele,index)=>(
          
-          <tr>
+          <tr key={index}>
           <td className='border-4 border-black font-bold py-4 text-center'> {ele} </td>
 
           <td className='border-4 border-black font-bold '> {
@@ -190,7 +198,10 @@ const Monthly = () => {
   }</td>
 
   <td className='border-4 border-black font-bold '> 
----
+{
+  pSize.forEach(myFunction)
+}
+{sum.toFixed(2)}
   </td>
 
           <td className='border-4 border-black font-bold '> {
@@ -222,4 +233,3 @@ const Monthly = () => {
 }
 
 export default Monthly
-

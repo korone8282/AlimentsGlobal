@@ -45,11 +45,11 @@ const UserList = () => {
   }
  
   return (
-    <div className='text-3xl flex justify-center mt-12'>
+    <div className='text-3xl h-screen bg-white'>
   {
     loading ? (<Loader/>
     ) : (
-      <table className=' border-2 border-black bg-[#f59e0b]'>
+      <table className=' border-2 mx-auto  border-black my-12'>
 <thead>
 <tr className='border-2 border-black text-start'>
    <th className='border-2 border-black w-48 p-2'>S No.</th>

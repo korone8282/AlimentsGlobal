@@ -220,7 +220,7 @@ Enter OTP sent to
         } 
         </div>
         <div onClick={()=>setshowOtp(0)}
-        className='text-2xl font-semibold h-16 w-[14rem] flex items-center justify-center border-4 rounded-md border-[#2e1065] hover:bg-gradient-to-r from-[#1e1b4b] to-[#2e1065]'>
+        className='text-2xl font-semibold h-16 w-[14rem] flex items-center justify-center text-[#f59e0b] rounded-lg bg-black border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>
             Edit Details?
         </div>
   </div>

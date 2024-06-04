@@ -55,7 +55,7 @@ const ProfileMenu = () => {
         <>  
         {
             userinfo.isAdmin ? (
-         <section className="bg-gradient-to-br from-30% from-black to-red-700 rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
+         <section className="bg-black rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
           <ul className="list-none mt-2">
             <li>
               <NavLink
@@ -103,7 +103,7 @@ const ProfileMenu = () => {
             </li>
             <li>
             <div
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm text-[#FB2E86]"
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] cursor-pointer select-none rounded-sm text-[#FB2E86]"
                 onClick={logouthandler}
               >
                 Logout
@@ -127,7 +127,7 @@ const ProfileMenu = () => {
             </li>
             <li>
               <div
-                className="py-2 px-3 block text-[#FB2E86] mb-5 hover:bg-black rounded-sm"
+                className="py-2 px-3 block text-[#FB2E86] mb-5 cursor-pointer select-none hover:bg-black rounded-sm"
                 onClick={logouthandler}
               >
                 Logout
