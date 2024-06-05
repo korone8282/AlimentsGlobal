@@ -60,7 +60,7 @@ const Retort = () => {
    {
     loading ? (<Loader/> 
     ) : (
-      <div className='sm:max-lg:ml-16 sm:max-lg:mr-2'>
+      <div className='sm:max-lg:mx-3'>
       <table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>

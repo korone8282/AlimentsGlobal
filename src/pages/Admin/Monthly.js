@@ -71,7 +71,7 @@ const Monthly = () => {
       {months[month-1].month}
       </div>
           {
-          val  ? ( <div className='absolute bg-black border-2 rounded-xl border-[#f59e0b] text-[#f59e0b] sm:max-lg:top-6 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
+          val  ? ( <div className='absolute bg-black border-2 rounded-xl border-[#f59e0b] text-[#f59e0b] sm:max-lg:right-[11.5rem] sm:max-lg:-top-3 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
               {
             months.map((val,index)=>(
               <div key={index}
@@ -93,7 +93,7 @@ const Monthly = () => {
          <div>
          {
   loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] sm:max-lg:ml-16 mx-auto my-12 sm:max-lg:w-fit'>
+    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit sm:max-lg:mx-2'>
       <thead>
         <tr>
         <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (Kg)</th>

@@ -60,7 +60,7 @@ const Filiing = () => {
     {
       loading ? (<Loader/>
       ) : (
-        <div className='sm:max-lg:ml-20 sm:max-lg:mr-4'>
+        <div className='sm:max-lg:mx-3'>
         <table className='w-[80rem] mx-auto text-center  my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>

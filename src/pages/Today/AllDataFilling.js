@@ -190,20 +190,20 @@ const AllDataFilling = () => {
 
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
         
-         <div>
+         <div className='sm:max-lg:mx-1'>
                   <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
-          <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>S no.</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Buyer Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Product Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Produced</th>
           <th colSpan={2} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Remarks</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Delete</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0'>No. of Workers</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Remarks</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Delete</th>
         </tr>
         <tr>
           <th className='border-4 border-black p-1'>Empty</th>
@@ -224,8 +224,8 @@ const AllDataFilling = () => {
           <td className='border-4 border-black'>{val.empty}</td>
           <td className='border-4 border-black'>{val.filled}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
-          <td className='border-4 border-black px-8 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
-          <td className='border-4 border-black px-8 hover:bg-red-500'
+          <td className='border-4 border-black px-8 hover:bg-slate-300 sm:max-lg:px-7'><FaSquareCheck color='green'/></td>
+          <td className='border-4 border-black px-8 sm:max-lg:px-5 hover:bg-red-500'
               onClick={()=>deleteRow(index)}><FaTrash/></td>
               </tr>
             ))
@@ -269,7 +269,7 @@ const AllDataFilling = () => {
           <input type='text'
                  name='batch'
                  value={formData.batch}
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-20 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -277,7 +277,7 @@ const AllDataFilling = () => {
           <input type='number'
                  name='packSize'
                  value={formData.packSize}
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-16 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -309,13 +309,13 @@ const AllDataFilling = () => {
           <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
-                 className='w-full bg-transparent'
+                 className='w-full sm:max-lg:w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
-          <td className='border-4 border-black px-8 hover:bg-green-200'
+          <td className='border-4 border-black px-8 sm:max-lg:px-7 hover:bg-green-200'
               onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
-          <td className='border-4 border-black px-8'>-</td>
+          <td className='border-4 border-black px-8 sm:max-lg:px-5'>-</td>
         
       </tr>
 

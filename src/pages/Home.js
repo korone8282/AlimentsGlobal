@@ -27,58 +27,59 @@ const Home = () => {
   return (
     <div className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 h-screen'>
   
-  <div className='flex  gap-10 justify-center py-20'>
+  <div className='flex  gap-10 justify-center py-20 sm:max-lg:gap-2 sm:max-lg:mx-2 sm:max-lg:py-2'>
   <div className=' max-w-sm
     rounded-2xl
     text-white/35
     backdrop-blur-lg
     [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold
+    sm:max-lg:w-72 sm:max-lg:text-3xl sm:max-lg:h-[20rem]'
     id="navigation-container">
       
-      <div className='item p-12 pt-56'>View Data</div>
+      <div className='item p-12 pt-56 sm:max-lg:pt-32'>View Data</div>
 
-      <div className='nav-item-name flex flex-col gap-6 mt-7'>
+      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:mt-2.5'>
 
 <div onClick={()=>{
       dispatch(setSection("Retort"));
       navigate(`admin/Date`)
-    }}  className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }}  className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Retort 
- <TbWashMachine className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </div>
 
 <div onClick={()=>{
       dispatch(setSection("Filling"));
       navigate(`admin/Date`)
-    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Filling 
- <MdFormatColorFill className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <MdFormatColorFill className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </div>
 
 <div onClick={()=>{
       dispatch(setSection("Kitchen"));
       navigate(`admin/Date`)
-    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Kitchen 
- <TbToolsKitchen className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <TbToolsKitchen className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-7" size={50} color='black' />
 </div>
 
 <div onClick={()=>{
       dispatch(setSection("Dispatch"));
       navigate(`admin/Date`)
-    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Dispatch 
- <FaBox className=" mt-2 sm:max-lg:mt-[2rem]" size={36} color='black' />
+ <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </div>
 
 <div onClick={()=>{
       dispatch(setSection("Utility"));
       navigate(`admin/Date`)
-    }} className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Utility 
- <LuUtilityPole className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <LuUtilityPole className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </div>
 
 </div>
@@ -92,10 +93,11 @@ const Home = () => {
     backdrop-blur-lg
     [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold
+    sm:max-lg:w-72 sm:max-lg:text-3xl sm:max-lg:h-[20rem]'
     id="navigation-container">
       
-        <div className='item p-12 pt-56'>View Analytics</div>
+        <div className='item p-12 pt-56 sm:max-lg:pt-28'>View Analytics</div>
 
         <div className='nav-item-name flex flex-col gap-6 mt-7'>
 
@@ -119,37 +121,38 @@ const Home = () => {
     backdrop-blur-lg
     [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold'
+    [ shadow-black/70 shadow-2xl ] h-[35rem] w-[25rem] text-center text-5xl font-bold
+    sm:max-lg:w-72 sm:max-lg:text-3xl sm:max-lg:h-[20rem]'
     id="navigation-container"
     >
       
-      <div className='item p-12 pt-56'>Create Data</div>
+      <div className='item p-12 pt-56 sm:max-lg:pt-32'>Create Data</div>
 
-      <div className='nav-item-name flex flex-col gap-6 mt-7'>
+      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:mt-2.5'>
 
-<Link to="/admin/Create-Data-Retort" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Retort" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Retort 
- <TbWashMachine className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Filling" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Filling 
- <MdFormatColorFill className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <MdFormatColorFill className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Kitchen" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Kitchen 
- <TbToolsKitchen className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <TbToolsKitchen className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-7" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Dispatch" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Dispatch 
- <FaBox className=" mt-2 sm:max-lg:mt-[2rem]" size={36} color='black' />
+ <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Filling" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Utility" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Utility 
- <LuUtilityPole className=" mt-2 sm:max-lg:mt-[2rem]" size={50} color='black' />
+ <LuUtilityPole className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </Link>
 
 </div>

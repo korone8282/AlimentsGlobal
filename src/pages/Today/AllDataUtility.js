@@ -64,10 +64,10 @@ const AllDataUtility = () => {
 
       </div>
 
-         <h2 className='text-center text-2xl font-bold my-4'>DataSheet for : {date.toLocaleDateString()}</h2>
+         <h2 className='text-center text-2xl font-bold my-10'>DataSheet for : {date.toLocaleDateString()}</h2>
       
-         <div>
-                    <table className='w-[80rem] mx-auto -my-2'>
+         <div className='sm:max-lg:mx-1'>
+                    <table className='w-[80rem] mx-auto -my-2 sm:max-lg:w-fit sm:max-lg:my-10'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>

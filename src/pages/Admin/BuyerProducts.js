@@ -82,7 +82,7 @@ const BuyerProducts = () => {
   return (
     <div>
     
-    <div className='flex justify-center my-8 text-2xl font-bold gap-24'>
+    <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
         <div>
         <select
                  name='buyer'
@@ -109,7 +109,7 @@ const BuyerProducts = () => {
                    onChange={ e => inputHandler(e) }
             />
         </div>
-        <div className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 pt-4 bg-[#f59e0b]' 
+        <div className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
              onClick={getData}
              >Submit</div>
     </div>
@@ -122,7 +122,7 @@ const BuyerProducts = () => {
      loading ? ( <Loader/>
      ) : (
        <div>
-       <table className='w-[80rem] mx-auto text-center text-black my-12'>
+       <table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit sm:max-lg:mx-3'>
        <thead>
          <tr>
            <th rowSpan={2} className='border-4 border-black p-1'>S no.</th>

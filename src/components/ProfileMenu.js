@@ -37,7 +37,7 @@ const ProfileMenu = () => {
 }
 
   return (
-    <>
+    <div>
       <button
         className="p-2 "
         onClick={toggleMenu}
@@ -49,7 +49,7 @@ const ProfileMenu = () => {
         )}
       </button>
 
-<div className="absolute right-[1%]">
+<div className="absolute right-[1%] z-30">
 {
         isMenuOpen ? (
         <>  
@@ -140,7 +140,7 @@ const ProfileMenu = () => {
       ) : null }
 </div>
       
-    </>
+    </div>
   );
 };
 

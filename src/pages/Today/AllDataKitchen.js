@@ -189,21 +189,21 @@ const AllDataKitchen = () => {
 
          <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
         
-         <div>
-            <table className='w-[80rem] mx-auto my-12'>
+         <div className='sm:max-lg:mx-1'>
+            <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
       <thead>
         <tr>
-          <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. of Batch</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Batch Size (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Remarks</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Delete</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>S no.</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Buyer Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Batch No.</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. of Batch</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Batch Size (kg)</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Yield (kg)</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Yield Loss (kg)</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. of Workers</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Remarks</th>
+          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Delete</th>
         </tr>
       </thead>
 
@@ -221,7 +221,7 @@ const AllDataKitchen = () => {
           <td className='border-4 border-black'>{val.yieldLoss}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
           <td className='border-4 border-black px-8 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
-          <td className='border-4 border-black px-8 hover:bg-red-500'
+          <td className='border-4 border-black px-8 sm:max-lg:px-6 hover:bg-red-500'
               onClick={()=>deleteRow(index)}><FaTrash/></td>
               </tr>
             ))
@@ -265,7 +265,7 @@ const AllDataKitchen = () => {
           <input type='text'
                  name='batch'
                  value={formData.batch}
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-20 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -273,7 +273,7 @@ const AllDataKitchen = () => {
           <input type='number'
                  name='batchQuantity'
                  value={formData.batchQuantity}
-                 className='w-40 bg-transparent'
+                 className='w-40 sm:max-lg:w-16 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -281,7 +281,7 @@ const AllDataKitchen = () => {
           <input type='number'
                  value={formData.batchSize}
                  name='batchSize'
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-16 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -289,7 +289,7 @@ const AllDataKitchen = () => {
           <input type='number'
                  value={formData.yield}
                  name='yield'
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-16 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -297,7 +297,7 @@ const AllDataKitchen = () => {
           <input type='number'
                  value={formData.yieldLoss}
                  name='yieldLoss'
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-12 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
@@ -305,13 +305,13 @@ const AllDataKitchen = () => {
           <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
-                 className='w-32 bg-transparent'
+                 className='w-32 sm:max-lg:w-16 bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
           <td className='border-4 border-black px-8 hover:bg-green-200'
               onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
-          <td className='border-4 border-black px-8'>-</td>
+          <td className='border-4 border-black px-8 sm:max-lg:px-6'>-</td>
         
       </tr>
 

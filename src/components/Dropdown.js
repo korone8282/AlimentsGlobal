@@ -48,7 +48,7 @@ const Dropdown = ({val}) => {
             <div>
                 {
                     val === 2 ? (
-              <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl text-[#f59e0b] sm:max-lg:top-6 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
+              <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl text-[#f59e0b] sm:max-lg:-top-5 sm:max-lg:left-2.5 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
               {
             months.map((val,index)=>(
               <div key={index}
@@ -64,14 +64,14 @@ const Dropdown = ({val}) => {
           }
             </div>
                     ) : (
-            <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl p-1 text-[#f59e0b] sm:max-lg:-top-12 sm:max-lg:h-fit sm:max-lg:w-80 top-10 w-[21rem] h-[21rem] flex gap-3 flex-wrap justify-center items-center'>
+            <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl p-1 text-[#f59e0b] sm:max-lg:-top-12 sm:max-lg:left-1.5 sm:max-lg:h-fit sm:max-lg:w-72 top-10 w-[21rem] h-[21rem] flex gap-3 flex-wrap justify-center items-center'>
               {[...Array(data.days).keys()].map((_, i) => (
                 <div key={i} 
                 onClick={()=>{
                 dispatch(setDate(i+1));
                 navigate(`/admin/${data.section}/${data.month}`);
                 }} 
-                className='text-sm font-bold h-11 w-11 sm:max-lg:h-10 sm:max-lg:text-xs sm:max-lg:w-12 bg-black hover:bg-[#f59e0b] hover:text-black border-2 border-[#f59e0b] rounded-lg hover:scale-105 text-center cursor-auto pt-2.5'>
+                className='text-sm font-bold h-11 w-11 sm:max-lg:h-9 sm:max-lg:pt-2 sm:max-lg:text-xs sm:max-lg:w-9 bg-black hover:bg-[#f59e0b] hover:text-black border-2 border-[#f59e0b] rounded-lg hover:scale-105 text-center cursor-auto pt-2.5'>
                 {i + 1}
                 </div>
               ))}

@@ -30,7 +30,7 @@ import Product from './pages/Admin/Product'
 const App = () => {
   
   return (
-<div>
+<div className='sm:max-lg:overflow-x-hidden'>
 
 <Header/>
 

@@ -49,7 +49,7 @@ const UserList = () => {
   {
     loading ? (<Loader/>
     ) : (
-      <table className=' border-2 mx-auto  border-black my-12'>
+      <table className=' border-2 mx-auto  border-black my-12 sm:max-lg:mx-4'>
 <thead>
 <tr className='border-2 border-black text-start'>
    <th className='border-2 border-black w-48 p-2'>S No.</th>

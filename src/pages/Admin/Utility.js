@@ -32,7 +32,7 @@ const Utility = () => {
   }, [date,userinfo.token]);
 
   return (
-    <div className='bg-white h-screen'>
+    <div>
       
       <DataLog/>
      {
@@ -40,8 +40,8 @@ const Utility = () => {
       ) : (
         loading ? (<Loader/>
         ) : (
-          <div className='sm:max-lg:mr-4 sm:max-lg:ml-16'>
-                    <table className='w-[80rem] mx-32 sm:max-lg:ml-0  bg-[#f59e0b]  my-10 sm:max-lg:w-fit'>
+          <div className='sm:max-lg:-mx-28 '>
+                    <table className='w-[80rem] mx-32 my-10 sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>

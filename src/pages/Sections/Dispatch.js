@@ -61,8 +61,8 @@ const Dispatch = () => {
    {
     loading ? ( <Loader/>
     ) : (
-      <div className='sm:max-lg:mr-4 sm:max-lg:ml-16'>
-      <table className='w-[80rem] mx-auto text-center text-black sm:max-lg:w-fit'>
+      <div className='sm:max-lg:mx-3 '>
+      <table className='w-[80rem] mx-auto text-center my-12 text-black sm:max-lg:w-fit'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>

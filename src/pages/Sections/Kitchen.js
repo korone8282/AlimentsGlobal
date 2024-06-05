@@ -60,7 +60,7 @@ const Kitchen = () => {
    
    {
     loading ? ( <Loader/>
-    ) : ( <div className='sm:max-lg:ml-16 sm:max-lg:mr-2'>
+    ) : ( <div className='sm:max-lg:mx-3'>
       <table className='w-[80rem] mx-auto text-center my-12 text-black sm:max-lg:w-fit'>
       <thead>
         <tr>
