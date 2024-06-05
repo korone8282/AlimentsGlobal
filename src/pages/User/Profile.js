@@ -125,7 +125,7 @@ const Profile = () => {
                 <div>
                   <p className="mb-2 text-sm">Date Of Birth</p>
                   <p className="text-sm font-medium">
-                    {user?.dob.substring(0,10) ?? "Add DOB"}
+                    {user.dob?.substring(0,10) ?? "Add DOB"}
                   </p>
                 </div>
             </div>

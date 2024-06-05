@@ -76,9 +76,9 @@ async function handleSubmit(){
   }
 
   return (
-    <div className='flex justify-center items-center h-[90vh]'>
+    <div className='flex justify-center my-12'>
 
-    <div className='w-[40rem] border-2 h-[40rem] bg-black text-[#f59e0b] border-[#f59e0b] rounded-3xl sm:max-lg:h-fit sm:max-lg:mt-96'>
+    <div className='w-[40rem] border-2 h-[40rem] bg-black text-[#f59e0b] border-[#f59e0b] rounded-3xl sm:max-lg:h-fit'>
     <div className=' flex flex-col p-12 gap-10'>
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
@@ -134,7 +134,7 @@ async function handleSubmit(){
     <div className='flex w-full justify-between text-2xl font-bold'>
     <label>DOB: </label>
         <input  type='date'
-                className='bg-transparent border-2 border-[#f59e0b] p-1'
+                className='bg-transparent border-2 border-[#f59e0b] p-1 dark:[color-scheme:dark]'
                 name='dob'
                 onChange={(e)=>inputHandler(e)}
                 />

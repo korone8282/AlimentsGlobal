@@ -81,10 +81,10 @@ const Login = () => {
     <div className='h-[90vh] flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80'
         alt=''
-        className='h-[40rem] w-[35rem] sm:max-lg:h-80 sm:max-lg:w-64' />
+        className='h-[40rem] w-[35rem] sm:max-lg:h-[28rem] sm:max-lg:w-96  sm:max-lg:mt-36  sm:max-lg:mr-15' />
         <section className='flex flex-col h-[40rem] w-[35rem]  sm:max-lg:w-80'>
-        <p className='ml-6 mt-32 text-5xl font-semibold sm:max-lg:text-2xl'>Sign In..</p>
-        <form onSubmit={handleSubmit((data,e)=>loginHandler(data,e))} className='flex flex-col ml-6 mt-12 sm:max-lg:mt-1' autoComplete='on'>
+        <p className='ml-6 mt-32 text-5xl font-semibold  sm:max-lg:mt-44 sm:max-lg:text-3xl'>Sign In..</p>
+        <form onSubmit={handleSubmit((data,e)=>loginHandler(data,e))} className='flex flex-col ml-6 mt-12 sm:max-lg:mt-12' autoComplete='on'>
         <label htmlFor="email" className='mb-2 text-xl'>
               Email
         </label>
@@ -131,13 +131,13 @@ const Login = () => {
           </button>
         </form>
 
-             <button onClick={()=>navigate("/otpLogin")} className='ml-44 mt-6 h-8 sm:max-lg:mt-1 bg-pink-600 w-48 rounded-md hover:bg-pink-800'>
+             <button onClick={()=>navigate("/otpLogin")} className='ml-44 mt-6 h-8 sm:max-lg:-mt-8 bg-pink-600 w-48 rounded-md hover:bg-pink-800'>
               Login with OTP
             </button>
 
-         <div className='flex justify-between mx-5 text-xl mt-6 sm:max-lg:mt-6'>
+         <div className='flex justify-between mx-5 text-xl mt-6 sm:max-lg:mt-10'>
 
-         <h2 className='sm:max-lg:text-white'>SignUp with Google : </h2>
+         <h2 className='sm:max-lg:hidden'>SignUp with Google : </h2>
                 <GoogleLogin
                 onSuccess={credentialResponse => { googleLogin(credentialResponse.credential) }}
                 onError={() => {console.log('Login Failed')}}
@@ -146,7 +146,7 @@ const Login = () => {
          </div>
           
 
-           <p className='ml-6 mt-6 text-lg'>
+           <p className='ml-6 mt-6 text-lg  sm:max-lg:mt-8'>
             Haven't Registered Yet? {" "}
             <Link to={redirect? `/SignUp`:`/SignUp?redirect=${redirect}`}
             className='text-red-500 hover:text-red-800'>
