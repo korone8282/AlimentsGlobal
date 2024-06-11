@@ -5,17 +5,18 @@ import { UTIL_URL } from '../../redux/Utils/constants';
 import { setUtil, setStorage, emptyUtil } from '../../redux/Slices/utilSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setDate} from '../../redux/Slices/dateSlice';
 
 const AllDataUtility = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   
-  const date = new Date();
-  
   const initalData = useSelector(state=>state.util);
 
   const {userinfo} = useSelector(state=>state.auth);
+
+  const date = useSelector(state=>state.data);
 
   const submitHandler = async() =>{
 
@@ -64,10 +65,10 @@ const AllDataUtility = () => {
 
       </div>
 
-         <h2 className='text-center text-2xl font-bold my-10'>DataSheet for : {date.toLocaleDateString()}</h2>
+      <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : <input type='date' value={date.date} onChange={(e)=>dispatch(setDate(e.target.value))}></input> </h2>
       
          <div className='sm:max-lg:mx-1'>
-                    <table className='w-[80rem] mx-auto -my-2 sm:max-lg:w-fit sm:max-lg:my-10'>
+                    <table className='w-[80rem] mx-auto my-8 sm:max-lg:w-fit sm:max-lg:my-10'>
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-0'>Name</th>

@@ -13,7 +13,6 @@ const BuyerProducts = () => {
     const [loading, setLoading] = useState(1);
     const [products, setproducts] = useState([]);
     const [error, setError] = useState(0);
-    const [data, setData] = useState([]);
     const [categories, setcategories] = useState([]);
     const [info, setInfo] = useState({
         start:"",
@@ -25,12 +24,12 @@ const BuyerProducts = () => {
 
       async function getData(){
         try {
-
+        setError(0);
+        setLoading(1);
+        
           const res = await apiConnector(`${DATA_URL}/List`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
 
-          setData(res.data.data);
-
-         setSectionData(data.map(e=>e.dataList.filter( buyer => buyer.buyerName === info.buyer)));
+         setSectionData(res.data.data.map(e=>e.dataList.filter( buyer => buyer.buyerName === info.buyer)));
 
         setLoading(0);
         
@@ -109,7 +108,7 @@ const BuyerProducts = () => {
                    onChange={ e => inputHandler(e) }
             />
         </div>
-        <div className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
+        <div className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
              onClick={getData}
              >Submit</div>
     </div>
@@ -137,7 +136,8 @@ const BuyerProducts = () => {
        </thead>
  
        { 
-           sectionData.length ? (<tbody>
+           sectionData.length ? (
+            <tbody>
              {
               products.filter(product=> product.buyer === info.buyer).map((element,index)=>(
                 <tr key={index}>

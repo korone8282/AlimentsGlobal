@@ -21,6 +21,7 @@ const Filiing = () => {
     
     async function getData(){
       try {
+        setError(0);
         const res = await apiConnector(`${DATA_URL}/${date.date}/${date.month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
         setData(res.data.data);
         setLoading(0);

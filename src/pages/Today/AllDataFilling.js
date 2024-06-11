@@ -8,6 +8,7 @@ import { useLocation, useNavigate} from 'react-router-dom';
 import { FaSquareCheck } from "react-icons/fa6";
 import { FaTrash} from "react-icons/fa";
 import { MdLightMode,MdModeNight } from "react-icons/md";
+import { setDate} from '../../redux/Slices/dateSlice';
 
 const AllDataFilling = () => {
   
@@ -18,6 +19,8 @@ const AllDataFilling = () => {
 
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
+
+  const date = useSelector(state=>state.data);
 
   const currentSection = section.pathname.split("/")[2].split("-")[2];
 
@@ -57,8 +60,6 @@ const AllDataFilling = () => {
   const val = 2;
 
   const initalData = useSelector(state=>state.local);
-  
-  const date = new Date();
 
   const [formData, setformData] = useState({
   section:"",
@@ -95,7 +96,7 @@ const AllDataFilling = () => {
 
    try {
 
-    await apiConnector(`${DATA_URL}/Filling/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DATA_URL}/Filling_${date.date}/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
     dispatch(emptyData(val));
 
@@ -188,7 +189,7 @@ const AllDataFilling = () => {
 
       </div>
 
-         <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : {date.toLocaleDateString()}</h2>
+      <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : <input type='date' value={date.date} onChange={(e)=>dispatch(setDate(e.target.value))}></input> </h2>
         
          <div className='sm:max-lg:mx-1'>
                   <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>

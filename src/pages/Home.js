@@ -109,6 +109,10 @@ const Home = () => {
  Product Data
 </Link>
 
+<Link to="/admin/Day-Night" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+ Day Vs Night 
+</Link>
+
 
 </div>
       

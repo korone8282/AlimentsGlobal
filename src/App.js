@@ -26,6 +26,7 @@ import Monthly from './pages/Admin/Monthly'
 import Utility from './pages/Admin/Utility'
 import AllDataUtility from './pages/Today/AllDataUtility'
 import Product from './pages/Admin/Product'
+import DvN from './pages/Admin/DvN'
 
 const App = () => {
   
@@ -61,6 +62,7 @@ const App = () => {
      <Route path='BuyerList' element={<Buyer/>}></Route>
      <Route path='ProductList' element={<Product/>}></Route>
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>
+     <Route path='Day-Night' element={<DvN/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />
