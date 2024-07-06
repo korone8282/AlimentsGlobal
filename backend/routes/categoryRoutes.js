@@ -7,6 +7,6 @@ router.route("/").post(authorization,authAdmin,createCategory);
 router.post("/:categoryId",authorization,authAdmin,updateCategory);
 router.delete("/:categoryId",authorization,authAdmin,deleteCategory);
 router.get("/categories",categoryList);
-router.get("/:id",authorization,authAdmin,readCategory);
+router.get("/:id",authorization,readCategory);
 
 module.exports = router;

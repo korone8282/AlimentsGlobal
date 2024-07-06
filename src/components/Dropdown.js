@@ -5,7 +5,7 @@ import { setDate,setMonth,setDays,setSection } from '../redux/Slices/dateSlice';
 
 const Dropdown = ({val}) => {
 
-    const sections = ["Kitchen","Filling","Retort","Dispatch","Utility"];
+    const sections = ["Kitchen","Filling","Retort","Dispatch"];
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -30,7 +30,7 @@ const Dropdown = ({val}) => {
     <div className='absolute'>
       {
         val === 1 ? (
-            <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl text-[#f59e0b] p-2 top-10 w-48 h-48 flex gap-3 flex-wrap justify-center items-center'>
+            <div className='absolute bg-black border-[#f59e0b] border-2 rounded-xl text-[#f59e0b] p-2 top-10 w-48 h-40 flex gap-3 flex-wrap justify-center items-center'>
               {
             sections.map((val,index)=>(
               <div key={index}

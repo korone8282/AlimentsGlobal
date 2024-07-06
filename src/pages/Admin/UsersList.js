@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector'
-import { USERINFO_URL, USERID_URL } from '../../redux/Utils/constants';
-import { FaRegTrashAlt } from "react-icons/fa";
+import { USERINFO_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
-import {toast} from 'react-toastify';
 import Loader from '../../components/Loader';
 
 const UserList = () => {
@@ -29,20 +27,6 @@ const UserList = () => {
 
     displayUsers();
   }, [userinfo.token]);
-
-  async function userHandler(id){
-    try {console.log("hi")
-
-     await apiConnector(`${USERID_URL}/${id}`,"DELETE",null,{Authorization: `Bearer ${userinfo.token}`});
-
-      toast("Successfully Deleted");
-
-      window.location.reload();
-
-    } catch (error) {
-      console.log(error);
-    }
-  }
  
   return (
     <div className='text-3xl h-screen bg-white'>
@@ -66,7 +50,7 @@ const UserList = () => {
               <td className='border-2 text-lg font-bold p-2 border-black'>{index+1}</td>
               <td className='capitalize  border-2 text-lg font-bold border-black'>{element.fname}</td>
               <td className='border-2 text-lg font-bold border-black'>{element.email}  </td>
-              <td className=' border-black border-2 font-bold hover:bg-red-600 text-lg'>{element.isAdmin?"Admin":<div className='pl-20'><FaRegTrashAlt color='black' size={20} onClick={()=>userHandler(element._id)}/></div>}</td>
+              <td className=' border-black border-2 font-bold text-lg'>{element.isAdmin?"Admin":"User"}</td>
             </tr>
           ))
 }

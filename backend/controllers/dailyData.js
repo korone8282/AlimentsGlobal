@@ -5,7 +5,7 @@ exports.createData = async(req,res) => {
 try {
 
     const {string,dayTime} = req.params;
-console.log(string)
+
     const dataItems = req.body;
     const section = string.split("_")[0];
     const newdate = new Date(string.split("_")[1]);

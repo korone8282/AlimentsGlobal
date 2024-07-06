@@ -10,7 +10,6 @@ import Login from './pages/User/Login'
 import SignUp from './pages/User/SignUp'
 import DataLog from './components/DataLog'
 import Date from './pages/Date'
-import PrivateRoute from './components/PrivateRoute'
 import AdminRoute from './components/AdminRoute'
 import UsersList from './pages/Admin/UsersList'
 import OtpLogin from './pages/User/OtpLogin'
@@ -23,10 +22,10 @@ import UpdateProfile from './pages/User/UpdateProfile'
 import Buyer from './pages/Admin/Buyer'
 import BuyerProducts from './pages/Admin/BuyerProducts'
 import Monthly from './pages/Admin/Monthly'
-import Utility from './pages/Admin/Utility'
-import AllDataUtility from './pages/Today/AllDataUtility'
 import Product from './pages/Admin/Product'
 import DvN from './pages/Admin/DvN'
+import ProductionGoal from './pages/Admin/ProductionGoal'
+import Production from './pages/Admin/Production'
 
 const App = () => {
   
@@ -39,14 +38,13 @@ const App = () => {
 
   <Route path='/' element={<Home/>}/>
 
-  <Route path="/user" element={<PrivateRoute/>}>
-     <Route path='Profile/:id' element={<Profile/>} />
-     <Route path='updateProfile/:id' element={<UpdateProfile/>} />
-  </Route>
 
   <Route path="/admin" element={<AdminRoute/>}>
+     <Route path='Profile/:id' element={<Profile/>} />
+     <Route path='updateProfile/:id' element={<UpdateProfile/>} />
      <Route path='Monthly-Data' element={<Monthly/>} />
-     <Route path='Create-Data-Utility' element={<AllDataUtility/>} />
+     <Route path='Production-Goal' element={<ProductionGoal/>} />
+     <Route path='Production' element={<Production/>} />
      <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
      <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
      <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
@@ -56,7 +54,6 @@ const App = () => {
      <Route path='Kitchen/:month' element={<Kitchen/>} />
      <Route path='Filling/:month' element={<Filiing/>} />
      <Route path='Dispatch/:month' element={<Dispatch/>} />
-     <Route path='Utility/:month' element={<Utility/>} />
      <Route path='Date' element={<Date/>} />
      <Route path=':section/:month' element={<DataLog/>} />
      <Route path='BuyerList' element={<Buyer/>}></Route>

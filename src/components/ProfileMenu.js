@@ -54,13 +54,13 @@ const ProfileMenu = () => {
         isMenuOpen ? (
         <>  
         {
-            userinfo.isAdmin ? (
+            userinfo ? (
          <section className="bg-black rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
           <ul className="list-none mt-2">
             <li>
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to={`/user/Profile/${userinfo._id}`}
+                to={`/admin/Profile/${userinfo._id}`}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}
@@ -93,6 +93,17 @@ const ProfileMenu = () => {
             <li>
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
+                to="/admin/Production"
+                style={({ isActive }) => ({
+                  color: isActive ? "white" : "#f59e0b",
+                })}
+              >
+                Production Plan
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Userlist"
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
@@ -112,29 +123,7 @@ const ProfileMenu = () => {
           </ul>
         </section>
         ) : (
-             <section className="bg-black rounder-xl p-4  right-7 top-5">
-          <ul className="list-none mt-2">
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to={`/user/Profile/${userinfo._id}`}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <div
-                className="py-2 px-3 block text-[#FB2E86] mb-5 cursor-pointer select-none hover:bg-black rounded-sm"
-                onClick={logouthandler}
-              >
-                Logout
-              </div>
-            </li>
-          </ul>
-        </section>)
+            <div></div>)
         }
         </>
       ) : null }

@@ -7,7 +7,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const dataRoutes = require('./routes/dataRoutes');
-const utilityRoutes = require('./routes/utlityRoutes');
+const goalRoutes = require('./routes/goalRoutes');
 const cors = require('cors');
 const path = require('path');
 
@@ -30,7 +30,7 @@ app.use('/api/users',userRoutes);
 app.use('/api/category',categoryRoutes);
 app.use('/api/product',productRoutes);
 app.use("/api/uploads",uploadRoutes);
-app.use("/api/utility",utilityRoutes)
+app.use("/api/goal",goalRoutes)
 app.use("/api/data",dataRoutes);
 app.use("/uploads",express.static(path.join(__dirname + '/uploads')));
 

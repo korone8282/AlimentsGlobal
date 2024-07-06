@@ -36,7 +36,7 @@ const Monthly = () => {
                   
                   async function getData(){
                     try {
-                    
+                    setLoading(1);
                       setError(0);
                       const res = await apiConnector(`${DATA_URL}/List/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
                       
@@ -107,7 +107,6 @@ const Monthly = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Worker</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Cost / Pouch</th>
         </tr>
       </thead>
 
@@ -160,15 +159,7 @@ const Monthly = () => {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.workersQuantity,0),0)
   }</td>) : (<td></td>)
   }
-
-{ !index ? ( <td rowSpan={pSize.length+1} className='border-4 text-center border-black font-bold '> {
-    (data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.workersQuantity,0),0) * 500 /  data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)).toFixed(3)
-  }</td>) : (<td></td>)
-}
-
-
- 
-      </tr> 
+       </tr> 
      
         ))
       }
