@@ -383,7 +383,7 @@ exports.getAllUsers = async(req,res) =>{
 exports.getCurrentUser = async(req,res) =>{
 
     try{
-        const user = await User.findById(req.user.id);
+        const user = await User.findById(req.params.id);
 
         if(!user){
            res.status(404).json({

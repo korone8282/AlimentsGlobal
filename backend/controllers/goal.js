@@ -4,6 +4,7 @@ const Goal = require('../models/goalModel');
 exports.createGoal = async(req,res) => {
 try {
     const{
+    buyerName,
     fname,
     batchNum,
     pouchSize,
@@ -12,7 +13,7 @@ try {
     date,
 } = req.body;
 
-if(!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
+if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
     return res.status(500).json({
         message:"Fill All Blanks",
     });
@@ -20,6 +21,7 @@ if(!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
     const newDate = new Date(date);
 
     const newGoal = await Goal.create({
+        buyerName,
         fname,
         batchNum,
         pouchSize,
@@ -46,6 +48,7 @@ if(!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
 exports.updateGoal = async(req,res) => {
     try {
         const {
+            buyerName,
             fname,
             batchNum,
             pouchSize,
@@ -63,7 +66,8 @@ exports.updateGoal = async(req,res) => {
             });
         }
         
-        existGoal.fname = fname|| existGoal.fname;
+        existGoal.buyerName = buyerName || existGoal.buyerName;
+        existGoal.fname = fname || existGoal.fname;
         existGoal.batchNum = batchNum || existGoal.batchNum;
         existGoal.pouchSize = pouchSize || existGoal.pouchSize;
         existGoal.pouchGoal = pouchGoal || existGoal.pouchGoal;

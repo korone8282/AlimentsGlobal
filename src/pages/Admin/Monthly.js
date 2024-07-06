@@ -156,7 +156,7 @@ const Monthly = () => {
   }</td>
 
 { !index ? (<td  rowSpan={pSize.length+1} className='border-4 text-center border-black font-bold'> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.workersQuantity,0),0)
+    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
   }</td>) : (<td></td>)
   }
        </tr> 

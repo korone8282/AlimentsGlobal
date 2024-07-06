@@ -39,7 +39,7 @@ const Home = () => {
       
       <div className='item p-12 pt-56 sm:max-lg:pt-32'>View Data</div>
 
-      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:mt-2.5 text-4xl'>
+      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
 
 <div onClick={()=>{
       dispatch(setSection("Retort"));
@@ -90,21 +90,21 @@ const Home = () => {
       
         <div className='item p-12 pt-56 sm:max-lg:pt-28'>View Analytics</div>
 
-        <div className='nav-item-name flex flex-col gap-6 mt-7 text-4xl'>
+        <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
 
-<Link to="/admin/Monthly-Data" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Monthly-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Monthly Data 
 </Link>
 
-<Link to="/admin/Product-Data" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Product-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Product Data
 </Link>
 
-<Link to="/admin/Day-Night" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Day-Night" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Day Vs Night 
 </Link>
 
-<Link to="/admin/Production-Goal" className='h-20 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
 Production Goal
 </Link>
 
@@ -126,7 +126,7 @@ Production Goal
       
       <div className='item p-12 pt-56 sm:max-lg:pt-32'>Create Data</div>
 
-      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:mt-2.5 text-4xl'>
+      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
 
 <Link to="/admin/Create-Data-Retort" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
  Retort 

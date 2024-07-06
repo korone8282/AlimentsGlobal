@@ -76,7 +76,7 @@ const Profile = () => {
               <IconBtn
               text="Edit"
               onclick={() => {
-                navigate(`/user/updateProfile/${userinfo._id}`)
+                navigate(`/admin/updateProfile/${userinfo._id}`)
               }}
             >
               <RiEditBoxLine />
@@ -96,7 +96,7 @@ const Profile = () => {
               <IconBtn
             text="Edit"
             onclick={() => {
-              navigate(`/user/updateProfile/${userinfo._id}`)
+              navigate(`/admin/updateProfile/${userinfo._id}`)
             }}
           >
             <RiEditBoxLine />

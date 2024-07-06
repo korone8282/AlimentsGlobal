@@ -9,11 +9,11 @@ const { createData,
         readDvN} = require('../controllers/dailyData');
 
 router.post("/:string/:dayTime",authorization,authAdmin,createData);
-router.get("/List/:month",authorization,readMonthlyData); 
-router.route("/:date/:month").get(authorization,readData);
-router.route("/:id").delete(authorization,deleteData);
-router.put("/List",authorization,readBuyerData);
-router.put("/DvN",authorization,readDvN); 
+router.get("/List/:month",readMonthlyData); 
+router.route("/:date/:month").get(readData);
+router.route("/:id").delete(authorization,authAdmin,deleteData);
+router.put("/List",readBuyerData);
+router.put("/DvN",readDvN); 
 
 
 module.exports = router;

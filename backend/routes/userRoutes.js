@@ -18,8 +18,8 @@ router.post('/login',login);
 router.post("/googleLogin",googleLogin)
 router.route("/signup").post(signup);
 router.post("/logout",logout);
-router.route("/getAllUsers").get(authorization,getAllUsers);
-router.get("/profile/:id",authorization,getCurrentUser).put("/profile/:id",authorization,formidable(),updateProfile);
+router.route("/getAllUsers").get(getAllUsers);
+router.get("/profile/:id",getCurrentUser).put("/profile/:id",formidable(),updateProfile);
 router.route("/:id").delete(authorization,authAdmin,deleteUser).get(userId);
 router.post("/otpEntry",sendOtp);
 router.post("/otpLogin",loginOtp);

@@ -8,7 +8,7 @@ const {createProduct ,updateProduct,deleteProduct,productList,readProduct} = req
 router.route("/:buyer").post(authorization,authAdmin,createProduct);
 router.delete("/:productId",authorization,authAdmin,deleteProduct);
 router.get("/products",productList);
-router.get("/:id",authorization,authAdmin,readProduct);
+router.get("/:id",readProduct);
 router.post("/update/:productId",authorization,authAdmin,updateProduct);
 
 module.exports = router;
