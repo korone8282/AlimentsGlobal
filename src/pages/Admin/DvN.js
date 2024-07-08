@@ -128,7 +128,7 @@ console.log(data);
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
  }</td>
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.workersQuantity,0),0)
+   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
  }</td>
          </tr>
 
@@ -169,7 +169,7 @@ console.log(data);
    data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
  }</td>
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.workersQuantity,0),0)
+   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
  }</td>
          </tr>
 
