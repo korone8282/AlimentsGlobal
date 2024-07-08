@@ -172,7 +172,7 @@ const inputHandler = async(e) =>{
       loading ? (
         <Loader/>
       ) : (
-        <div className="flex flex-wrap gap-12 sm:max-lg:gap-3  mx-1 sm:max-lg:mx-2 my-6">
+        <div className="flex flex-wrap gap-6 sm:max-lg:gap-3 mx-6 sm:max-lg:mx-5 my-6">
         {
           goals?.map((val,index)=>(
             <div key={index} 
@@ -181,7 +181,7 @@ const inputHandler = async(e) =>{
                   setopenBox(!openBox);
                   setcurrentGoal(val)}}>
 
-            <div className='flex flex-col text-2xl justify-evenly font-bold sm:max-lg:text-lg'>
+            <div className='flex flex-col text-2xl justify-evenly font-bold sm:max-lg:text-lg max-w-48 sm:max-lg:max-w-32'>
             <div className='text-white -mb-2'> Buyer Name: </div>
             <div className='mb-2'>{val.buyerName}</div>
             <div className='text-white -mb-2'> Product Name: </div>
