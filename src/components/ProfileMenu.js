@@ -24,14 +24,21 @@ const ProfileMenu = () => {
   const dispatch = useDispatch();
 
   const logouthandler = async() =>{
+
+    const toastId = toast.loading("Loading...",{
+      position: 'top-center',
+    });
+
     try {
       await apiConnector(LOGOUT_API,"POST");
+      toast.dismiss(toastId);
       toast.success("logged out successfully");
       navigate("/Login")
       dispatch(logout());
       googleLogout();
       window.location.reload();
     } catch (error) {
+      toast.dismiss(toastId);
       console.log(error);
     }
 }
