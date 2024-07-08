@@ -172,11 +172,11 @@ const inputHandler = async(e) =>{
       loading ? (
         <Loader/>
       ) : (
-        <div className="flex flex-wrap gap-12 mx-1 my-6">
+        <div className="flex flex-wrap gap-12 sm:max-lg:gap-3  mx-1 sm:max-lg:mx-2 my-6">
         {
           goals?.map((val,index)=>(
             <div key={index} 
-                 className='flex gap-12 border-2 text-[#f59e0b] bg-black rounded-lg p-4 sm:max-lg:p-3 sm:max-lg:mx-auto sm:max-lg:gap-1'
+                 className='flex gap-12 border-2  text-[#f59e0b] bg-black rounded-lg p-4 sm:max-lg:gap-8'
                  onClick={()=>{
                   setopenBox(!openBox);
                   setcurrentGoal(val)}}>
@@ -227,7 +227,7 @@ const inputHandler = async(e) =>{
      
           {
             openBox ? (
-      <div className="fixed top-[10%] z-10 flex my-5 left-[18%] sm:max-lg:left-6 sm:max-lg:-top-2 h-[40rem] backdrop-blur-xl
+      <div className="fixed top-[10%] sm:max-lg:absolute z-10 flex my-5 left-[18%] sm:max-lg:left-6 sm:max-lg:top-20 h-[40rem] backdrop-blur-xl
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
