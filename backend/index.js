@@ -10,10 +10,10 @@ const dataRoutes = require('./routes/dataRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 const cors = require('cors');
 const path = require('path');
-const job = require('~/cron.js');
+// const job = require('~/cron.js');
 dbConnect();
 
-job.start();
+// job.start();
 
 const app = express();
 app.use(cookieParser());
