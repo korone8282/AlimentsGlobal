@@ -24,7 +24,7 @@ const Home = () => {
  
 
   return (
-    <div className='bg-gradient-to-r from-fuchsia-500 to-cyan-500 h-screen'>
+    <div className='bg-zero h-screen bg-cover bg-center'>
   
   <div className='flex  gap-10 justify-center py-20 sm:max-lg:gap-2 sm:max-lg:mx-2 sm:max-lg:py-2'>
   <div className=' max-w-sm
@@ -44,7 +44,7 @@ const Home = () => {
 <div onClick={()=>{
       dispatch(setSection("Retort"));
       navigate(`admin/Date`)
-    }}  className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }}  className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Retort 
  <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </div>
@@ -52,7 +52,7 @@ const Home = () => {
 <div onClick={()=>{
       dispatch(setSection("Filling"));
       navigate(`admin/Date`)
-    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Filling 
  <MdFormatColorFill className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </div>
@@ -60,7 +60,7 @@ const Home = () => {
 <div onClick={()=>{
       dispatch(setSection("Kitchen"));
       navigate(`admin/Date`)
-    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Kitchen 
  <TbToolsKitchen className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-7" size={50} color='black' />
 </div>
@@ -68,7 +68,7 @@ const Home = () => {
 <div onClick={()=>{
       dispatch(setSection("Dispatch"));
       navigate(`admin/Date`)
-    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
+    }} className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
  Dispatch 
  <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </div>
@@ -92,19 +92,19 @@ const Home = () => {
 
         <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
 
-<Link to="/admin/Monthly-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Monthly-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Monthly Data 
 </Link>
 
-<Link to="/admin/Product-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Product-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Product Data
 </Link>
 
-<Link to="/admin/Day-Night" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Day-Night" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Day Vs Night 
 </Link>
 
-<Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
 Production Goal
 </Link>
 
@@ -128,22 +128,22 @@ Production Goal
 
       <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
 
-<Link to="/admin/Create-Data-Retort" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Retort" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Retort 
  <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Filling" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Filling" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Filling 
  <MdFormatColorFill className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Kitchen" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Kitchen" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Kitchen 
  <TbToolsKitchen className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-7" size={50} color='black' />
 </Link>
 
-<Link to="/admin/Create-Data-Dispatch" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-fuchsia-500 to-cyan-500 hover:text-black w-[90%] rounded-lg mx-auto'> 
+<Link to="/admin/Create-Data-Dispatch" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Dispatch 
  <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </Link>
