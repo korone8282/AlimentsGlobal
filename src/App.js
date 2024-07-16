@@ -30,7 +30,7 @@ import Production from './pages/Admin/Production'
 const App = () => {
   
   return (
-<div className='sm:max-lg:overflow-x-hidden'>
+<div>
 
 <Header/>
 
