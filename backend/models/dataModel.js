@@ -88,9 +88,9 @@ const dataSchema = new mongoose.Schema({
     },
 })
 
-// async function sendMail(){
+// async function sendMail(section,day){
 // try {
-//    await mailSender("korone8282@gmail.com","Daily data for Aliments Global has been uploaded","");
+//    await mailSender("korone8282@gmail.com","Daily data for Aliments Global has been uploaded",`Section: ${section} Time:${day}`);
 // } catch (error) {
 //     console.log("error while sending mail",error);
 //     throw new error;
@@ -98,7 +98,7 @@ const dataSchema = new mongoose.Schema({
 // }
 
 // dataSchema.post("save", async function(){
-//     await sendMail();
+//     await sendMail(this.sectionMain, this.dayTime);
 // });
 
 
