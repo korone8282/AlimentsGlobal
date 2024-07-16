@@ -8,7 +8,7 @@ const { createData,
         readMonthlyData,
         readDvN} = require('../controllers/dailyData');
 
-router.post("/:string/:dayTime",authorization,authAdmin,createData);
+router.post("/:string/:dayTime",createData);
 router.get("/List/:month",readMonthlyData); 
 router.route("/:date/:month").get(readData);
 router.route("/:id").delete(authorization,authAdmin,deleteData);
