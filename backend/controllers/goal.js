@@ -10,14 +10,16 @@ try {
     pouchSize,
     pouchGoal,
     pouchPacked,
+    day,
     date,
 } = req.body;
 
-if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
+if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date||!day){
     return res.status(500).json({
         message:"Fill All Blanks",
     });
 }
+
     const newDate = new Date(date);
 
     const newGoal = await Goal.create({
@@ -27,6 +29,7 @@ if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date){
         pouchSize,
         pouchGoal,
         pouchPacked,
+        day,
         createdAt:newDate
     });
 
@@ -53,7 +56,8 @@ exports.updateGoal = async(req,res) => {
             batchNum,
             pouchSize,
             pouchGoal,
-            pouchPacked
+            pouchPacked,
+            day,
         } = req.body;
 
         const {goalId} = req.params;
@@ -72,6 +76,7 @@ exports.updateGoal = async(req,res) => {
         existGoal.pouchSize = pouchSize || existGoal.pouchSize;
         existGoal.pouchGoal = pouchGoal || existGoal.pouchGoal;
         existGoal.pouchPacked = pouchPacked || existGoal.pouchPacked;
+        existGoal.day = day || existGoal.day;
 
         const updatedGoal = await existGoal.save();
 

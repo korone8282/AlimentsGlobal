@@ -22,6 +22,7 @@ const Production = () => {
         pouchSize:"",
         pouchGoal:"",
         pouchPacked:"",
+        day:"",
         date:"",
     });
 
@@ -81,6 +82,7 @@ const Production = () => {
         pouchSize:"",
         pouchGoal:"",
         pouchPacked:"",
+        day:"",
         date:"",
       });
 
@@ -92,7 +94,7 @@ const Production = () => {
       toast("Fill Date and other Details");
     }
   }
-
+console.log(info)
   return (
     <div>
       
@@ -101,7 +103,7 @@ const Production = () => {
     {
       loading ? (<Loader/> 
       ) : (
-        <div className="flex justify-center my-5 mx-auto h-[38rem] sm:max-lg:h-fit sm:max-lg:w-[50rem] bg-black text-[#f59e0b] w-[70rem] rounded-lg">
+        <div className="flex justify-center my-5 mx-auto h-[44rem] sm:max-lg:h-fit sm:max-lg:w-[50rem] bg-black text-[#f59e0b] w-[70rem] rounded-lg">
               <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl gap-12 mx-9 sm:max-lg:text-xl'>
 
         <div className='flex justify-between sm:max-lg:items-center gap-12'>
@@ -195,8 +197,44 @@ const Production = () => {
                  className='bg-transparent border-2 border-[#f59e0b] p-1'
                        />
         </div>
-          
 
+        <div className='flex justify-between'>
+
+        <div>
+            DayTime:
+        </div>
+
+        <div className='flex gap-24 mr-8'>
+        <div className='flex gap-6 mr-9'>  
+        <label htmlFor="today">
+             Day 
+          </label>
+          <input type='radio'
+                 id="today" 
+                 name = "day"
+                 value="Day" 
+                 onChange={ e => inputHandler(e) }
+                 className='bg-transparent border-2 border-[#f59e0b] p-1'
+                       />
+        </div>
+        <div className='flex gap-6'>  
+        <label htmlFor="today">
+             Night 
+          </label>
+          <input type='radio'
+                 id="today" 
+                 name = "day"
+                 value="Night" 
+                 onChange={ e => inputHandler(e) }
+                 className='bg-transparent border-2 border-[#f59e0b] p-1'
+                       />
+        </div>
+        </div>
+        
+
+        
+      
+        </div>
 
           <button 
            onClick={handleCreate}

@@ -21,6 +21,7 @@ const ProductionGoal = () => {
   const [goals, setGoals] = useState();
   const [currentGoal, setcurrentGoal] = useState();
   const [error, setError] = useState(0);
+  const [newtime, setnewtime] = useState(new Date().toLocaleString());
 
   const date = useSelector(state=>state.goal);
 
@@ -33,6 +34,7 @@ const [info, setInfo] = useState({
   pouchSize:"",
   pouchGoal:"",
   pouchPacked:"",
+  day:"",
   date:date.date,
 });
 
@@ -107,6 +109,7 @@ const inputHandler = async(e) =>{
         pouchSize:"",
         pouchGoal:"",
         pouchPacked:"",
+        day:"",
         date:date.date,
       });
       
@@ -139,6 +142,7 @@ const inputHandler = async(e) =>{
         pouchSize:"",
         pouchGoal:"",
         pouchPacked:"",
+        day:"",
         date:date.date,
       });
       
@@ -157,6 +161,10 @@ const inputHandler = async(e) =>{
   return (
     <div>
 
+<div>
+    <div onClick={()=>setnewtime(new Date().toLocaleString())}
+         className='mx-10 mt-4 cursor-pointer select-none text-2xl font-bold'>Updated At: <span className='bg-red-300'>{newtime}</span></div>
+</div>
 <h2 className='text-center text-3xl font-bold my-7 mx-auto'>Plan for : <input type='date' 
                                                                               name='date' 
                                                                               value={info.date} 
@@ -172,7 +180,7 @@ const inputHandler = async(e) =>{
       loading ? (
         <Loader/>
       ) : (
-        <div className="flex flex-wrap gap-6 sm:max-lg:gap-3 mx-6 sm:max-lg:mx-5 my-6">
+        <div className="flex flex-wrap gap-6 sm:max-lg:gap-3 sm:max-lg:justify-between mx-6 sm:max-lg:mx-5 my-6">
         {
           goals?.map((val,index)=>(
             <div key={index} 
@@ -216,6 +224,8 @@ const inputHandler = async(e) =>{
             />
 
                 <div className='text-3xl sm:max-lg:text-xl font-bold'> {val.pouchPacked} / {val.pouchGoal} </div>
+
+                <div className='text-3xl sm:max-lg:text-xl font-bold'>{val.day}</div>
               </div>
              
             </div>
@@ -227,7 +237,7 @@ const inputHandler = async(e) =>{
      
           {
             openBox ? (
-      <div className="fixed top-[10%] sm:max-lg:absolute z-10 flex my-5 left-[18%] sm:max-lg:left-6 sm:max-lg:top-20 h-[40rem] backdrop-blur-xl
+      <div className="fixed top-[5%] sm:max-lg:absolute z-10 flex my-5 left-[18%] sm:max-lg:left-6 sm:max-lg:top-20 h-[45rem] backdrop-blur-xl
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
@@ -326,6 +336,44 @@ const inputHandler = async(e) =>{
          placeholder={currentGoal.pouchPacked}
          className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
                />
+</div>
+
+<div className='flex justify-between'>
+
+<div>
+    DayTime:
+</div>
+
+<div className='flex gap-24 mr-8'>
+<div className='flex gap-6 mr-9'>  
+<label htmlFor="today">
+     Day 
+  </label>
+  <input type='radio'
+         id="today" 
+         name = "day"
+         value="Day" 
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1'
+               />
+</div>
+<div className='flex gap-6'>  
+<label htmlFor="today">
+     Night 
+  </label>
+  <input type='radio'
+         id="today" 
+         name = "day"
+         value="Night" 
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1'
+               />
+</div>
+</div>
+
+
+
+
 </div>
 
         <div className="flex justify-between gap-4 text-3xl py-2">

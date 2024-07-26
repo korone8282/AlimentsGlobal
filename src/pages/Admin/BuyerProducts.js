@@ -128,6 +128,7 @@ const BuyerProducts = () => {
            <th rowSpan={2} className='border-4 border-black p-8'>Product Name</th>
            <th rowSpan={2} className='border-4 border-black p-1'>No. Of Batches</th>
            <th rowSpan={2} className='border-4 border-black p-4'>Yield (kg)</th>
+           <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Filled</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Packed</th>
            <th rowSpan={2} className='border-4 border-black p-4'>Retort Cycles</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Unit Rejected</th>
@@ -145,6 +146,7 @@ const BuyerProducts = () => {
                   <td className='border-4 border-black font-bold'>{element.name}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, object) => accumulator + object.batchQuantity,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ 
