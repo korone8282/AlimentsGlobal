@@ -94,7 +94,7 @@ const Production = () => {
       toast("Fill Date and other Details");
     }
   }
-console.log(info)
+
   return (
     <div>
       
