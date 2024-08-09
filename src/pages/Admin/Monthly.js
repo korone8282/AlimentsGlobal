@@ -9,7 +9,7 @@ const Monthly = () => {
 
   const {userinfo} = useSelector(state => state.auth);
 
-  const pSize = [0.125,0.13,0.2,0.225,0.25,0.3,0.35,0.375,0.5,0.6,1];
+  const pSize = [0.125,0.13,0.175,0.2,0.225,0.25,0.3,0.35,0.375,0.45,0.5,0.6,1];
 
   const [data, setData] = useState([]);
   const [month, setmonth] = useState(1);

@@ -10,6 +10,7 @@ const BuyerProducts = () => {
 
 
     const [sectionData, setSectionData] = useState([]);
+    const [indexing, setindexing] = useState(-1);
     const [loading, setLoading] = useState(1);
     const [products, setproducts] = useState([]);
     const [error, setError] = useState(0);
@@ -19,6 +20,8 @@ const BuyerProducts = () => {
         end:"",
         buyer:"",
     });
+
+    const pSize = [0.125,0.13,0.175,0.2,0.225,0.25,0.3,0.35,0.375,0.45,0.5,0.6,1];
 
     const {userinfo} = useSelector(state => state.auth);
 
@@ -80,7 +83,6 @@ const BuyerProducts = () => {
 
   return (
     <div>
-    
     <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
         <div>
         <select
@@ -127,7 +129,7 @@ const BuyerProducts = () => {
            <th rowSpan={2} className='border-4 border-black p-1'>S no.</th>
            <th rowSpan={2} className='border-4 border-black p-8'>Product Name</th>
            <th rowSpan={2} className='border-4 border-black p-1'>No. Of Batches</th>
-           <th rowSpan={2} className='border-4 border-black p-4'>Yield (kg)</th>
+           <th rowSpan={2} className='border-4 border-black p-4'>Production (kg)</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Filled</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Packed</th>
            <th rowSpan={2} className='border-4 border-black p-4'>Retort Cycles</th>
@@ -135,15 +137,14 @@ const BuyerProducts = () => {
            <th rowSpan={2} className='border-4 border-black p-1'>No. Of Box Packed</th>
          </tr>
        </thead>
- 
-       { 
-           sectionData.length ? (
-            <tbody>
+
+
              {
               products.filter(product=> product.buyer === info.buyer).map((element,index)=>(
-                <tr key={index}>
+                <tbody key={index}>
+      <tr  onClick={()=>setindexing(index)}>
                   <td className='border-4 border-black font-bold p-3'>{index+1}</td>
-                  <td className='border-4 border-black font-bold'>{element.name}</td>
+                  <td className='border-4 border-black font-bold'> {element.name} </td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, object) => accumulator + object.batchQuantity,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
@@ -156,14 +157,33 @@ const BuyerProducts = () => {
                     sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
                     }</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
-                </tr>
-              ))
-             }
-           </tbody>
-           ) : (
-            <tbody className='font-bold text-3xl'><tr><td colSpan={7}>No Data Entry Found</td></tr></tbody>)
-          
-         }
+                  </tr>
+                  
+                  {
+                    pSize.map((ele,i)=>(
+                      <tr className={`${indexing !== index ? "hidden" : null} bg-slate-200`} 
+                      onClick={()=>setindexing(-1)}>
+                  <td className='border-4 border-black font-bold p-3'>•</td>
+                  <td className='border-4 border-black font-bold'> {ele} KG </td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, object) => accumulator + object.batchQuantity,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{ 
+                    sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+                    sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0) +
+                    sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.filled,0),0) +
+                    sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
+                    }</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
+                  </tr>
+                    ))
+                  }
+                
+                  </tbody>
+     ))}
+
                      </table>
      </div>)
     }
@@ -171,7 +191,6 @@ const BuyerProducts = () => {
     </div>
           )
      }
-    
    </div>
   )
 }
