@@ -90,7 +90,7 @@ const Home = () => {
       
         <div className='item p-12 pt-56 sm:max-lg:pt-28'>View Analytics</div>
 
-        <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
+        <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-1.5 text-4xl sm:max-lg:text-2xl'>
 
 <Link to="/admin/Monthly-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Monthly Data 
@@ -106,6 +106,10 @@ const Home = () => {
 
 <Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
 Production Goal
+</Link>
+
+<Link to="/admin/Daily-List" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
+Kitchen Vs Filling  
 </Link>
 
 </div>

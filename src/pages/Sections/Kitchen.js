@@ -68,11 +68,9 @@ const Kitchen = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Batch</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Batch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Cost/Kg</th>
         </tr>
@@ -86,11 +84,9 @@ const Kitchen = () => {
           <td className='border-4 border-black font-bold px-4 p-2'>{index+1}</td>
           <td className='border-4 border-black font-bold'>{val.buyerName}</td>
           <td className='border-4 border-black font-bold'>{val.productName}</td>
-          <td className='border-4 border-black font-bold'>{val.batch}</td>
           <td className='border-4 border-black font-bold'>{val.batchQuantity}</td>
           <td className='border-4 border-black font-bold'>{val.batchSize}</td>
           <td className='border-4 border-black font-bold'>{val.yield}</td>
-          <td className='border-4 border-black font-bold'>{val.yieldLoss}</td>
           {
         !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{val.workersQuantity}</td>) : (<td></td>)
        }   
@@ -101,11 +97,11 @@ const Kitchen = () => {
             ))
             }
             <tr >
-          <td className='border-4 border-black font-bold' colSpan={4}>Total: </td>
+          <td className='border-4 border-black font-bold' colSpan={3}>Total: </td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0)}</td>
-          <td className='border-4 border-black font-bold'>--</td>
+          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchSize*obj.batchQuantity,0)}</td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity*obj.yield,0)}</td>
-          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0)}</td>
+
               </tr>
           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
         }

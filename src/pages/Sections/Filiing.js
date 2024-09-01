@@ -71,13 +71,13 @@ const Filiing = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Produced</th>
-          <th colSpan={2} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
+          <th colSpan={2} className='border-4 border-black p-2'>Wastage</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Cost/Pouch</th>
         </tr>
         <tr>
-          <th className='border-4 border-black p-1'>Empty</th>
-          <th className='border-4 border-black p-1'>Filled</th>
+          <th className='border-4 border-black p-1'>Pouch</th>
+          <th className='border-4 border-black p-1'>Item (Kg) </th>
         </tr>
       </thead>
 

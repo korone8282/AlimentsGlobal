@@ -9,7 +9,7 @@ const Monthly = () => {
 
   const {userinfo} = useSelector(state => state.auth);
 
-  const pSize = [0.125,0.13,0.175,0.2,0.225,0.25,0.3,0.35,0.375,0.45,0.5,0.6,1];
+  const pSize = [0.125,0.13,0.175,0.2,0.22,0.225,0.25,0.3,0.35,0.375,0.4,0.45,0.5,0.6,1];
 
   const [data, setData] = useState([]);
   const [month, setmonth] = useState(1);
@@ -100,7 +100,6 @@ const Monthly = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycles</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Total (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
@@ -128,10 +127,6 @@ const Monthly = () => {
   
          <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0),0)
   }</td>
 
   <td className='border-4 border-black font-bold '> {

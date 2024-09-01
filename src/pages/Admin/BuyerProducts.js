@@ -21,7 +21,7 @@ const BuyerProducts = () => {
         buyer:"",
     });
 
-    const pSize = [0.125,0.13,0.175,0.2,0.225,0.25,0.3,0.35,0.375,0.45,0.5,0.6,1];
+    const pSize = [0.125,0.13,0.175,0.2,0.22,0.225,0.25,0.3,0.35,0.375,0.4,0.45,0.5,0.6,1];
 
     const {userinfo} = useSelector(state => state.auth);
 

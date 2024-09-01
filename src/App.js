@@ -26,6 +26,7 @@ import Product from './pages/Admin/Product'
 import DvN from './pages/Admin/DvN'
 import ProductionGoal from './pages/Admin/ProductionGoal'
 import Production from './pages/Admin/Production'
+import KvF from './pages/Admin/KvF'
 
 const App = () => {
   
@@ -60,6 +61,7 @@ const App = () => {
      <Route path='ProductList' element={<Product/>}></Route>
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>
      <Route path='Day-Night' element={<DvN/>}></Route>
+     <Route path='Daily-List' element={<KvF/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />

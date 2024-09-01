@@ -200,15 +200,15 @@ const AllDataFilling = () => {
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Product Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Batch No.</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Produced</th>
-          <th colSpan={2} className='border-4 border-black p-2'>No. Of Pouch Rejected</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Pouch Produced</th>
+          <th colSpan={2} className='border-4 border-black p-2'>Wastage</th>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0'>No. of Workers</th>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Remarks</th>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Delete</th>
         </tr>
         <tr>
-          <th className='border-4 border-black p-1'>Empty</th>
-          <th className='border-4 border-black p-1'>Filled</th>
+          <th className='border-4 border-black p-1'>Pouch</th>
+          <th className='border-4 border-black p-1'>Item (Kg)</th>
         </tr>
       </thead>
 

@@ -36,7 +36,7 @@ const Dispatch = () => {
   }, [date,userinfo.token]);
 
   const sectionData = data.length !==0 ? data.filter( item => item.sectionMain === "Dispatch" && item.dayTime === `${dayArray[+mode]}`) : [];
-
+console.log(data)
   return (
     <div>
     <div className='flex justify-center items-center h-24'>
