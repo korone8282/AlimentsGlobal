@@ -107,7 +107,7 @@ const KvF = () => {
     }
   } 
 
-  function count(val,ele,obj){
+  function count(val,ele){
 
     if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
       let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
@@ -117,7 +117,7 @@ const KvF = () => {
     }
   } 
 
-  function quant(val,ele,obj){
+  function quant(val,ele){
 
     if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
       let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
