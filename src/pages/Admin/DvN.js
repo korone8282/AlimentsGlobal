@@ -78,10 +78,10 @@ const DvN = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycles</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield Loss (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Worker</th>
         </tr>
@@ -107,10 +107,6 @@ const DvN = () => {
  }</td>
 
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
  }</td>
 
@@ -119,11 +115,14 @@ const DvN = () => {
  }</td>
 
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) +
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
  }</td>
+
+ <td className='border-4 border-black font-bold '>{
+  data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) 
+ } </td>
          <td className='border-4 border-black font-bold '> {
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
  }</td>

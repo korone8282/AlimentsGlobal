@@ -98,13 +98,13 @@ const Monthly = () => {
         <tr>
         <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycles</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Total (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted (Filling)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted (Dispatch)</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Worker</th>
         </tr>
@@ -120,9 +120,6 @@ const Monthly = () => {
 
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
-  }</td>
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)
   }</td>
   
          <td className='border-4 border-black font-bold '> {
@@ -142,13 +139,16 @@ const Monthly = () => {
   }</td>
 
   <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.filled,0),0) +
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) 
   }</td>
 
   <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+  }</td>
+
+  <td className='border-4 border-black font-bold '> {
+        data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.filled,0),0) 
   }</td>
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.box,0),0)
@@ -170,17 +170,9 @@ const Monthly = () => {
 
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
-  }</td>
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)
-  }</td>
-  
+  }</td>  
          <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0),0)
   }</td>
 
   <td className='border-4 border-black font-bold '> {
@@ -199,7 +191,6 @@ const Monthly = () => {
   }</td>
 
   <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) +
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) 
   }</td>
 
@@ -207,6 +198,11 @@ const Monthly = () => {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
   }</td>
+
+  <td className='border-4 border-black font-bold '> {
+    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0)
+  }</td>
+  
           <td className='border-4 border-black font-bold '> {
     data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
   }</td>
