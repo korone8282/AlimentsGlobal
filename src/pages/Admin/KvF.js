@@ -85,12 +85,14 @@ const KvF = () => {
   )
 
   function yo(val,ele){
- 
-    let item =0;
 
     if (arr.length){
-      item = arr.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return (item.yield*item.batch).toFixed(2);
+      let item = arr.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
+      if(item){
+      return (item.yield*item.batch).toFixed(2)
+      } else {
+        return 0;
+      }
     } else {
       return 0;
     }
