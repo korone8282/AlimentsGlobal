@@ -6,6 +6,7 @@ import { FaBox } from "react-icons/fa";
 import { MdFormatColorFill } from "react-icons/md";
 import { useDispatch } from 'react-redux'
 import { setSection } from '../redux/Slices/dateSlice'
+import { VscSettingsGear } from "react-icons/vsc";
 import "./Home.css";
 
 const Home = () => {
@@ -72,6 +73,10 @@ const Home = () => {
  Dispatch 
  <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </div>
+
+<Link to="/admin/Inventory" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
+Inventory <span> <VscSettingsGear color='black'/></span>
+</Link>
 
 </div>
       

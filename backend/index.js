@@ -7,6 +7,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
 const dataRoutes = require('./routes/dataRoutes');
+const inventoryRoutes = require('./routes/inventoryRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 const cors = require('cors');
 const path = require('path');
@@ -31,6 +32,7 @@ app.use('/api/product',productRoutes);
 app.use("/api/uploads",uploadRoutes);
 app.use("/api/goal",goalRoutes)
 app.use("/api/data",dataRoutes);
+app.use("/api/inventory",inventoryRoutes);
 app.use("/uploads",express.static(path.join(__dirname + '/uploads')));
 
 port = 4000||process.env.PORT;
@@ -38,7 +40,7 @@ port = 4000||process.env.PORT;
 app.get("/", (req, res) => {
 	return res.json({
 		success: true,
-		message: "Your server is up and running successfully ...",
+		message: "Your server is up and running ...",
 	});
 });
 

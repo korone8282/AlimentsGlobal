@@ -24,3 +24,6 @@ export const DATA_URL = 'https://alimentsglobal.onrender.com/api/data'
 export const PRODUCT_URL = 'https://alimentsglobal.onrender.com/api/product'
 
 export const GOAL_URL = 'https://alimentsglobal.onrender.com/api/goal'
+
+export const STORE_URL = 'https://alimentsglobal.onrender.com/api/inventory'
+

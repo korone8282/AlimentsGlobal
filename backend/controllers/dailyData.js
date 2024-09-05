@@ -250,3 +250,41 @@ exports.readKvF = async(req,res) => {
                                 })
                                         }
                                  }
+
+
+exports.readDvN = async(req,res) => {
+                    try {
+                
+                        const {start,end} = req.body;
+                  
+                        const startDate = new Date(start);
+                        startDate.setHours(0, 0, 0, 0);
+                        const endDate = new Date(end);
+                        endDate.setHours(23, 59, 59, 999);
+                
+                        const existData = await Data.find({createdAt:{
+                            $gte:startDate,
+                            $lte:endDate
+                        }});
+                      
+                            if(!existData.length){
+                             return res.status(404).json({
+                             message:"data doesn't exists",
+                             })
+                        }
+                            
+                         res.status(200).json({
+                            success:true,
+                            data:existData,
+                        })
+                                
+                        } catch (error) {
+                            console.log(error);
+                            res.status(400).json({
+                             message:error
+                        })
+                                }
+                         }
+                                    
+                
+        
