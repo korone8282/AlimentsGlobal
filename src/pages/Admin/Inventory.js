@@ -13,7 +13,7 @@ const Inventory = () => {
     const [ogData, setogData] = useState([]);
     const [dummy, setdummy] = useState();
     const [openBox, setopenBox] = useState(0);
-    const [loading, setLoading] = useState(0);
+    const [loading, setLoading] = useState(1);
     const [error, setError] = useState(0);
     const [item, setItem] = useState();
     const [add, setadd] = useState(0);
@@ -50,6 +50,7 @@ const Inventory = () => {
 async function handleDelete(){
         try {
 
+          setLoading(1)
           await apiConnector(`${STORE_URL}/${item._id}`,"DELETE",null,{Authorization: `Bearer ${userinfo.token}`});
       
           toast("deleted successfully");
@@ -61,6 +62,7 @@ async function handleDelete(){
             lDate:"",
         });
           setopenBox(0);
+          setLoading(0);
           window.location.reload();
       
         } catch (error) {
@@ -70,7 +72,7 @@ async function handleDelete(){
       
 async function handleCreate(){
         try {
-      
+          setLoading(1)
           await apiConnector(`${STORE_URL}`,"POST",info,{Authorization: `Bearer ${userinfo.token}`});
       
           toast("created successfully");
@@ -82,6 +84,7 @@ async function handleCreate(){
             lDate:"",
         });
           setopenBox(0);
+          setLoading(0);
           window.location.reload();
           
         } catch (error) {
@@ -91,7 +94,7 @@ async function handleCreate(){
       
 const handleUpdate = async() =>{
         try {
-      
+          setLoading(1)
           await apiConnector(`${STORE_URL}/${item._id}`,"POST",info,{Authorization: `Bearer ${userinfo.token}`});
       
           toast("updated successfully");
@@ -103,6 +106,7 @@ const handleUpdate = async() =>{
             lDate:"",
         });
           setopenBox(0);
+          setLoading(0);
           window.location.reload();
       
         } catch (error) {
