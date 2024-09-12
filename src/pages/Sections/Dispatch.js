@@ -54,7 +54,7 @@ console.log(data)
 
 
     {
-      error ? (<div className='text-center text-white font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
+      error ? (<div className='text-center text-black font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
       ) : (
         <div>
    <div className='text-3xl font-bold text-center my-8 '>Daily Log</div>

@@ -67,6 +67,7 @@ async function handleDelete(){
       
         } catch (error) {
           console.log(error);
+          setLoading(0);
         }
       }
       
@@ -88,7 +89,9 @@ async function handleCreate(){
           window.location.reload();
           
         } catch (error) {
-          console.log(error)
+          console.log(error.message)
+          setLoading(0);
+          toast(error.response.data.message)
         }
       }
       
@@ -111,6 +114,7 @@ const handleUpdate = async() =>{
       
         } catch (error) {
           console.log(error);
+          setLoading(0);
         }
       }
 

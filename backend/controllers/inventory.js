@@ -33,7 +33,9 @@ exports.addInventory = async(req,res) => {
         const{pDate,name,stock,rate,lDate} = req.body;
 
         if(!name||!stock){
-            return res.json({error:"Name is required"});
+            return res.status(500).json({
+                message:"Fill Name And Stock",
+            });
         }
     
         const existItem = await Inventory.findOne({name:name});
@@ -107,6 +109,10 @@ exports.updateInventory = async(req,res) => {
           return res.status(500).json({
                 message:"category doesn't exists",
             });
+        }
+
+        if(existItem.stock<stock){
+            existItem.quant += stock-existItem.stock
         }
         
         existItem.name = name || existItem.name;

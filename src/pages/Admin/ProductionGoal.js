@@ -14,6 +14,11 @@ const ProductionGoal = () => {
 
   const {userinfo} = useSelector(state=>state.auth);
 
+  setTimeout(()=>{
+    window.location.reload();
+  },3600000);
+
+
   const [openBox, setopenBox] = useState(0);
   const [loading, setLoading] = useState(0);
   const [products, setproducts] = useState([]);

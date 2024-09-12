@@ -1,7 +1,7 @@
 import React,  { useEffect } from 'react'
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { TbToolsKitchen, TbWashMachine } from "react-icons/tb";
+import { TbToolsKitchen} from "react-icons/tb";
 import { FaBox } from "react-icons/fa";
 import { MdFormatColorFill } from "react-icons/md";
 import { useDispatch } from 'react-redux'
@@ -41,14 +41,6 @@ const Home = () => {
       <div className='item p-12 pt-56 sm:max-lg:pt-32'>View Data</div>
 
       <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
-
-<div onClick={()=>{
-      dispatch(setSection("Retort"));
-      navigate(`admin/Date`)
-    }}  className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto cursor-pointer'> 
- Retort 
- <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
-</div>
 
 <div onClick={()=>{
       dispatch(setSection("Filling"));
@@ -136,11 +128,6 @@ Kitchen Vs Filling
       <div className='item p-12 pt-56 sm:max-lg:pt-32'>Create Data</div>
 
       <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
-
-<Link to="/admin/Create-Data-Retort" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
- Retort 
- <TbWashMachine className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-8" size={50} color='black' />
-</Link>
 
 <Link to="/admin/Create-Data-Filling" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Filling 
