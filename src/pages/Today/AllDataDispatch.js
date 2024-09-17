@@ -12,7 +12,7 @@ import { setDate} from '../../redux/Slices/dateSlice';
 
 const AllDataDispatch = () => {
 
-  const sections = ["Dispatch","Kitchen","Filling","Retort"];
+  const sections = ["Dispatch","Kitchen","Filling"];
   
   const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
@@ -107,8 +107,7 @@ const AllDataDispatch = () => {
     navigate("/");
    } catch (error) {
     toast.dismiss(toastId);
-    toast("Check Buyer / Product Name ");
-    console.log(error);
+    toast(error.response.data.message)
    }
   }
 

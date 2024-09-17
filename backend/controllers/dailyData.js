@@ -10,13 +10,23 @@ try {
     const section = string.split("_")[0];
     const newdate = new Date(string.split("_")[1]);
 
-     if(!dataItems){
-        res.status(400).json({
-            success:false,
-            data:"no data found"
-
+     if(!dataItems.length){
+       return res.status(400).json({
+            message:"Empty Entry Submitted",
         })
      }
+
+     const existData = await Data.find({
+        createdAt:newdate,
+        sectionMain:section,
+        dayTime:dayTime
+    });
+
+        if(existData.length){
+         return res.status(404).json({
+         message:"Data for this date already exists",
+         })
+    }
 
     const newData = await Data.create({
         sectionMain: section,

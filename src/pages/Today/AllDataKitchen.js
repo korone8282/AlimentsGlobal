@@ -12,7 +12,7 @@ import { setDate} from '../../redux/Slices/dateSlice';
 
 const AllDataKitchen = () => {
 
-  const sections = ["Dispatch","Kitchen","Filling","Retort"];
+  const sections = ["Dispatch","Kitchen","Filling"];
 
   const [products, setproducts] = useState([]);
   const [buyer, setbuyer] = useState("");
@@ -106,8 +106,7 @@ const AllDataKitchen = () => {
     navigate("/");
    } catch (error) {
     toast.dismiss(toastId);
-    toast("Check Buyer / Product Name ");
-    console.log(error);
+    toast(error.response.data.message)
    }
   }
 

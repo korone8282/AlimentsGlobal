@@ -24,7 +24,7 @@ const AllDataFilling = () => {
 
   const currentSection = section.pathname.split("/")[2].split("-")[2];
 
-  const sections = ["Dispatch","Kitchen","Filling","Retort"];
+  const sections = ["Dispatch","Kitchen","Filling"];
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -106,8 +106,7 @@ const AllDataFilling = () => {
     navigate("/");
    } catch (error) {
     toast.dismiss(toastId); 
-    toast("Check Buyer / Product Name ");
-    console.log(error);
+    toast(error.response.data.message)
    }
   }
 

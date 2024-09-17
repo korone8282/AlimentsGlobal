@@ -5,7 +5,7 @@ import { setDate,setMonth,setDays,setSection } from '../redux/Slices/dateSlice';
 
 const Dropdown = ({val}) => {
 
-    const sections = ["Kitchen","Filling","Retort","Dispatch"];
+    const sections = ["Kitchen","Filling","Dispatch"];
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
