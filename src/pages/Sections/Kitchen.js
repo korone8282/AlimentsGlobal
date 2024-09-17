@@ -69,7 +69,6 @@ const Kitchen = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Batch</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Batch Size (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Production (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. of Workers</th>
@@ -86,9 +85,8 @@ const Kitchen = () => {
           <td className='border-4 border-black font-bold'>{val.buyerName}</td>
           <td className='border-4 border-black font-bold'>{val.productName}</td>
           <td className='border-4 border-black font-bold'>{val.batchQuantity}</td>
-          <td className='border-4 border-black font-bold'>{val.batchSize}</td>
           <td className='border-4 border-black font-bold'>{val.yield}</td>
-          <td className='border-4 border-black font-bold'>{val.yield*val.batchQuantity}</td>
+          <td className='border-4 border-black font-bold'>{(val.yield*val.batchQuantity).toFixed(2)}</td>
           {
         !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{val.workersQuantity}</td>) : (<td></td>)
        }   
@@ -101,8 +99,7 @@ const Kitchen = () => {
             <tr >
           <td className='border-4 border-black font-bold' colSpan={3}>Total: </td>
           <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0)}</td>
-          <td className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchSize*obj.batchQuantity,0)}</td>
-          <td colSpan={2} className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity*obj.yield,0)}</td>
+          <td colSpan={2} className='border-4 border-black font-bold'>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity*obj.yield,0).toFixed(2)}</td>
 
               </tr>
           </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)

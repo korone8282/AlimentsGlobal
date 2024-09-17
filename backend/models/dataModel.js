@@ -17,7 +17,7 @@ const dataSchema = new mongoose.Schema({
         },
         batch:{
             type: String,
-            required : true
+            default:null,
         },
         buyer:{
             type: mongoose.Schema.Types.ObjectId,
