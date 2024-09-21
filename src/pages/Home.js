@@ -70,6 +70,10 @@ const Home = () => {
 Inventory <span> <VscSettingsGear color='black'/></span>
 </Link>
 
+<Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
+Production Goal
+</Link>
+
 </div>
       
     </div>
@@ -94,19 +98,19 @@ Inventory <span> <VscSettingsGear color='black'/></span>
 </Link>
 
 <Link to="/admin/Product-Data" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
- Product Data
+ Buyer Product Data
 </Link>
 
 <Link to="/admin/Day-Night" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
  Day Vs Night 
 </Link>
 
-<Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
-Production Goal
-</Link>
-
 <Link to="/admin/Daily-List" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
 Kitchen Vs Filling  
+</Link>
+
+<Link to="/admin/ProductData" className='h-20 sm:max-lg:h-10 flex items-center justify-around bg-gradient-to-r from-[#2f0743eb] to-[#c88fe5] hover:text-black w-[90%] rounded-lg mx-auto'> 
+Product DataList
 </Link>
 
 </div>

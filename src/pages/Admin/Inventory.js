@@ -131,9 +131,9 @@ const inputHandler = async(e) =>{
          setData(dummy)
          return
          }
-         console.log(data)
+
         let filterBySearch = ogData.filter((item) => {
-            if (item.name.toLowerCase().includes(val.toLowerCase())){ 
+            if (item.name.toLowerCase().startsWith(val.toLowerCase())){ 
               return item
              } else {
               return null 

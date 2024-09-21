@@ -26,6 +26,7 @@ import ProductionGoal from './pages/Admin/ProductionGoal'
 import Production from './pages/Admin/Production'
 import KvF from './pages/Admin/KvF'
 import Inventory from './pages/Admin/Inventory'
+import ProductData from './pages/Admin/ProductData'
 
 const App = () => {
   
@@ -41,6 +42,7 @@ const App = () => {
 
   <Route path="/admin" element={<AdminRoute/>}>
      <Route path='Profile/:id' element={<Profile/>} />
+     <Route path='ProductData' element={<ProductData/>} />
      <Route path='Inventory' element={<Inventory/>} />
      <Route path='updateProfile/:id' element={<UpdateProfile/>} />
      <Route path='Monthly-Data' element={<Monthly/>} />

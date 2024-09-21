@@ -7,7 +7,8 @@ const { createData,
         readBuyerData,
         readMonthlyData,
         readDvN,
-    readKvF} = require('../controllers/dailyData');
+        readKvF,
+        ProductData} = require('../controllers/dailyData');
 
 router.post("/:string/:dayTime",createData);
 router.get("/List/:month",readMonthlyData); 
@@ -16,6 +17,7 @@ router.route("/:id").delete(authorization,authAdmin,deleteData);
 router.put("/List",readBuyerData);
 router.put("/DvN",readDvN); 
 router.put("/KvF",readKvF); 
+router.put("/Product",ProductData); 
 
 
 module.exports = router;
