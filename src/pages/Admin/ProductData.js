@@ -6,12 +6,14 @@ import { FiSearch } from "react-icons/fi";
 import Loader from '../../components/Loader'
 import { TbFilterCog } from "react-icons/tb";
 import { CiWifiOff } from "react-icons/ci";
+import {toast} from 'react-toastify';
 
 const ProductData = () => {
 
     const [arr, setarr] = useState([]);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(1);
+    const [loading2, setLoading2] = useState(0);
     const [error, setError] = useState(0);
     const [products, setproducts] = useState([]);
     const [ogData, setogData] = useState([]);
@@ -90,6 +92,8 @@ const inputHandler = async(e) =>{
 
 async function getData(){
 
+  setLoading2(1)
+
   let array = []
   for (let q = new Date(info.start); q <= new Date(info.end); q = new Date(q.getTime() + 86400000)) {
     array.push(q.toISOString());
@@ -100,16 +104,18 @@ async function getData(){
 
       const res = await apiConnector(`${DATA_URL}/Product`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
       setData(res.data.data);
+      setLoading2(0);
 
     } catch (error) {
-      console.log(error);
+      setLoading2(0);
+      toast(error.response.data.message)
     }
   }
-console.log(data)
-  return (
-    <div >
 
-    <div className='text-center text-6xl font-bold my-8 '>
+  return (
+    <div className={`${openBox2 ? 'w-[43.5rem]':''}`}>
+
+    <div className={` text-6xl  ${openBox2 ? 'mx-40':'text-center'} font-bold my-8`}>
         Product List 
     </div>
 
@@ -120,9 +126,9 @@ error ? (
 <div className='mt-2'> <CiWifiOff /> </div> 
 </div>
 ) : ( 
-  <div>
+  <div className={`${openBox2 ? 'h-[38rem] overflow-auto':''}`}>
 
-<div className='flex mx-32 items-center gap-36'>
+<div className={`flex items-center ${openBox2 ? 'mx-2':'mx-32 gap-36'}`}>
 
 <div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
     onClick={()=>{
@@ -133,7 +139,7 @@ error ? (
 </div>
 
 
-    <div className='flex justify-center sm:max-lg:mr-8 cursor-pointer ml-40'>
+    <div className={`flex justify-center sm:max-lg:mr-8 cursor-pointer  ${openBox2 ? 'ml-32':'ml-40'}`}>
 <input type='text'
        onChange={(e)=>handleSearch(e.target.value)}
        className=' relative w-80 rounded-l-lg h-10 bg-[#f59e0b] font-bold text-2xl focus:outline-none p-4'
@@ -148,8 +154,9 @@ error ? (
 {
 loading ? (<Loader/> 
 ) : (
-<div className='sm:max-lg:mx-3'>
-<table className='w-[80rem] relative mx-auto text-center text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+  
+  openBox2 ? (
+    <table className='w-[40rem] relative ml-2 text-center text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b]'>
     <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
@@ -170,7 +177,7 @@ loading ? (<Loader/>
                 ...prevData,
                 product: val.name
     }));
-                setopenBox2(!openBox2)
+                setopenBox2(1)
             }}>
     <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
     <td className='border-4 border-black font-bold max-w-28'>{val.buyer}</td>
@@ -182,15 +189,50 @@ loading ? (<Loader/>
     </tbody>) : (<div className='font-bold text-6xl mt-12'>No Entry Found</div>)
   }
 </table>
-</div>
+  ) : (
+    <table className='w-[80rem] relative mx-auto text-center text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+<thead>
+  <tr className='bg-[#f59e0b]'>
+    <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
+    <th rowSpan={2} className='border-4 border-black'>Buyer</th>
+    <th rowSpan={2} className='border-4 border-black'> Product Name</th>
+  </tr>
+</thead>
+
+{   
+  products.length ? (<tbody>
+      {
+        products.map((val,index)=>(
+        <tr key={index} 
+            className='text-center hover:bg-slate-400'
+            name='product'
+            onClick={()=>{
+                setInfo((prevData) => ({
+                ...prevData,
+                product: val.name
+    }));
+                setopenBox2(1)
+            }}>
+    <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{val.buyer}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{val.name}</td>
+        </tr>
+      ))
+      }
+     
+    </tbody>) : (<div className='font-bold text-6xl mt-12'>No Entry Found</div>)
+  }
+    </table>
+  )
+
 )
 }
 
 {
     openBox2 ? (
-    <div className='sm:max-lg:mx-3 absolute top-16  p-2 left-[44rem] w-[50rem] bg-slate-500 max-h-[45rem] overflow-auto'>
+    <div className='sm:max-lg:mx-3 absolute top-[3.5rem] border-l-4 border-black p-2 left-[44rem] w-[50rem] h-[45.5rem] overflow-auto'>
          
-         <div className='text-center font-bold text-3xl mt-4'> {info.product} </div>
+         <div className='text-center font-bold text-6xl mt-6'> {info.product} </div>
 
 <div className='flex justify-center my-8 text-2xl font-bold gap-14 h-16 w-full items-center sm:max-lg:gap-10 sm:max-lg:mx-8 '>
         <div>
@@ -216,7 +258,14 @@ loading ? (<Loader/>
              >Submit</div>
     </div>
 
-        <table className='mx-auto text-center bg-red-200 text-black my-12 sm:max-lg:w-fit text-xl font-bold'
+{
+  loading2 ? (
+    <div className='mt-[30rem]'>
+    <Loader/>
+    </div>
+
+  ) : (
+    <table className='mx-auto text-center bg-red-200 text-black my-12 sm:max-lg:w-fit text-xl font-bold'
                onClick={()=>{
                  setopenBox2(!openBox2)
                  setData([])}}>
@@ -266,13 +315,16 @@ loading ? (<Loader/>
     </tbody>) : (<div className='font-bold text-6xl mt-12'>No Entry Found</div>)
   }
         </table>
+  )
+}
+        
     </div>
 
     ) : null
 }
 
 {
-    openBox ? (<div className='absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit max-w-60 top-[14.5rem] left-[15.5rem] rounded-lg border-black border-2 p-2'>
+    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit  ${openBox2 ? 'left-[9rem]':'left-[15.5rem]'} max-w-60 top-[14.5rem] rounded-lg border-black border-2 p-2`}>
         {
             categories.map((val,ind)=>(
                 <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
