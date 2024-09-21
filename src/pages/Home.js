@@ -40,7 +40,7 @@ const Home = () => {
       
       <div className='item p-12 pt-56 sm:max-lg:pt-32'>View Data</div>
 
-      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-8 text-4xl sm:max-lg:text-2xl'>
+      <div className='nav-item-name flex flex-col gap-6 mt-7 sm:max-lg:my-2 text-4xl sm:max-lg:text-2xl'>
 
 <div onClick={()=>{
       dispatch(setSection("Filling"));
