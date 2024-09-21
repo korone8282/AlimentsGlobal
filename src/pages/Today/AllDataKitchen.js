@@ -194,13 +194,13 @@ const AllDataKitchen = () => {
       <thead>
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>S no.</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Buyer Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Product Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. of Batch</th>
+          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>Buyer Name</th>
+          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>Product Name</th>
+          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>No. of Batch</th>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Yield (kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. of Workers</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Remarks</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Delete</th>
+          <th rowSpan={2} className='border-4 border-black  sm:max-lg:p-0.5'>Remarks</th>
+          <th rowSpan={2} className='border-4 border-black  sm:max-lg:p-0.5'>Delete</th>
         </tr>
       </thead>
 
@@ -208,14 +208,14 @@ const AllDataKitchen = () => {
       {
           initalData[1].map((val,index)=>(
               <tr key={index}>
-          <td className='border-4 border-black px-4 p-2'>{index+1}</td>
+          <td className='border-4 border-black px-4 p-2 w-12 text-center'>{index+1}</td>
           <td className='border-4 border-black'>{val.buyerName}</td>
           <td className='border-4 border-black'>{val.productName}</td>
           <td className='border-4 border-black'>{val.batchQuantity}</td>
           <td className='border-4 border-black'>{val.yield}</td>
           <td className='border-4 border-black'>{val.workersQuantity}</td>
-          <td className='border-4 border-black px-8 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
-          <td className='border-4 border-black px-8 sm:max-lg:px-6 hover:bg-red-500'
+          <td className='border-4 border-black pl-11 sm:max-lg:pl-7 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
+          <td className='border-4 border-black pl-9 sm:max-lg:pl-6 hover:bg-red-500'
               onClick={()=>deleteRow(index)}><FaTrash/></td>
               </tr>
             ))
@@ -226,10 +226,10 @@ const AllDataKitchen = () => {
       <tr className='text-center'>
 
           <td className='border-4 border-black'>-</td>
-          <td className='border-4 border-black'>
+          <td className='border-4 w-36 border-black'>
           <select
                  name='buyerName'
-                 className='w-24 bg-transparent'
+                 className='w-full bg-transparent'
                  value={formData.buyerName}
                  onChange={ e =>{
                    inputHandler(e) 
@@ -242,10 +242,10 @@ const AllDataKitchen = () => {
             }
             </select>
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 w-40 border-black'>
           <select
                  name='productName'
-                 className='w-24 bg-transparent'
+                 className='w-full bg-transparent'
                  value={formData.productName}
                  onChange={ e => inputHandler(e) }
             >
@@ -255,33 +255,33 @@ const AllDataKitchen = () => {
             }
             </select>
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 w-32 border-black'>
           <input type='number'
                  name='batchQuantity'
                  value={formData.batchQuantity}
-                 className='w-40 sm:max-lg:w-16 bg-transparent'
+                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 w-32 border-black'>
           <input type='number'
                  value={formData.yield}
                  name='yield'
-                 className='w-32 sm:max-lg:w-16 bg-transparent'
+                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
-          <td className='border-4 border-black'>
+          <td className='border-4 w-32 border-black'>
           <input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
-                 className='w-32 sm:max-lg:w-16 bg-transparent'
+                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
             ></input>
           </td>
-          <td className='border-4 border-black px-8 hover:bg-green-200'
+          <td className='border-4 border-black w-16 pl-11 sm:max-lg:pl-7 hover:bg-green-200'
               onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
-          <td className='border-4 border-black px-8 sm:max-lg:px-6'>-</td>
+          <td className='border-4 w-16 border-black pl-1'>-</td>
         
       </tr>
 
