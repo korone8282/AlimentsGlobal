@@ -125,7 +125,7 @@ error ? (
 <div className='flex justify-start'>
 
 {/* table 1 */}
-<div className='sm:max-lg:w-[25.7rem]'>
+<div className='sm:max-lg:w-[26.5rem]'>
 
 <div className={` text-6xl mx-40 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div>
 
@@ -270,7 +270,7 @@ loading ? (<Loader/>
     <td className='border-4 border-black font-bold max-w-28'>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
         </tr>
 
-    </tbody>) : (<div className='font-bold text-6xl mt-12'>No Entry Found</div>)
+    </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
   }
         </table>
   )
