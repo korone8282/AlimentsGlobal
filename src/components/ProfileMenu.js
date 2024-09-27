@@ -11,7 +11,7 @@ import { LOGOUT_API } from '../redux/Utils/constants';
 
 const ProfileMenu = () => {
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(0);
 
   const {userinfo} = useSelector(state => state.auth);
 
@@ -68,6 +68,7 @@ const ProfileMenu = () => {
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to={`/admin/Profile/${userinfo._id}`}
+                onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}
@@ -79,6 +80,7 @@ const ProfileMenu = () => {
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/BuyerList"
+                onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}
@@ -90,6 +92,7 @@ const ProfileMenu = () => {
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/ProductList"
+                onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}
@@ -101,6 +104,7 @@ const ProfileMenu = () => {
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Production"
+                onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}
@@ -112,6 +116,7 @@ const ProfileMenu = () => {
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Userlist"
+                onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({
                   color: isActive ? "white" : "#f59e0b",
                 })}

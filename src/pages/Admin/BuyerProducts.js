@@ -166,7 +166,6 @@ const BuyerProducts = () => {
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
-                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{ 
                     sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
                     sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name && ele === item.packSize).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0) +

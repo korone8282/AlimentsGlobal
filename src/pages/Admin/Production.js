@@ -82,7 +82,7 @@ const Production = () => {
         pouchSize:"",
         pouchGoal:"",
         pouchPacked:"",
-        day:"",
+        day:info.day,
         date:"",
       });
 

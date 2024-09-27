@@ -282,7 +282,7 @@ exports.ProductData = async(req,res) => {
 
                             if(!existData.length){
                              return res.status(404).json({
-                             message:"data doesn't exists",
+                             message:"Data Doesn't Exists",
                              })
                         }
  

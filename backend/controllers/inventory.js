@@ -30,7 +30,7 @@ exports.readInventory = async(req,res) => {
 exports.addInventory = async(req,res) => {
     try {
                                     
-        const{pDate,name,stock,rate,lDate} = req.body;
+        const{pDate,name,unit,stock,rate,equipment,lDate} = req.body;
 
         if(!name||!stock){
             return res.status(500).json({
@@ -49,9 +49,11 @@ exports.addInventory = async(req,res) => {
         const newItem = await Inventory.create({
             pDate,
             name,
+            unit,
             stock,
             rate,
             quant:stock,
+            equipment,
             lDate,
         })
                                                 
@@ -100,7 +102,7 @@ exports.deleteInventory = async(req,res) => {
 exports.updateInventory = async(req,res) => {
     try {
                                 
-        const{pDate,name,stock,rate,lDate} = req.body;
+        const{pDate,name,unit,stock,rate,equipment,lDate} = req.body;
         const {inventoryId} = req.params;
         
         const existItem = await Inventory.findOne({_id:inventoryId});
@@ -116,8 +118,10 @@ exports.updateInventory = async(req,res) => {
         }
         
         existItem.name = name || existItem.name;
+        existItem.unit= unit || existItem.unit;
         existItem.stock = stock || existItem.stock;
         existItem.rate = rate || existItem.rate;
+        existItem.equipment= equipment || existItem.equipment;
         existItem.pDate = pDate || existItem.pDate;
         existItem.lDate = lDate || existItem.lDate;
 

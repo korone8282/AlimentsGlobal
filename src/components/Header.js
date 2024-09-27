@@ -17,8 +17,8 @@ const Header = () => {
   return ( 
       <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between '>
 
-       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-8 sm:max-lg:text-lg sm:max-lg:mx-14'>
-        Aliments Global Foods
+       <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-10 sm:max-lg:text-lg sm:max-lg:mx-14'>
+        Aliments Global Private Limited
        </Link>
       
   

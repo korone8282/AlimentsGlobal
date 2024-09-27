@@ -57,8 +57,10 @@ async function handleDelete(){
           setInfo({
             pDate:"",
             name:"",
+            unit:"",
             stock:"",
             rate:"",
+            equipment:"",
             lDate:"",
         });
           setopenBox(0);
@@ -80,8 +82,10 @@ async function handleCreate(){
           setInfo({
             pDate:"",
             name:"",
+            unit:"",
             stock:"",
             rate:"",
+            equipment:"",
             lDate:"",
         });
           setopenBox(0);
@@ -104,8 +108,10 @@ const handleUpdate = async() =>{
           setInfo({
             pDate:"",
             name:"",
+            unit:"",
             stock:"",
             rate:"",
+            equipment:"",
             lDate:"",
         });
           setopenBox(0);
@@ -184,8 +190,10 @@ loading ? (<Loader/>
     <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Purchase Date</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Item Name</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Units</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Stock Count</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Rate / Part</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Equipment </th>
     <th rowSpan={2} className='border-4 border-black p-2'>Last Issued </th>
     <th rowSpan={2} className='border-4 border-black p-2'>Update</th>
   </tr>
@@ -199,15 +207,17 @@ loading ? (<Loader/>
     <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
     <td className='border-4 border-black font-bold '>{val.pDate?.substring(0,10)}</td>
     <td className='border-4 border-black font-bold '>{val.name}</td>
+    <td className='border-4 border-black font-bold '>{val.unit}</td>
     <td className='border-4 border-black font-bold '>{val.stock}</td>
     <td className='border-4 border-black font-bold '>{val.rate}</td>
+    <td className='border-4 border-black font-bold '>{val.equipment}</td>
     <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10)}</td>
     <td className='border-4 border-black font-bold hover:bg-slate-400' 
         onClick={()=>{
           setopenBox(!openBox)
           setItem(val)
         }}>
-        <LuClipboardEdit size={24} className='ml-[5rem] sm:max-lg:ml-[1.5rem]'/></td>
+        <LuClipboardEdit size={24} className='ml-[1.8rem] sm:max-lg:ml-[1.5rem]'/></td>
         </tr>
       ))
       }
@@ -228,7 +238,7 @@ loading ? (<Loader/>
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-1 font-semibold text-3xl sm:max-lg:text-lg  gap-12 mx-9'>
+              <section className='flex flex-col h-full w-full my-1 font-semibold text-3xl sm:max-lg:text-lg  gap-6 mx-9'>
               <div className='flex justify-between gap-16'>
 
 
@@ -259,6 +269,18 @@ loading ? (<Loader/>
          className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
                />
   </div>
+
+  <div className='flex justify-between'>
+<label htmlFor="confirPassword">
+     Unit : 
+  </label>
+  <input type='text'
+         id="texty" 
+         name = "unit"
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+               />
+</div>
   
   <div className='flex justify-between'>
   <label htmlFor="confirPassword" >
@@ -279,6 +301,18 @@ loading ? (<Loader/>
   <input type='number'
          id="confirmPassword" 
          name = "rate"
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+               />
+</div>
+
+<div className='flex justify-between'>
+<label htmlFor="confirPassword">
+     Equipment : 
+  </label>
+  <input type='text'
+         id="yoyo" 
+         name = "equipment"
          onChange={ e => inputHandler(e) }
          className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
                />

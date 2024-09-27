@@ -9,6 +9,9 @@ const inventorySchema = new mongoose.Schema({
         type: String,
         required : true,
     },
+    unit:{
+        type: String,
+    },
     stock:{
         type: Number,
         required : true,
@@ -18,6 +21,9 @@ const inventorySchema = new mongoose.Schema({
     },
     quant:{
         type: Number,
+    },
+    equipment:{
+        type: String,
     },
     lDate:{
         type: Date,

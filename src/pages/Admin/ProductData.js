@@ -193,7 +193,7 @@ loading ? (<Loader/>
 
 
 {/* table 2 */}
-<div className='border-l-8 border-dashed border-black p-2 w-[50rem] sm:max-lg:w-[32.5rem]'>
+<div className='border-l-8 border-dashed border-black p-2 w-screen sm:max-lg:w-[32.5rem] overflow-x-hidden'>
          
          <div className='text-center font-bold text-6xl mt-6 sm:max-lg:my-4 sm:max-lg:text-3xl'> {info.product} </div>
 
@@ -225,8 +225,7 @@ loading ? (<Loader/>
   loading2 ? (
     <Loader/>
   ) : (
-    <table className='mx-auto text-center bg-red-200 text-black my-12 sm:max-lg:w-fit text-xl font-bold'
-               onClick={()=>setData([])}>
+    <table className='mx-auto text-center bg-red-200 text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b]'>
     <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
