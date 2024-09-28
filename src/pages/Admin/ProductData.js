@@ -173,7 +173,7 @@ loading ? (<Loader/>
             onClick={(e)=>{
                 setInfo((prevData) => ({
                 ...prevData,
-                product: val.name
+                product: val
     }));
             }}>
     <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
@@ -195,7 +195,8 @@ loading ? (<Loader/>
 {/* table 2 */}
 <div className='border-l-8 border-dashed border-black p-2 w-screen sm:max-lg:w-[32.5rem] overflow-x-hidden'>
          
-         <div className='text-center font-bold text-6xl mt-6 sm:max-lg:my-4 sm:max-lg:text-3xl'> {info.product} </div>
+         <div className='text-center font-bold text-6xl mt-6 sm:max-lg:my-4 sm:max-lg:text-3xl'> {info.product.name}</div>
+         <div className='text-center font-bold text-2xl mt-3 sm:max-lg:my-4 sm:max-lg:text-xl'> ({info.product.buyer}) </div>
 
 <div className='flex justify-center items-center my-8 sm:max-lg:my-2 text-2xl font-bold gap-14 mx-4 sm:max-lg:mx-1 h-16 w-full sm:max-lg:gap-4 '>
         <div className='flex sm:max-lg:flex-col'>
@@ -243,30 +244,30 @@ loading ? (<Loader/>
         arr.map((val,index)=>(
         <tr key={index} className='text-center'>
     <td className='border-4 border-black font-bold p-0.5'>{val?.substring(5,10)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
     <td className='border-4 border-black font-bold max-w-28'>{ 
-      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
-      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
+      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+      data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
     }</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{ data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
         </tr>
       ))
       }
      
       <tr className='text-center bg-[#f59e0b]'>
     <td className='border-4 border-black font-bold p-0.5'>Total</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
     <td className='border-4 border-black font-bold max-w-28'>{ 
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
+      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
     }</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
+    <td className='border-4 border-black font-bold max-w-28'>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
         </tr>
 
     </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)

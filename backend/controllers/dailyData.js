@@ -277,7 +277,7 @@ exports.ProductData = async(req,res) => {
                             $gte:startDate,
                             $lte:endDate
                         },
-                        dataList:{ $elemMatch: { productName:product } }
+                       dataList:{ $elemMatch: { productName:product.name ,buyerName:product.buyer}},
                          });
 
                             if(!existData.length){
