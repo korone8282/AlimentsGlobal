@@ -16,7 +16,7 @@ const ProductionGoal = () => {
 
   setTimeout(()=>{
     window.location.reload();
-  },3600000);
+  },900000);
 
 
   const [openBox, setopenBox] = useState(0);

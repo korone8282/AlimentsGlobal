@@ -62,7 +62,8 @@ const ProfileMenu = () => {
         <>  
         {
             userinfo ? (
-         <section className="bg-black rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
+         <section className=" [ bg-gradient-to-b from-black to-gray-700 ]
+    [ shadow-black/70 shadow-2xl ] rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
           <ul className="list-none mt-2">
             <li>
               <NavLink
@@ -98,18 +99,6 @@ const ProfileMenu = () => {
                 })}
               >
                 Product
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/Production"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Production Plan
               </NavLink>
             </li>
             <li>
