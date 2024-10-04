@@ -1,5 +1,6 @@
 require("dotenv").config();
 const Inventory = require('../models/inventoryModel');
+const Report = require('../models/reportModel')
 
 exports.readInventory = async(req,res) => {
     try {
@@ -30,11 +31,11 @@ exports.readInventory = async(req,res) => {
 exports.addInventory = async(req,res) => {
     try {
                                     
-        const{pDate,name,unit,stock,rate,equipment,lDate} = req.body;
+        const{pDate,name,unit,stock,rate,equipment,section,lDate} = req.body;
 
         if(!name||!stock){
             return res.status(500).json({
-                message:"Fill Name And Stock",
+                message:"Fill rate,unit,equipment etc.",
             });
         }
     
@@ -54,6 +55,7 @@ exports.addInventory = async(req,res) => {
             rate,
             quant:stock,
             equipment,
+            section,
             lDate,
         })
                                                 
@@ -102,7 +104,7 @@ exports.deleteInventory = async(req,res) => {
 exports.updateInventory = async(req,res) => {
     try {
                                 
-        const{pDate,name,unit,stock,rate,equipment,lDate} = req.body;
+        const{pDate,name,unit,stock,rate,equipment,section,lDate} = req.body;
         const {inventoryId} = req.params;
         
         const existItem = await Inventory.findOne({_id:inventoryId});
@@ -113,8 +115,23 @@ exports.updateInventory = async(req,res) => {
             });
         }
 
-        if(existItem.stock<stock){
-            existItem.quant += stock-existItem.stock
+        if(stock && !section && !lDate){
+            return res.status(500).json({
+                  message:"Fill Section and Last Issue Date",
+              });
+          }
+ 
+        if(existItem.stock>stock){
+
+          await Report.create({
+                pDate: lDate,
+                name: existItem.name,
+                unit: existItem.unit,
+                count: existItem.stock-stock,
+                rate: existItem.rate,
+                equipment: equipment || existItem.equipment,
+                section: section || existItem.section,
+            })
         }
         
         existItem.name = name || existItem.name;
@@ -123,6 +140,7 @@ exports.updateInventory = async(req,res) => {
         existItem.rate = rate || existItem.rate;
         existItem.equipment= equipment || existItem.equipment;
         existItem.pDate = pDate || existItem.pDate;
+        existItem.section = section || existItem.section;
         existItem.lDate = lDate || existItem.lDate;
 
         const updatedItem = await existItem.save();
@@ -130,6 +148,42 @@ exports.updateInventory = async(req,res) => {
                 res.status(200).json({
                     success:true,
                     data:updatedItem,
+                })
+                                                    
+                    } catch (error) {
+                        console.log(error);
+                        res.status(400).json({
+                        message:error
+                                })
+                                    }
+                                            }
+
+
+exports.readReport = async(req,res) => {
+    try {                         
+                  
+        const {start,end} = req.body;
+                    
+        const startDate = new Date(start);
+        startDate.setHours(0, 0, 0, 0);
+        const endDate = new Date(end);
+        endDate.setHours(23, 59, 59, 999);
+
+        const existData = await Report.find({ 
+        pDate:{
+            $gte:startDate,
+            $lte:endDate
+        },});
+
+             if(!existData.length){
+               return res.status(404).json({
+              message:"Data doesn't exists",
+                    })
+                    }
+                                
+                res.status(200).json({
+                    success:true,
+                    data:existData,
                 })
                                                     
                     } catch (error) {

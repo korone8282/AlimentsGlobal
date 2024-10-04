@@ -271,13 +271,13 @@ exports.ProductData = async(req,res) => {
                         startDate.setHours(0, 0, 0, 0);
                         const endDate = new Date(end);
                         endDate.setHours(23, 59, 59, 999);
-                
+
                         const existData = await Data.find({
                         createdAt:{
                             $gte:startDate,
                             $lte:endDate
                         },
-                       dataList:{ $elemMatch: { productName:product.name ,buyerName:product.buyer}},
+                        dataList:{ $elemMatch: { productName:product.name ,buyerName:product.buyer}},
                          });
 
                             if(!existData.length){

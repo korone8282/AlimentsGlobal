@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { STORE_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { LuClipboardEdit } from "react-icons/lu";
 import { FiSearch } from "react-icons/fi";
 import {toast} from 'react-toastify';
@@ -21,8 +22,11 @@ const Inventory = () => {
     const [info, setInfo] = useState({
         pDate:"",
         name:"",
+        unit:"",
         stock:"",
         rate:"",
+        equipment:"",
+        section:"",
         lDate:"",
     });
 
@@ -55,13 +59,14 @@ async function handleDelete(){
       
           toast("deleted successfully");
           setInfo({
-            pDate:"",
-            name:"",
-            unit:"",
-            stock:"",
-            rate:"",
-            equipment:"",
-            lDate:"",
+        pDate:"",
+        name:"",
+        unit:"",
+        stock:"",
+        rate:"",
+        equipment:"",
+        section:"",
+        lDate:"",
         });
           setopenBox(0);
           setLoading(0);
@@ -80,13 +85,14 @@ async function handleCreate(){
       
           toast("created successfully");
           setInfo({
-            pDate:"",
-            name:"",
-            unit:"",
-            stock:"",
-            rate:"",
-            equipment:"",
-            lDate:"",
+        pDate:"",
+        name:"",
+        unit:"",
+        stock:"",
+        rate:"",
+        equipment:"",
+        section:"",
+        lDate:"",
         });
           setopenBox(0);
           setLoading(0);
@@ -106,21 +112,22 @@ const handleUpdate = async() =>{
       
           toast("updated successfully");
           setInfo({
-            pDate:"",
-            name:"",
-            unit:"",
-            stock:"",
-            rate:"",
-            equipment:"",
-            lDate:"",
+        pDate:"",
+        name:"",
+        unit:"",
+        stock:"",
+        rate:"",
+        equipment:"",
+        section:"",
+        lDate:"",
         });
           setopenBox(0);
           setLoading(0);
           window.location.reload();
       
         } catch (error) {
-          console.log(error);
           setLoading(0);
+          toast(error.response.data.message)
         }
       }
 
@@ -152,16 +159,20 @@ const inputHandler = async(e) =>{
   return (
     <div >
 
-<div className='flex justify-center items-center sm:max-lg:gap-16'>
+<div className='flex items-center justify-center gap-80 sm:max-lg:gap-36'>
 
-<div className='text-5xl font-bold text-center my-8 ml-[30rem] sm:max-lg:ml-[16rem]'>Inventory</div>
+<Link 
+      to="report"
+      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] text-center py-2.5 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Report</Link>
+
+<div className='text-5xl font-bold text-center my-8 '>Inventory</div>
 
 <button 
       onClick={()=>{
         setadd(!add)
         setopenBox(!openBox)
         }}
-      className='mt-4 h-10 text-[#f59e0b] bg-black border-[#f59e0b] ml-96 sm:max-lg:mx-10 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
+      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
 </div>
 
 {
@@ -169,7 +180,7 @@ error ? (<div className='text-center font-bold text-7xl mt-64 sm:max-lg:mt-4'>No
 ) : ( 
   <div>
 
-<div className='flex justify-center mr-20 sm:max-lg:mr-8'>
+<div className='flex justify-center'>
 <input type='text'
        onChange={(e)=>handleSearch(e.target.value)}
        className=' relative w-80 rounded-l-lg h-10 bg-slate-300 focus:outline-none p-4'
@@ -194,6 +205,7 @@ loading ? (<Loader/>
     <th rowSpan={2} className='border-4 border-black p-2'>Stock Count</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Rate / Part</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Equipment </th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Section </th>
     <th rowSpan={2} className='border-4 border-black p-2'>Last Issued </th>
     <th rowSpan={2} className='border-4 border-black p-2'>Update</th>
   </tr>
@@ -211,6 +223,7 @@ loading ? (<Loader/>
     <td className='border-4 border-black font-bold '>{val.stock}</td>
     <td className='border-4 border-black font-bold '>{val.rate}</td>
     <td className='border-4 border-black font-bold '>{val.equipment}</td>
+    <td className='border-4 border-black font-bold '>{val.section}</td>
     <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10)}</td>
     <td className='border-4 border-black font-bold hover:bg-slate-400' 
         onClick={()=>{
@@ -238,7 +251,7 @@ loading ? (<Loader/>
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-1 font-semibold text-3xl sm:max-lg:text-lg  gap-6 mx-9'>
+              <section className='flex flex-col h-full w-full my-4 font-semibold text-3xl sm:max-lg:text-lg  gap-4 mx-9'>
               <div className='flex justify-between gap-16'>
 
 
@@ -318,6 +331,18 @@ loading ? (<Loader/>
                />
 </div>
 
+<div className='flex justify-between'>
+<label htmlFor="confirPassword">
+     Section : 
+  </label>
+  <input type='text'
+         id="textyu" 
+         name = "section"
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+               />
+</div>
+
 <div className='flex justify-between sm:max-lg:items-center'>
 <label htmlFor="Datex">
       Issue Date
@@ -338,11 +363,14 @@ loading ? (<Loader/>
             setopenBox(!openBox)
             setadd(!add)
             setInfo({
-            pDate:"",
-            name:"",
-            stock:"",
-            rate:"",
-            lDate:"",
+        pDate:"",
+        name:"",
+        unit:"",
+        stock:"",
+        rate:"",
+        equipment:"",
+        section:"",
+        lDate:"",
         });
           }}> 
             Cancel
@@ -366,11 +394,14 @@ loading ? (<Loader/>
           onClick={()=>{
             setopenBox(!openBox)
             setInfo({
-            pDate:"",
-            name:"",
-            stock:"",
-            rate:"",
-            lDate:"",
+        pDate:"",
+        name:"",
+        unit:"",
+        stock:"",
+        rate:"",
+        equipment:"",
+        section:"",
+        lDate:"",
         });
             }}> 
             Cancel
