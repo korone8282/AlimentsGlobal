@@ -26,7 +26,6 @@ const inventorySchema = new mongoose.Schema({
     },
     equipment:{
         type: String,
-        required : true,
     },
     section:{
         type: String,

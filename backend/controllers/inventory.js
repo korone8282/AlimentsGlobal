@@ -115,7 +115,7 @@ exports.updateInventory = async(req,res) => {
             });
         }
 
-        if(stock && !section && !lDate){
+        if(stock && !section && !lDate && !equipment){
             return res.status(500).json({
                   message:"Fill Section and Last Issue Date",
               });
