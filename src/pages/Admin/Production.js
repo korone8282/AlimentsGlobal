@@ -21,7 +21,7 @@ const Production = () => {
         batchNum:"",
         pouchSize:"",
         pouchGoal:"",
-        pouchPacked:"",
+        pouchPacked:0,
         day:"",
         date:"",
     });
@@ -81,7 +81,7 @@ const Production = () => {
         batchNum:"",
         pouchSize:"",
         pouchGoal:"",
-        pouchPacked:"",
+        pouchPacked:0,
         day:info.day,
         date:"",
       });
@@ -103,8 +103,8 @@ const Production = () => {
     {
       loading ? (<Loader/> 
       ) : (
-        <div className="flex justify-center my-5 mx-auto h-[44rem] sm:max-lg:h-fit sm:max-lg:w-[50rem] bg-black text-[#f59e0b] w-[70rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl gap-12 mx-9 sm:max-lg:text-xl'>
+        <div className="flex justify-center my-5 mx-auto h-[37.5rem] sm:max-lg:h-fit sm:max-lg:w-[45rem] sm:max-lg:my-2 bg-black text-[#f59e0b] w-[60rem] rounded-lg">
+              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl gap-12 mx-9 sm:max-lg:text-xl sm:max-lg:gap-9'>
 
         <div className='flex justify-between sm:max-lg:items-center gap-12'>
 
@@ -184,19 +184,6 @@ const Production = () => {
                  className='bg-transparent border-2 border-[#f59e0b] p-1'
                        />
           </div>
-          
-        <div className='flex justify-between'>
-        <label htmlFor="confirPassword">
-             Pouch Packed : 
-          </label>
-          <input type='number'
-                 id="confirmPassword" 
-                 name = "pouchPacked"
-                 value={info.pouchPacked} 
-                 onChange={ e => inputHandler(e) }
-                 className='bg-transparent border-2 border-[#f59e0b] p-1'
-                       />
-        </div>
 
         <div className='flex justify-between'>
 
@@ -238,7 +225,7 @@ const Production = () => {
 
           <button 
            onClick={handleCreate}
-                   className=' text-[#f59e0b] bg-black border-[#f59e0b] h-14 my-2 border-2 w-48 mx-auto rounded-md hover:scale-105 text-xl font-semibold'
+                   className=' text-[#f59e0b] bg-black border-[#f59e0b] h-14 border-2 w-48 mx-auto rounded-md hover:scale-105 text-xl font-semibold'
                    >
              Submit
           </button>

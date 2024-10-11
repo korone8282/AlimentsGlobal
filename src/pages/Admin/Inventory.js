@@ -18,6 +18,8 @@ const Inventory = () => {
     const [error, setError] = useState(0);
     const [item, setItem] = useState();
     const [add, setadd] = useState(0);
+    
+    const arr = ["Preparation","Kitchen","Filling","Retort","Dispatch","Utility"];
 
     const [info, setInfo] = useState({
         pDate:"",
@@ -335,12 +337,16 @@ loading ? (<Loader/>
 <label htmlFor="confirPassword">
      Section : 
   </label>
-  <input type='text'
-         id="textyu" 
-         name = "section"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
+  <select
+                 name='section'
+                 className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
+                 onChange={ e => inputHandler(e) }
+            >
+            <option className=' bg-[#f59e0b] text-black font-semibold'>Select Section</option>
+            {
+                arr.map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val} key={index}>{val}</option>))
+            }
+            </select>
 </div>
 
 <div className='flex justify-between sm:max-lg:items-center'>

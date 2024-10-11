@@ -9,12 +9,11 @@ try {
     batchNum,
     pouchSize,
     pouchGoal,
-    pouchPacked,
     day,
     date,
 } = req.body;
 
-if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date||!day){
+if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!date||!day){
     return res.status(500).json({
         message:"Fill All Blanks",
     });
@@ -28,7 +27,7 @@ if(!buyerName||!fname||!batchNum||!pouchSize||!pouchGoal||!pouchPacked||!date||!
         batchNum,
         pouchSize,
         pouchGoal,
-        pouchPacked,
+        pouchPacked : 0,
         day,
         createdAt:newDate
     });

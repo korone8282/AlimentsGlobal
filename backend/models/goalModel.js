@@ -23,7 +23,7 @@ const goalSchema = new mongoose.Schema({
         },
         pouchPacked:{
             type: Number,
-            required:true,
+            default:0,
         },
         day:{ 
             type: String,

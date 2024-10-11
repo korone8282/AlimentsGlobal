@@ -58,7 +58,7 @@ const inputHandler = async(e) =>{
     const res = await apiConnector(`${GOAL_URL}/${info.date}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
     setGoals(res.data.data);
     setLoading(0);
-
+    
       } catch (error) {
         setError(1);
         console.log(error);
@@ -176,6 +176,7 @@ const inputHandler = async(e) =>{
                                                                               onChange={e =>{ 
                                                                                 inputHandler(e);
                                                                                 dispatch(setGoalDate(e.target.value));
+                                                                                window.location.reload();
                                                                               }}></input> </h2>
     {
       error ? (<div className='text-center font-bold text-7xl my-auto sm:max-lg:mt-4'>No Plans Found</div>
@@ -242,11 +243,11 @@ const inputHandler = async(e) =>{
      
           {
             openBox ? (
-      <div className="fixed top-[5%] sm:max-lg:absolute z-10 flex my-5 left-[18%] sm:max-lg:left-6 sm:max-lg:top-20 h-[45rem] backdrop-blur-xl
+      <div className="fixed top-[2%] sm:max-lg:fixed z-10 flex my-5 left-[18%] sm:max-lg:left-16 sm:max-lg:-top-4 h-[45rem] backdrop-blur-xl
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl sm:max-lg:text-lg  gap-12 mx-9'>
+    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] sm:max-lg:h-[26.5rem] rounded-lg">
+              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl sm:max-lg:text-lg gap-12 mx-9 sm:max-lg:gap-[1.2rem] sm:max-lg:my-2'>
               <div className='flex justify-between gap-16'>
 
 <div className='flex gap-6 items-center'>
@@ -255,7 +256,7 @@ const inputHandler = async(e) =>{
 </label>
 <select
          name='buyerName'
-         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
+         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 sm:max-lg:h-14 text-center rounded-xl bg-[#f59e0b]'
          value={info.buyerName}
          onChange={ e => inputHandler(e) }
     >
@@ -272,7 +273,7 @@ const inputHandler = async(e) =>{
 </label>
 <select
          name='fname'
-         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
+         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 sm:max-lg:h-14 text-center rounded-xl bg-[#f59e0b]'
          value={info.fname}
          onChange={ e => inputHandler(e) }
     >
@@ -381,8 +382,8 @@ const inputHandler = async(e) =>{
 
 </div>
 
-        <div className="flex justify-between gap-4 text-3xl py-2">
-          <button className="px-5 py-2.5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
+        <div className="flex justify-between gap-4 text-3xl sm:max-lg:text-2xl py-2 sm:max-lg:py-0">
+          <button className="px-5 p-2 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
           onClick={()=>setopenBox(!openBox)}> 
             Cancel
           </button>
