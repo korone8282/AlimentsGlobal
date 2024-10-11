@@ -246,8 +246,8 @@ const inputHandler = async(e) =>{
       <div className="fixed top-[2%] sm:max-lg:fixed z-10 flex my-5 left-[18%] sm:max-lg:left-16 sm:max-lg:-top-4 h-[45rem] backdrop-blur-xl
     [ bg-gradient-to-b from-white/65 to-white/45 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] sm:max-lg:h-[26.5rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl sm:max-lg:text-lg gap-12 mx-9 sm:max-lg:gap-[1.2rem] sm:max-lg:my-2'>
+    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
+              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl sm:max-lg:text-lg gap-12 mx-9 sm:max-lg:gap-[0.9rem] sm:max-lg:my-2'>
               <div className='flex justify-between gap-16'>
 
 <div className='flex gap-6 items-center'>
