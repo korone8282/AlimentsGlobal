@@ -124,10 +124,11 @@ Production Goal
  Day Vs Night 
 </Link>
 
-<Link to="/admin/Daily-List" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
+<Link to="/admin/Left" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] hover:text-black w-[90%] rounded-lg mx-auto'> 
-Kitchen Vs Filling  
+
+Incubation  
 </Link>
 
 <Link to="/admin/ProductData" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]

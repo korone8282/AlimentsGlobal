@@ -3,6 +3,7 @@ import Loader from '../../components/Loader';
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { DATA_URL } from '../../redux/Utils/constants';
+import { Link } from 'react-router-dom';
 
 const DvN = () => {
 
@@ -46,6 +47,10 @@ const DvN = () => {
     <div>
       
       <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
+
+      <Link to='/admin/Daily-List' className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
+             >Wastage</Link>
+    
         <div>
         <label>Start: </label>
             <input type='date'

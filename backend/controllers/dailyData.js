@@ -158,7 +158,7 @@ exports.readBuyerData = async(req,res) => {
 
 exports.readMonthlyData = async(req,res) => {
             try {
-                
+
                 const days = [31,29,31,30,31,30,31,31,30,31,30,31];
 
                 const {month} = req.params;
@@ -195,7 +195,7 @@ exports.readMonthlyData = async(req,res) => {
 
 exports.readDvN = async(req,res) => {
                     try {
-                
+
                         const {start,end} = req.body;
                   
                         const startDate = new Date(start);
@@ -229,7 +229,7 @@ exports.readDvN = async(req,res) => {
 
 exports.readKvF = async(req,res) => {
                             try {
-                        
+
                                 const {datey} = req.body;
 
                                 const startDate = new Date(datey);
@@ -266,7 +266,7 @@ exports.ProductData = async(req,res) => {
                     try {
 
                         const {start,end,product} = req.body;
-                    
+
                         const startDate = new Date(start);
                         startDate.setHours(0, 0, 0, 0);
                         const endDate = new Date(end);
@@ -298,6 +298,65 @@ exports.ProductData = async(req,res) => {
                         })
                                 }
                          }
+                                  
+                         
+exports.readLeft = async(req,res) => {
+                            try {
+                                const startDate = new Date("2024-10-01");
+
+                                startDate.setHours(0, 0, 0, 0);
+
+                                const existData = await Data.find({createdAt:{ $gte:startDate }}).sort({"createdAt": 1});
+
+                                    if(!existData.length){
+                                     return res.status(404).json({
+                                     message:"data doesn't exists",
+                                     })
+                                }
                                     
-                
+                                 res.status(200).json({
+                                    success:true,
+                                    data:existData,
+                                })
+                                        
+                                } catch (error) {
+                                    console.log(error);
+                                    res.status(400).json({
+                                     message:error
+                                })
+                                        }
+                                 }
+
+exports.updateData = async(req,res)=>{
+    try {
+
+        const {filling,dispatch,index} = req.body;
+        const data = await Data.findById(req.params.id);
+
+        if(!data){
+            return res.status(404).json({
+                success:false,
+                data:"no data exists",
+            }); 
+        }
+
+        data.dataList[index].pouchQuantity = filling ||  data.dataList[index].pouchQuantity;
+        data.dataList[index].retortCycle = dispatch ||  data.dataList[index].retortCycle;
+        
+        const updatedData = await data.save();
+
+        res.status(200).json({
+            success:true,
+            data:updatedData
+,            message:"data successfully updated",
+        })
+
+    } catch (error) {
+    console.log(error);
+        res.status(500).json({
+            success:false,
+            data:error,
+    });
+    }
+}                
         

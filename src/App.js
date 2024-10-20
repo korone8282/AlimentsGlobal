@@ -28,6 +28,7 @@ import KvF from './pages/Admin/KvF'
 import Inventory from './pages/Admin/Inventory'
 import ProductData from './pages/Admin/ProductData'
 import Report from './pages/Admin/Report'
+import Left from './pages/Admin/Left'
 
 const App = () => {
   
@@ -45,6 +46,7 @@ const App = () => {
      <Route path='Inventory/Report' element={<Report/>} />
      <Route path='Profile/:id' element={<Profile/>} />
      <Route path='ProductData' element={<ProductData/>} />
+     <Route path='Left' element={<Left/>} />
      <Route path='Inventory' element={<Inventory/>} />
      <Route path='updateProfile/:id' element={<UpdateProfile/>} />
      <Route path='Monthly-Data' element={<Monthly/>} />
