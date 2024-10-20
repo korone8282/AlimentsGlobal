@@ -166,7 +166,7 @@ error ? (
 
 {
   loading2 ? (
-    <div className='mt-[30rem] sm:max-lg:mt-[15rem]'> <Loader/> </div>
+    <div className='absolute top-[20rem] left-[50rem] sm:max-lg:left-[25rem] sm:max-lg:top-[10rem]'> <Loader/> </div>
   ) : (
     <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
