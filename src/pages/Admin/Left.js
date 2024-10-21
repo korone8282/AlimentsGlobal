@@ -126,9 +126,9 @@ error ? (
 ) : ( 
   <div>
 
-<div className='flex items-center justify-center'>
+<div className='flex items-center justify-center mx-4'>
 
-<div className='flex gap-20'>
+<div className='flex gap-20 sm:max-lg:gap-8'>
 <div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
     onClick={()=>setopenBox(!openBox)}>
     <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
@@ -143,7 +143,7 @@ error ? (
 </div>
 </div>
 
-<div className={` text-6xl mx-40 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div> 
+<div className={` text-6xl mx-40 sm:max-lg:mx-8 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div> 
 
 <Link 
       to="Dispatch-Report"
@@ -170,15 +170,15 @@ error ? (
     <div>
       {
         !obj && !item ? (
-          <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+          <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b]'>
     <th rowSpan={2} className='border-4 border-black'>Date</th>
-    <td rowSpan={2} className='border-4 border-black'>Shift</td>
+    <td rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Shift</td>
     <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
     <th rowSpan={2} className='border-4 border-black'>Product Name</th>
     <th rowSpan={2} className='border-4 border-black'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Pack Size</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch (Retort)</th>
     <th rowSpan={2} className='border-4 border-black'>Incubation (In)</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch Packed</th>
@@ -204,11 +204,11 @@ error ? (
                     }));
             setopenBox2(!openBox2)}}>
           <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
-          <td className='border-4 border-black font-bold'>{val.dayTime}</td>
+          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
+          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{ele.packSize }</td>
           <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
           <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
           <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
@@ -221,7 +221,9 @@ error ? (
       }
      
       <tr className='text-center bg-[#f59e0b]'>  
-      <td colSpan={6} className='border-4 border-black font-bold'>Total</td>
+      <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
+      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
+      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
       <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
       <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
       <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
@@ -234,15 +236,15 @@ error ? (
   }
         </table>
         ) : (
-          <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+          <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b]'>
     <th rowSpan={2} className='border-4 border-black'>Date</th>
-    <td rowSpan={2} className='border-4 border-black'>Shift</td>
+    <td rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Shift</td>
     <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
     <th rowSpan={2} className='border-4 border-black'>Product Name</th>
     <th rowSpan={2} className='border-4 border-black'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Pack Size</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch (Retort)</th>
     <th rowSpan={2} className='border-4 border-black'>Incubation (In)</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch Packed</th>
@@ -268,11 +270,11 @@ error ? (
                     }));
             setopenBox2(!openBox2)}}>
           <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
-          <td className='border-4 border-black font-bold'>{val.dayTime}</td>
+          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
+          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{ele.packSize }</td>
           <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
           <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
           <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
@@ -285,13 +287,15 @@ error ? (
       }
      
       <tr className='text-center bg-[#f59e0b]'>  
-      <td colSpan={6} className='border-4 border-black font-bold'>Total</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
-      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.yieldLoss || 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchPerCycle,0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.yieldLoss,0),0)).toFixed(2) }</td>
+      <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
+      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
+      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.yieldLoss || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.yieldLoss,0),0)).toFixed(2) }</td>
         </tr>
 
     </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
@@ -309,7 +313,7 @@ error ? (
 
 
 {
-    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[12rem] max-w-60 top-[5rem] rounded-lg border-black border-2 p-2`}>
+    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[6.9rem] sm:max-lg:top-[3rem] left-[12rem] max-w-60 top-[5rem] rounded-lg border-black border-2 p-2`}>
         {
           categories.map((val,ind)=>(
                 <div className={`flex items-center ${val === obj ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
@@ -319,6 +323,7 @@ error ? (
                         let p = products.filter(item => item.buyer === val.name)
                             setproducts2(p)
                             setobj(val.name)
+                            setitem("")
                             setopenBox(0)}}>
                     ⦿ {val.name}
                 </div>
@@ -333,7 +338,7 @@ error ? (
             openBox2 ? (
       <div className="space-y-3 fixed top-[18rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[12rem] sm:max-lg:top-[12rem]">
+    [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[13.5rem] sm:max-lg:top-[2.5rem]">
        
       <div className='flex justify-between gap-3'>
   <label htmlFor="confirPassword" className='font-bold text-xl'>
@@ -419,7 +424,7 @@ error ? (
 }
 
 {
-    openBox3 ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[31rem] max-w-60 top-[5.2rem] rounded-lg border-black border-2 p-2`}>
+    openBox3 ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[17.9rem] sm:max-lg:top-[2.9rem] left-[26.5rem] max-w-60 top-[5.2rem] rounded-lg border-black border-2 p-2`}>
         {
           products2.map((val,ind)=>(
                 <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
@@ -427,7 +432,7 @@ error ? (
                      name='product'
                      onClick={()=>{
                             setitem(val.name)
-                            setopenBox(0)}}>
+                            setopenBox3(0)}}>
                     ⦿ {val.name}
                 </div>
            

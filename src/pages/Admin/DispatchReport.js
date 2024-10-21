@@ -17,7 +17,7 @@ const DispatchReport = () => {
     const [categories, setcategories] = useState([]); 
     const [item, setitem] = useState();
     const [obj, setobj] = useState();
-    console.log(obj,item)
+
     const {userinfo} = useSelector(state=>state.auth);
 
     useEffect(() => {
@@ -96,10 +96,10 @@ async function getReport(){
 
   return (
     
-    <div className='flex gap-10'>
+    <div className='flex gap-6 sm:max-lg:gap-0'>
 
-    <div className='bg-[#f59e0b] h-screen w-52 flex justify-start flex-col font-bold text-lg'>
-        <div className='text-center text-2xl bg-[#000000] text-white p-1 border-solid border-[#f59e0b] border-t-4   '> Buyer</div>
+    <div className='bg-[#f59e0b] h-full w-52 sm:max-lg:text-sm sm:max-lg:w-40 flex justify-start flex-col font-bold text-lg  rounded-b-lg sm:max-lg:mb-3'>
+        <div className='text-center text-2xl bg-[#000000] text-white p-1 border-solid border-[#f59e0b] border-t-4  sm:max-lg:text-lg '> Buyer</div>
         <div> {
             categories.map((val,ind)=>(
                 <div className={`flex items-center ${val === obj ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
@@ -108,6 +108,7 @@ async function getReport(){
                      onClick={()=>{
                         let p = products.filter(item => item.buyer === val.name)
                             setproducts2(p)
+                            setitem("")
                             setobj(val.name)}}>
                     ⦿ {val.name}
                 </div>
@@ -117,8 +118,8 @@ async function getReport(){
         </div>
     </div>
 
-    <div className='mx-3'>
-    <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
+    <div >
+    <div className='flex justify-center my-8 text-2xl mx-2 font-bold gap-24 sm:max-lg:gap-4 sm:max-lg:mx-2'>
 
     <div className='flex select-none relative justify-center items-center text-xl cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
     onClick={()=>setopenBox(!openBox)}>
@@ -126,10 +127,11 @@ async function getReport(){
     <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
          </div>
 
-        <div>
-        <label>Start: </label>
+        <div >
+        <label >Start: </label>
             <input type='date'
                    name='start'
+                   className='sm:max-lg:max-w-48'
                    onChange={ e => inputHandler(e) }
             />
         </div>
@@ -137,6 +139,7 @@ async function getReport(){
         <label>End: </label>
             <input type='date'
                    name='end'
+                  className='sm:max-lg:max-w-48'
                    onChange={ e => inputHandler(e) }
             />
         </div>
@@ -198,7 +201,7 @@ loading ? (<Loader/>
 </table>
 </div>
     ) : (
-      <div className='sm:max-lg:mx-3'>
+      <div>
 <table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit'>
 <thead>
   <tr>
@@ -249,10 +252,10 @@ loading ? (<Loader/>
 }
 
 {
-    openBox && obj ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[24rem] max-w-60 top-[9rem] rounded-lg border-black border-2 p-2`}>
+    openBox && obj ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:top-[7.9rem] sm:max-lg:left-[9.9rem] left-[24rem] max-w-60 top-[9rem] rounded-lg border-black border-2 p-2`}>
         {
             products2.map((val,ind)=>(
-                <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
+                <div className='flex items-center  sm:max-lg:text-sm hover:bg-black hover:text-white rounded-md p-1'
                      key={ind}
                      name='product'
                      onClick={()=>{
