@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
-import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL } from '../../redux/Utils/constants';
-import { FiSearch } from "react-icons/fi";
+import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL ,DISPATCH_URL } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
+import { Link } from 'react-router-dom';
 import { TbFilterCog } from "react-icons/tb";
 import { CiWifiOff } from "react-icons/ci";
 import {toast} from 'react-toastify';
@@ -13,18 +13,24 @@ const Left = () => {
     const [data, setData] = useState([]);
     const [openBox2, setopenBox2] = useState(0);
     const [loading2, setLoading2] = useState(0);
+    const [products2, setproducts2] = useState([]);
+    const [item, setitem] = useState();
+    const [obj, setobj] = useState();
     const [error, setError] = useState(0);
     const [products, setproducts] = useState([]);
-    const [ogData, setogData] = useState([]);
-    const [dummy, setdummy] = useState();
     const [openBox, setopenBox] = useState(0);
     const [categories, setcategories] = useState([]); 
+    const [openBox3, setopenBox3] = useState();
     const [info, setInfo] = useState({
-       filling:"",
-       dispatch:"",
-       index:"",
-       product:"",
-       id:""
+      filling:"",
+      dispatch:"",
+      index:"",
+      product:"",
+      id:"",
+      packed:"",
+      box:"",
+      issue:"",
+      count:""
     });
 
     const {userinfo} = useSelector(state=>state.auth);
@@ -36,8 +42,6 @@ const Left = () => {
       
           const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
           setproducts(res.data.data);
-          setogData(res.data.data);
-          setdummy(res.data.data);
       
             } catch (error) {
               console.log(error);
@@ -80,24 +84,6 @@ const Left = () => {
 
       }, [userinfo.token]);
 
-  function handleSearch(val) {
-
-       if (val === ""){ 
-         setproducts(dummy)
-         return
-         }
-
-        let filterBySearch = ogData.filter((item) => {
-            if (item.name.toLowerCase().startsWith(val.toLowerCase())){ 
-              return item
-             } else {
-              return null 
-             }
-        })
-        setogData(dummy)
-        setproducts(filterBySearch); 
-      }
-
 const inputHandler = async(e) =>{
     setInfo((prevData) => ({
       ...prevData,
@@ -108,14 +94,18 @@ const inputHandler = async(e) =>{
 async function handleUpdate(){
   try {
 
-    await apiConnector(`${DATA_URL}/Update/${info.id}`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DISPATCH_URL}/Update/${info.id}`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
     setopenBox2(!openBox2);
     setInfo({
-       filling:"",
-       dispatch:"",
-       index:"",
-       product:"",
-       id:""
+      filling:"",
+      dispatch:"",
+      index:"",
+      product:"",
+      id:"",
+      packed:"",
+      box:"",
+      issue:"",
+      count:""
     })
     toast("Successfully Updated");
     window.location.reload();
@@ -138,25 +128,34 @@ error ? (
 
 <div className='flex items-center justify-center'>
 
+<div className='flex gap-20'>
 <div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-    onClick={()=>{
-        setopenBox(!openBox)
-        setproducts(dummy)}}>
+    onClick={()=>setopenBox(!openBox)}>
     <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
     <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
 </div>
 
-<div className={` text-6xl mx-40 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div>
 
-<div className='flex justify-center sm:max-lg:mr-18 cursor-pointer'>
-<input type='text'
-       onChange={(e)=>handleSearch(e.target.value)}
-       className=' relative w-80 sm:max-lg:w-52 rounded-l-lg h-10 bg-[#f59e0b] font-bold text-2xl focus:outline-none p-4'
-/>
-<i className='mr-2 bg-[#000000] h-10 w-11 rounded-r-lg'>
-<FiSearch className='mt-1.5 ml-2 text-white' size={26}/>
-</i>
-</div> 
+<div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
+    onClick={()=>setopenBox3(!openBox3)}>
+    <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
+    <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
+</div>
+</div>
+
+<div className={` text-6xl mx-40 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div> 
+
+<Link 
+      to="Dispatch-Report"
+      className='mt-4 mx-12 h-14 text-[#f59e0b] bg-black border-[#f59e0b] text-center py-2.5 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Dispatch
+
+      </Link>
+
+<Link 
+      to="Packed-Report"
+      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] text-center py-2.5 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Packed
+        
+      </Link>
 
 </div>
 {/* end div */}
@@ -168,18 +167,24 @@ error ? (
   loading2 ? (
     <div className='absolute top-[20rem] left-[50rem] sm:max-lg:left-[25rem] sm:max-lg:top-[10rem]'> <Loader/> </div>
   ) : (
-    <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+    <div>
+      {
+        !obj && !item ? (
+          <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
-    <td className='border-4 border-black font-bold'>Shift</td>
-    <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Filled</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Difference</th>
+    <th rowSpan={2} className='border-4 border-black'>Date</th>
+    <td rowSpan={2} className='border-4 border-black'>Shift</td>
+    <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
+    <th rowSpan={2} className='border-4 border-black'>Product Name</th>
+    <th rowSpan={2} className='border-4 border-black'>Batch Code</th>
+    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch (Retort)</th>
+    <th rowSpan={2} className='border-4 border-black'>Incubation (In)</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch Packed</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
+    <th rowSpan={2} className='border-4 border-black'>Box</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Stock</th>
   </tr>
 </thead>
 
@@ -188,7 +193,16 @@ error ? (
       {
         data.filter( obj => obj.sectionMain === "Filling").map(val=>(
         val.dataList.filter( object => object.retortCycle !== object.pouchQuantity ).map((ele,i)=>(
-          <tr key={i}>
+          <tr key={i}
+              className='hover:bg-slate-300'
+              onClick = {()=>{
+              setInfo((prevData) => ({
+                     ...prevData,
+                     index:i,
+                     id: val._id,
+                     count:ele.pouchQuantity
+                    }));
+            setopenBox2(!openBox2)}}>
           <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
           <td className='border-4 border-black font-bold'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
@@ -196,15 +210,11 @@ error ? (
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
           <td className='border-4 border-black font-bold'>{ele.packSize }</td>
           <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
-          <td onClick = {()=>{
-             setInfo((prevData) => ({
-                     ...prevData,
-                     index:i,
-                     id: val._id
-                    }));
-            setopenBox2(!openBox2)}}
-              className='border-4 border-black font-bold hover:bg-slate-300'>{ele.retortCycle}</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchQuantity - ele.retortCycle}</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
+          <td className='border-4 border-black font-bold'>{ele.yieldLoss }</td>
+          <td className='border-4 border-black font-bold'>{ele.retortCycle}</td>
+          <td className='border-4 border-black font-bold'>{(ele.pouchPerCycle ? ele.pouchPerCycle : 0) - (ele.yieldLoss ? ele.yieldLoss : 0)}</td>
           </tr>
         ))
       ))
@@ -213,13 +223,83 @@ error ? (
       <tr className='text-center bg-[#f59e0b]'>  
       <td colSpan={6} className='border-4 border-black font-bold'>Total</td>
       <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.retortCycle,0),0)}</td>
-      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.retortCycle,0),0)).toFixed(2) }</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.yieldLoss || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.pouchPerCycle,0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.yieldLoss,0),0)).toFixed(2) }</td>
         </tr>
 
     </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
   }
         </table>
+        ) : (
+          <table className='sm:max-lg:mx-12 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
+<thead>
+  <tr className='bg-[#f59e0b]'>
+    <th rowSpan={2} className='border-4 border-black'>Date</th>
+    <td rowSpan={2} className='border-4 border-black'>Shift</td>
+    <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
+    <th rowSpan={2} className='border-4 border-black'>Product Name</th>
+    <th rowSpan={2} className='border-4 border-black'>Batch Code</th>
+    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch (Retort)</th>
+    <th rowSpan={2} className='border-4 border-black'>Incubation (In)</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch Packed</th>
+    <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
+    <th rowSpan={2} className='border-4 border-black'>Box</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Stock</th>
+  </tr>
+</thead>
+
+{   
+  data.length ? (<tbody>
+      {
+        data.filter( obj => obj.sectionMain === "Filling").map(val=>(
+        val.dataList.filter( object => object.retortCycle !== object.pouchQuantity && item ? (object.productName === item) : (object.buyerName === obj) ).map((ele,i)=>(
+          <tr key={i}
+              className='hover:bg-slate-300'
+              onClick = {()=>{
+              setInfo((prevData) => ({
+                     ...prevData,
+                     index:i,
+                     id: val._id,
+                     count:ele.pouchQuantity
+                    }));
+            setopenBox2(!openBox2)}}>
+          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
+          <td className='border-4 border-black font-bold'>{val.dayTime}</td>
+          <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
+          <td className='border-4 border-black font-bold'>{ele.productName}</td>
+          <td className='border-4 border-black font-bold'>{ele.batch}</td>
+          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
+          <td className='border-4 border-black font-bold'>{ele.yieldLoss }</td>
+          <td className='border-4 border-black font-bold'>{ele.retortCycle}</td>
+          <td className='border-4 border-black font-bold'>{(ele.pouchPerCycle ? ele.pouchPerCycle : 0) - (ele.yieldLoss ? ele.yieldLoss : 0)}</td>
+          </tr>
+        ))
+      ))
+      }
+     
+      <tr className='text-center bg-[#f59e0b]'>  
+      <td colSpan={6} className='border-4 border-black font-bold'>Total</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.yieldLoss || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchPerCycle,0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.yieldLoss,0),0)).toFixed(2) }</td>
+        </tr>
+
+    </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
+  }
+        </table>
+        )
+      }
+    </div>
   )
 }
         
@@ -229,16 +309,17 @@ error ? (
 
 
 {
-    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[23rem] max-w-60 top-[4.8rem] rounded-lg border-black border-2 p-2`}>
+    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[12rem] max-w-60 top-[5rem] rounded-lg border-black border-2 p-2`}>
         {
-            categories.map((val,ind)=>(
-                <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
+          categories.map((val,ind)=>(
+                <div className={`flex items-center ${val === obj ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
                      key={ind}
-                     name='product'
-                     onClick={(e)=>{
-                            let p = products.filter(item => item.buyer === val.name)
-                            setproducts(p)
-                            setopenBox(!openBox)}}>
+                     name='obj'
+                     onClick={()=>{
+                        let p = products.filter(item => item.buyer === val.name)
+                            setproducts2(p)
+                            setobj(val.name)
+                            setopenBox(0)}}>
                     ⦿ {val.name}
                 </div>
            
@@ -250,7 +331,7 @@ error ? (
 
 {
             openBox2 ? (
-      <div className="space-y-3 fixed top-[20rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
+      <div className="space-y-3 fixed top-[18rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[12rem] sm:max-lg:top-[12rem]">
        
@@ -261,6 +342,7 @@ error ? (
   <input type='number'
          id="confirmPassword" 
          name = "filling"
+         placeholder={info.count}
          onChange={ e => inputHandler(e) }
          className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
                />
@@ -277,6 +359,43 @@ error ? (
          className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
                />
 </div>
+
+<div className='flex justify-between gap-3'>
+<label htmlFor="confirPassword" className='font-bold text-xl'>
+     Packed Count : 
+  </label>
+  <input type='number'
+         id="confirmPassword" 
+         name = "packed"
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+               />
+</div>
+
+<div className='flex justify-between gap-3'>
+<label htmlFor="confirPassword" className='font-bold text-xl'>
+    Box : 
+  </label>
+  <input type='number'
+         id="confirmPassword" 
+         name = "box"
+         onChange={ e => inputHandler(e) }
+         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+               />
+</div>
+
+<div className='flex justify-between sm:max-lg:items-center'>
+<label htmlFor="Datex" className='font-bold text-xl'>
+      Issue Date
+</label>
+<input type='date' 
+       id="Datex" 
+       name="issue" 
+       onChange={ e => inputHandler(e) }
+       className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
+       />
+</div>
+
 
         <div className="flex justify-center gap-24">
           <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
@@ -297,7 +416,26 @@ error ? (
             ) : (
               null
             )
-          }
+}
+
+{
+    openBox3 ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[7.9rem] left-[31rem] max-w-60 top-[5.2rem] rounded-lg border-black border-2 p-2`}>
+        {
+          products2.map((val,ind)=>(
+                <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
+                     key={ind}
+                     name='product'
+                     onClick={()=>{
+                            setitem(val.name)
+                            setopenBox(0)}}>
+                    ⦿ {val.name}
+                </div>
+           
+            ))
+        }
+    </div>
+    ) : null
+}
 
 </div>
 )

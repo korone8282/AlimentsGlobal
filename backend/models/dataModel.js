@@ -40,18 +40,22 @@ const dataSchema = new mongoose.Schema({
         },
         yield:{
             type: Number,
+            default:0,
         },
         yieldLoss:{
             type: Number,
+            default:0,
         },
         workersQuantity:{
             type: Number,
         },
         retortCycle:{
             type: Number,
+            default:0,
         },
         pouchPerCycle:{
             type: Number,
+            default:0,
         },
         empty:{
             type: Number,

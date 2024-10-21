@@ -29,6 +29,8 @@ import Inventory from './pages/Admin/Inventory'
 import ProductData from './pages/Admin/ProductData'
 import Report from './pages/Admin/Report'
 import Left from './pages/Admin/Left'
+import DispatchReport from './pages/Admin/DispatchReport'
+import PackedReport from './pages/Admin/PackedReport'
 
 const App = () => {
   
@@ -66,6 +68,8 @@ const App = () => {
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>
      <Route path='Day-Night' element={<DvN/>}></Route>
      <Route path='Daily-List' element={<KvF/>}></Route>
+     <Route path='Left/Dispatch-Report' element={<DispatchReport/>}></Route>
+     <Route path='Left/Packed-Report' element={<PackedReport/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />

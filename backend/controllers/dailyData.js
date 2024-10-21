@@ -326,37 +326,5 @@ exports.readLeft = async(req,res) => {
                                 })
                                         }
                                  }
-
-exports.updateData = async(req,res)=>{
-    try {
-
-        const {filling,dispatch,index} = req.body;
-        const data = await Data.findById(req.params.id);
-
-        if(!data){
-            return res.status(404).json({
-                success:false,
-                data:"no data exists",
-            }); 
-        }
-
-        data.dataList[index].pouchQuantity = filling ||  data.dataList[index].pouchQuantity;
-        data.dataList[index].retortCycle = dispatch ||  data.dataList[index].retortCycle;
-        
-        const updatedData = await data.save();
-
-        res.status(200).json({
-            success:true,
-            data:updatedData
-,            message:"data successfully updated",
-        })
-
-    } catch (error) {
-    console.log(error);
-        res.status(500).json({
-            success:false,
-            data:error,
-    });
-    }
-}                
+     
         

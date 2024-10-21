@@ -27,3 +27,4 @@ export const GOAL_URL = 'https://alimentsglobal.onrender.com/api/goal'
 
 export const STORE_URL = 'https://alimentsglobal.onrender.com/api/inventory'
 
+export const DISPATCH_URL = 'http://alimentsglobal.onrender.com/api/dispatch'

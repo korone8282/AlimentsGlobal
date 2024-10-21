@@ -9,6 +9,7 @@ const uploadRoutes = require('./routes/uploadRoutes');
 const dataRoutes = require('./routes/dataRoutes');
 const inventoryRoutes = require('./routes/inventoryRoutes');
 const goalRoutes = require('./routes/goalRoutes');
+const dispatchRoutes = require('./routes/dispatchRoutes');
 const cors = require('cors');
 const path = require('path');
 dbConnect();
@@ -33,6 +34,7 @@ app.use("/api/uploads",uploadRoutes);
 app.use("/api/goal",goalRoutes)
 app.use("/api/data",dataRoutes);
 app.use("/api/inventory",inventoryRoutes);
+app.use("/api/dispatch",dispatchRoutes);
 app.use("/uploads",express.static(path.join(__dirname + '/uploads')));
 
 port = 4000||process.env.PORT;
