@@ -108,7 +108,6 @@ async function handleUpdate(){
       count:""
     })
     toast("Successfully Updated");
-    window.location.reload();
   } catch (error) {
     toast(error.response.data.message)
   }
@@ -335,7 +334,7 @@ error ? (
 }
 
 {
-            openBox2 ? (
+            openBox2 && !obj && !item? (
       <div className="space-y-3 fixed top-[18rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[13.5rem] sm:max-lg:top-[2.5rem]">
