@@ -108,6 +108,7 @@ async function handleUpdate(){
       count:""
     })
     toast("Successfully Updated");
+    window.location.reload();
   } catch (error) {
     toast(error.response.data.message)
   }
