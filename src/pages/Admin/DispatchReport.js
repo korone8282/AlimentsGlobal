@@ -179,7 +179,7 @@ loading ? (<Loader/>
       {
         data.map((val,index)=>(
         <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10)}</td>
+    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
     <td className='border-4 border-black font-bold '>{val.buyerName}</td>
     <td className='border-4 border-black font-bold '>{val.productName}</td>
     <td className='border-4 border-black font-bold '>{val.batch}</td>
@@ -220,7 +220,7 @@ loading ? (<Loader/>
       {
         data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).map((val,index)=>(
         <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10)}</td>
+    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
     <td className='border-4 border-black font-bold '>{val.buyerName}</td>
     <td className='border-4 border-black font-bold '>{val.productName}</td>
     <td className='border-4 border-black font-bold '>{val.batch}</td>

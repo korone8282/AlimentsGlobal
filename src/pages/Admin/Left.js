@@ -203,7 +203,7 @@ error ? (
                      count:ele.pouchQuantity
                     }));
             setopenBox2(!openBox2)}}>
-          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
+          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
           <td className='border-4 border-black font-bold sm:max-lg:hidden'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
@@ -269,7 +269,7 @@ error ? (
                      count:ele.pouchQuantity
                     }));
             setopenBox2(!openBox2)}}>
-          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10)}</td>
+          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
           <td className='border-4 border-black font-bold sm:max-lg:hidden'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
