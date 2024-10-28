@@ -139,7 +139,7 @@ const inputHandler = async(e) =>{
 <tbody>
   {
     arr?.list.map((val,ind)=>(
-      <tr key={ind} className={`${val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)) >=0 ? "bg-green-300" : "bg-red-400"}`}>
+      <tr key={ind} className={`${val.pouch - (array.filter( product => product.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === val.productName && item.buyerName === val.buyerName && item.packSize === val.packSize).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)) >0 ? "bg-red-400" : "bg-green-300" }`}>
       <td className='border-4 border-black font-bold'> {ind+1} </td>
       <td className='border-4 border-black font-bold p-3'> {val.buyerName} </td>
       <td className='border-4 border-black font-bold p-3'> {val.productName} </td>
