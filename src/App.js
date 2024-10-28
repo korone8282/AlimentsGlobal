@@ -31,6 +31,9 @@ import Report from './pages/Admin/Report'
 import Left from './pages/Admin/Left'
 import DispatchReport from './pages/Admin/DispatchReport'
 import PackedReport from './pages/Admin/PackedReport'
+import Exports from './pages/Admin/Exports'
+import Container from './pages/Admin/Container'
+import ContainerList from './pages/Admin/ContainerList'
 
 const App = () => {
   
@@ -46,6 +49,8 @@ const App = () => {
 
   <Route path="/admin" element={<AdminRoute/>}>
      <Route path='Inventory/Report' element={<Report/>} />
+     <Route path='Container-List/:id' element={<Container/>} />
+     <Route path='Container-List' element={<ContainerList/>} />
      <Route path='Profile/:id' element={<Profile/>} />
      <Route path='ProductData' element={<ProductData/>} />
      <Route path='Left' element={<Left/>} />
@@ -55,6 +60,7 @@ const App = () => {
      <Route path='Production-Goal' element={<ProductionGoal/>} />
      <Route path='Production' element={<Production/>} />
      <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
+     <Route path='Create-Exports' element={<Exports/>} />
      <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
      <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
      <Route path='UserList' element={<UsersList/>}></Route>
