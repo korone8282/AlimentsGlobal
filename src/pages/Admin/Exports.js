@@ -22,6 +22,7 @@ const Exports = () => {
   
   const {userinfo} = useSelector(state=>state.auth)
 
+  console.log(yo)
   useEffect(() => {
 
     async function getCategories(){
