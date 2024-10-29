@@ -17,12 +17,10 @@ const Exports = () => {
     packSize:"",
   });
   const [name, setName] = useState("C1");
-  const [yo, setyo] = useState("");
-  const [arr, setarr] = useState([]);
+  const [arr] = useState([]);
   
   const {userinfo} = useSelector(state=>state.auth)
 
-  console.log(yo)
   useEffect(() => {
 
     async function getCategories(){
@@ -77,11 +75,23 @@ const inputHandler = async(e) =>{
     toast(error.response.data.message)
    }
   }
-console.log(arr.length)
+
   const rowDataHandler = () =>{
     
    arr.push(info)
-    setarr(arr);
+
+    setInfo({
+        buyerName:"",
+        productName:"",
+        pouch:"",
+        packSize:"",
+  });
+
+  }
+
+const deleteHandler = (i) =>{
+    
+   arr.splice(i,1);
 
     setInfo({
         buyerName:"",
@@ -133,10 +143,7 @@ console.log(arr.length)
           <td className='border-4 border-black'>{val.pouch}</td>
           <td className='border-4 border-black pl-9 hover:bg-slate-300 sm:max-lg:px-7'><FaSquareCheck color='green'/></td>
           <td className='border-4 border-black pl-8 sm:max-lg:px-5 hover:bg-red-500'
-              onClick={()=>{
-                arr.splice(index,1);
-                setarr(arr)
-                setyo(index)}}><FaTrash/></td>
+              onClick={()=>deleteHandler(index)}><FaTrash/></td>
               </tr>
             ))
         }
