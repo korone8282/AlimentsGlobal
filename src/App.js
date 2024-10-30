@@ -40,7 +40,7 @@ const App = () => {
   return (
 <div>
 
-<Header/>
+{/* <Header/>
 
 <Routes>
 
@@ -82,7 +82,7 @@ const App = () => {
   <Route path='SignUp' element={<SignUp/>}/>
   <Route path='OtpLogin' element={<OtpLogin/>}/>
 
-</Routes>
+</Routes> */}
 
 </div>
 
