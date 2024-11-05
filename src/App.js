@@ -1,46 +1,46 @@
 import React from 'react'
-// import Home from './pages/Home'
-// import { Route,Routes } from 'react-router-dom'
-// import Header from './components/Header'
-// import Filiing from './pages/Sections/Filiing'
-// import Dispatch from './pages/Sections/Dispatch'
-// import Kitchen from './pages/Sections/Kitchen'
-// import Login from './pages/User/Login'
-// import SignUp from './pages/User/SignUp'
-// import DataLog from './components/DataLog'
-// import Date from './pages/Date'
-// import AdminRoute from './components/AdminRoute'
-// import UsersList from './pages/Admin/UsersList'
-// import OtpLogin from './pages/User/OtpLogin'
-// import Profile from './pages/User/Profile'
-// import AllDataKitchen from './pages/Today/AllDataKitchen'
-// import AllDataDispatch from './pages/Today/AllDataDispatch'
-// import AllDataFilling from './pages/Today/AllDataFilling'
-// import UpdateProfile from './pages/User/UpdateProfile'
-// import Buyer from './pages/Admin/Buyer'
-// import BuyerProducts from './pages/Admin/BuyerProducts'
-// import Monthly from './pages/Admin/Monthly'
-// import Product from './pages/Admin/Product'
-// import DvN from './pages/Admin/DvN'
-// import ProductionGoal from './pages/Admin/ProductionGoal'
-// import Production from './pages/Admin/Production'
-// import KvF from './pages/Admin/KvF'
-// import Inventory from './pages/Admin/Inventory'
-// import ProductData from './pages/Admin/ProductData'
-// import Report from './pages/Admin/Report'
-// import Left from './pages/Admin/Left'
-// import DispatchReport from './pages/Admin/DispatchReport'
-// import PackedReport from './pages/Admin/PackedReport'
-// import Exports from './pages/Admin/Exports'
-// import Container from './pages/Admin/Container'
-// import ContainerList from './pages/Admin/ContainerList'
+import Home from './pages/Home'
+import { Route,Routes } from 'react-router-dom'
+import Header from './components/Header'
+import Filiing from './pages/Sections/Filiing'
+import Dispatch from './pages/Sections/Dispatch'
+import Kitchen from './pages/Sections/Kitchen'
+import Login from './pages/User/Login'
+import SignUp from './pages/User/SignUp'
+import DataLog from './components/DataLog'
+import Date from './pages/Date'
+import AdminRoute from './components/AdminRoute'
+import UsersList from './pages/Admin/UsersList'
+import OtpLogin from './pages/User/OtpLogin'
+import Profile from './pages/User/Profile'
+import AllDataKitchen from './pages/Today/AllDataKitchen'
+import AllDataDispatch from './pages/Today/AllDataDispatch'
+import AllDataFilling from './pages/Today/AllDataFilling'
+import UpdateProfile from './pages/User/UpdateProfile'
+import Buyer from './pages/Admin/Buyer'
+import BuyerProducts from './pages/Admin/BuyerProducts'
+import Monthly from './pages/Admin/Monthly'
+import Product from './pages/Admin/Product'
+import DvN from './pages/Admin/DvN'
+import ProductionGoal from './pages/Admin/ProductionGoal'
+import Production from './pages/Admin/Production'
+import KvF from './pages/Admin/KvF'
+import Inventory from './pages/Admin/Inventory'
+import ProductData from './pages/Admin/ProductData'
+import Report from './pages/Admin/Report'
+import Left from './pages/Admin/Left'
+import DispatchReport from './pages/Admin/DispatchReport'
+import PackedReport from './pages/Admin/PackedReport'
+import Exports from './pages/Admin/Exports'
+import Container from './pages/Admin/Container'
+import ContainerList from './pages/Admin/ContainerList'
 
 const App = () => {
   
   return (
 <div>
 
-{/* <Header/>
+<Header/>
 
 <Routes>
 
@@ -82,7 +82,7 @@ const App = () => {
   <Route path='SignUp' element={<SignUp/>}/>
   <Route path='OtpLogin' element={<OtpLogin/>}/>
 
-</Routes> */}
+</Routes>
 
 </div>
 
