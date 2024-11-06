@@ -81,7 +81,6 @@ const DvN = () => {
         <tr>
           <th rowSpan={2} className='border-4 border-black p-2'>Day Time</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Retort Cycles</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
           <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
@@ -103,9 +102,6 @@ const DvN = () => {
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
  }</td>
 
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)
- }</td>
  
         <td className='border-4 border-black font-bold '> {
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
@@ -142,17 +138,9 @@ const DvN = () => {
          <td className='border-4 border-black font-bold '> {
    data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
  }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.retortCycle,0),0)
- }</td>
  
         <td className='border-4 border-black font-bold '> {
    data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yieldLoss,0),0)
  }</td>
 
  <td className='border-4 border-black font-bold '> {

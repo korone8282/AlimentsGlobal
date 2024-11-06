@@ -302,7 +302,7 @@ exports.ProductData = async(req,res) => {
                          
 exports.readLeft = async(req,res) => {
                             try {
-                                const startDate = new Date("2024-10-01");
+                                const startDate = new Date("2024-10-20");
 
                                 startDate.setHours(0, 0, 0, 0);
 
