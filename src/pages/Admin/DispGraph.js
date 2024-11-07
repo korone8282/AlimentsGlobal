@@ -38,18 +38,16 @@ const DispGraph = () => {
           setLoading(1);
             setError(0);
 
-            for(let i=1;i<32;i++){
+            const res = await apiConnector(`${GRAPH_URL}/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
 
-                const res = await apiConnector(`${GRAPH_URL}/${i}/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-  
-                const num = res.data.data ? res.data.data.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0) : 0;
-
-                arr.push({
-                  "name":i,
-                  "Pouches Packed":num,
-                })
-  
-              }
+            res.data.data.forEach((e,i) => {
+              const num =  e.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0);
+              arr.push({
+                "name":i+1,
+                "Pouches Packed":num,
+              })
+            });
+              
           setLoading(0);
       
           } catch (e) {
@@ -59,7 +57,7 @@ const DispGraph = () => {
         }
 
         getData();
-       }, [months,userinfo.token,month,arr]);
+       }, [month,userinfo.token,arr]);
 
   return (
     <div>

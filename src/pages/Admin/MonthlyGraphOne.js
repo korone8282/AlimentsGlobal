@@ -37,18 +37,15 @@ const MonthlyGraphOne= () => {
           setLoading(1);
             setError(0);
 
-            for(let i=1;i<13;i++){
+              const res = await apiConnector(`${GRAPH_URL}/List`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
 
-              const res = await apiConnector(`${GRAPH_URL}/List/${i}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-
-              const num = res.data.data.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0);
-
-              arr.push({
-                "name":months[i-1].month,
-                "Pouches Packed":num,
-              })
-
-            }
+              res.data.data.forEach((e,i) => {
+                const num =  e.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0);
+                arr.push({
+                  "name":months[i].month,
+                  "Pouches Packed":num,
+                })
+              });
 
           setLoading(0);
       

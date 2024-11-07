@@ -5,7 +5,7 @@ import { CustomToolTip } from './CustomToolTip';
 const Chart = ({data,dataKey}) => {
 
   return (
-    <div className='w-[100%] h-[45rem]'>
+    <div className='w-[100%] h-[45rem] sm:max-lg:h-96'>
     <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={500}

@@ -38,18 +38,16 @@ const FillGraph = () => {
           setLoading(1);
             setError(0);
 
-            for(let i=1;i<32;i++){
-
-                const res = await apiConnector(`${GRAPH_URL}/${i}/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+                const res = await apiConnector(`${GRAPH_URL}/${month}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
   
-                const num = res.data.data ? res.data.data.filter(obj => obj.sectionMain === 'Filling').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) : 0;
+                res.data.data.forEach((e,i) => {
+                  const num =  e.filter(obj => obj.sectionMain === 'Filling').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0);
+                  arr.push({
+                    "name":i+1,
+                    "Pouches Filled":num,
+                  })
+                });
 
-                arr.push({
-                  "name":i,
-                  "Pouches Filled":num,
-                })
-  
-              }
           setLoading(0);
       
           } catch (e) {

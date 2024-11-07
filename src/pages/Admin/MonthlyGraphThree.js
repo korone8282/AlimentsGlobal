@@ -37,18 +37,15 @@ const MonthlyGraphThree = () => {
           setLoading(1);
             setError(0);
 
-            for(let i=1;i<13;i++){
+            const res = await apiConnector(`${GRAPH_URL}/List`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
 
-              const res = await apiConnector(`${GRAPH_URL}/List/${i}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-
-              const num = res.data.data.filter(obj => obj.sectionMain === 'Kitchen').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + (obj.batchQuantity*obj.yield),0),0);
-
+            res.data.data.forEach((e,i) => {
+              const num =  e.filter(obj => obj.sectionMain === 'Kitchen').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + (obj.batchQuantity*obj.yield),0),0);
               arr.push({
-                "name":months[i-1].month,
+                "name":months[i].month,
                 "Production":num,
               })
-
-            }
+            });
 
           setLoading(0);
       

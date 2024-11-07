@@ -4,28 +4,37 @@ const Data = require('../models/dataModel');
 exports.readGraph = async(req,res) => {
     try {
  
-        const {date,month} = req.params;
+        const {month} = req.params;
 
-        const start = new Date(`2024-${month}-${date}`);
-        start.setHours(0, 0, 0, 0);
-        const end = new Date(`2024-${month}-${date}`);
-        end.setHours(23, 59, 59, 999);
+        const arr = [];
 
-        const existData = await Data.find({createdAt:{
-            $gte:start,
-            $lte:end
-        }});
+        let flag = 0;
+ 
+        for(let i=1;i<32;i++){
 
-            if(!existData.length){
-                return res.status(200).json({
-                    success:true,
-                    data:0,
+            const start = new Date(`2024-${month}-${i}`);
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(`2024-${month}-${i}`);
+            end.setHours(23, 59, 59, 999);
+
+            const existData = await Data.find({createdAt:{
+                $gte:start,
+                $lte:end
+            }});
+
+            existData.length ? ( arr.push(existData), flag = 1 ) : arr.push([])
+
+        }
+
+        if(!flag){
+            return res.status(404).json({
+                message:"data doesn't exists",
                 })
         }
                     
          res.status(200).json({
             success:true,
-            data:existData,
+            data:arr,
         })
                 
         } catch (error) {
@@ -41,11 +50,15 @@ exports.monthlyGraph = async(req,res) => {
                 
                 const days = [31,29,31,30,31,30,31,31,30,31,30,31];
 
-                const {month} = req.params;
-                
-                const startDate = new Date(`2024-${month}-01`);
+                const arr = [];
+
+                let flag = 0;
+
+                for(let i=1;i<13;i++){
+ 
+                const startDate = new Date(`2024-${i}-01`);
                 startDate.setHours(0, 0, 0, 0);
-                const endDate = new Date(`2024-${month}-${days[month-1]}`);
+                const endDate = new Date(`2024-${i}-${days[i-1]}`);
                 endDate.setHours(23, 59, 59, 999);
 
                 const existData = await Data.find({createdAt:{
@@ -53,9 +66,19 @@ exports.monthlyGraph = async(req,res) => {
                     $lte:endDate
                 } });
 
+                existData.length ? ( arr.push(existData), flag =1  ) : arr.push([])
+
+                }
+
+                if(!flag){
+                    return res.status(404).json({
+                        message:"data doesn't exists",
+                        })
+                }
+
                  res.status(200).json({
                     success:true,
-                    data:existData,
+                    data:arr,
                 })
                         
                 } catch (error) {
