@@ -10,7 +10,7 @@ const Wrapper = ({data,dataKey}) => {
      border-radius: 10px;`;
    
   return (
-    <CardWrapper className='w-[99%] mx-auto my-1'>
+    <CardWrapper className='w-[99%] mx-auto my-3'>
       <Chart data={data} dataKey={dataKey}/>
     </CardWrapper>
   )
