@@ -34,6 +34,13 @@ import PackedReport from './pages/Admin/PackedReport'
 import Exports from './pages/Admin/Exports'
 import Container from './pages/Admin/Container'
 import ContainerList from './pages/Admin/ContainerList'
+import DispGraph from './pages/Admin/DispGraph'
+import FillGraph from './pages/Admin/FillGraph'
+import KitchenGraph from './pages/Admin/KitchenGraph'
+import MonthlyGraphOne from './pages/Admin/MonthlyGraphOne'
+import MonthlyGraphTwo from './pages/Admin/MonthlyGraphTwo'
+import MonthlyGraphThree from './pages/Admin/MonthlyGraphThree'
+import Graph from './pages/Admin/Graph'
 
 const App = () => {
   
@@ -64,6 +71,9 @@ const App = () => {
      <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
      <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
      <Route path='UserList' element={<UsersList/>}></Route>
+     <Route path='Graph/Monthly-Dispatch' element={<MonthlyGraphOne/>}></Route>
+     <Route path='Graph/Monthly-Filling' element={<MonthlyGraphTwo/>}></Route>
+     <Route path='Graph/Monthly-Kitchen' element={<MonthlyGraphThree/>}></Route>
      <Route path='Kitchen/:month' element={<Kitchen/>} />
      <Route path='Filling/:month' element={<Filiing/>} />
      <Route path='Dispatch/:month' element={<Dispatch/>} />
@@ -76,6 +86,10 @@ const App = () => {
      <Route path='Daily-List' element={<KvF/>}></Route>
      <Route path='Left/Dispatch-Report' element={<DispatchReport/>}></Route>
      <Route path='Left/Packed-Report' element={<PackedReport/>}></Route>
+     <Route path='Graph/Dispatch-Graph' element={<DispGraph/>}></Route>
+     <Route path='Graph/Filling-Graph' element={<FillGraph/>}></Route>
+     <Route path='Graph/Kitchen-Graph' element={<KitchenGraph/>}></Route>
+     <Route path='Graph' element={<Graph/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />

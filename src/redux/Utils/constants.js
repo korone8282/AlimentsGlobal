@@ -30,3 +30,5 @@ export const STORE_URL = 'https://alimentsglobal.onrender.com/api/inventory'
 export const DISPATCH_URL = 'https://alimentsglobal.onrender.com/api/dispatch'
 
 export const EXPORT_URL = 'https://alimentsglobal.onrender.com/api/export'
+
+export const GRAPH_URL = 'https://alimentsglobal.onrender.com/api/graph'

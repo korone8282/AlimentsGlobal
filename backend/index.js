@@ -11,6 +11,7 @@ const inventoryRoutes = require('./routes/inventoryRoutes');
 const goalRoutes = require('./routes/goalRoutes');
 const dispatchRoutes = require('./routes/dispatchRoutes');
 const exportRoutes = require('./routes/exportRoutes');
+const graphRoutes = require('./routes/graphRoutes');
 const cors = require('cors');
 const path = require('path');
 dbConnect();
@@ -37,6 +38,7 @@ app.use("/api/data",dataRoutes);
 app.use("/api/inventory",inventoryRoutes);
 app.use("/api/dispatch",dispatchRoutes);
 app.use("/api/export",exportRoutes);
+app.use("/api/graph",graphRoutes);
 app.use("/uploads",express.static(path.join(__dirname + '/uploads')));
 
 port = 4000||process.env.PORT;

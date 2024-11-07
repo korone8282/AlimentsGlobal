@@ -52,7 +52,7 @@ const ContainerList = () => {
                                     <div key={ind}
                                          onClick={()=>navigate(`${val._id}`)}
                                          >
-                                        <div className='h-40 w-60 flex items-center rounded-lg justify-center font-bold text-5xl my-auto hover:translate-y-3 hover:bg-yellow-800  bg-yellow-600 [ bg-gradient-to-b from-white/35 to-white/5 ]
+                                        <div className='h-40 w-60 flex items-center rounded-lg justify-center font-bold text-3xl my-auto hover:translate-y-3 hover:bg-yellow-800  bg-yellow-600 [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ]'>{val.name}</div>
                                     </div>

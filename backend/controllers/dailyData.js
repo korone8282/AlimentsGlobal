@@ -54,7 +54,7 @@ exports.readData = async(req,res) => {
     try {
     
         const {date,month} = req.params;
-        
+
         const start = new Date(`2024-${month}-${date}`);
         start.setHours(0, 0, 0, 0);
         const end = new Date(`2024-${month}-${date}`);

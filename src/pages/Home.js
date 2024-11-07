@@ -6,7 +6,7 @@ import { FaBox } from "react-icons/fa";
 import { MdFormatColorFill } from "react-icons/md";
 import { useDispatch } from 'react-redux'
 import { setSection } from '../redux/Slices/dateSlice'
-import { VscSettingsGear } from "react-icons/vsc";
+import { GiIncubator } from "react-icons/gi";
 import Slider from '../components/Slider'
 import "./Home.css";
 
@@ -75,10 +75,10 @@ const Home = () => {
  <FaBox className=" mt-2 sm:max-lg:mt-1 sm:max-lg:h-6" size={36} color='black' />
 </div>
 
-<Link to="/admin/Inventory" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
+<Link to="/admin/Left" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] hover:text-black w-[90%] rounded-lg mx-auto'> 
-Inventory <span> <VscSettingsGear color='black'/></span>
+Incubation <span> <GiIncubator color='black'/></span>
 </Link>
 
 <Link to="/admin/Production-Goal" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
@@ -124,11 +124,11 @@ Production Goal
  Exports Data 
 </Link>
 
-<Link to="/admin/Left" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
+<Link to="/admin/Graph" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] hover:text-black w-[90%] rounded-lg mx-auto'> 
 
-Incubation  
+Graphs  
 </Link>
 
 <Link to="/admin/ProductData" className='h-20 sm:max-lg:h-10 flex items-center justify-around  [ bg-gradient-to-b from-white/35 to-white/5 ]
