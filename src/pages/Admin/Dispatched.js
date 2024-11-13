@@ -66,7 +66,6 @@ const Dispatched = () => {
         const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
         setcategories(res.data.data);
     
-        setLoading(0);
           } catch (e) {
             console.log(e)
           }
@@ -78,7 +77,6 @@ const Dispatched = () => {
           const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
           setproducts(res.data.data);
       
-          setLoading(0);
             } catch (error) {
               console.log(error);
             }
@@ -93,8 +91,7 @@ const Dispatched = () => {
 
          setSectionData(res.data.data.map(e=>e.dataList.filter( buyer => buyer.buyerName === info.buyer)));
 
-        setLoading(0);
-        
+         setTimeout(()=>setLoading(0),800);
 
         } catch (e) {
           setError(1);
