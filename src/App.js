@@ -41,6 +41,8 @@ import MonthlyGraphOne from './pages/Admin/MonthlyGraphOne'
 import MonthlyGraphTwo from './pages/Admin/MonthlyGraphTwo'
 import MonthlyGraphThree from './pages/Admin/MonthlyGraphThree'
 import Graph from './pages/Admin/Graph'
+import Dispatched from './pages/Admin/Dispatched'
+import Pouch from './pages/Admin/Pouch'
 
 const App = () => {
   
@@ -83,13 +85,15 @@ const App = () => {
      <Route path='ProductList' element={<Product/>}></Route>
      <Route path='Product-Data' element={<BuyerProducts/>}></Route>
      <Route path='Day-Night' element={<DvN/>}></Route>
+     <Route path='Pouch' element={<Pouch/>}></Route>
      <Route path='Daily-List' element={<KvF/>}></Route>
-     <Route path='Left/Dispatch-Report' element={<DispatchReport/>}></Route>
+     <Route path='Dispatched/Dispatch-Report' element={<DispatchReport/>}></Route>
      <Route path='Left/Packed-Report' element={<PackedReport/>}></Route>
      <Route path='Graph/Dispatch-Graph' element={<DispGraph/>}></Route>
      <Route path='Graph/Filling-Graph' element={<FillGraph/>}></Route>
      <Route path='Graph/Kitchen-Graph' element={<KitchenGraph/>}></Route>
      <Route path='Graph' element={<Graph/>}></Route>
+     <Route path='Dispatched' element={<Dispatched/>}></Route>
   </Route>
 
   <Route path='Login' element={<Login/>} />

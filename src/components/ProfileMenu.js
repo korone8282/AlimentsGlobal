@@ -104,30 +104,6 @@ const ProfileMenu = () => {
             <li>
               <NavLink
                 className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/Day-Night"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Day Vs Night
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/Inventory"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Inventory
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
                 to="/admin/Userlist"
                 onClick={()=>setIsMenuOpen(0)}
                 style={({ isActive }) => ({

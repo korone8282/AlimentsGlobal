@@ -10,6 +10,18 @@
     transition: width 0.5s ease-in-out;
 }
 
+#navigation-container2 + div{
+  margin-left: 60px;
+  transition: all 600ms ease-in-out;
+  /* gap: 60px; */
+}
+
+#navigation-container2:hover + div{
+  margin-left: 320px;
+  transition: all 600ms ease-in-out;
+  gap: 40px;
+}
+
 .heading {
     transition: all 1s ease-in-out;
     transform: rotate(270deg) translateX(-19rem) translateY(-9.5rem);

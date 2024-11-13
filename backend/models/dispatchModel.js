@@ -9,14 +9,6 @@ const dispatchSchema = new mongoose.Schema({
         type: String,
         required:true,
     },
-    batch:{
-        type: String,
-        required:true,
-    },
-    packSize:{
-        type: Number,
-        required:true,
-    },
     pouchDispatched:{
         type: Number,
         required:true,

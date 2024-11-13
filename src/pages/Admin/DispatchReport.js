@@ -167,8 +167,6 @@ loading ? (<Loader/>
     <th rowSpan={2} className='border-4 border-black'>Date</th>
     <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
     <th rowSpan={2} className='border-4 border-black'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Batch</th>
-    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
     <th rowSpan={2} className='border-4 border-black'>Box</th>
   </tr>
@@ -182,8 +180,6 @@ loading ? (<Loader/>
     <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
     <td className='border-4 border-black font-bold '>{val.buyerName}</td>
     <td className='border-4 border-black font-bold '>{val.productName}</td>
-    <td className='border-4 border-black font-bold '>{val.batch}</td>
-    <td className='border-4 border-black font-bold '>{val.packSize}</td>
     <td className='border-4 border-black font-bold '>{val.pouchDispatched}</td>
     <td className='border-4 border-black font-bold '>{val.box}</td>
         </tr>
@@ -191,7 +187,7 @@ loading ? (<Loader/>
       }
      
       <tr className='text-center bg-teal-400'>
-    <td colSpan={5} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
+    <td colSpan={3} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
     <td className='border-4 border-black font-bold '>{ data.reduce((acc,obj)=>  acc + obj.pouchDispatched,0)}</td>
     <td className='border-4 border-black font-bold '>{ data.reduce((acc,obj)=>  acc + obj.box,0)}</td>
         </tr>
@@ -208,8 +204,6 @@ loading ? (<Loader/>
     <th rowSpan={2} className='border-4 border-black'>Date</th>
     <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
     <th rowSpan={2} className='border-4 border-black'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Batch</th>
-    <th rowSpan={2} className='border-4 border-black'>Pack Size</th>
     <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
     <th rowSpan={2} className='border-4 border-black'>Box</th>
   </tr>
@@ -223,8 +217,6 @@ loading ? (<Loader/>
     <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
     <td className='border-4 border-black font-bold '>{val.buyerName}</td>
     <td className='border-4 border-black font-bold '>{val.productName}</td>
-    <td className='border-4 border-black font-bold '>{val.batch}</td>
-    <td className='border-4 border-black font-bold '>{val.packSize}</td>
     <td className='border-4 border-black font-bold '>{val.pouchDispatched}</td>
     <td className='border-4 border-black font-bold '>{val.box}</td>
         </tr>
@@ -232,7 +224,7 @@ loading ? (<Loader/>
       }
      
       <tr className='text-center bg-teal-400'>
-    <td colSpan={5} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
+    <td colSpan={3} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
     <td className='border-4 border-black font-bold '>{ data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce((acc,obj)=>  acc + obj.pouchDispatched,0)}</td>
     <td className='border-4 border-black font-bold '>{ data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce((acc,obj)=>  acc + obj.box,0)}</td>
         </tr>
