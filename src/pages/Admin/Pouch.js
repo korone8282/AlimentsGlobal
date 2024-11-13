@@ -88,7 +88,7 @@ const Pouch = () => {
 
          setSectionData(res.data.data.map(e=>e.dataList.filter( buyer => buyer.buyerName === info.buyer)));
 
-         setTimeout(()=>setLoading(0),800);
+         setTimeout(()=>setLoading(0),100);
         
 
         } catch (e) {
