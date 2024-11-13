@@ -172,6 +172,7 @@ const Pouch = () => {
            <th rowSpan={2} className='border-4 border-black p-4'>Pouches (IN)</th>
            <th rowSpan={2} className='border-4 border-black p-4'>Balance</th>
            <th rowSpan={2} className='border-4 border-black p-4'>No. Of Pouch Filled</th>
+           <th rowSpan={2} className='border-4 border-black p-4'>Wastage</th>
            <th rowSpan={2} className='border-4 border-black p-1'>Total Balance</th>
          </tr>
        </thead>
@@ -194,6 +195,7 @@ const Pouch = () => {
                   <td className='border-4 border-black font-bold'>{element.pouches[month-1].stock}</td>
                   <td className='border-4 border-black font-bold'>{element.pouches.filter( item => item.month < month).reduce( (accumulator, obj) => accumulator + obj.remain,0) + element.pouches[month-1].stock}</td>
                   <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{element.pouches.filter( item => item.month <= month).reduce( (accumulator, obj) => accumulator + obj.remain,0)}</td>
             </tr>
                 

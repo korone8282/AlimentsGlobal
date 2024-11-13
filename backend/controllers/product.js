@@ -229,7 +229,7 @@ exports.updatePouches = async(req,res) => {
                 }
 
                     existProduct.pouches[month-1].stock = parseInt(pouches) + (existProduct.pouches[month-1].stock || 0);
-                    existProduct.pouches[month-1].remain = ( existProduct.pouches[month-1].stock - existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === product).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)) 
+                    existProduct.pouches[month-1].remain = ( existProduct.pouches[month-1].stock - (existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === product).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) + existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === product).reduce( (accumulator, obj) => accumulator + obj.empty,0),0))) 
                     
                     await existProduct.save();
                 
