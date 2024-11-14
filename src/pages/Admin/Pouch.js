@@ -190,12 +190,12 @@ const Pouch = () => {
         }))}}>
             <tr className='hover:bg-slate-400'>
                   <td className='border-4 border-black font-bold p-3'>{index+1}</td>
-                  <td className='border-4 border-black font-bold'> {element.name} </td>
+                  <td className='border-4 border-black font-bold'>{element.name} </td>
                   <td className='border-4 border-black font-bold'>{element.pouches.filter( item => item.month < month).reduce( (accumulator, obj) => accumulator + obj.remain,0)}</td>
                   <td className='border-4 border-black font-bold'>{element.pouches[month-1].stock}</td>
                   <td className='border-4 border-black font-bold'>{element.pouches.filter( item => item.month < month).reduce( (accumulator, obj) => accumulator + obj.remain,0) + element.pouches[month-1].stock}</td>
-                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
-                  <td className='border-4 border-black font-bold'>{ sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+                  <td className='border-4 border-black font-bold'>{sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</td>
                   <td className='border-4 border-black font-bold'>{element.pouches.filter( item => item.month <= month).reduce( (accumulator, obj) => accumulator + obj.remain,0)}</td>
             </tr>
                 

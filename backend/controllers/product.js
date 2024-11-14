@@ -192,6 +192,7 @@ exports.updateDispProduct = async(req,res) => {
                 
                     res.status(200).json({
                         success:true,
+                        message:"updateDispProduct"
                     });
                 
                 } catch (error) {
@@ -244,3 +245,49 @@ exports.updatePouches = async(req,res) => {
                     })
                 }
                 }
+
+exports.updaterOne = async(req,res) => {
+                try {
+
+                const existProduct = await Product.find({});
+
+                const days = [31,29,31,30,31,30,31,31,30,31,30,31];
+
+                for(let i=1; i<13;i++){
+
+                    const startDate = new Date(`2024-${i}-01`);
+                    startDate.setHours(0, 0, 0, 0);
+                    const endDate = new Date(`2024-${i}-${days[i-1]}`);
+                    endDate.setHours(23, 59, 59, 999);
+
+                    const existData = await Data.find({createdAt:{
+                        $gte:startDate,
+                        $lte:endDate
+                    } });
+ 
+
+                for(let index=0; index < existProduct.length ;index++){
+
+                const newProduct = existProduct[index];
+
+                newProduct.dispatched[i-1].balance = ( existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0) -  ( newProduct.dispatched[i-1].dispatch ? newProduct.dispatched[i-1].dispatch : 0 ))  
+                   
+                newProduct.pouches[i-1].remain = ((newProduct.pouches[i-1].stock ? newProduct.pouches[i-1].stock : 0) -  (existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === existProduct[index].name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) + existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)))  
+
+                await newProduct.save();
+
+                    }     
+                }
+
+                    res.status(200).json({
+                        success:true,
+                    });
+                
+                } catch (error) {
+                    console.log(error);
+                    res.status(400).json({
+                        message:error
+                    })
+                }
+                }
+

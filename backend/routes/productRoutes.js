@@ -7,10 +7,10 @@ const { createProduct ,
         productList,
         readProduct, 
         updateDispProduct,
-        updatePouches} = require('../controllers/product');
+        updatePouches,
+        updaterOne} = require('../controllers/product');
 
-
-
+router.get("/dispUpdater",updaterOne)
 router.route("/:buyer").post(authorization,authAdmin,createProduct);
 router.delete("/:productId",authorization,authAdmin,deleteProduct);
 router.get("/products",productList);
