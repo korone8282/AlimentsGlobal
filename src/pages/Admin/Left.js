@@ -23,13 +23,14 @@ const Left = () => {
     const [openBox3, setopenBox3] = useState();
     const [info, setInfo] = useState({
       filling:"",
-      index:"",
+      i:"",
       product:"",
       id:"",
       packed:"",
       box:"",
       issue:"",
-      count:""
+      count:"",
+      element:"",
     });
 
     const {userinfo} = useSelector(state=>state.auth);
@@ -97,13 +98,14 @@ async function handleUpdate(){
     setopenBox2(!openBox2);
     setInfo({
       filling:"",
-      index:"",
+      i:"",
       product:"",
       id:"",
       packed:"",
       box:"",
       issue:"",
-      count:""
+      count:"",
+      element:"",
     })
     toast("Successfully Updated");
     window.location.reload();
@@ -188,9 +190,10 @@ error ? (
               onClick = {()=>{
               setInfo((prevData) => ({
                      ...prevData,
-                     index:i,
+                     i:i,
                      id: val._id,
-                     count:ele.pouchQuantity
+                     count:ele.pouchQuantity,
+                     element:ele,
                     }));
             setopenBox2(!openBox2)}}>
           <td className='border-4 border-black font-bold p-2'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
@@ -225,17 +228,17 @@ error ? (
         ) : (
           <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
-  <tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black'>Date</th>
-    <td rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Shift</td>
-    <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black sm:max-lg:hidden'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black'>Pouch (Retort)</th>
-    <th rowSpan={2} className='border-4 border-black'>Incubation (In)</th>
-    <th rowSpan={2} className='border-4 border-black'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black'>Box</th>
+<tr className='bg-[#f59e0b]'>
+    <th rowSpan={2} className='border-4 border-black p-4'>Date</th>
+    <td rowSpan={2} className='border-4 border-black p-4'>Shift</td>
+    <th rowSpan={2} className='border-4 border-black p-4'>Buyer Name</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Product Name</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Batch Code</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Pouch (Retort)</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Incubation (In)</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Pouch Packed</th>
+    <th rowSpan={2} className='border-4 border-black p-4'>Box</th>
   </tr>
 </thead>
 
@@ -249,9 +252,10 @@ error ? (
               onClick = {()=>{
               setInfo((prevData) => ({
                      ...prevData,
-                     index:i,
+                     i:i,
                      id: val._id,
-                     count:ele.pouchQuantity
+                     count:ele.pouchQuantity,
+                     element:ele,
                     }));
             setopenBox2(!openBox2)}}>
           <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
@@ -314,7 +318,7 @@ error ? (
 }
 
 {
-            openBox2 && !obj && !item? (
+            openBox2 ? (
       <div className="space-y-3 fixed top-[18rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
     [ border-[3px] border-solid border-white border-opacity-30 ]
     [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[13.5rem] sm:max-lg:top-[2.5rem]">

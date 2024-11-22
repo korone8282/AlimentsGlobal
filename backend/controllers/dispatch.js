@@ -57,7 +57,7 @@ exports.readPacked = async(req,res) => {
 exports.updateData = async(req,res)=>{
     try {
 
-        const {filling,index,product,id,packed,box,issue} = req.body;
+        const {filling,i,product,id,packed,box,issue,element} = req.body;
         const data = await Data.findById(req.params.id);
 
         if(!data){
@@ -66,6 +66,8 @@ exports.updateData = async(req,res)=>{
                 data:"no data exists",
             }); 
         }
+
+       const index = data.dataList.findIndex( obj => obj.buyerName === element.buyerName && obj.productName === element.productName && obj.batch === element.batch)
 
         data.dataList[index].pouchQuantity = filling ||  data.dataList[index].pouchQuantity;
 
