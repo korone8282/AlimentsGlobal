@@ -36,7 +36,7 @@ const Home = () => {
       } catch (error) {
         console.log(error)
       }
-    },21600000);
+    },3600000);
   }, [userinfo.token]);
 
   return (

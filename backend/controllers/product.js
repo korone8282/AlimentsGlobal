@@ -25,6 +25,20 @@ try {
         name,
     })
 
+    for(let i=0; i<12;i++){
+        newProduct.pouches.push({
+            month:i+1,
+            stock:0,
+            remain:0,
+        })
+        newProduct.dispatched.push({
+            month:i+1,
+            dispatch:0,
+            balance:0,
+        })
+    }
+
+    await newProduct.save();
 
     res.status(200).json({
         success:true,
@@ -248,8 +262,8 @@ exports.updatePouches = async(req,res) => {
 
 exports.updaterOne = async(req,res) => {
                 try {
-
-                const existProduct = await Product.find({});
+                   
+                const existProduct = await Product.find({ });
 
                 const days = [31,29,31,30,31,30,31,31,30,31,30,31];
 
@@ -270,9 +284,9 @@ exports.updaterOne = async(req,res) => {
 
                 const newProduct = existProduct[index];
 
-                newProduct.dispatched[i-1].balance = ( existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0) -  ( newProduct.dispatched[i-1].dispatch ? newProduct.dispatched[i-1].dispatch : 0 ))  
+                newProduct.dispatched[i-1].balance = ( existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === newProduct.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0) -  ( newProduct.dispatched[i-1].dispatch ? newProduct.dispatched[i-1].dispatch : 0 ))  
                    
-                newProduct.pouches[i-1].remain = ((newProduct.pouches[i-1].stock ? newProduct.pouches[i-1].stock : 0) -  (existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === existProduct[index].name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) + existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === existProduct[index].buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)))  
+                newProduct.pouches[i-1].remain = ((newProduct.pouches[i-1].stock ? newProduct.pouches[i-1].stock : 0) -  (existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === newProduct.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) + existData.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.productName === newProduct.name && item.buyerName === newProduct.buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)))  
 
                 await newProduct.save();
 

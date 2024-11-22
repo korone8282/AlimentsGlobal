@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const inventorySchema = new mongoose.Schema({
     pDate:{
         type: Date,
-        // default:Date.now(),
     },
     name:{
         type: String,
@@ -11,15 +10,12 @@ const inventorySchema = new mongoose.Schema({
     },
     unit:{
         type: String,
-        required : true,
     },
     stock:{
         type: Number,
-        required : true,
     },
     rate:{
         type: Number,
-        required : true,
     },
     quant:{
         type: Number,
