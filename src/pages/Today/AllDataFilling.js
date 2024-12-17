@@ -87,6 +87,14 @@ const AllDataFilling = () => {
 
   const {userinfo} = useSelector(state=>state.auth);
 
+  const updater = async() =>{
+    try {
+    await apiConnector(`${PRODUCT_URL}/dispUpdater`, "GET",null, {Authorization: `Bearer ${userinfo.token}`})
+    
+  } catch (error) {
+    console.log(error)
+  }}
+
   const submitHandler = async() =>{
     
     const toastId = toast.loading("Loading...",{
@@ -182,7 +190,9 @@ const AllDataFilling = () => {
         </div>
 
       <button className='text-xl font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-              onClick={submitHandler}>
+              onClick={()=>{
+                submitHandler()
+                updater()}}>
             Submit
       </button>
 
