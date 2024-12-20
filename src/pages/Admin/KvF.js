@@ -89,7 +89,7 @@ const KvF = () => {
     if (arr.length){
       let item = arr.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
       if(item){
-      return (item.yield*item.batch).toFixed(2)
+      return (item.yield*item.batch)?.toFixed(2)
       } else {
         return 0;
       }
@@ -123,9 +123,19 @@ const KvF = () => {
 
     if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
       let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return ((ele.pouchQuantity*(ele.packSize+0.005))+(item.count*(item.size+0.005))).toFixed(2);
+      return ((ele.pouchQuantity*(ele.packSize+0.005))+(item.count*(item.size+0.005)))?.toFixed(2);
     } else {
-      return ((ele.packSize+0.005)*ele.pouchQuantity).toFixed(2)
+      return ((ele.packSize+0.005)*ele.pouchQuantity)?.toFixed(2)
+    }
+  } 
+
+  function waste(val,ele){
+
+    if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
+      let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
+      return (ele.filled+item.filled ? ele.filled+item.filled.toFixed(2) : 0);
+    } else {
+      return (ele.filled ? ele.filled.toFixed(2) : 0)
     }
   } 
 
@@ -158,12 +168,14 @@ const KvF = () => {
           <th rowSpan={2} className='border-4 border-black p-2'>Production (Filling)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Production (Kitchen)</th>
           <th rowSpan={2} className='border-4 border-black p-2'>Difference (Kg)</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
+          <th rowSpan={2} className='border-4 border-black p-2'>Variance (Kg)</th>
         </tr>
       </thead>
 
       <tbody className='text-center'>
          {
-          data?.filter(obj=> obj.sectionMain === "Filling" ).map( (val,i) =>(
+          data?.filter(obj=> obj.sectionMain === "Filling" ).map( (val) =>(
             val.dataList.filter((value, index, self) =>
     index === self.findIndex((obj) => ( obj.productName === value.productName && obj.day === val.day ))).map((ele,index)=>(
                     <tr key={index}>
@@ -174,7 +186,9 @@ const KvF = () => {
           <td className='border-4 border-black font-bold'>{count(val,ele)}</td>
           <td className='border-4 border-black font-bold'>{quant(val,ele)}</td>
           <td className='border-4 border-black font-bold'>{yo(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{ (yo(val,ele) - quant(val,ele)).toFixed(2) }</td>
+          <td className='border-4 border-black font-bold'>{ (yo(val,ele) - quant(val,ele))?.toFixed(2) }</td>
+          <td className='border-4 border-black font-bold'>{waste(val,ele)}</td>
+          <td className='border-4 border-black font-bold'>{((yo(val,ele) - quant(val,ele))-waste(val,ele))?.toFixed(2)}</td>
               </tr>
                   ))
 
