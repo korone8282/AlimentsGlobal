@@ -188,7 +188,7 @@ const KvF = () => {
           <td className='border-4 border-black font-bold'>{yo(val,ele)}</td>
           <td className='border-4 border-black font-bold'>{ (yo(val,ele) - quant(val,ele))?.toFixed(2) }</td>
           <td className='border-4 border-black font-bold'>{waste(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{((yo(val,ele) - quant(val,ele))-waste(val,ele))?.toFixed(2)}</td>
+          <td className='border-4 border-black font-bold'>{(Math.abs(yo(val,ele) - quant(val,ele))-waste(val,ele))?.toFixed(2)}</td>
               </tr>
                   ))
 
