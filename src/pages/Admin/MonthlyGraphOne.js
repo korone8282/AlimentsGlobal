@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import Loader from '../../components/Loader';
-import Wrapper from '../../components/Wrapper'
+import Wrapper2 from '../../components/Wrapper2'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { GRAPH_URL } from '../../redux/Utils/constants';
@@ -41,9 +41,11 @@ const MonthlyGraphOne= () => {
 
               res.data.data.forEach((e,i) => {
                 const num =  e.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0);
+                const worker =  e.filter(obj => obj.sectionMain === 'Dispatch').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0);
                 arr.push({
                   "name":months[i].month,
                   "Pouches Packed":num,
+                  "Costing": (worker?(((worker*680)/num)*100000):0)
                 })
               });
 
@@ -71,7 +73,7 @@ const MonthlyGraphOne= () => {
     loading ? (
         <Loader/>
     ):( 
-        <Wrapper data={arr.slice(0,12)} dataKey={"Pouches Packed"}/>
+        <Wrapper2 data={arr.slice(0,12)} dataKey={["Pouches Packed","Costing"]}/>
     )
 }
 </div>

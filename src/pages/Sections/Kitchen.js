@@ -91,7 +91,7 @@ const Kitchen = () => {
         !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{val.workersQuantity}</td>) : (<td></td>)
        }   
        {
-        !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{((val.workersQuantity*500)/(sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity),0))).toFixed(3)}</td>) : (<td></td>)
+        !index ?  (<td rowSpan={sectionData[0].dataList.length+1} className='border-4 border-black font-bold '>{((val.workersQuantity*680)/(sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity),0))).toFixed(3)}</td>) : (<td></td>)
        }   
               </tr>
             ))

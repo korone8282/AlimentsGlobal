@@ -1,8 +1,8 @@
 import React from 'react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { CustomToolTip } from './CustomToolTip';
+import { CustomTip } from './CustomTip';
 
-const Chart = ({data,dataKey}) => {
+const ChartYearly = ({data,dataKey}) => {
   return (
     <div className='w-[100%] h-[45rem] sm:max-lg:h-96'>
     <ResponsiveContainer width="100%" height="100%">
@@ -48,7 +48,7 @@ const Chart = ({data,dataKey}) => {
                  fontWeight={700}
                  domain={[0,'dataMax + 5000']}
           />
-          <Tooltip content={<CustomToolTip/>}/>
+          <Tooltip content={<CustomTip/>}/>
 
           <Area type="monotone" 
                 dataKey={dataKey[0]} 
@@ -70,4 +70,4 @@ const Chart = ({data,dataKey}) => {
   )
 }
 
-export default Chart
+export default ChartYearly

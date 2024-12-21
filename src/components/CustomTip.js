@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TooltipCustom = styled.div`
+const ToolCustom = styled.div`
 padding: 5px 10px;
 background: rgba(19, 19, 20, 8.5);
 backdrop-filter: blur(5px);
@@ -29,21 +29,21 @@ margin-right: 10px;
 border-radius: 5px;
 border: 2px solid #fff`;
 
-export const CustomToolTip = ({active, payload, label}) =>{
+export const CustomTip = ({active, payload, label}) =>{
 
 if (active && payload && payload.length) {
 return(
-<TooltipCustom>
-<p>Date: {label}</p>
+<ToolCustom>
+<p>Month: {label}</p>
 <div>
 <Color color={payload[0].stroke}></Color>
 { `${payload[0].dataKey}: ${payload[0].value}`}
 </div>
 <div>
 <Color color={payload[1].stroke}></Color>
-{ `${payload[1].dataKey}: ${((payload[1].value)/10000).toFixed(2)}`}
+{ `${payload[1].dataKey}: ${((payload[1].value)/100000).toFixed(2)}`}
 </div>  
-</TooltipCustom>
+</ToolCustom>
 )}
 return null
 }

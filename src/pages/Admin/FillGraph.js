@@ -42,9 +42,11 @@ const FillGraph = () => {
   
                 res.data.data.forEach((e,i) => {
                   const num =  e.filter(obj => obj.sectionMain === 'Filling').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0);
+                  const worker =  e.filter(obj => obj.sectionMain === 'Filling').reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0);
                   arr.push({
                     "name":i+1,
                     "Pouches Filled":num,
+                    "Costing": (worker?(((worker*680)/num)*10000):0)
                   })
                 });
 
@@ -97,7 +99,7 @@ const FillGraph = () => {
     loading ? (
         <Loader/>
     ):( 
-        <Wrapper data={arr} dataKey={"Pouches Filled"}/>
+        <Wrapper data={arr} dataKey={["Pouches Filled","Costing"]}/>
     )
 }
 </div>
