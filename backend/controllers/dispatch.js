@@ -9,7 +9,6 @@ exports.readDispatch = async(req,res) => {
                   
         const existData = await Dispatch.find({}).sort({lDate: -1 });
 
-
              if(!existData.length){
                return res.status(404).json({
               message:"data doesn't exists",
@@ -161,7 +160,7 @@ exports.readDispatchedReport = async(req,res) => {
               message:"Data doesn't exists",
                     })
                     }
-                                
+                             
                 res.status(200).json({
                     success:true,
                     data:existData,
