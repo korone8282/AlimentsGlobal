@@ -3,7 +3,15 @@ import './Loader.css';
 
 const Loader = () => {
   return (
-      <div className="clock"></div>
+    <div id="page">
+    <div id="container">
+        <div id="ring"></div>
+        <div id="ring"></div>
+        <div id="ring"></div>
+        <div id="ring"></div>
+        <div id="h3">Loading...</div>
+    </div>
+</div>
   )
 }
 
