@@ -7,7 +7,8 @@ exports.readDispatch = async(req,res) => {
     try {
                                     
                   
-        const existData = await Dispatch.find({});
+        const existData = await Dispatch.find({}).sort({lDate: -1 });
+
 
              if(!existData.length){
                return res.status(404).json({
@@ -153,7 +154,7 @@ exports.readDispatchedReport = async(req,res) => {
         lDate:{
             $gte:startDate,
             $lte:endDate
-        },});
+        },}).sort({lDate: -1 });;
 
              if(!existData.length){
                return res.status(404).json({
