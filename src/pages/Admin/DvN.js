@@ -42,7 +42,7 @@ const DvN = () => {
           console.log(e);
         }
       }
-
+console.log(data)
   return (
     <div>
       
@@ -116,9 +116,7 @@ const DvN = () => {
  }</td>
 
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
  }</td>
 
  <td className='border-4 border-black font-bold '>{
@@ -128,7 +126,7 @@ const DvN = () => {
    data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
  }</td>
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
+   data.filter(item=>item.dayTime === "Day" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
  }</td>
          </tr>
 
@@ -152,9 +150,7 @@ const DvN = () => {
  }</td>
 
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
  }</td>
 
  <td className='border-4 border-black font-bold '>{
@@ -164,7 +160,7 @@ const DvN = () => {
    data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
  }</td>
  <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
+   data.filter(item=>item.dayTime === "Night" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
  }</td>
          </tr>
 
