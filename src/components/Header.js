@@ -1,10 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Link} from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import ProfileMenu from './ProfileMenu';
 import { AiOutlineHome} from "react-icons/ai";
+import Calc from './Calc';
+import { FaCalculator } from "react-icons/fa6";
 
 const Header = () => {
+
+  const [calc, setCalc] = useState(0);
 
   const date = new Date().toLocaleDateString("en-US", {
     month: "long",
@@ -15,7 +19,7 @@ const Header = () => {
   const {userinfo} = useSelector(state=>state.auth);
 
   return ( 
-      <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between '>
+      <div className='w-full h-14 text-[#f59e0b] bg-black flex items-center justify-between select-none'>
 
        <Link to="/" className='flex items-center w-[30rem] text-2xl font-bold mx-10 sm:max-lg:text-lg sm:max-lg:mx-14'>
         Aliments Global Private Limited
@@ -24,9 +28,20 @@ const Header = () => {
   
         <div className='flex text-xl gap-16 items-center font-bold mx-8 sm:max-lg:gap-8'>
 
+    
+        <FaCalculator onClick={()=>setCalc(!calc)}/>
+        {
+          calc ? (<div className="z-10 mt-[50rem]" >
+            <Calc />
+          </div>):(
+            null
+          )
+        }
+
         <Link to="/">
           <AiOutlineHome  size={32} />
         </Link>
+
         
       <div className='flex gap-6 items-center'>
       
