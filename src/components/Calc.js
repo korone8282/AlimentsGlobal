@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import { toast } from 'react-toastify';
 import { FaMicrophone } from "react-icons/fa6";
+import {evaluate} from 'mathjs'
 
 const Calc = () => {
 
@@ -33,11 +34,11 @@ const Calc = () => {
 
   function calc(){
     try {
-      setVal(eval(val));
+      setVal(evaluate(val));
     } catch (error) {
       toast("Enter Correctly")
+      console.log(error)
     }
-
   }
 
   function editHandle(e){
