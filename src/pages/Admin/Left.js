@@ -226,8 +226,8 @@ error ? (
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
           <td className='border-4 border-black font-bold'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchPacked }</td>
-          <td className='border-4 border-black font-bold'>{ele.box}</td>
+          <td className='border-4 border-black font-bold p-2'>{ele.pouchPacked }</td>
+          <td className='border-4 border-black font-bold p-2'>{ele.box}</td>
           </tr>
         ))
       ))
@@ -237,8 +237,8 @@ error ? (
       <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
       <td className='border-4 border-black font-bold'>-</td>
       <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
 
         </tr>
 
@@ -272,8 +272,8 @@ error ? (
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
           <td className='border-4 border-black font-bold'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchPacked }</td>
-          <td className='border-4 border-black font-bold'>{ele.box}</td>
+          <td className='border-4 border-black font-bold p-2'>{ele.pouchPacked }</td>
+          <td className='border-4 border-black font-bold p-2'>{ele.box}</td>
           </tr>
         ))
       ))
@@ -283,8 +283,8 @@ error ? (
       <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
       <td className='border-4 border-black font-bold'>-</td>
       <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
 
         </tr>
 
