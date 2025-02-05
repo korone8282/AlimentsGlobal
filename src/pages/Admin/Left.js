@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
-import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL ,DISPATCH_URL } from '../../redux/Utils/constants';
+import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL  } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
-import { Link } from 'react-router-dom';
 import { TbFilterCog } from "react-icons/tb";
 import { CiWifiOff } from "react-icons/ci";
 import {toast} from 'react-toastify';
+import { FiSearch } from "react-icons/fi";
 
 const Left = () => {
 
     const [data, setData] = useState([]);
-    const [openBox2, setopenBox2] = useState(0);
+
+    const [info, setInfo] = useState({
+      start:"",
+      end:"",
+  });
+
     const [loading2, setLoading2] = useState(0);
+    const [search, setsearch] = useState("");
     const [products2, setproducts2] = useState([]);
+    const [ogData, setogData] = useState([]);
+    const [dummy, setdummy] = useState();
     const [item, setitem] = useState();
     const [obj, setobj] = useState();
     const [error, setError] = useState(0);
@@ -21,17 +29,13 @@ const Left = () => {
     const [openBox, setopenBox] = useState(0);
     const [categories, setcategories] = useState([]); 
     const [openBox3, setopenBox3] = useState();
-    const [info, setInfo] = useState({
-      filling:"",
-      i:"",
-      product:"",
-      id:"",
-      packed:"",
-      box:"",
-      issue:"",
-      count:"",
-      element:"",
-    });
+
+    const inputHandler = async(e) =>{
+      setInfo((prevData) => ({
+        ...prevData,
+        [e.target.name]: e.target.value
+      }));
+    }
 
     const {userinfo} = useSelector(state=>state.auth);
 
@@ -70,6 +74,8 @@ const Left = () => {
 
       const res = await apiConnector(`${DATA_URL}/Left`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
       setData(res.data.data);
+      setogData(res.data.data);
+      setdummy(res.data.data);
       setLoading2(0);
 
     } catch (error) {
@@ -84,77 +90,107 @@ const Left = () => {
 
       }, [userinfo.token]);
 
-const inputHandler = async(e) =>{
-    setInfo((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value
-    }));
-  }
+      function handleSearch(val) {
 
-async function handleUpdate(){
-  try {
+        if (val === ""){ 
+          setData(dummy)
+          return
+          }
 
-    await apiConnector(`${DISPATCH_URL}/Update/${info.id}`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
-    setopenBox2(!openBox2);
-    setInfo({
-      filling:"",
-      i:"",
-      product:"",
-      id:"",
-      packed:"",
-      box:"",
-      issue:"",
-      count:"",
-      element:"",
-    })
-    toast("Successfully Updated");
-    window.location.reload();
-  } catch (error) {
-    toast(error.response.data.message)
-  }
+         setsearch(val);
 
-}
+         let filterBySearch = ogData.filter((item) => { 
+          return item.sectionMain === "Dispatch" && item.dataList.filter((object) => {
+                return object.batch.toLowerCase().startsWith(val.toLowerCase())
+          }).length > 0
+         })
+
+         setogData(dummy)
+         setData(filterBySearch); 
+       }
+
+ async function getDateData(){
+        try {
+        setError(0);
+        setLoading2(1);
+        
+        const res = await apiConnector(`${DATA_URL}/DvN`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+
+        setData(res.data.data);
+
+        setLoading2(0);
+        
+
+        } catch (e) {
+          setError(1);
+          console.log(e);
+        }
+      }
 
   return (
     <div className='relative'>
 {
 error ? (
-    <div className='font-bold text-7xl mt-64 sm:max-lg:mt-4 flex items-center justify-center gap-4'>  
+    <div className='font-bold text-7xl mt-64 sm:max-lg:mt-4 flex items-center h-10 justify-center gap-1'>  
 <div>Network Issue</div> 
 <div className='mt-2'> <CiWifiOff /> </div> 
 </div>
 ) : ( 
   <div>
 
-<div className='flex items-center justify-center mx-4'>
+<div className='flex items-center justify-evenly gap-4 '>
 
-<div className='flex gap-20 sm:max-lg:gap-8'>
 <div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
     onClick={()=>setopenBox(!openBox)}>
     <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
     <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
 </div>
 
-
 <div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
     onClick={()=>setopenBox3(!openBox3)}>
     <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
     <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
 </div>
+
+<div className={` text-4xl  font-bold my-8 sm:max-lg:hidden`}>Product</div> 
+
+<div className='flex gap-20 sm:max-lg:gap-8 '>
+
+<div className='flex font-bold items-center gap-10 text-lg'>
+<div>
+        <label>Start: </label>
+            <input type='date'
+                   name='start'
+                   onChange={ e => inputHandler(e) }
+            />
+        </div>
+        <div>
+        <label>End: </label>
+            <input type='date'
+                   name='end'
+                   onChange={ e => inputHandler(e) }
+            />
+        </div>
+        <div className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
+             onClick={getDateData}
+             >Submit</div>
 </div>
 
-<div className={` text-6xl mx-40 sm:max-lg:mx-8 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div> 
 
-<Link 
-      to="Packed-Report"
-      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] text-center py-2.5 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Packed
-        
-      </Link>
+</div>
 
 </div>
 {/* end div */}
 
-
+<div className='flex justify-center'>
+<input type='text'
+       onChange={(e)=>handleSearch(e.target.value)}
+       className=' relative w-80 rounded-l-lg h-10 bg-slate-300 focus:outline-none p-4'
+/>
+<i className='mr-2 bg-slate-500 h-10 w-11 rounded-r-lg'>
+<FiSearch className='mt-1.5 ml-2 text-white' size={26}/>
+</i>
+</div>
 {/* table */}
 
 {
@@ -166,15 +202,13 @@ error ? (
         !obj && !item ? (
           <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
-  <tr className='bg-[#f59e0b]'>
+  <tr className='bg-[#f59e0b] mx-auto'>
     <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
     <td rowSpan={2} className='border-4 border-black p-2'>Shift</td>
     <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch (Retort)</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Incubation (In)</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
   </tr>
@@ -183,29 +217,17 @@ error ? (
 {   
   data.length ? (<tbody>
       {
-        data.filter( obj => obj.sectionMain === "Filling").map(val=>(
-        val.dataList.filter( object => object.retortCycle !== object.pouchQuantity ).map((ele,i)=>(
-          <tr key={i}
-              className='hover:bg-slate-300'
-              onClick = {()=>{
-              setInfo((prevData) => ({
-                     ...prevData,
-                     i:i,
-                     id: val._id,
-                     count:ele.pouchQuantity,
-                     element:ele,
-                    }));
-            setopenBox2(!openBox2)}}>
-          <td className='border-4 border-black font-bold p-2'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
-          <td className='border-4 border-black font-bold sm:max-lg:hidden p-2'>{val.dayTime}</td>
+        data.filter( obj => obj.sectionMain === "Dispatch").map(value=>(
+        value.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).map((ele,i)=>(
+          <tr key={i} className='hover:bg-slate-300'>
+          <td className='border-4 border-black font-bold p-2'>{value.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
+          <td className='border-4 border-black font-bold p-2'>{value.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
-          <td className='border-4 border-black font-bold'>{ele.retortCycle}</td>
+          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchPacked }</td>
+          <td className='border-4 border-black font-bold'>{ele.box}</td>
           </tr>
         ))
       ))
@@ -213,12 +235,10 @@ error ? (
      
       <tr className='text-center bg-[#f59e0b]'>  
       <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
-      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
-      <td className='border-4 border-black font-bold sm:max-lg:hidden'>-</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
-      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>-</td>
+      <td className='border-4 border-black font-bold'>-</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
 
         </tr>
 
@@ -229,56 +249,43 @@ error ? (
           <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
 <tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black p-4'>Date</th>
-    <td rowSpan={2} className='border-4 border-black p-4'>Shift</td>
-    <th rowSpan={2} className='border-4 border-black p-4'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Pouch (Retort)</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Incubation (In)</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black p-4'>Box</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
+    <td rowSpan={2} className='border-4 border-black p-2'>Shift</td>
+    <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
   </tr>
 </thead>
 
 {   
   data.length ? (<tbody>
       {
-        data.filter( obj => obj.sectionMain === "Filling").map(val=>(
-        val.dataList.filter( object => object.retortCycle !== object.pouchQuantity && item ? (object.productName === item) : (object.buyerName === obj) ).map((ele,i)=>(
-          <tr key={i}
-              className='hover:bg-slate-300'
-              onClick = {()=>{
-              setInfo((prevData) => ({
-                     ...prevData,
-                     i:i,
-                     id: val._id,
-                     count:ele.pouchQuantity,
-                     element:ele,
-                    }));
-            setopenBox2(!openBox2)}}>
-          <td className='border-4 border-black font-bold'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
-          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{val.dayTime}</td>
+        data.filter( obj => obj.sectionMain === "Dispatch").map(val=>(
+          val.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).map((ele,i)=>(
+          <tr key={i} className='hover:bg-slate-300'>
+          <td className='border-4 border-black font-bold p-2'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
+          <td className='border-4 border-black font-bold p-2'>{val.dayTime}</td>
           <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
           <td className='border-4 border-black font-bold'>{ele.productName}</td>
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold sm:max-lg:hidden'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchQuantity }</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchQuantity - (ele.pouchPerCycle ? ele.pouchPerCycle : 0)}</td>
-          <td className='border-4 border-black font-bold'>{ele.pouchPerCycle }</td>
-          <td className='border-4 border-black font-bold'>{ele.retortCycle}</td>
+          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
+          <td className='border-4 border-black font-bold'>{ele.pouchPacked }</td>
+          <td className='border-4 border-black font-bold'>{ele.box}</td>
           </tr>
         ))
       ))
       }
      
       <tr className='text-center bg-[#f59e0b]'>  
-      <td colSpan='6' className='border-4 border-black font-bold'>Total</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + object.pouchQuantity,0),0)}</td>
-      <td className='border-4 border-black font-bold'>{(data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchQuantity || 0),0),0) - data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)).toFixed(2)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.pouchPerCycle || 0),0),0)}</td>
-      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,o)=> acc+o.dataList.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce( (accumulator, object) => accumulator + (object.retortCycle || 0),0),0)}</td>
+      <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
+      <td className='border-4 border-black font-bold'>-</td>
+      <td className='border-4 border-black font-bold'>-</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+      <td className='border-4 border-black font-bold'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
+
         </tr>
 
     </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
@@ -317,82 +324,6 @@ error ? (
     ) : null
 }
 
-{
-            openBox2 ? (
-      <div className="space-y-3 fixed top-[18rem] left-[33rem] bg-slate-300 p-5 [ bg-gradient-to-b from-white/35 to-white/5 ]
-    [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] w-[30rem] rounded-lg sm:max-lg:left-[13.5rem] sm:max-lg:top-[2.5rem]">
-       
-      <div className='flex justify-between gap-3'>
-  <label htmlFor="confirPassword" className='font-bold text-xl'>
-     Filling Count :
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "filling"
-         placeholder={info.count}
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-  </div>
-
-<div className='flex justify-between gap-3'>
-<label htmlFor="confirPassword" className='font-bold text-xl'>
-     Packed Count : 
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "packed"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-
-<div className='flex justify-between gap-3'>
-<label htmlFor="confirPassword" className='font-bold text-xl'>
-    Box : 
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "box"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-
-<div className='flex justify-between sm:max-lg:items-center'>
-<label htmlFor="Datex" className='font-bold text-xl'>
-      Issue Date
-</label>
-<input type='date' 
-       id="Datex" 
-       name="issue" 
-       onChange={ e => inputHandler(e) }
-       className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-       />
-</div>
-
-
-        <div className="flex justify-center gap-24">
-          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-          onClick={()=>setopenBox2(!openBox2)}> 
-            Cancel
-          </button>
-          
-          <button
-          type='submit'
-          onClick={handleUpdate}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Update
-            </button>
-        </div>
-      </div>
-
-            ) : (
-              null
-            )
-}
 
 {
     openBox3 ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[17.9rem] sm:max-lg:top-[2.9rem] left-[26.5rem] max-w-60 top-[5.2rem] rounded-lg border-black border-2 p-2`}>

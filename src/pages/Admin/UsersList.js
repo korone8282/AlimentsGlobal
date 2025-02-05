@@ -29,7 +29,7 @@ const UserList = () => {
   }, [userinfo.token]);
  
   return (
-    <div className='text-3xl h-screen bg-white'>
+    <div className='text-3xl '>
   {
     loading ? (<Loader/>
     ) : (

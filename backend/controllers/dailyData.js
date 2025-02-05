@@ -206,7 +206,7 @@ exports.readDvN = async(req,res) => {
                         const existData = await Data.find({createdAt:{
                             $gte:startDate,
                             $lte:endDate
-                        }});
+                        }}).sort({"createdAt": -1});
                       
                             if(!existData.length){
                              return res.status(404).json({
@@ -302,11 +302,17 @@ exports.ProductData = async(req,res) => {
                          
 exports.readLeft = async(req,res) => {
                             try {
-                                const startDate = new Date("2024-10-20");
+                            
+                                const startDate = new Date();
 
                                 startDate.setHours(0, 0, 0, 0);
 
-                                const existData = await Data.find({createdAt:{ $gte:startDate }}).sort({"createdAt": 1});
+                                const endDate = new Date(startDate - 7 * 24 * 60 * 60 * 1000);
+
+                                const existData = await Data.find({createdAt:{
+                            $gte:endDate,
+                            $lte:startDate
+                        }}).sort({"createdAt": -1});
 
                                     if(!existData.length){
                                      return res.status(404).json({

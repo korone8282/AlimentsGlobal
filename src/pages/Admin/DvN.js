@@ -42,7 +42,7 @@ const DvN = () => {
           console.log(e);
         }
       }
-console.log(data)
+
   return (
     <div>
       
