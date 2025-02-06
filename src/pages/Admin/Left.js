@@ -22,8 +22,8 @@ const Left = () => {
     const [products2, setproducts2] = useState([]);
     const [ogData, setogData] = useState([]);
     const [dummy, setdummy] = useState();
-    const [item, setitem] = useState();
-    const [obj, setobj] = useState();
+    const [item, setitem] = useState("");
+    const [buyerName, setbuyerName] = useState("");
     const [error, setError] = useState(0);
     const [products, setproducts] = useState([]);
     const [openBox, setopenBox] = useState(0);
@@ -108,7 +108,7 @@ const Left = () => {
          setogData(dummy)
          setData(filterBySearch); 
        }
-
+       
  async function getDateData(){
         try {
         setError(0);
@@ -128,7 +128,7 @@ const Left = () => {
           console.log(e);
         }
       }
-
+console.log(item)
   return (
     <div className='relative'>
 {
@@ -201,7 +201,7 @@ error ? (
   ) : (
     <div>
       {
-        !obj && !item ? (
+        !buyerName && !item ? (
           <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
   <tr className='bg-[#f59e0b] mx-auto'>
@@ -266,7 +266,16 @@ error ? (
   data.length ? (<tbody>
       {
         data.filter( obj => obj.sectionMain === "Dispatch").map(val=>(
-          val.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).map((ele,i)=>(
+          val.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (item) {
+              return matchesSearch && object.productName === item;
+            }
+            else if (buyerName) {
+              return matchesSearch && object.buyerName === buyerName;
+            }
+            return matchesSearch;
+          }).map((ele,i)=>(
           <tr key={i} className='hover:bg-slate-300'>
           <td className='border-4 border-black font-bold p-2'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
           <td className='border-4 border-black font-bold p-2'>{val.dayTime}</td>
@@ -285,8 +294,28 @@ error ? (
       <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
       <td className='border-4 border-black font-bold'>-</td>
       <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
+      
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (item) {
+              return matchesSearch && object.productName === item;
+            }
+            else if (buyerName) {
+              return matchesSearch && object.buyerName === buyerName;
+            }
+            return matchesSearch;
+          }).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+
+      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (item) {
+              return matchesSearch && object.productName === item;
+            }
+            else if (buyerName) {
+              return matchesSearch && object.buyerName === buyerName;
+            }
+            return matchesSearch;
+          }).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
 
         </tr>
 
@@ -308,13 +337,13 @@ error ? (
     openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[6.9rem] sm:max-lg:top-[3rem] left-[12rem] max-w-60 top-[5rem] rounded-lg border-black border-2 p-2`}>
         {
           categories.map((val,ind)=>(
-                <div className={`flex items-center ${val === obj ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
+                <div className={`flex items-center ${val === buyerName ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
                      key={ind}
                      name='obj'
                      onClick={()=>{
                         let p = products.filter(item => item.buyer === val.name)
                             setproducts2(p)
-                            setobj(val.name)
+                            setbuyerName(val.name)
                             setitem("")
                             setopenBox(0)}}>
                     ⦿ {val.name}
