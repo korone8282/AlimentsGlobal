@@ -199,55 +199,7 @@ error ? (
   loading2 ? (
     <div className='absolute top-[20rem] left-[50rem] sm:max-lg:left-[25rem] sm:max-lg:top-[10rem]'> <Loader/> </div>
   ) : (
-    <div>
-      {
-        !buyerName && !item ? (
-          <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
-<thead>
-  <tr className='bg-[#f59e0b] mx-auto'>
-    <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
-    <td rowSpan={2} className='border-4 border-black p-2'>Shift</td>
-    <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
-  </tr>
-</thead>
 
-{   
-  data.length ? (<tbody>
-      {
-        data.filter( obj => obj.sectionMain === "Dispatch").map(value=>(
-        value.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).map((ele,i)=>(
-          <tr key={i} className='hover:bg-slate-300'>
-          <td className='border-4 border-black font-bold p-2'>{value.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
-          <td className='border-4 border-black font-bold p-2'>{value.dayTime}</td>
-          <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
-          <td className='border-4 border-black font-bold'>{ele.productName}</td>
-          <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold p-2'>{ele.pouchPacked }</td>
-          <td className='border-4 border-black font-bold p-2'>{ele.box}</td>
-          </tr>
-        ))
-      ))
-      }
-     
-      <tr className='text-center bg-[#f59e0b]'>  
-      <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
-      <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => object.batch.toLowerCase().startsWith(search.toLowerCase())).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
-
-        </tr>
-
-    </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
-  }
-        </table>
-        ) : (
           <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
 <thead>
 <tr className='bg-[#f59e0b]'>
@@ -322,9 +274,7 @@ error ? (
     </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
   }
         </table>
-        )
-      }
-    </div>
+    
   )
 }
         
