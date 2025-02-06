@@ -117,6 +117,8 @@ const Left = () => {
         const res = await apiConnector(`${DATA_URL}/DvN`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
 
         setData(res.data.data);
+        setogData(res.data.data);
+        setdummy(res.data.data);
 
         setLoading2(0);
         
