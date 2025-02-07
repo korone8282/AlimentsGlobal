@@ -69,7 +69,8 @@ const KvF = () => {
         "day":ele.dayTime,
         "product":e.productName,
         "count":e.pouchQuantity,
-        "size":e.packSize
+        "size":e.packSize,
+        "filled":e.filled
       }
 
 
@@ -133,7 +134,7 @@ const KvF = () => {
 
     if ( array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )){
       let item = array.find( obj => obj.day === val.dayTime && obj.product === ele.productName )
-      return (ele.filled+item.filled ? ele.filled+item.filled.toFixed(2) : 0);
+      return (ele.filled+item.filled ? (ele.filled+item.filled).toFixed(2) : 0);
     } else {
       return (ele.filled ? ele.filled.toFixed(2) : 0)
     }
