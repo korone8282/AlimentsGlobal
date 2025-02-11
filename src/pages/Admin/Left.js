@@ -210,6 +210,7 @@ error ? (
     <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
+    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Leaked</th>
     <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
   </tr>
 </thead>
@@ -236,6 +237,7 @@ error ? (
           <td className='border-4 border-black font-bold'>{ele.batch}</td>
           <td className='border-4 border-black font-bold'>{ele.packSize }</td>
           <td className='border-4 border-black font-bold p-2'>{ele.pouchPacked }</td>
+          <td className='border-4 border-black font-bold p-2'>{ele.leaked }</td>
           <td className='border-4 border-black font-bold p-2'>{ele.box}</td>
           </tr>
         ))
@@ -257,6 +259,17 @@ error ? (
             }
             return matchesSearch;
           }).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+
+          <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (item) {
+              return matchesSearch && object.productName === item;
+            }
+            else if (buyerName) {
+              return matchesSearch && object.buyerName === buyerName;
+            }
+            return matchesSearch;
+          }).reduce( (accumulator, object) => accumulator + (object.leaked || 0),0),0)}</td>
 
       <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
             const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());

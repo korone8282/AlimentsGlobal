@@ -307,7 +307,7 @@ exports.readLeft = async(req,res) => {
 
                                 startDate.setHours(0, 0, 0, 0);
 
-                                const endDate = new Date(startDate - 7 * 24 * 60 * 60 * 1000);
+                                const endDate = new Date(startDate - 14 * 24 * 60 * 60 * 1000);
 
                                 const existData = await Data.find({createdAt:{
                             $gte:endDate,
