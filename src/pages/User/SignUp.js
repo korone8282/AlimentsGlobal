@@ -169,7 +169,7 @@ const SignUp = () => {
                        />
   
            <button onClick={submitHandle}
-                   className='mt-6 h-8 bg-pink-600 w-16 rounded-md'
+                   className='text-xl mt-6 font-semibold h-16 w-[9.6rem] text-center hover:bg-white hover:text-black rounded-xl bg-[#f59e0b]'
                    >
             Submit
           </button>

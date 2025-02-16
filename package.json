@@ -4,13 +4,18 @@
   "private": true,
   "dependencies": {
     "@fseehawer/react-circular-slider": "^2.7.0",
+    "@radix-ui/react-popover": "^1.1.6",
+    "@radix-ui/react-slot": "^1.1.2",
     "@react-oauth/google": "^0.12.1",
     "@reduxjs/toolkit": "^2.2.3",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "class-variance-authority": "^0.7.1",
     "concurrently": "^8.2.2",
+    "framer-motion": "^12.4.3",
+    "lucide-react": "^0.475.0",
     "mathjs": "^14.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,6 +28,7 @@
     "recharts": "^2.13.3",
     "styled-component": "^2.8.0",
     "styled-components": "^6.1.13",
+    "tailwind-merge": "^3.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

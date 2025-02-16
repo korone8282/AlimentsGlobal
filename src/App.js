@@ -8,7 +8,6 @@ import Kitchen from './pages/Sections/Kitchen'
 import Login from './pages/User/Login'
 import SignUp from './pages/User/SignUp'
 import DataLog from './components/DataLog'
-import Date from './pages/Date'
 import AdminRoute from './components/AdminRoute'
 import UsersList from './pages/Admin/UsersList'
 import OtpLogin from './pages/User/OtpLogin'
@@ -30,7 +29,6 @@ import ProductData from './pages/Admin/ProductData'
 import Report from './pages/Admin/Report'
 import Left from './pages/Admin/Left'
 import DispatchReport from './pages/Admin/DispatchReport'
-import PackedReport from './pages/Admin/PackedReport'
 import Exports from './pages/Admin/Exports'
 import Container from './pages/Admin/Container'
 import ContainerList from './pages/Admin/ContainerList'
@@ -43,6 +41,7 @@ import MonthlyGraphThree from './pages/Admin/MonthlyGraphThree'
 import Graph from './pages/Admin/Graph'
 import Dispatched from './pages/Admin/Dispatched'
 import Pouch from './pages/Admin/Pouch'
+import Month from './components/Month'
 
 const App = () => {
   
@@ -79,7 +78,7 @@ const App = () => {
      <Route path='Kitchen/:month' element={<Kitchen/>} />
      <Route path='Filling/:month' element={<Filiing/>} />
      <Route path='Dispatch/:month' element={<Dispatch/>} />
-     <Route path='Date' element={<Date/>} />
+     <Route path='Month' element={<Month/>} />
      <Route path=':section/:month' element={<DataLog/>} />
      <Route path='BuyerList' element={<Buyer/>}></Route>
      <Route path='ProductList' element={<Product/>}></Route>
@@ -88,7 +87,6 @@ const App = () => {
      <Route path='Pouch' element={<Pouch/>}></Route>
      <Route path='Daily-List' element={<KvF/>}></Route>
      <Route path='Dispatched/Dispatch-Report' element={<DispatchReport/>}></Route>
-     <Route path='Left/Packed-Report' element={<PackedReport/>}></Route>
      <Route path='Graph/Dispatch-Graph' element={<DispGraph/>}></Route>
      <Route path='Graph/Filling-Graph' element={<FillGraph/>}></Route>
      <Route path='Graph/Kitchen-Graph' element={<KitchenGraph/>}></Route>

@@ -9,6 +9,7 @@ import CircularSlider from '@fseehawer/react-circular-slider';
 import { setGoalDate } from '../../redux/Slices/goalSlice';
 import { CATEGORIES_URL  } from '../../redux/Utils/constants';
 import { PRODUCT_URL } from '../../redux/Utils/constants';
+import styled from 'styled-components';
 
 const ProductionGoal = () => {
 
@@ -26,7 +27,6 @@ const ProductionGoal = () => {
   const [goals, setGoals] = useState();
   const [currentGoal, setcurrentGoal] = useState();
   const [error, setError] = useState(0);
-  const [newtime, setnewtime] = useState(new Date().toLocaleString());
 
   const date = useSelector(state=>state.goal);
 
@@ -164,257 +164,303 @@ const inputHandler = async(e) =>{
   }
 
   return (
-    <div>
+    <div className={`min-h-screen bg-background p-6 `}>
+      <div className="max-w-[95rem] mx-auto">
+        <div className="mb-8 space-y-7">
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-semibold text-foreground">Daily Goals</h1>
+            <div className="flex items-center space-x-4">
+              <label className="text-md text-muted-foreground">Updated At:</label>
+              <span className="bg-[#25282d] px-3 py-1 rounded-md text-sm text-muted-foreground">
+                {new Date().toLocaleString()}
+              </span>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <label className="text-lg text-muted-foreground">Plan for:</label>
+            <input
+              type="date"
+              value={info.date}
+              name='date'
+              onChange={e =>{ 
+                              inputHandler(e);
+                              dispatch(setGoalDate(e.target.value));
+                              window.location.reload();
+                            }}
+              className="border bg-[#22252a] border-border rounded-md px-3 py-1.5 text-md focus:outline-none focus:ring-2 focus:ring-ring text-muted-foreground shadow-md"
+            />
+          </div>
+        </div>
 
-<div>
-    <div onClick={()=>setnewtime(new Date().toLocaleString())}
-         className='mx-10 mt-4 cursor-pointer select-none text-2xl font-bold'>Updated At: <span className='bg-red-300'>{newtime}</span></div>
-</div>
-<h2 className='text-center text-3xl font-bold my-7 mx-auto'>Plan for : <input type='date' 
-                                                                              name='date' 
-                                                                              value={info.date} 
-                                                                              onChange={e =>{ 
-                                                                                inputHandler(e);
-                                                                                dispatch(setGoalDate(e.target.value));
-                                                                                window.location.reload();
-                                                                              }}></input> </h2>
+{
+  error ? (
+<div className='text-center text-9xl'>No Data Found</div>
+  ):(
+  <div>
     {
-      error ? (<div className='text-center font-bold text-7xl my-auto sm:max-lg:mt-4'>No Plans Found</div>
-      ) :(
-        <div>
-    {
-      loading ? (
-        <Loader/>
-      ) : (
-        <div className="flex flex-wrap gap-6 sm:max-lg:gap-3 sm:max-lg:justify-between mx-6 sm:max-lg:mx-5 my-6">
+      loading ? (<Loader/>
+      ):(
+        <div className={`flex flex-wrap justify-evenly ${openBox ? 'hidden' : ''} gap-20 max-w-[100rem]`}>
         {
           goals?.map((val,index)=>(
             <div key={index} 
-                 className='flex gap-12 border-2  text-[#f59e0b] bg-black rounded-lg p-4 sm:max-lg:gap-8'
+                 className='flex gap-12 border-2 text-[#f59e0b] bg-[#22252a] rounded-lg p-8 max-h-96 mx-2 px-12 sm:max-lg:gap-8'
                  onClick={()=>{
                   setopenBox(!openBox);
                   setcurrentGoal(val)}}>
 
-            <div className='flex flex-col text-2xl justify-evenly font-bold sm:max-lg:text-lg max-w-48 sm:max-lg:max-w-32'>
-            <div className='text-white -mb-2'> Buyer Name: </div>
+            <div className='flex flex-col gap-1 text-2xl justify-evenly font-bold sm:max-lg:text-lg max-w-48 sm:max-lg:max-w-32'>
+            <div className='text-white'> Buyer Name: </div>
             <div className='mb-2'>{val.buyerName}</div>
-            <div className='text-white -mb-2'> Product Name: </div>
+            <div className='text-white'> Product Name: </div>
             <div className='mb-2'>{val.fname}</div>
-            <div className='text-white -mb-2'> Batch No: </div>
+            <div className='text-white'> Batch No: </div>
             <div className='mb-2'>{val.batchNum}</div>
-            <div className='text-white -mb-2'>Pack Size (Kg):</div>
+            <div className='text-white'>Pack Size (Kg):</div>
             <div className='mb-2'>{val.pouchSize}</div>
             </div>
              
 
-              <div className='flex flex-col items-center gap-5'>
-
-            <CircularSlider
+<div className='flex flex-col items-center gap-6'>
+              <div className="flex w-[200px] h-[200px] justify-center items-center relative">
+    <div className="w-[110%] h-[110%] shadow-lg shadow-pink-500 bg-transparent rounded-full absolute animate-spin_right"></div>                
+    <div className="w-[108%] h-[108%] shadow-lg shadow-violet-500 bg-transparent rounded-full absolute animate-spin_left"></div>
+    <div className="w-[106%] h-[106%] shadow-lg shadow-cyan-500 bg-transparent rounded-full absolute animate-spin_right_fast"></div>
+    <CircularSlider
             label="Completion"
             labelFontSize='1rem'
             valueFontSize='2rem'
             verticalOffset='0.5rem'
             width={200}
             labelColor='#f59e0b'           
-            progressColorFrom="red"
+            progressColorFrom="#f59e0b"
             progressColorTo="#f59e0b"
             hideKnob={true}
-            progressSize={24}
+            progressSize={20}
             value={`${((val.pouchPacked / val.pouchGoal)*100).toFixed(2)}`}
             appendToValue='%'
-            trackColor="#eeeeee"
+            trackColor=""
             trackSize={24}
             initialValue={(val.pouchPacked / val.pouchGoal)*100}
             knobDraggable={false}
             dataIndex={(val.pouchPacked / val.pouchGoal)*360}
             />
+</div>
+            
 
-                <div className='text-3xl sm:max-lg:text-xl font-bold'> {val.pouchPacked} / {val.pouchGoal} </div>
+                <div className='text-3xl my-2 sm:max-lg:text-xl font-bold'> {val.pouchPacked} / {val.pouchGoal} </div>
 
-                <div className='text-3xl sm:max-lg:text-xl font-bold'>{val.day}</div>
+                <div className='text-3xl -my-3 sm:max-lg:text-xl font-bold'>{val.day}</div>
               </div>
              
             </div>
           ))
         }
-      </div>
+        </div>
       )
     }
+  </div>
+  )
+}
      
-          {
-            openBox ? (
-      <div className="fixed top-[2%] sm:max-lg:fixed z-10 flex my-5 left-[18%] sm:max-lg:left-16 sm:max-lg:-top-4 h-[45rem] backdrop-blur-xl
-    [ bg-gradient-to-b from-white/65 to-white/45 ]
-    [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl sm:max-lg:text-lg gap-12 mx-9 sm:max-lg:gap-[0.9rem] sm:max-lg:my-2'>
-              <div className='flex justify-between gap-16'>
 
-<div className='flex gap-6 items-center'>
-<label htmlFor="name">
-      Buyer Name :
-</label>
-<select
+        {
+            openBox ? (
+              <div className={`bg-[#22252a] text-white  p-6 rounded-lg shadow-lg w-full max-w-md z-30 h-fit absolute inset-0 m-auto`}>
+        <h2 className="text-xl font-semibold mb-4">Update Goal</h2>
+        <div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Buyer Name</label>
+                <select
          name='buyerName'
-         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 sm:max-lg:h-14 text-center rounded-xl bg-[#f59e0b]'
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
          value={info.buyerName}
          onChange={ e => inputHandler(e) }
     >
-    <option className=' bg-[#f59e0b] text-black '>{currentGoal.buyerName}</option>
+    <option className=' bg-[#2e3138] text-muted-foreground '>Select</option>
     {
-        categories.map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val.name} key={index}>{val.name}</option>))
+        categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
     }
     </select>
 </div>
-
-<div className='flex gap-6 items-center'>
-<label htmlFor="name">
-      Product Name :
-</label>
-<select
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Product Name</label>
+                <select
          name='fname'
-         className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 sm:max-lg:h-14 text-center rounded-xl bg-[#f59e0b]'
+           className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
          value={info.fname}
          onChange={ e => inputHandler(e) }
     >
-    <option className=' bg-[#f59e0b] text-black'>{currentGoal.fname}</option>
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
     {
-        products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val.name} key={index}>{val.name}</option>))
+        products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
     }
     </select>
 </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Batch Number</label>
+                <input  type='text' 
+                        id="email" 
+                        value={info.batchNum}
+                        placeholder={currentGoal.batchNum}
+                        name="batchNum" 
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        /> 
+            </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Pouch Size</label>
+                <input  type='number'
+                        id="pass" 
+                        value={info.pouchSize}
+                        placeholder={currentGoal.pouchSize}
+                        name='pouchSize'
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
+
+            </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Pouch Goal</label>
+                <input  type='number'
+                        id="confirmPassword" 
+                        name = "pouchGoal" 
+                        value={info.pouchGoal}
+                        placeholder={currentGoal.pouchGoal}
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              /></div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Pouch Packed</label>
+                <input  type='number'
+                        id="confirmPassword" 
+                        name = "pouchPacked"
+                        value={info.pouchPacked} 
+                        onChange={ e => inputHandler(e) }
+                        placeholder={currentGoal.pouchPacked}
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
 
 </div>
+            <div className="mb-6">
+                <label className="block text-muted-foreground mb-3">Day/Night</label>
+                <div className="flex items-center gap-12">
 
+                <StyledWrapper>
+      <label className="checkbox-btn">
+        Day <label htmlFor="checkbox" />
+        <input id="checkbox" type="checkbox" name='day' value="Day" onClick={e=>{inputHandler(e); document.getElementById('nightCheckbox').checked = false;}}/>
+        <span className="checkmark" />
+      </label>
+               </StyledWrapper>
 
-<div className='flex justify-between sm:max-lg:items-center'>
-<label htmlFor="email">
-      Batch Number :
-</label>
-<input type='text' 
-       id="email" 
-       value={info.batchNum}
-       placeholder={currentGoal.batchNum}
-       name="batchNum" 
-       onChange={ e => inputHandler(e) }
-       className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-       />
-</div>
+               <StyledWrapper>
+      <label className="checkbox-btn">
+         Night <label htmlFor="nightCheckbox" />
+        <input id="nightCheckbox" type="checkbox" name='day' value="Night" onClick={e=>{inputHandler(e); document.getElementById('checkbox').checked = false;}}/>
+        <span className="checkmark" />
+      </label>
+               </StyledWrapper>
 
-
-  <div className='flex justify-between'>
-  <label htmlFor="pass" >
-      Pouch Size :
-  </label>
-  <input type='number'
-         id="pass" 
-         value={info.pouchSize}
-         placeholder={currentGoal.pouchSize}
-         name='pouchSize'
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-  </div>
-  
-  <div className='flex justify-between'>
-  <label htmlFor="confirPassword" >
-     PouchGoal :
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "pouchGoal" 
-         value={info.pouchGoal}
-         placeholder={currentGoal.pouchGoal}
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-  </div>
-  
-<div className='flex justify-between'>
-<label htmlFor="confirPassword">
-     Pouch Packed : 
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "pouchPacked"
-         value={info.pouchPacked} 
-         onChange={ e => inputHandler(e) }
-         placeholder={currentGoal.pouchPacked}
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-
-<div className='flex justify-between'>
-
-<div>
-    DayTime:
-</div>
-
-<div className='flex gap-24 mr-8'>
-<div className='flex gap-6 mr-9'>  
-<label htmlFor="today">
-     Day 
-  </label>
-  <input type='radio'
-         id="today" 
-         name = "day"
-         value="Day" 
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1'
-               />
-</div>
-<div className='flex gap-6'>  
-<label htmlFor="today">
-     Night 
-  </label>
-  <input type='radio'
-         id="today" 
-         name = "day"
-         value="Night" 
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1'
-               />
-</div>
-</div>
-
-
-
-
-</div>
-
-        <div className="flex justify-between gap-4 text-3xl sm:max-lg:text-2xl py-2 sm:max-lg:py-0">
-          <button className="px-5 p-2 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-          onClick={()=>setopenBox(!openBox)}> 
-            Cancel
-          </button>
-          
-          <button
-          onClick={handleUpdate}
-          className="px-5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Update
-            </button>
-
-            <button
-            onClick={handleDelete}
-            className="px-5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Delete
-            </button>
-
+                </div>
+            </div>
+            <div className="flex justify-end space-x-2">
+                <button type="button" className="bg-[#2e3138] py-2 px-4 rounded hover:bg-gray-600" 
+                        onClick={()=>setopenBox(!openBox)}>Cancel</button>
+                <button type="button" className="bg-red-600 py-2 px-4 rounded hover:bg-red-500"
+                        onClick={handleDelete}>Delete</button>
+                <button type="submit" className="bg-primary text-black py-2 px-4 rounded hover:bg-yellow-400"
+                        onClick={handleUpdate}>Update</button>
+            </div>
         </div>
-        </section>
-              </div>
+    </div>
             ) : (
               <div></div>
             )
           }
+
+      </div>
     </div>
-      )
-    }
-    
-  </div>  
-  )
+  );
 }
 
 export default ProductionGoal
+
+const StyledWrapper = styled.div`
+
+.checkbox-btn {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-btn input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-btn label {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2.5px solid #2e3138;
+  transition: .2s linear;
+}
+.checkbox-btn input:checked ~ .checkmark {
+  background-color: transparent;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  top: 40%;
+  width: 10px;
+  height: 14px;
+  border: 2px solid #0ea021;
+  filter: drop-shadow(0px 0px 10px #0ea021);
+  border-width: 0 2.5px 2.5px 0;
+  transition: .2s linear;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
+}
+
+.checkbox-btn input:checked ~ .checkmark:after {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  animation: pulse 1s ease-in;
+}
+
+.checkbox-btn input:checked ~ .checkmark {
+  transform: rotate(45deg);
+  border: none;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
+  }
+}`;

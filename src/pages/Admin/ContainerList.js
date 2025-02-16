@@ -46,15 +46,24 @@ const ContainerList = () => {
                 {
                     loading ? (<Loader/>
                     ) : (
-                        <div className='flex flex-wrap gap-12 sm:max-lg:gap-9 my-4 mx-16'>
+                        <div className='flex flex-wrap gap-12 sm:max-lg:gap-9 my-4 mx-9'>
                             {
                                 arr.map((val,ind)=>(
                                     <div key={ind}
                                          onClick={()=>navigate(`${val._id}`)}
                                          >
-                                        <div className='h-40 w-60 flex items-center rounded-lg justify-center font-bold text-3xl my-auto hover:translate-y-3 hover:bg-yellow-800  bg-yellow-600 [ bg-gradient-to-b from-white/35 to-white/5 ]
-    [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ]'>{val.name}</div>
+                                 
+<div class="w-72 h-48 flex justify-center items-center relative hover:translate-y-2">
+
+  
+<div class="blur absolute inset-0 rounded-lg -translate-x-1 translate-y-1 bg-gradient-to-br from-pink-500 via-cyan-500 to-violet-500"></div>
+
+    
+<div class="relative w-[98%] h-[96%] bg-black rounded-lg p-4">
+    <p class="ml-2 text-4xl text-primary p-3">{val.name}</p>
+</div>
+
+</div>
                                     </div>
                                 ))
                             }

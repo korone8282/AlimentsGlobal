@@ -125,13 +125,13 @@ const Login = () => {
           )}
 
            <button type='submit'
-                   className='mt-6 h-8 bg-pink-600 w-16 rounded-md  hover:bg-pink-800'
+                   className='text-xl mt-4 h-16 w-[9.6rem] text-center hover:bg-white hover:text-black rounded-xl bg-[#f59e0b]'
                    >
             Submit
           </button>
         </form>
 
-             <button onClick={()=>navigate("/otpLogin")} className='ml-44 mt-6 h-8 sm:max-lg:-mt-8 bg-pink-600 w-48 rounded-md hover:bg-pink-800'>
+             <button onClick={()=>navigate("/otpLogin")} className='ml-52 mt-2 h-16 sm:max-lg:-mt-8 bg-[#f59e0b] hover:bg-white hover:text-black w-48 rounded-xl  '>
               Login with OTP
             </button>
 

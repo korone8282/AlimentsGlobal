@@ -1,45 +1,131 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
-import { MdArrowDropDownCircle } from "react-icons/md";
-import { useState } from 'react';
-import Dropdown from './Dropdown';
+import React   from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setDate,setMonth,setDays,setSection } from '../redux/Slices/dateSlice';
+import {
+   Popover,
+   PopoverContent,
+   PopoverTrigger,
+ } from "./Popover";
+ import { Button } from "./Buttons";
 
 const DataLog = () => {
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const data = useSelector(state=>state.data);
 
-  const [val, setVal] = useState(0);
-  return (
-        
-      <div className='flex select-none items-center justify-center mx-6 gap-96'>
+  const months = [{month:"January",days:31},
+    {month:"February",days:28},
+    {month:"March",days:31},
+    {month:"April",days:30},
+    {month:"May",days:31},
+    {month:"June",days:30},
+    {month:"July",days:31},
+    {month:"August",days:31},
+    {month:"September",days:30},
+    {month:"October",days:31},
+    {month:"November",days:30},
+    {month:"December",days:31}
+   ]
 
-          <div className='flex gap-8 mt-4'>
-      <div className='flex items-center text-center font-bold text-2xl h-fit rounded-lg gap-1'
-      onClick={()=>setVal( val ? 0 : 1  )}>   
-         {data.section}
-          <MdArrowDropDownCircle className='mt-1'/>
-          {
-          val === 1 ? (<div> <Dropdown val={1}/></div>) : (<div></div>)
-         }
-      </div>
-      <div className='flex items-center  text-center font-bold text-2xl h-fit rounded-lg gap-1'
-      onClick={()=>setVal( val ? 0 : 2 )}>   
-         {data.month}
-         <MdArrowDropDownCircle className='mt-1'/>
-         {
-          val === 2 ? (<div> <Dropdown val={2}/></div>) : (<div></div>)
-         }
-      </div>
-      <div className='flex items-center text-center font-bold text-2xl h-fit rounded-lg gap-1'
-      onClick={()=>setVal( val ? 0 : 3 )}>  
-         {data.date}
-         <MdArrowDropDownCircle className='mt-1'/>
-         {
-          val === 3 ? (<div> <Dropdown val={3}/></div>) : (<div></div>)
-         }
-      </div>
-          </div>      
-    </div>
+  return (
+   <div className="flex items-center gap-8 justify-center">
+   <div className="flex items-center gap-2 bg-card">
+     <Popover>
+       <PopoverTrigger asChild>
+         <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+           Sections
+         </Button>
+       </PopoverTrigger>
+       <PopoverContent className="w-40 p-2 bg-card border-primary">
+         <div className="flex flex-col gap-2">
+           <Button
+             variant="ghost"
+             className={`justify-start`}
+             onClick={()=>{
+                dispatch(setSection("Kitchen"));
+                navigate(`/admin/Kitchen/${data.month}`);  
+               }}>
+             Kitchen
+           </Button>
+           <Button
+             variant="ghost"
+             className={`justify-start`}
+             onClick={()=>{
+                dispatch(setSection("Filling"));
+                navigate(`/admin/Filling/${data.month}`);  
+               }}>
+             Filling
+           </Button>
+           <Button
+             variant="ghost"
+             className={`justify-start`}
+             onClick={()=>{
+                dispatch(setSection("Dispatch"));
+                navigate(`/admin/Dispatch/${data.month}`);  
+               }}>
+             Dispatch
+           </Button>
+         </div>
+       </PopoverContent>
+     </Popover>
+   </div>
+
+   <div className="flex items-center gap-2 bg-card">
+     <Popover>
+       <PopoverTrigger asChild>
+         <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+           Date
+         </Button>
+       </PopoverTrigger>
+       <PopoverContent className="w-[280px] p-2 bg-card border-primary">
+         <div className="grid grid-cols-7 gap-2">
+           {Array.from({ length: months[data.month-1].days }, (_, i) => i + 1).map((day) => (
+             <Button
+               key={day}
+               variant="ghost"
+               className={`w-8 h-8 p-0`}
+               onClick={()=>{
+                dispatch(setDate(day));
+                navigate(`/admin/${data.section}/${data.month}`);
+                }} 
+             >
+               {day}
+             </Button>
+           ))}
+         </div>
+       </PopoverContent>
+     </Popover>
+   </div>
+
+   <div className="flex items-center gap-2 bg-card">
+     <Popover>
+       <PopoverTrigger asChild>
+         <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
+           Month
+         </Button>
+       </PopoverTrigger>
+       <PopoverContent className="w-[280px] p-2 bg-card border-primary">
+         <div className="grid grid-cols-3 gap-2">
+           {months.map((month,index) => (
+             <Button
+               key={month.month}
+               variant="ghost"
+               onClick={()=>{
+                dispatch(setMonth(index+1));
+                dispatch(setDays(month.days));
+                navigate(`/admin/${data.section}/${month.month}`);  
+               }}>
+               {month.month}
+             </Button>
+           ))}
+         </div>
+       </PopoverContent>
+     </Popover>
+   </div>
+ </div>
   )
 }
 

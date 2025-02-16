@@ -16,7 +16,7 @@ const Monthly = () => {
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
   
-  const [val, setVal] = useState(1);
+  const [val, setVal] = useState(0);
 
   const months = [{month:"January"},
                   {month:"February"},

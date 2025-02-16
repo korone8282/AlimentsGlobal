@@ -1,298 +1,308 @@
+import { motion } from "framer-motion";
+import { Button } from "../../components/Buttons";
+import { Input } from "../../components/Input";
+import { Search, Filter } from "lucide-react";
 import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL } from '../../redux/Utils/constants';
-import { FiSearch } from "react-icons/fi";
 import Loader from '../../components/Loader'
-import { TbFilterCog } from "react-icons/tb";
-import { CiWifiOff } from "react-icons/ci";
 import {toast} from 'react-toastify';
 
-const ProductData = () => {
 
-    const [arr, setarr] = useState([]);
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(1);
-    const [loading2, setLoading2] = useState(0);
-    const [error, setError] = useState(0);
-    const [products, setproducts] = useState([]);
-    const [ogData, setogData] = useState([]);
-    const [dummy, setdummy] = useState();
-    const [openBox, setopenBox] = useState(0);
-    const [categories, setcategories] = useState([]); 
-    const [info, setInfo] = useState({
-        start:"",
-        end:"",
-        product:""
-    });
+const Index = () => {
 
-    const {userinfo} = useSelector(state=>state.auth);
+  const [arr, setarr] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(1);
+  const [loading2, setLoading2] = useState(0);
+  const [error, setError] = useState(0);
+  const [products, setproducts] = useState([]);
+  const [ogData, setogData] = useState([]);
+  const [dummy, setdummy] = useState();
+  const [openBox, setopenBox] = useState(0);
+  const [categories, setcategories] = useState([]); 
+  const [info, setInfo] = useState({
+      start:"",
+      end:"",
+      product:""
+  });
 
-    useEffect(() => {
+  const {userinfo} = useSelector(state=>state.auth);
 
-        async function getProducts(){
-            try {
-      
-          const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
-          setproducts(res.data.data);
-          setogData(res.data.data);
-          setdummy(res.data.data);
-      
-          setLoading(0);
-            } catch (error) {
-              console.log(error);
+  useEffect(() => {
+
+      async function getProducts(){
+          try {
+    
+        const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
+        setproducts(res.data.data);
+        setogData(res.data.data);
+        setdummy(res.data.data);
+    
+        setLoading(0);
+          } catch (error) {
+            console.log(error);
+          }
+          }
+
+  async function getCategories(){
+          try {
+        
+        setError(0);
+    
+        const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+        setcategories(res.data.data);
+    
+        setLoading(0);
+          } catch (error) {
+            setError(1)
+            console.log(error);
+          }
+          }
+    
+    getCategories();
+    getProducts();
+
+    }, [userinfo.token]);
+
+    function handleSearch(val) {
+
+      if (val === ""){ 
+        setproducts(dummy)
+        return
+        }
+
+       let filterBySearch = ogData.filter((item) => {
+           if (item.name.toLowerCase().startsWith(val.toLowerCase())){ 
+             return item
+            } else {
+             return null 
             }
-            }
-
-    async function getCategories(){
-            try {
-          
-          setError(0);
-      
-          const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
-          setcategories(res.data.data);
-      
-          setLoading(0);
-            } catch (error) {
-              setError(1)
-              console.log(error);
-            }
-            }
-      
-      getCategories();
-      getProducts();
-
-      }, [userinfo.token]);
-
-  function handleSearch(val) {
-
-       if (val === ""){ 
-         setproducts(dummy)
-         return
-         }
-
-        let filterBySearch = ogData.filter((item) => {
-            if (item.name.toLowerCase().startsWith(val.toLowerCase())){ 
-              return item
-             } else {
-              return null 
-             }
-        })
-        setogData(dummy)
-        setproducts(filterBySearch); 
-      }
+       })
+       setogData(dummy)
+       setproducts(filterBySearch); 
+     }
 
 const inputHandler = async(e) =>{
-    setInfo((prevData) => ({
-      ...prevData,
-      [e.target.name]: e.target.value
-    }));
-  }
+   setInfo((prevData) => ({
+     ...prevData,
+     [e.target.name]: e.target.value
+   }));
+ }
 
 async function getData(){
 
-  setLoading2(1)
+ setLoading2(1)
 
-  let array = []
-  for (let q = new Date(info.start); q <= new Date(info.end); q = new Date(q.getTime() + 86400000)) {
-    array.push(q.toISOString());
-  }
-  setarr(array)
+ let array = []
+ for (let q = new Date(info.start); q <= new Date(info.end); q = new Date(q.getTime() + 86400000)) {
+   array.push(q.toISOString());
+ }
+ setarr(array)
 
-    try {
+   try {
 
-      const res = await apiConnector(`${DATA_URL}/Product`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
-      setData(res.data.data);
-      setLoading2(0);
+     const res = await apiConnector(`${DATA_URL}/Product`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
+     setData(res.data.data);
+     setLoading2(0);
 
-    } catch (error) {
-      setLoading2(0);
-      toast(error.response.data.message)
-    }
-  }
+   } catch (error) {
+     setLoading2(0);
+     toast(error.response.data.message)
+   }
+ }
 
   return (
     <div>
-{
-error ? (
-    <div className='font-bold text-7xl mt-64 sm:max-lg:mt-4 flex items-center justify-center gap-4'>  
-<div>Network Issue</div> 
-<div className='mt-2'> <CiWifiOff /> </div> 
-</div>
-) : ( 
-  <div>
-
-<div className='flex justify-start'>
-
-{/* table 1 */}
-<div className='sm:max-lg:w-[26.5rem]'>
-
-<div className={` text-6xl mx-40 font-bold my-8 sm:max-lg:my-4 sm:max-lg:text-3xl sm:max-lg:text-center`}>Product</div>
-
-<div className='flex items-center mx-2 gap-32 sm:max-lg:gap-6'>
-
-<div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-    onClick={()=>{
-        setopenBox(!openBox)
-        setproducts(dummy)}}>
-    <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
-    <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
-</div>
-
-<div className={`flex justify-center sm:max-lg:mr-8 cursor-pointer ml-32}`}>
-<input type='text'
-       onChange={(e)=>handleSearch(e.target.value)}
-       className=' relative w-80 sm:max-lg:w-52 rounded-l-lg h-10 bg-[#f59e0b] font-bold text-2xl focus:outline-none p-4'
-/>
-<i className='mr-2 bg-[#000000] h-10 w-11 rounded-r-lg'>
-<FiSearch className='mt-1.5 ml-2 text-white' size={26}/>
-</i>
-</div>
-
-</div>
-
-{
-loading ? (<Loader/> 
-) : (
-<table className='w-[43rem] mx-2 text-center text-black my-12 sm:max-lg:my-6 sm:max-lg:w-[25rem] text-xl font-bold'>
-<thead>
-  <tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
-    <th rowSpan={2} className='border-4 border-black'>Buyer</th>
-    <th rowSpan={2} className='border-4 border-black'> Product Name</th>
-  </tr>
-</thead>
-
-{   
-  products.length ? (<tbody>
       {
-        products.map((val,index)=>(
-        <tr key={index} 
-            className='text-center hover:bg-slate-400'
-            name='product'
-            onClick={(e)=>{
-                setInfo((prevData) => ({
-                ...prevData,
-                product: val
-    }));
-            }}>
-    <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{val.buyer}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{val.name}</td>
-        </tr>
-      ))
-      }
-     
-    </tbody>) : (<div className='font-bold text-6xl mt-12'>No Entry Found</div>)
-  }
-</table>
-)
-}
-
-</div>
-
-
-{/* table 2 */}
-<div className='border-l-8 border-dashed border-black p-2 w-screen sm:max-lg:w-[32.5rem] overflow-x-hidden'>
-         
-         <div className='text-center font-bold text-6xl mt-6 sm:max-lg:my-4 sm:max-lg:text-3xl'> {info.product.name}</div>
-         <div className='text-center font-bold text-2xl mt-3 sm:max-lg:my-4 sm:max-lg:text-xl'> ({info.product.buyer}) </div>
-
-<div className='flex justify-center items-center my-8 sm:max-lg:my-2 text-2xl font-bold gap-14 mx-4 sm:max-lg:mx-1 h-16 w-full sm:max-lg:gap-4 '>
-        <div className='flex sm:max-lg:flex-col'>
-        <label>Start: </label>
-            <input type='date'
-                   name='start'
-                   className='w-44'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div className='flex sm:max-lg:flex-col'>
-        <label>End: </label>
-            <input type='date'
-                   className='w-44'
-                   name='end'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div className='text-xl select-none ml-10 sm:max-lg:ml-0 font-bold h-16 w-[9.6rem] sm:max-lg:w-32 text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-3 pt-4 bg-[#f59e0b]' 
-             onClick={()=>{
-              setarr([])
-              getData()}}
-             >Submit</div>
-    </div>
-
+        error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>):(
+          <div>
 {
-  loading2 ? (
-    <Loader/>
+  loading ? (<Loader/>
   ) : (
-    <table className='mx-auto text-center bg-red-200 text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
-<thead>
-  <tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Produced</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Filled</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Wasted</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
-  </tr>
-</thead>
+    <div className="min-h-screen bg-[#121212] text-white p-6">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="max-w-7xl mx-auto"
+      >
+        <header className="flex justify-between items-center mb-8">
+          <div>
+            <div className="text-gray-400 text-xl">
+              Production Management System
+            </div>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-3 mx-2 cursor-pointer hover:bg-orange-500 hover:text-black"
+                 onClick={()=>{
+                  setarr([])
+                  getData()}}>
+              <span>Submit</span>
+            </div>
+          </div>
+        </header>
 
-{   
-  data.length ? (<tbody>
-      {
-        arr.map((val,index)=>(
-        <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold p-0.5'>{val?.substring(5,10)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ 
+{
+  loading2 ? ( <Loader/>
+  ) : (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-[#1E1E1E] rounded-xl p-6"
+          >
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-xl font-semibold">Product Details</h2>
+              <Button variant="outline" className="bg-[#2A2A2A] border-orange-500/30 hover:bg-orange-500/10"
+                      onClick={()=>setopenBox(!openBox)}>
+                <Filter className="w-4 h-4 mr-2" />
+                Filter
+              </Button>
+            </div>
+            <div className="relative mb-6">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                onChange={(e)=>handleSearch(e.target.value)}
+                className="bg-[#2A2A2A] border-none pl-10"
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            </div>
+            <div className="overflow-y-auto max-h-[30rem] rounded-lg border border-orange-500/20">
+              <table className="w-full">
+                <thead className="bg-[#2A2A2A]">
+                  <tr>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">S No.</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Buyer</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Product Name</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-orange-500/10">
+                  {products.map((val,i) => (
+                    <motion.tr 
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={(e)=>{
+                      setInfo((prevData) => ({
+                      ...prevData,
+                      product: val
+                       }));
+                              }}
+                      className="hover:bg-[#2A2A2A]/50 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-sm">{i+1}</td>
+                      <td className="py-3 px-4 text-sm">{val.buyer}</td>
+                      <td className="py-3 px-4 text-sm">{val.name}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="bg-[#1E1E1E] rounded-xl p-6"
+          >
+            <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
+              <h2 className="text-xl font-semibold mb-4 md:mb-0">Production Overview</h2>
+              <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                <Input
+                  type="date"
+                  name="start"
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+                <Input
+                  type="date"
+                  name='end'
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+              </div>
+            </div>
+
+            <div className="text-center">
+            <div>{info.product.name}</div>
+            <div> ( {info.product.buyer} )</div>
+            </div>
+
+            <div className="overflow-y-auto max-h-[30rem] rounded-lg border my-4 border-orange-500/20">
+              <table className="w-full">
+                <thead className="bg-[#2A2A2A]">
+                  <tr>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Date</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Kitchen</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Filling</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Dispatch</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Wastage</th>
+                    <th className="py-3 px-4 text-left text-sm font-medium text-gray-400">Box</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-orange-500/10">
+                  {arr?.map((val,i) => (
+                    <motion.tr 
+                      key={i}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.2 }}
+                      className="hover:bg-[#2A2A2A]/50 transition-colors"
+                    >
+                      <td className="py-3 px-4 text-sm">{val?.substring(5,10)}</td>
+                      <td className="py-3 px-4 text-sm">{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
+                      <td className="py-3 px-4 text-sm">{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</td>
+                      <td className="py-3 px-4 text-sm">{data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
+                      <td className="py-3 px-4 text-sm">{ 
       data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
       data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
       data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
     }</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
-        </tr>
-      ))
-      }
-     
-      <tr className='text-center bg-[#f59e0b]'>
-    <td className='border-4 border-black font-bold p-0.5'>Total</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj ) => accumulator + obj.pouchQuantity,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ 
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-      data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
-    }</td>
-    <td className='border-4 border-black font-bold max-w-28'>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
-        </tr>
+                      <td className="py-3 px-4 text-sm">{ data.filter(item=>item.createdAt === val).reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
+                    </motion.tr>
+                  ))}
+                </tbody>
 
-    </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
-  }
-        </table>
+<tfoot>
+  <tr className="bg-[#2A2A2A]">
+      <td className='py-3 px-4 text-sm'>Total</td>
+      <td className='py-3 px-4 text-sm'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + (obj.yield*obj.batchQuantity) ,0),0).toFixed(2)}</td>
+      <td className='py-3 px-4 text-sm'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj ) => accumulator + obj.pouchQuantity,0),0)}</td>
+      <td className='py-3 px-4 text-sm'>{data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</td>
+      <td className='py-3 px-4 text-sm'>{ 
+        data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) +
+        data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+        data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+      }</td>
+      <td className='py-3 px-4 text-sm'>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(object => object.productName === info.product.name && object.buyerName === info.product.buyer).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</td>
+  </tr>
+</tfoot>
+              </table>
+            </div>
+          </motion.div>
+        </div>
   )
 }
         
-</div>
-
-
-</div>
+      </motion.div>
 
 {
-    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[6.5rem] left-[9rem] max-w-60 top-[11.8rem] rounded-lg border-black border-2 p-2`}>
+    openBox ? (<div className={`absolute flex-col gap-3 bg-[#2A2A2A] text-sm max-h-80 overflow-auto sm:max-lg:left-[43rem] left-[38rem] max-w-60 top-[15rem] border-orange-500/30 border-2 rounded-lg p-2`}>
         {
             categories.map((val,ind)=>(
                 <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
                      key={ind}
                      name='product'
-                     onClick={(e)=>{
+                     onClick={()=>{
                             let p = products.filter(item => item.buyer === val.name)
                             setproducts(p)
                             setopenBox(!openBox)}}>
-                    ⦿ {val.name}
+                    - {val.name}
                 </div>
            
             ))
@@ -300,14 +310,14 @@ loading ? (<Loader/>
     </div>
     ) : null
 }
-
-</div>
-)
-}
-
-</div>
+    </div>
   )
 }
+          </div>
+        )
+      }
+    </div>
+  );
+};
 
-export default ProductData
-
+export default Index;

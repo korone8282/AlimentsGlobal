@@ -1,25 +1,17 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { IoMdClose } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from '../redux/Slices/authSlice';
 import { toast } from 'react-toastify';
-import { GiHamburgerMenu } from "react-icons/gi";
 import { googleLogout } from '@react-oauth/google';
 import { apiConnector } from '../redux/Utils/apiConnector';
 import { LOGOUT_API } from '../redux/Utils/constants';
+import './ProfileMenu.css';
 
 const ProfileMenu = () => {
-
-  const [isMenuOpen, setIsMenuOpen] = useState(0);
 
   const {userinfo} = useSelector(state => state.auth);
 
   const navigate = useNavigate();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const dispatch = useDispatch();
 
@@ -44,93 +36,41 @@ const ProfileMenu = () => {
 }
 
   return (
-    <div>
-      <button
-        className="p-2 "
-        onClick={toggleMenu}
-      >
-        {isMenuOpen ? (
-          <IoMdClose  size={36} />
-        ) : (
-          <GiHamburgerMenu  size={32}/>
-        )}
-      </button>
-
-<div className="absolute right-[1%] z-30">
-{
-        isMenuOpen ? (
-        <>  
+<div className="absolute right-[0.2%] top-20 z-50">
         {
             userinfo ? (
-         <section className=" [ bg-gradient-to-b from-black to-gray-700 ]
-    [ shadow-black/70 shadow-2xl ] rounded-b-3xl p-4 sm:max-lg:p-1 sm:max-lg:text-base">
-          <ul className="list-none mt-2">
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to={`/admin/Profile/${userinfo._id}`}
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/BuyerList"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Buyers Info
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/ProductList"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Product
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] rounded-sm"
-                to="/admin/Userlist"
-                onClick={()=>setIsMenuOpen(0)}
-                style={({ isActive }) => ({
-                  color: isActive ? "white" : "#f59e0b",
-                })}
-              >
-                Manage Users
-              </NavLink>
-            </li>
-            <li>
-            <div
-                className="py-2 px-3 block mb-5 hover:bg-[#a1a1aa] cursor-pointer select-none rounded-sm text-[#FB2E86]"
-                onClick={logouthandler}
-              >
-                Logout
-              </div>
-            </li>
-          </ul>
+         <section className=" radio-container">
+            <input type="radio" id="profile" name="menu" />
+            <label htmlFor="profile" className="py-2 px-3 block mb-5 rounded-sm" onClick={() => navigate(`/admin/Profile/${userinfo._id}`)}>
+              Profile
+            </label>
+            <input type="radio" id="buyers-info" name="menu" />
+            <label htmlFor="buyers-info" className="py-2 px-3 block mb-5 rounded-sm" onClick={() => navigate("/admin/BuyerList")}>
+              Buyers Info
+            </label>
+            <input type="radio" id="product" name="menu" />
+            <label htmlFor="product" className="py-2 px-3 block mb-5 rounded-sm" onClick={() => navigate("/admin/ProductList")}>
+              Product
+            </label>
+            <input type="radio" id="manage-users" name="menu" />
+            <label htmlFor="manage-users" className="py-2 px-3 block mb-5 rounded-sm" onClick={() => navigate("/admin/Userlist")}>
+              Manage Users
+            </label>
+            <input type="radio" id="logout" name="menu" />
+            <label htmlFor="logout" className="py-2 px-3 block mb-5 rounded-sm" onClick={logouthandler}>
+              Logout
+            </label>
+
+          <div class="glider-container">
+            <div class="glider"></div>
+         </div>
+
         </section>
         ) : (
             <div></div>)
         }
-        </>
-      ) : null }
 </div>
-      
-    </div>
+
   );
 };
 

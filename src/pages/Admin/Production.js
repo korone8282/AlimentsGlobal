@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { GOAL_URL } from '../../redux/Utils/constants'; 
 import { CATEGORIES_URL  } from '../../redux/Utils/constants';
 import { PRODUCT_URL } from '../../redux/Utils/constants';
+import styled from 'styled-components';
 
 const Production = () => {
 
@@ -95,143 +96,113 @@ const Production = () => {
     }
   }
 
+  
+
   return (
     <div>
-      
-    <h2 className='text-center text-3xl font-bold my-5  '>Plan for : <input type='date' name='date' value={info.date} onChange={e => inputHandler(e)}></input> </h2>
-    
+            <div className="flex justify-center my-6 items-center space-x-4">
+            <label className="text-lg text-muted-foreground">Plan for:</label>
+            <input
+              type="date"
+              value={info.date}
+              name='date'
+              onChange={e => inputHandler(e)}
+              className="border bg-[#22252a] border-border rounded-md px-3 py-1.5 text-md focus:outline-none focus:ring-2 focus:ring-ring text-muted-foreground shadow-md"
+            />
+          </div> 
     {
       loading ? (<Loader/> 
       ) : (
-        <div className="flex justify-center my-5 mx-auto h-[37.5rem] sm:max-lg:h-fit sm:max-lg:w-[45rem] sm:max-lg:my-2 bg-black text-[#f59e0b] w-[60rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-9 font-semibold text-3xl gap-12 mx-9 sm:max-lg:text-xl sm:max-lg:gap-9'>
-
-        <div className='flex justify-between sm:max-lg:items-center gap-12'>
-
-        <div className='flex gap-12 sm:max-lg:gap-4'>
-      <label htmlFor="name">
-              Buyer Name :
-        </label>
-        <select
-                 name='buyerName'
-                 className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
-                 value={info.buyerName}
-                 onChange={ e => inputHandler(e) }
-            >
-            <option className=' bg-[#f59e0b] text-black '>Select</option>
-            {
-                categories.map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val.name} key={index}>{val.name}</option>))
-            }
-            </select>
-      </div>
-  
-      <div className='flex gap-12 sm:max-lg:gap-4'>
-      <label htmlFor="name">
-              Product Name :
-        </label>
-        <select
-                 name='fname'
-                 className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
-                 value={info.fname}
-                 onChange={ e => inputHandler(e) }
-            >
-            <option className=' bg-[#f59e0b] text-black'>Select Product</option>
-            {
-                products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val.name} key={index}>{val.name}</option>))
-            }
-            </select>
-      </div>
-
-        </div>
-      
-       
-      <div className='flex justify-between'>
-      <label htmlFor="email">
-              Batch Number :
-        </label>
-        <input type='text' 
-               id="email" 
-               value={info.batchNum}
-               name="batchNum" 
-               onChange={ e => inputHandler(e) }
-               className='bg-transparent border-2 border-[#f59e0b] p-1'
-               />
-      </div>
-       
-
-          <div className='flex justify-between'>
-          <label htmlFor="pass" >
-              Pouch Size :
-          </label>
-          <input type='number'
-                 id="pass" 
-                 value={info.pouchSize}
-                 name='pouchSize'
-                 onChange={ e => inputHandler(e) }
-                 className='bg-transparent border-2 border-[#f59e0b] p-1'
-                       />
-          </div>
-          
-          <div className='flex justify-between'>
-          <label htmlFor="confirPassword" >
-             PouchGoal :
-          </label>
-          <input type='number'
-                 id="confirmPassword" 
-                 name = "pouchGoal" 
-                 value={info.pouchGoal}
-                 onChange={ e => inputHandler(e) }
-                 className='bg-transparent border-2 border-[#f59e0b] p-1'
-                       />
-          </div>
-
-        <div className='flex justify-between'>
-
+        <div className={`bg-[#22252a] text-white  p-6 rounded-lg shadow-lg w-full max-w-md z-30 h-fit inset-0 m-auto`}>
+        <h2 className="text-xl font-semibold mb-4">Create Goal</h2>
         <div>
-            DayTime:
-        </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Buyer Name</label>
+                <select
+         name='buyerName'
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+         value={info.buyerName}
+         onChange={ e => inputHandler(e) }
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground '>Select</option>
+    {
+        categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
+    }
+    </select>
+</div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Product Name</label>
+                <select
+         name='fname'
+           className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+         value={info.fname}
+         onChange={ e => inputHandler(e) }
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+        products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
+    }
+    </select>
+</div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Batch Number</label>
+                <input  type='text' 
+                        id="email" 
+                        value={info.batchNum}
+                        name="batchNum" 
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        /> 
+            </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Pouch Size</label>
+                <input  type='number'
+                        id="pass" 
+                        value={info.pouchSize}
+                        name='pouchSize'
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              />
 
-        <div className='flex gap-24 mr-8'>
-        <div className='flex gap-6 mr-9'>  
-        <label htmlFor="today">
-             Day 
-          </label>
-          <input type='radio'
-                 id="today" 
-                 name = "day"
-                 value="Day" 
-                 onChange={ e => inputHandler(e) }
-                 className='bg-transparent border-2 border-[#f59e0b] p-1'
-                       />
-        </div>
-        <div className='flex gap-6'>  
-        <label htmlFor="today">
-             Night 
-          </label>
-          <input type='radio'
-                 id="today" 
-                 name = "day"
-                 value="Night" 
-                 onChange={ e => inputHandler(e) }
-                 className='bg-transparent border-2 border-[#f59e0b] p-1'
-                       />
-        </div>
-        </div>
-        
+            </div>
+            <div className="mb-4">
+                <label className="block text-muted-foreground mb-1">Pouch Goal</label>
+                <input  type='number'
+                        id="confirmPassword" 
+                        name = "pouchGoal" 
+                        value={info.pouchGoal}
+                        onChange={ e => inputHandler(e) }
+                        className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                              /></div>
 
-        
-      
-        </div>
+            <div className="mb-6">
+                <label className="block text-muted-foreground mb-3">Day/Night</label>
+                <div className="flex items-center gap-12">
 
-          <button 
-           onClick={handleCreate}
-                   className=' text-[#f59e0b] bg-black border-[#f59e0b] h-14 border-2 w-48 mx-auto rounded-md hover:scale-105 text-xl font-semibold'
-                   >
-             Submit
-          </button>
-       
-        </section>
-              </div>
+                <StyledWrapper>
+      <label className="checkbox-btn">
+        Day <label htmlFor="checkbox" />
+        <input id="checkbox" type="checkbox" name='day' value="Day" onClick={e=>{inputHandler(e); document.getElementById('nightCheckbox').checked = false;}}/>
+        <span className="checkmark" />
+      </label>
+               </StyledWrapper>
+
+               <StyledWrapper>
+      <label className="checkbox-btn">
+         Night <label htmlFor="nightCheckbox" />
+        <input id="nightCheckbox" type="checkbox" name='day' value="Night" onClick={e=>{inputHandler(e); document.getElementById('checkbox').checked = false;}}/>
+        <span className="checkmark" />
+      </label>
+               </StyledWrapper>
+
+                </div>
+            </div>
+            <div className="flex justify-end space-x-2">
+                <button type="button" className="bg-red-600 py-2 px-4 rounded hover:bg-red-500"
+                        onClick={handleCreate}>Submit</button>
+            </div>
+        </div>
+    </div>
       )
     }
 
@@ -242,3 +213,81 @@ const Production = () => {
 }
 
 export default Production
+
+const StyledWrapper = styled.div`
+
+.checkbox-btn {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkbox-btn input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-btn label {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2.5px solid #2e3138;
+  transition: .2s linear;
+}
+.checkbox-btn input:checked ~ .checkmark {
+  background-color: transparent;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  left: 50%;
+  top: 40%;
+  width: 10px;
+  height: 14px;
+  border: 2px solid #0ea021;
+  filter: drop-shadow(0px 0px 10px #0ea021);
+  border-width: 0 2.5px 2.5px 0;
+  transition: .2s linear;
+  transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
+}
+
+.checkbox-btn input:checked ~ .checkmark:after {
+  visibility: visible;
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  animation: pulse 1s ease-in;
+}
+
+.checkbox-btn input:checked ~ .checkmark {
+  transform: rotate(45deg);
+  border: none;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
+  }
+}`;
