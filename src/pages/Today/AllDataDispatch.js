@@ -205,13 +205,15 @@ const AllDataDispatch = () => {
   </div>
 </Button>
 
-
-<Button variant="outline" className="border-primary text-primary hover:bg-primary/10"
-        onClick={()=>{
+<div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-3 mx-2 cursor-pointer hover:bg-orange-500 hover:text-black"
+                onClick={()=>{
           submitHandler()
           updater()}}>
-     Submit
-</Button>
+              <span>Submit</span>
+            </div>
+</div>
+
 
 </div>
 
@@ -275,7 +277,7 @@ const AllDataDispatch = () => {
              name='buyerName'
              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
              value={formData.buyerName}
-                 onChange={ e =>{
+                   onChange={ e =>{
                    inputHandler(e) 
                    setbuyer(e.target.value.split("-")[1])
                    }}
