@@ -46,7 +46,7 @@ const Kitchen = () => {
 
 
         <div className="text-center">
-          <h2 className="text-xl font-semibold">Daily Log</h2>
+          <h2 className="text-xl font-semibold">Daily Log For {date.date}-{date.month}-2025</h2>
         </div>
 
     <div className='flex justify-center gap-10'>
@@ -127,7 +127,7 @@ const Kitchen = () => {
               <TableRow className="font-medium bg-muted/50">
                 <TableCell colSpan={3}>Total:</TableCell>
                 <TableCell colSpan={2}>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0)}</TableCell>
-                <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + (obj.batchQuantity*obj.yield),0)}</TableCell> 
+                <TableCell>{sectionData[0].dataList.reduce( (accumulator, obj) => accumulator + (obj.batchQuantity*obj.yield),0).toFixed(2)}</TableCell> 
                 <TableCell colSpan={2}></TableCell>
               </TableRow>
             </TableBody>

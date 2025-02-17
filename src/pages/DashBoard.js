@@ -16,9 +16,9 @@ import {
 } from "lucide-react";
 
 const menuItems = [
-  { icon: ClipboardList, label: "Filling", path:"Create-Data-Filling" },
-  { icon: ChefHat, label: "Kitchen", path:"Create-Data-/Kitchen"},
-  { icon: Truck, label: "Dispatch", path:"Create-Data-Dispatch"},
+  { icon: ClipboardList, label: "Filling", path:"Create-Data-Filling", section:"Filling" },
+  { icon: ChefHat, label: "Kitchen", path:"Create-Data-Kitchen", section:"Kitchen"},
+  { icon: Truck, label: "Dispatch", path:"Create-Data-Dispatch", section:"Dispatch"},
   { icon: Target, label: "Production Goal", path:"Production" },
   { icon: Container, label: "Exports", path:"Create-Exports"},
 ];

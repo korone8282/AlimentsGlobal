@@ -46,7 +46,7 @@ const Dispatch = () => {
 
 
         <div className="text-center">
-          <h2 className="text-xl font-semibold">Daily Log</h2>
+          <h2 className="text-xl font-semibold">Daily Log For {date.date}-{date.month}-2025</h2>
         </div>
 
     <div className='flex justify-center gap-10'>

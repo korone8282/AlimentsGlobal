@@ -5,22 +5,24 @@ import { DATA_URL, CATEGORIES_URL, PRODUCT_URL } from '../../redux/Utils/constan
 import { setData, deleteData, emptyData } from '../../redux/Slices/localSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FaSquareCheck } from "react-icons/fa6";
-import { FaTrash} from "react-icons/fa";
-import { MdLightMode,MdModeNight } from "react-icons/md";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import Loader from '../../components/Loader'
+import { Sun, Moon,CheckCheck, Trash2, Check, CirclePlus } from "lucide-react";
+import { Button } from "../../components/Buttons";
+import { Input } from "../../components/Input";
 import { setDate} from '../../redux/Slices/dateSlice';
 
 const AllDataKitchen = () => {
 
-  const sections = ["Dispatch","Kitchen","Filling"];
-
   const [products, setproducts] = useState([]);
   const [buyer, setbuyer] = useState("");
+  const [loading, setLoading] = useState(1);
 
-  const [mode, setMode] = useState(0);
   const dayArray = ["Day","Night"];
 
   const section = useLocation();
+
+  const [isDayShift, setIsDayShift] = useState(true);
 
   const date = useSelector(state=>state.data);
 
@@ -39,6 +41,7 @@ const AllDataKitchen = () => {
       try {
        const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
        setcategories(res.data.data);
+       setLoading(0);
       } catch (error) {
         console.log(error);
       }
@@ -96,7 +99,7 @@ const AllDataKitchen = () => {
     
    try {
 
-    await apiConnector(`${DATA_URL}/Kitchen_${date.date}/${dayArray[+mode]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
+    await apiConnector(`${DATA_URL}/Kitchen_${date.date}/${dayArray[+!isDayShift]}`,"POST",initalData[val],{Authorization: `Bearer ${userinfo.token}`});
 
     dispatch(emptyData(val));
 
@@ -155,139 +158,149 @@ const AllDataKitchen = () => {
   }
 
   return (
-    <div>
-      <div className='my-8 rounded-xl w-full h-12 flex justify-around items-center'>
+    <div className="min-h-screen bg-background p-6">
 
-      <select 
-      name="section"
-      className='text-xl font-semibold bg-transparent bg-[#f59e0b] rounded-xl hover:text-white p-3 hover:bg-black'
-      onChange={e=> navigate(`/admin/Create-Data-${e.target.value}`)}>
-      <option className='bg-[#f59e0b]'>Select Section</option>
+ <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+ <div className='my-8 rounded-xl w-full h-12 -mx-9 flex justify-around items-center'>
+
+<div className="flex items-center space-x-4 mx-12">
+      <label className="text-lg text-muted-foreground">DataSheet for:</label>
+      <input
+        type="date"
+        value={date.date}
+        name='date'
+        onChange={(e)=>dispatch(setDate(e.target.value))}
+        className="border bg-[#22252a] border-border rounded-md px-3 py-1.5 text-md focus:outline-none focus:ring-2 focus:ring-ring text-muted-foreground shadow-md"
+      />
+</div>
+
+<Button
+  variant="ghost"
+  className={`w-12 h-12 p-0 rounded-full hover:bg-primary/20 transition-all duration-300 relative overflow-hidden ${
+  isDayShift ? 'bg-amber-400/10' : 'bg-blue-400/10'
+  }`}
+  onClick={() => setIsDayShift(!isDayShift)}
+  >
+  <div className={`transform transition-all duration-500 ${
+  isDayShift ? 'rotate-0 scale-100' : 'rotate-180 scale-0'
+  } absolute inset-0 flex items-center justify-center`}>
+  <Sun className={`w-6 h-6 ${
+  isDayShift ? 'text-amber-400' : 'text-blue-400'
+  }`} />
+  </div>
+  <div className={`transform transition-all duration-500 ${
+  !isDayShift ? 'rotate-0 scale-100' : 'rotate-180 scale-0'
+  } absolute inset-0 flex items-center justify-center`}>
+  <Moon className={`w-6 h-6 ${
+  !isDayShift ? 'text-blue-400' : 'text-amber-400'
+  }`} />
+  </div>
+</Button>
+
+
+<Button variant="outline" className="border-primary text-primary hover:bg-primary/10"
+        onClick={()=>submitHandler}>
+     Submit
+</Button>
+
+</div>
+
+
+{
+  loading ? (<Loader/>
+  ):(
+    <div className="rounded-lg border bg-card">
+  <Table>
+      <TableHeader>
+        <TableRow className="bg-muted/60">
+          <TableHead className="text-left">S No.</TableHead>
+          <TableHead>Buyer Name</TableHead>
+          <TableHead>Product Name</TableHead>
+          <TableHead>No. Of Batch</TableHead>
+          <TableHead>Yield (kg)</TableHead>
+          <TableHead>No. of Workers</TableHead>
+          <TableHead>Remarks</TableHead>
+          <TableHead>Delete</TableHead>
+        </TableRow>
+      </TableHeader>
+
+    <TableBody>
         {
-          sections.map((val,index)=>(
-            <option key={index} className=' bg-[#f59e0b] text-black font-semibold'>{val}</option>
-          ))
-        }
-      </select>
+          initalData[1]?.map((row,i) => (
+          <TableRow key={row.sNo} className="hover:bg-muted/50">
+            <TableCell>{i+1}</TableCell>
+            <TableCell>{row.buyerName}</TableCell>
+            <TableCell>{row.productName}</TableCell>
+            <TableCell>{row.batchQuantity}</TableCell>
+            <TableCell>{row.yield}</TableCell>
+            <TableCell>{row.workersQuantity}</TableCell>
+            <TableCell><CheckCheck className='h-6 w-6 mx-auto' color='#13c952'/></TableCell>
+            <TableCell><Trash2 className='h-6 w-6' color="#e01010" onClick={()=>deleteRow(i)}/></TableCell>
+          </TableRow>
+        ))}
 
-      <div  onClick={()=>setMode(!mode)}>
-    {
-      !mode ? (
-        <MdLightMode color='black' size={36}/>
-      ) : (
-        <MdModeNight  size={36}/>
-      )
-    }
-        </div>
-
-      <button className='text-xl font-semibold h-16 w-[9.6rem] text-center bg-[#f59e0b] rounded-xl hover:text-white hover:bg-black'
-              onClick={submitHandler}>
-            Submit
-      </button>
-
-      </div>
-
-      <h2 className='text-center text-2xl font-bold my-8'>DataSheet for : <input type='date' value={date.date} onChange={(e)=>dispatch(setDate(e.target.value))}></input> </h2>
-        
-         <div className='sm:max-lg:mx-1'>
-            <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit'>
-      <thead>
-        <tr>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>S no.</th>
-          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>Buyer Name</th>
-          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>Product Name</th>
-          <th rowSpan={2} className='border-4 border-black sm:max-lg:p-0.5'>No. of Batch</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Yield (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. of Workers</th>
-          <th rowSpan={2} className='border-4 border-black  sm:max-lg:p-0.5'>Remarks</th>
-          <th rowSpan={2} className='border-4 border-black  sm:max-lg:p-0.5'>Delete</th>
-        </tr>
-      </thead>
-
-      <tbody>
-      {
-          initalData[1].map((val,index)=>(
-              <tr key={index}>
-          <td className='border-4 border-black px-4 p-2 w-12 text-center'>{index+1}</td>
-          <td className='border-4 border-black'>{val.buyerName}</td>
-          <td className='border-4 border-black'>{val.productName}</td>
-          <td className='border-4 border-black'>{val.batchQuantity}</td>
-          <td className='border-4 border-black'>{val.yield}</td>
-          <td className='border-4 border-black'>{val.workersQuantity}</td>
-          <td className='border-4 border-black pl-11 sm:max-lg:pl-7 hover:bg-slate-300'><FaSquareCheck color='green'/></td>
-          <td className='border-4 border-black pl-9 sm:max-lg:pl-6 hover:bg-red-500'
-              onClick={()=>deleteRow(index)}><FaTrash/></td>
-              </tr>
-            ))
-        }
-      
-        
-
-      <tr className='text-center'>
-
-          <td className='border-4 border-black'>-</td>
-          <td className='border-4 w-36 border-black'>
-          <select
-                 name='buyerName'
-                 className='w-full bg-transparent'
-                 value={formData.buyerName}
+        <TableRow className="hover:bg-muted/50">
+        <TableCell><CirclePlus className='h-5 w-5' color='#06a73f'/></TableCell>
+            <TableCell> <select
+             name='buyerName'
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+             value={formData.buyerName}
                  onChange={ e =>{
                    inputHandler(e) 
                    setbuyer(e.target.value.split("-")[1])
                    }}
-            >
-            <option selected={1} className=' bg-[#f59e0b]'>Select Buyer</option>
-            {
-                categories.map((val,index)=>(<option className=' bg-[#f59e0b]' value={`${val._id}-${val.name}`} key={index}>{val.name}</option>))
-            }
-            </select>
-          </td>
-          <td className='border-4 w-40 border-black'>
-          <select
-                 name='productName'
-                 className='w-full bg-transparent'
-                 value={formData.productName}
-                 onChange={ e => inputHandler(e) }
-            >
-            <option selected={true} className=' bg-[#f59e0b]'>Select Product</option>
-            {
-                products?.filter((product) => product.buyer === buyer).map((val,index)=>(<option className=' bg-[#f59e0b] px-2' value={val.name} key={index}>{val.name}</option>))
-            }
-            </select>
-          </td>
-          <td className='border-4 w-32 border-black'>
-          <input type='number'
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+        categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={`${val._id}-${val.name}`} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
+            <TableCell>  <select
+           name='productName'
+           className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+           value={formData.productName}
+           onChange={ e => inputHandler(e) }
+    >
+    <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+      products?.filter((product) => product.buyer === buyer).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
+            <TableCell> <Input type='number'
                  name='batchQuantity'
                  value={formData.batchQuantity}
-                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 w-32 border-black'>
-          <input type='number'
+            ></Input> </TableCell>
+
+            <TableCell> <Input type='number'
                  value={formData.yield}
                  name='yield'
-                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 w-32 border-black'>
-          <input type='number'
+            ></Input> </TableCell>
+
+            <TableCell><Input type='number'
                  name='workersQuantity'
                  value={formData.workersQuantity}
-                 className='w-full bg-transparent'
                  onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 border-black w-16 pl-11 sm:max-lg:pl-7 hover:bg-green-200'
-              onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
-          <td className='border-4 w-16 border-black pl-1'>-</td>
-        
-      </tr>
+            ></Input> </TableCell>
 
-      </tbody>
-    </table>
-            </div>
+            <TableCell><Check className="w-6 h-6 mx-auto hover:bg-gray-700" 
+                              color="#e01010"
+                              onClick={rowDataHandler}
+                              /></TableCell>
+            <TableCell>---</TableCell>
+          </TableRow>
+      </TableBody>
+            
+  
+
+    </Table>
+  </div>
+  )
+}
+  </div>
 
     </div>
   )

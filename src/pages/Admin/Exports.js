@@ -2,14 +2,18 @@ import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { toast } from 'react-toastify';
 import { CATEGORIES_URL, PRODUCT_URL, EXPORT_URL } from '../../redux/Utils/constants';
-import { FaSquareCheck } from "react-icons/fa6";
-import { FaTrash} from "react-icons/fa";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import Loader from '../../components/Loader'
+import { CheckCheck, Trash2, Check, CirclePlus } from "lucide-react";
+import { Button } from "../../components/Buttons";
+import { Input } from "../../components/Input";
 import { useSelector } from 'react-redux';
 
 const Exports = () => {
 
   const [products, setproducts] = useState([]);
   const [categories, setcategories] = useState([]); 
+  const [loading, setLoading] = useState(1);
   const [info, setInfo] = useState({
     buyerName:"",
     productName:"",
@@ -27,6 +31,7 @@ const Exports = () => {
       try {
        const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
        setcategories(res.data.data);
+       setLoading(0);
       } catch (error) {
         console.log(error);
       }
@@ -102,105 +107,115 @@ const deleteHandler = (i) =>{
 
   }
 
+
   return (
-    <div>
-      <div className='sm:max-lg:mx-1'>
+    <div className="min-h-screen bg-background p-6">
 
-    <div className='flex justify-center my-12 text-3xl font-bold gap-2'>
-      <label htmlFor='main'>Container Name :  </label>
-          <input type='name'
-                 id='main'
-                 className='border-2 border-black'
-                 onChange={ e => setName(e.target.value) }
-            ></input>
+ <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+ <div className='my-8 rounded-xl w-full h-12 -mx-9 flex justify-around items-center'>
 
-<div className='text-xl select-none font-semibold sm:max-lg:mx-10 mx-32 h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
-             onClick={submitHandler}
-             >Submit</div>
-    </div>
+<div className="flex items-center space-x-4 mx-12">
+      <label className="text-xl text-muted-foreground">Container Name</label>
+      <Input
+        type="name"
+        onChange={ e => setName(e.target.value) }
+        className="border bg-[#22252a] border-border rounded-md px-3 py-1.5 text-md focus:outline-none focus:ring-2 focus:ring-ring text-muted-foreground shadow-md"
+      />
+</div>
 
-    <table className='w-[60rem] mx-auto my-12 sm:max-lg:w-fit'>
-      <thead>
-        <tr>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>S no.</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Buyer Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Product Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Pouch Size (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>No. Of Pouches</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Remarks</th>
-          <th rowSpan={2} className='border-4 border-black p-2 sm:max-lg:p-0.5'>Delete</th>
-        </tr>
-      </thead>
+<Button variant="outline" className="border-primary text-primary hover:bg-primary/10"
+        onClick={submitHandler}>
+     Submit
+</Button>
 
-      <tbody>
-      {
-          arr?.map((val,index)=>(
-              <tr key={index}>
-          <td className='border-4 border-black px-4 p-2'>{index+1}</td>
-          <td className='border-4 border-black'>{val.buyerName}</td>
-          <td className='border-4 border-black'>{val.productName}</td>
-          <td className='border-4 border-black'>{val.packSize}</td>
-          <td className='border-4 border-black'>{val.pouch}</td>
-          <td className='border-4 border-black pl-9 hover:bg-slate-300 sm:max-lg:px-7'><FaSquareCheck color='green'/></td>
-          <td className='border-4 border-black pl-8 sm:max-lg:px-5 hover:bg-red-500'
-              onClick={()=>deleteHandler(index)}><FaTrash/></td>
-              </tr>
-            ))
-        }
-      
-        
+</div>
 
-      <tr className='text-center'>
 
-          <td className='border-4 border-black'>-</td>
-          <td className='border-4 border-black'>
-          <select
-                 name='buyerName'
-                 value={info.buyerName}
-                 onChange={ e => inputHandler(e)}
-            >
-            <option selected={1} className=' bg-[#f59e0b]'>Select Buyer</option>
-            {
-                categories.map((val,index)=>(<option className=' bg-[#f59e0b]' value={`${val.name}`} key={index}>{val.name}</option>))
-            }
-            </select>
-          </td>
-          <td className='border-4 border-black'>
-          <select
-                 name='productName'
-                 value={info.productName}
-                 onChange={ e => inputHandler(e) }
-            >
-            <option selected={true} className=' bg-[#f59e0b]'>Select Product</option>
-            {
-                products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#f59e0b] px-2' value={val.name} key={index}>{val.name}</option>))
-            }
-            </select>
-          </td>
-          <td className='border-4 border-black'>
-          <input type='number'
+{
+  loading ? (<Loader/>
+  ):(
+    <div className="rounded-lg border bg-card">
+  <Table>
+      <TableHeader>
+        <TableRow className="bg-muted/60">
+          <TableHead className="text-left">S No.</TableHead>
+          <TableHead>Buyer Name</TableHead>
+          <TableHead>Product Name</TableHead>
+          <TableHead>Pouch Size (kg)</TableHead>
+          <TableHead>Required Pouches</TableHead>
+          <TableHead>Remarks</TableHead>
+          <TableHead>Delete</TableHead>
+        </TableRow>
+      </TableHeader>
+
+    <TableBody>
+        {
+          arr?.map((row,i) => (
+          <TableRow key={i} className="hover:bg-muted/50">
+            <TableCell>{i+1}</TableCell>
+            <TableCell>{row.buyerName}</TableCell>
+            <TableCell>{row.productName}</TableCell>
+            <TableCell>{row.packSize}</TableCell>
+            <TableCell>{row.pouch}</TableCell>
+            <TableCell><CheckCheck className='h-6 w-6 mx-auto' color='#13c952'/></TableCell>
+            <TableCell><Trash2 className='h-6 w-6' color="#e01010" onClick={()=>deleteHandler(i)}/></TableCell>
+          </TableRow>
+        ))}
+
+        <TableRow className="hover:bg-muted/50">
+        <TableCell><CirclePlus className='h-5 w-5' color='#06a73f'/></TableCell>
+            <TableCell> <select
+             className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+             name='buyerName'
+             value={info.buyerName}
+             onChange={ e => inputHandler(e)}
+    >
+    <option selected={true} className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+        categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={`${val.name}`} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
+            <TableCell>  <select
+           name='productName'
+           className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+           value={info.productName}
+           onChange={ e => inputHandler(e) }
+    >
+    <option selected={true} className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+    {
+      products?.filter((product) => product.buyer === info.buyerName).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' value={val.name} key={index}>{val.name}</option>))
+    }
+    </select> </TableCell>
+
+            <TableCell> <Input type='number'
                  name='packSize'
                  value={info.packSize}
                  onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 border-black'>
-          <input type='number'
-                 name='pouch'
-                 value={info.pouch}
+            ></Input> </TableCell>
+
+            <TableCell> <Input type='number'
+                  name='pouch'
+                  value={info.pouch}
                  onChange={ e => inputHandler(e) }
-            ></input>
-          </td>
-          <td className='border-4 border-black pl-9 sm:max-lg:px-7 hover:bg-green-200'
-              onClick={rowDataHandler}><FaSquareCheck color='red' className='hover:text-black'/></td>
-          <td className='border-4 border-black px-8 sm:max-lg:px-4'>-</td>
-        
-      </tr>
+            ></Input> </TableCell>
 
-      </tbody>
-                    </table>
+            <TableCell><Check className="w-6 h-6 mx-auto hover:bg-gray-700" 
+                              color="#e01010"
+                              onClick={rowDataHandler}
+                              /></TableCell>
+            <TableCell>---</TableCell>
+          </TableRow>
+      </TableBody>
+            
+  
 
-            </div>
+    </Table>
+  </div>
+  )
+}
+  </div>
+
     </div>
   )
 }

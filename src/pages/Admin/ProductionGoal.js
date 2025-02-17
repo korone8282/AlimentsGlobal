@@ -224,8 +224,8 @@ const inputHandler = async(e) =>{
 
 <div className='flex flex-col items-center gap-6'>
               <div className="flex w-[200px] h-[200px] justify-center items-center relative">
-    <div className="w-[110%] h-[110%] shadow-lg shadow-pink-500 bg-transparent rounded-full absolute animate-spin_right"></div>                
-    <div className="w-[108%] h-[108%] shadow-lg shadow-violet-500 bg-transparent rounded-full absolute animate-spin_left"></div>
+    <div className="w-[110%] h-[110%] shadow-lg shadow-primary bg-transparent rounded-full absolute animate-spin_right"></div>                
+    <div className="w-[108%] h-[108%] shadow-lg shadow-violet-400 bg-transparent rounded-full absolute animate-spin_left"></div>
     <div className="w-[106%] h-[106%] shadow-lg shadow-cyan-500 bg-transparent rounded-full absolute animate-spin_right_fast"></div>
     <CircularSlider
             label="Completion"
@@ -234,8 +234,8 @@ const inputHandler = async(e) =>{
             verticalOffset='0.5rem'
             width={200}
             labelColor='#f59e0b'           
-            progressColorFrom="#f59e0b"
-            progressColorTo="#f59e0b"
+            progressColorFrom="#00BCD4"
+            progressColorTo="#9C27B0"
             hideKnob={true}
             progressSize={20}
             value={`${((val.pouchPacked / val.pouchGoal)*100).toFixed(2)}`}
