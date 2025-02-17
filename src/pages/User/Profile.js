@@ -41,13 +41,11 @@ const Profile = () => {
 {
         loading ? ( <Loader/>
         ) : (
-          <div className='w-[50rem] flex flex-col mx-auto h-auto'>
-          <h1 className="my-8  text-3xl font-medium ">
-            My Profile
-          </h1>
-          <div className="flex items-center justify-between  rounded-md text-[#f59e0b] bg-black border-[#f59e0b] border-2 p-8 px-12">
-            <div className="flex items-center justify-between w-full">
-            <div className='flex items-center gap-4'>
+          <div className='w-[90%] md:w-1/2 flex flex-col gap-5 mx-auto h-auto'>
+          <h1 className="mt-7 mb-4 text-3xl text-center"> My Profile </h1>
+          <div className="flex flex-col items-center justify-center rounded-md text-[#f59e0b] bg-black border-[#f59e0b] border-2 p-8 px-12">
+            <div className="flex flex-col items-center justify-center w-full gap-4">
+            <div className='flex items-center gap-20'>
             <img
                 src={user?.image}
                 alt="Profile"
@@ -70,7 +68,7 @@ const Profile = () => {
           </IconBtn>
             </div>
           </div>
-          <div className="my-4 flex flex-col gap-y-6 rounded-md text-[#f59e0b] border-[#f59e0b] bg-black border-2 p-8 px-12">
+          <div className="flex flex-col gap-y-6 rounded-md text-[#f59e0b] border-[#f59e0b] bg-black border-2 p-8 px-12">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg font-semibold">About</p>
               <IconBtn
@@ -88,7 +86,7 @@ const Profile = () => {
               {user?.about ?? "Write Something About Yourself"}
             </p>
           </div>
-          <div className="my-4 flex flex-col gap-y-6 rounded-md border-[#f59e0b] border-2 bg-black text-[#f59e0b] p-8 px-12">
+          <div className="flex flex-col gap-y-6 rounded-md border-[#f59e0b] border-2 bg-black text-[#f59e0b] p-8 px-12">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg font-semibold">
                 Personal Details
@@ -102,7 +100,7 @@ const Profile = () => {
             <RiEditBoxLine />
           </IconBtn>
             </div>
-            <div className="flex">
+            <div className="flex flex-col">
             <div className="flex flex-col w-full flex-wrap gap-4 h-[15vh]">
                 <div>
                   <p className="mb-2 text-sm">First Name</p>

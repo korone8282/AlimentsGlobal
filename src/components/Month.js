@@ -34,7 +34,7 @@ const Month = () => {
   return (
     <div className="p-6 bg-black backdrop-blur-lg rounded-2xl my-2 max-w-[100rem] mx-auto">
       <div className="mb-6">
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex md:flex-row flex-col gap-4 items-center justify-between mb-6">
           <h2 className="text-2xl font-medium text-primary">{selectedMonth.month}</h2>
           <div className="flex gap-2">
             <button
@@ -84,7 +84,7 @@ const Month = () => {
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-11 gap-4">
+        <div className="grid grid-cols-11 gap-8 md:gap-4">
           {days.slice(0, selectedMonth.days).map((day,i) => (
             <motion.button
               key={day}

@@ -167,8 +167,8 @@ const AllDataFilling = () => {
   return (
     <div className="min-h-screen bg-background p-6">
 
- <div className="max-w-[100rem] mx-auto space-y-12 text-start">
- <div className='my-8 rounded-xl w-full h-12 -mx-9 flex justify-around items-center'>
+ <div className="max-w-[100rem] mx-auto space-y-12 text-start flex flex-col gap-10 md:gap-0">
+ <div className='my-8 rounded-xl w-full h-12 flex justify-around items-center flex-wrap gap-6'>
 
 <div className="flex items-center space-x-4 mx-12">
       <label className="text-lg text-muted-foreground">DataSheet for:</label>

@@ -204,57 +204,59 @@ const inputHandler = async(e) =>{
         <div className={`flex flex-wrap justify-evenly ${openBox ? 'hidden' : ''} gap-20 max-w-[100rem]`}>
         {
           goals?.map((val,index)=>(
-            <div key={index} 
-                 className='flex gap-12 border-2 text-[#f59e0b] bg-[#22252a] rounded-lg p-8 max-h-96 mx-2 px-12 sm:max-lg:gap-8'
-                 onClick={()=>{
+            <div 
+                key={index}
+                className="flex flex-col sm:flex-row gap-6 sm:gap-8 min-w-80 lg:gap-12 border-2 border-white/10 text-[#f59e0b] bg-[#22252a] rounded-lg p-4 sm:p-8 mx-0 sm:mx-2"
+                onClick={()=>{
                   setopenBox(!openBox);
-                  setcurrentGoal(val)}}>
+                  setcurrentGoal(val)}}
+                >
+                <div className="flex flex-col gap-1 text-xl sm:text-2xl justify-evenly font-bold sm:max-w-48">
+                  <div className="text-white">Buyer Name:</div>
+                  <div className="mb-2">{val.buyerName}</div>
+                  <div className="text-white">Product Name:</div>
+                  <div className="mb-2 break-words">{val.fname}</div>
+                  <div className="text-white">Batch No:</div>
+                  <div className="mb-2">{val.batchNum}</div>
+                  <div className="text-white">Pack Size (Kg):</div>
+                  <div className="mb-2">{val.pouchSize}</div>
+                </div>
 
-            <div className='flex flex-col gap-1 text-2xl justify-evenly font-bold sm:max-lg:text-lg max-w-48 sm:max-lg:max-w-32'>
-            <div className='text-white'> Buyer Name: </div>
-            <div className='mb-2'>{val.buyerName}</div>
-            <div className='text-white'> Product Name: </div>
-            <div className='mb-2'>{val.fname}</div>
-            <div className='text-white'> Batch No: </div>
-            <div className='mb-2'>{val.batchNum}</div>
-            <div className='text-white'>Pack Size (Kg):</div>
-            <div className='mb-2'>{val.pouchSize}</div>
-            </div>
-             
+                <div className="flex flex-col items-center gap-6 w-full sm:w-auto">
+                  <div className="flex w-[180px] sm:w-[200px] h-[180px] sm:h-[200px] justify-center items-center relative">
+                  <div className="w-[110%] h-[110%] shadow-lg shadow-primary bg-transparent rounded-full absolute animate-spin_right"></div>                
+                  <div className="w-[108%] h-[108%] shadow-lg shadow-violet-400 bg-transparent rounded-full absolute animate-spin_left"></div>
+                  <div className="w-[106%] h-[106%] shadow-lg shadow-cyan-500 bg-transparent rounded-full absolute animate-spin_right_fast"></div>
+                    <CircularSlider
+                      label="Completion"
+                      labelFontSize="1rem"
+                      valueFontSize="2rem"
+                      verticalOffset="0.5rem"
+                      width={180}
+                      labelColor="#f59e0b"
+                      progressColorFrom="#00BCD4"
+                      progressColorTo="#9C27B0"
+                      hideKnob={true}
+                      progressSize={20}
+                      value={`${((val.pouchPacked / val.pouchGoal)*100).toFixed(2)}`}
+                      appendToValue='%'
+                      trackColor=""
+                      trackSize={24}
+                      initialValue={(val.pouchPacked / val.pouchGoal)*100}
+                      knobDraggable={false}
+                      dataIndex={(val.pouchPacked / val.pouchGoal)*360}
+                    />
+                  </div>
 
-<div className='flex flex-col items-center gap-6'>
-              <div className="flex w-[200px] h-[200px] justify-center items-center relative">
-    <div className="w-[110%] h-[110%] shadow-lg shadow-primary bg-transparent rounded-full absolute animate-spin_right"></div>                
-    <div className="w-[108%] h-[108%] shadow-lg shadow-violet-400 bg-transparent rounded-full absolute animate-spin_left"></div>
-    <div className="w-[106%] h-[106%] shadow-lg shadow-cyan-500 bg-transparent rounded-full absolute animate-spin_right_fast"></div>
-    <CircularSlider
-            label="Completion"
-            labelFontSize='1rem'
-            valueFontSize='2rem'
-            verticalOffset='0.5rem'
-            width={200}
-            labelColor='#f59e0b'           
-            progressColorFrom="#00BCD4"
-            progressColorTo="#9C27B0"
-            hideKnob={true}
-            progressSize={20}
-            value={`${((val.pouchPacked / val.pouchGoal)*100).toFixed(2)}`}
-            appendToValue='%'
-            trackColor=""
-            trackSize={24}
-            initialValue={(val.pouchPacked / val.pouchGoal)*100}
-            knobDraggable={false}
-            dataIndex={(val.pouchPacked / val.pouchGoal)*360}
-            />
-</div>
-            
+                  <div className="text-2xl sm:text-3xl mt-4 font-bold">
+                    {val.pouchPacked} / {val.pouchGoal}
+                  </div>
 
-                <div className='text-3xl my-2 sm:max-lg:text-xl font-bold'> {val.pouchPacked} / {val.pouchGoal} </div>
-
-                <div className='text-3xl -my-3 sm:max-lg:text-xl font-bold'>{val.day}</div>
+                  <div className="text-2xl sm:text-3xl font-bold -mt-3">
+                    {val.day}
+                  </div>
+                </div>
               </div>
-             
-            </div>
           ))
         }
         </div>
@@ -267,7 +269,7 @@ const inputHandler = async(e) =>{
 
         {
             openBox ? (
-              <div className={`bg-[#22252a] text-white  p-6 rounded-lg shadow-lg w-full max-w-md z-30 h-fit absolute inset-0 m-auto`}>
+              <div className={`bg-[#22252a] text-white mt-96 md:m-auto p-6 rounded-lg shadow-lg w-full max-w-md z-30 h-fit absolute inset-0 `}>
         <h2 className="text-xl font-semibold mb-4">Update Goal</h2>
         <div>
             <div className="mb-4">

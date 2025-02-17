@@ -6,22 +6,9 @@ import { setSection } from '../redux/Slices/dateSlice'
 import {
   BarChart3,
   Package,
-  ClipboardList,
-  ChefHat,
-  Truck,
-  Target,
   FileText,
-  PlusIcon,
-  Container,
 } from "lucide-react";
-
-const menuItems = [
-  { icon: ClipboardList, label: "Filling", path:"Create-Data-Filling", section:"Filling" },
-  { icon: ChefHat, label: "Kitchen", path:"Create-Data-Kitchen", section:"Kitchen"},
-  { icon: Truck, label: "Dispatch", path:"Create-Data-Dispatch", section:"Dispatch"},
-  { icon: Target, label: "Production Goal", path:"Production" },
-  { icon: Container, label: "Exports", path:"Create-Exports"},
-];
+import { Navigation } from '../components/Navigation';
 
 const cards = [
   { icon: FileText, label: "View Data" },
@@ -70,31 +57,11 @@ export const Dashboard = () => {
   }, [userinfo,navigate]);
 
   return (
-    <div className="flex justify-center">
+    <div className="min-h-screen flex justify-center">
   
-  <div className="absolute z-30 left-0 h-[calc(100vh-64px)] w-24 hover:w-64 bg-black/40 backdrop-blur-xl border-r border-white/10 p-4 transition-all duration-[600ms] group/sidebar overflow-hidden">
-        <div className="space-y-6">
-          <div className="absolute top-2 right-3 bg-black m-4 opacity-100 group-hover/sidebar:opacity-0 transition-opacity">
-            <PlusIcon className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-white/80 text-2xl font-medium mt-4 mb-12 opacity-0 group-hover/sidebar:opacity-100 transition-opacity whitespace-nowrap">Create Data</h2>
-          {menuItems.map((item, index) => (
-            <motion.button
-              key={item.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.15 }}
-              className="w-full flex items-center space-x-10 p-4 hover:space-x-14 rounded-lg bg-white/5 hover:bg-white/10 transition-all group"
-              onClick={() => navigate(`/admin/${item.path}`)}
-            >
-              <item.icon className="w-7 h-7 text-primary group-hover:scale-110 transition-transform absolute" />
-              <span className="text-white/90 text-md opacity-0 group-hover/sidebar:opacity-100 transition-opacity whitespace-nowrap">{item.label}</span>
-            </motion.button>
-          ))}
-        </div>
-      </div>
-      
-      <div className="flex flex-col md:flex-row gap-6 md:gap-12 my-12 md:my-24 mx-4 md:ml-28">
+     <Navigation/>
+
+      <div className="flex flex-col md:flex-row gap-6 max-w-[90%] mx-6 md:gap-12 my-16 md:my-24 md:ml-28">
         {cards.map((card, index) => {
           return (
             <motion.div
@@ -103,7 +70,7 @@ export const Dashboard = () => {
               animate={{ 
                 opacity: 1, 
                 y: 0,
-                height: isOpen === card.label ? "32rem" : "20rem"
+                height: isOpen === card.label ? ( window.innerWidth < 768 ? "27rem" : "32rem" ) : "20rem"
               }}
               transition={{ 
                 delay: index * 0.3,
@@ -112,7 +79,7 @@ export const Dashboard = () => {
                 }
               }}
               onClick={() => setIsOpen(isOpen === card.label ? null : card.label)}
-              className="w-full md:w-[22rem] rounded-2xl bg-secondary/30 backdrop-blur-lg p-4 md:p-8 flex flex-col items-center hover:bg-secondary/50 transition-all group cursor-pointer overflow-hidden"
+              className="w-[20rem] md:w-[22rem] rounded-2xl bg-secondary/30 backdrop-blur-lg p-4 md:p-8 flex flex-col items-center hover:bg-secondary/50 transition-all group cursor-pointer overflow-hidden"
               style={{
                 justifyContent: isOpen === card.label ? "flex-start" : "center",
                 paddingTop: isOpen === card.label ? "2rem" : "4rem",
