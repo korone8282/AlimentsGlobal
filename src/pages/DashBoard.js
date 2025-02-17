@@ -49,7 +49,7 @@ const items = [
     {name: "Dispatch Stock", path: "Dispatched"},
     {name: "Product List", path: "ProductData"},
     {name: "Packed List", path: "Left"},
-    {name: "Inventory Record", path: "Inventory"}
+    {name: "Filling List", path: "Filling-List"}
   ]
 ]
 
@@ -72,7 +72,7 @@ export const Dashboard = () => {
   return (
     <div className="flex justify-center">
   
-  <div className="fixed left-0 h-[calc(100vh-64px)] w-24 hover:w-64 bg-black/40 backdrop-blur-xl border-r border-white/10 p-4 transition-all duration-[600ms] group/sidebar overflow-hidden">
+  <div className="absolute z-30 left-0 h-[calc(100vh-64px)] w-24 hover:w-64 bg-black/40 backdrop-blur-xl border-r border-white/10 p-4 transition-all duration-[600ms] group/sidebar overflow-hidden">
         <div className="space-y-6">
           <div className="absolute top-2 right-3 bg-black m-4 opacity-100 group-hover/sidebar:opacity-0 transition-opacity">
             <PlusIcon className="w-8 h-8 text-white" />

@@ -3,6 +3,7 @@ import Loader from '../../components/Loader';
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { DATA_URL } from '../../redux/Utils/constants';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 
 const KvF = () => {
 
@@ -141,72 +142,81 @@ const KvF = () => {
   } 
 
   return (
-    <div>
-      <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
-        <div>
-           <label>Date: </label>
-            <input type='date'
-            name='datey'
-            onChange={ e=> inputHandler(e)}
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+
+
+      <div className="mb-8 space-y-7">
+            <h1 className="text-3xl font-semibold text-foreground">Wastage Records</h1>
+          
+          <div className="flex items-center space-x-4">
+            <label className="text-lg text-muted-foreground">Find for:</label>
+            <input
+              type="date"
+              name='datey'
+              onChange={ e=> inputHandler(e)}
+              className="border bg-[#22252a] border-border rounded-md px-3 py-1.5 text-md focus:outline-none focus:ring-2 focus:ring-ring text-muted-foreground shadow-md"
             />
+          </div>
         </div>
-      </div>
 
-      <div> {
-      error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found For {date.datey}</div>
-        ) : (
-         <div>
-         {
-  loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit sm:max-lg:mx-2'>
-      <thead>
-        <tr>
-        <th rowSpan={2} className='border-4 border-black p-2'>S No.</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Item Name</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Day Time</th>
-          <th rowSpan={2} className='border-4 border-black p-4'>Pack Size</th>
-          <th rowSpan={2} className='border-4 border-black p-5'>No. Of Pouch Filled</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Production (Filling)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Production (Kitchen)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Difference (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Variance (Kg)</th>
-        </tr>
-      </thead>
+{
+  error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+  ):(
+    <div>
+      {
+        loading ? (<Loader/>
+        ):(
+          <div className="rounded-lg border bg-card">
+        <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/60">
+                <TableHead className="text-left">S No.</TableHead>
+                <TableHead>Item Name</TableHead>
+                <TableHead>Day Time</TableHead>
+                <TableHead>Pack Size (g)</TableHead>
+                <TableHead>Pouch Filled</TableHead>
+                <TableHead>Production (Filling)</TableHead>
+                <TableHead>Production (Kitchen)</TableHead>
+                <TableHead>Difference (kg)</TableHead>
+                <TableHead>Wastage (kg)</TableHead>
+                <TableHead>Variance (kg)</TableHead>
+              </TableRow>
+            </TableHeader>
 
-      <tbody className='text-center'>
-         {
-          data?.filter(obj=> obj.sectionMain === "Filling" ).map( (val) =>(
+          <TableBody>
+              {
+                data?.filter(obj=> obj.sectionMain === "Filling" ).map( (val) =>(
             val.dataList.filter((value, index, self) =>
     index === self.findIndex((obj) => ( obj.productName === value.productName && obj.day === val.day ))).map((ele,index)=>(
-                    <tr key={index}>
-          <td className='border-4 border-black font-bold  px-4 p-2'>⦿</td>
-          <td className='border-4 border-black font-bold'>{ele.productName}</td>
-          <td className='border-4 border-black font-bold'>{val.dayTime}</td>
-          <td className='border-4 border-black font-bold'>{size(val,ele) }</td>
-          <td className='border-4 border-black font-bold'>{count(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{quant(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{yo(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{ (yo(val,ele) - quant(val,ele))?.toFixed(2) }</td>
-          <td className='border-4 border-black font-bold'>{waste(val,ele)}</td>
-          <td className='border-4 border-black font-bold'>{(Math.abs(yo(val,ele) - quant(val,ele))-waste(val,ele))?.toFixed(2)}</td>
-              </tr>
-                  ))
+                <TableRow key={index} className="hover:bg-muted/50">
+                  <TableCell>⦿</TableCell>
+                  <TableCell>{ele.productName}</TableCell>
+                  <TableCell>{val.dayTime}</TableCell>
+                  <TableCell>{size(val,ele)}</TableCell>
+                  <TableCell>{count(val,ele)}</TableCell>
+                  <TableCell>{quant(val,ele)}</TableCell>
+                  <TableCell>{yo(val,ele)}</TableCell>
+                  <TableCell>{(yo(val,ele) - quant(val,ele))?.toFixed(2) }</TableCell>
+                  <TableCell>{waste(val,ele)}</TableCell>
+                  <TableCell>{(Math.abs(yo(val,ele) - quant(val,ele))-waste(val,ele))?.toFixed(2)}</TableCell>
+                </TableRow>
+                 ))
+               ))
+              }
+          </TableBody>
 
-          ))
-         }
-      </tbody>
-     
-  
-     
-</table>
-  )}       
+          </Table>
+        </div>
+        )
+      }
     </div>
   )
+}
 
-       } </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default KvF

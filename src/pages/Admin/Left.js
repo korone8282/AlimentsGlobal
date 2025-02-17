@@ -3,10 +3,10 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL  } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
-import { TbFilterCog } from "react-icons/tb";
-import { CiWifiOff } from "react-icons/ci";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 import {toast} from 'react-toastify';
-import { FiSearch } from "react-icons/fi";
+import { Input } from "../../components/Input";
+import { Search } from "lucide-react";
 
 const Left = () => {
 
@@ -15,20 +15,18 @@ const Left = () => {
     const [info, setInfo] = useState({
       start:"",
       end:"",
+      buyer:"",
+      product:"",
   });
 
     const [loading2, setLoading2] = useState(0);
     const [search, setsearch] = useState("");
-    const [products2, setproducts2] = useState([]);
     const [ogData, setogData] = useState([]);
     const [dummy, setdummy] = useState();
-    const [item, setitem] = useState("");
-    const [buyerName, setbuyerName] = useState("");
+    const [products2, setproducts2] = useState([]);
     const [error, setError] = useState(0);
     const [products, setproducts] = useState([]);
-    const [openBox, setopenBox] = useState(0);
     const [categories, setcategories] = useState([]); 
-    const [openBox3, setopenBox3] = useState();
 
     const inputHandler = async(e) =>{
       setInfo((prevData) => ({
@@ -128,222 +126,191 @@ const Left = () => {
           console.log(e);
         }
       }
-console.log(item)
+
   return (
-    <div className='relative'>
-{
-error ? (
-    <div className='font-bold text-7xl mt-64 sm:max-lg:mt-4 flex items-center h-10 justify-center gap-1'>  
-<div>Network Issue</div> 
-<div className='mt-2'> <CiWifiOff /> </div> 
+        <div className="min-h-screen bg-background p-6">
+          <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+  
+  <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
+
+  <div className='flex gap-12 md:flex-row'>
+      <div className="mb-4">
+                      <label className="block text-muted-foreground mb-1">Buyer Name</label>
+                      <select
+              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={ e =>{ 
+                              setInfo((prevData) => ({
+                                        ...prevData,
+                                        buyer: e.target.value,
+                                        product:""
+                                      })); 
+                                let p = products.filter(item => item.buyer === e.target.value)
+                                console.log(p)
+                                setproducts2(p)
+                                }}
+          >
+          <option className=' bg-[#2e3138] text-muted-foreground '>Select</option>
+          {
+              categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' 
+                                                   key={index} 
+                                                   value={val.name}> {val.name}</option>))
+          }
+          </select>
+      </div>
+
+      <div className="mb-4">
+                      <label className="block text-muted-foreground mb-1">Product Name</label>
+                      <select
+              name='product'
+              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onClick={(e)=>inputHandler(e)}
+          >
+          <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+          {
+              products2?.filter((product) => product.buyer === info.buyer).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' 
+                                                                                                         value={val.name} 
+                                                                                                         key={index}> {val.name}</option>))
+          }
+          </select>
+      </div>
+  </div>
+
+              <div className="flex flex-col gap-4 md:flex-row md:gap-4 items-center">Start:
+                <Input
+                  type="date"
+                  name="start"
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+                <Input
+                  type="date"
+                  name='end'
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                /> :End
+              </div>
+
+              <div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
+                 onClick={getDateData}>
+              <span>Submit</span>
+            </div>
 </div>
-) : ( 
-  <div>
 
-<div className='flex items-center justify-evenly gap-4 '>
-
-<div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-    onClick={()=>setopenBox(!openBox)}>
-    <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
-    <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
-</div>
-
-<div className='flex select-none relative justify-center items-center text-xl font-semibold cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-    onClick={()=>setopenBox3(!openBox3)}>
-    <div className='font-bold text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
-    <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
-</div>
-
-<div className={` text-4xl  font-bold my-8 sm:max-lg:hidden`}>Product</div> 
-
-<div className='flex gap-20 sm:max-lg:gap-8 '>
-
-<div className='flex font-bold items-center gap-10 text-lg'>
-<div>
-        <label>Start: </label>
-            <input type='date'
-                   name='start'
-                   onChange={ e => inputHandler(e) }
-            />
         </div>
+
+        <div className="relative mb-6 max-w-96 mx-auto">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                onChange={(e)=>handleSearch(e.target.value)}
+                className="bg-[#2A2A2A] border-none pl-10"
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            </div>
+    {
+      error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+      ):(
         <div>
-        <label>End: </label>
-            <input type='date'
-                   name='end'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
-             onClick={getDateData}
-             >Submit</div>
-</div>
-
-
-</div>
-
-</div>
-{/* end div */}
-
-<div className='flex justify-center'>
-<input type='text'
-       onChange={(e)=>handleSearch(e.target.value)}
-       className=' relative w-80 rounded-l-lg h-10 bg-slate-300 focus:outline-none p-4'
-/>
-<i className='mr-2 bg-slate-500 h-10 w-11 rounded-r-lg'>
-<FiSearch className='mt-1.5 ml-2 text-white' size={26}/>
-</i>
-</div>
-{/* table */}
-
-{
-  loading2 ? (
-    <div className='absolute top-[20rem] left-[50rem] sm:max-lg:left-[25rem] sm:max-lg:top-[10rem]'> <Loader/> </div>
-  ) : (
-
-          <table className='sm:max-lg:mx-2 text-center mx-auto text-black my-12 sm:max-lg:w-fit text-xl font-bold'>
-<thead>
-<tr className='bg-[#f59e0b]'>
-    <th rowSpan={2} className='border-4 border-black p-2'>Date</th>
-    <td rowSpan={2} className='border-4 border-black p-2'>Shift</td>
-    <th rowSpan={2} className='border-4 border-black p-2'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Batch Code</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pack Size</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Packed</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Pouch Leaked</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Box</th>
-  </tr>
-</thead>
-
-{   
-  data.length ? (<tbody>
-      {
-        data.filter( obj => obj.sectionMain === "Dispatch").map(val=>(
+          {
+            loading2 ? (<Loader/>
+            ):(
+              <div className="rounded-lg border bg-card max-h-[35rem] overflow-auto">
+            <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/60">
+                    <TableHead>Date</TableHead>
+                    <TableHead>Shift</TableHead>
+                    <TableHead>Buyer Name</TableHead>
+                    <TableHead>Product Name</TableHead>
+                    <TableHead>Batch Code</TableHead>
+                    <TableHead>Pack Size</TableHead>
+                    <TableHead>Pouch Packed</TableHead>
+                    <TableHead>Pouch Leaked</TableHead>
+                    <TableHead>Box</TableHead>
+                  </TableRow>
+                </TableHeader>
+    
+                {   
+        data.length ? (
+          <TableBody>
+              {
+                data.filter( obj => obj.sectionMain === "Dispatch").map(val=>(
           val.dataList.filter(object => {
             const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
-            if (item) {
-              return matchesSearch && object.productName === item;
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
             }
-            else if (buyerName) {
-              return matchesSearch && object.buyerName === buyerName;
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
             }
             return matchesSearch;
-          }).map((ele,i)=>(
-          <tr key={i} className='hover:bg-slate-300'>
-          <td className='border-4 border-black font-bold p-2'>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</td>
-          <td className='border-4 border-black font-bold p-2'>{val.dayTime}</td>
-          <td className='border-4 border-black font-bold'>{ele.buyerName}</td>
-          <td className='border-4 border-black font-bold'>{ele.productName}</td>
-          <td className='border-4 border-black font-bold'>{ele.batch}</td>
-          <td className='border-4 border-black font-bold'>{ele.packSize }</td>
-          <td className='border-4 border-black font-bold p-2'>{ele.pouchPacked }</td>
-          <td className='border-4 border-black font-bold p-2'>{ele.leaked }</td>
-          <td className='border-4 border-black font-bold p-2'>{ele.box}</td>
-          </tr>
-        ))
-      ))
-      }
-     
-      <tr className='text-center bg-[#f59e0b]'>  
-      <td colSpan='4' className='border-4 border-black font-bold'>Total</td>
-      <td className='border-4 border-black font-bold'>-</td>
-      <td className='border-4 border-black font-bold'>-</td>
-      
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+          }).map((row,i)=>(
+                <TableRow key={i} className="hover:bg-muted/50">
+                  <TableCell>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</TableCell>
+                  <TableCell>{val.dayTime}</TableCell>
+                  <TableCell>{row.buyerName}</TableCell>
+                  <TableCell>{row.productName}</TableCell>
+                  <TableCell>{row.batch}</TableCell>
+                  <TableCell>{row.packSize}</TableCell>
+                  <TableCell>{row.pouchPacked}</TableCell>
+                  <TableCell>{row.leaked}</TableCell>
+                  <TableCell>{row.box}</TableCell>
+                </TableRow>
+              ))
+            ))
+          }
+              <TableRow className="font-medium bg-muted/50">
+                <TableCell colSpan={5}>Total:</TableCell>
+                <TableCell>-</TableCell>
+                <TableCell>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
             const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
-            if (item) {
-              return matchesSearch && object.productName === item;
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
             }
-            else if (buyerName) {
-              return matchesSearch && object.buyerName === buyerName;
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
             }
             return matchesSearch;
-          }).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</td>
+          }).reduce( (accumulator, object) => accumulator + (object.pouchPacked|| 0),0),0)}</TableCell>
 
-          <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+                <TableCell>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
             const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
-            if (item) {
-              return matchesSearch && object.productName === item;
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
             }
-            else if (buyerName) {
-              return matchesSearch && object.buyerName === buyerName;
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
             }
             return matchesSearch;
-          }).reduce( (accumulator, object) => accumulator + (object.leaked || 0),0),0)}</td>
+          }).reduce( (accumulator, object) => accumulator + (object.leaked || 0),0),0)}</TableCell>
 
-      <td className='border-4 border-black font-bold p-2'>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+                <TableCell>{data.filter( obj => obj.sectionMain === "Dispatch").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
             const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
-            if (item) {
-              return matchesSearch && object.productName === item;
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
             }
-            else if (buyerName) {
-              return matchesSearch && object.buyerName === buyerName;
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
             }
             return matchesSearch;
-          }).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</td>
-
-        </tr>
-
-    </tbody>) : (<div className='font-bold text-6xl mt-12 sm:max-lg:text-xl'>No Entry Found</div>)
-  }
-        </table>
+          }).reduce( (accumulator, object) => accumulator + (object.box || 0),0),0)}</TableCell>
+              </TableRow>
+            </TableBody>
+          ) : (
+            <TableCell colSpan={4} className='font-bold text-md text-center'>No Data Entry Found</TableCell>)
+        }
+              </Table>
+            </div>
+            )
+          }
+        </div>
+      )
+    }
     
-  )
-}
-        
-
-
-
-
-
-{
-    openBox ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[6.9rem] sm:max-lg:top-[3rem] left-[12rem] max-w-60 top-[5rem] rounded-lg border-black border-2 p-2`}>
-        {
-          categories.map((val,ind)=>(
-                <div className={`flex items-center ${val === buyerName ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
-                     key={ind}
-                     name='obj'
-                     onClick={()=>{
-                        let p = products.filter(item => item.buyer === val.name)
-                            setproducts2(p)
-                            setbuyerName(val.name)
-                            setitem("")
-                            setopenBox(0)}}>
-                    ⦿ {val.name}
-                </div>
-           
-            ))
-        }
-    </div>
-    ) : null
-}
-
-
-{
-    openBox3 ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:left-[17.9rem] sm:max-lg:top-[2.9rem] left-[26.5rem] max-w-60 top-[5.2rem] rounded-lg border-black border-2 p-2`}>
-        {
-          products2.map((val,ind)=>(
-                <div className='flex items-center hover:bg-black hover:text-white rounded-md p-1'
-                     key={ind}
-                     name='product'
-                     onClick={()=>{
-                            setitem(val.name)
-                            setopenBox3(0)}}>
-                    ⦿ {val.name}
-                </div>
-           
-            ))
-        }
-    </div>
-    ) : null
-}
-
-</div>
-)
-}
-
-</div>
-  )
+          </div>
+        </div>
+      );
 }
 
 export default Left

@@ -199,7 +199,7 @@ const AllDataKitchen = () => {
 
 
 <div className="flex items-center gap-4">
-            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-3 mx-2 cursor-pointer hover:bg-orange-500 hover:text-black"
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 cursor-pointer hover:bg-orange-500 hover:text-black"
                 onClick={()=>submitHandler()}>
               <span>Submit</span>
             </div>

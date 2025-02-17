@@ -6,6 +6,7 @@ import { useState , useEffect} from 'react';
 import {toast} from 'react-toastify';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
+import { Input } from "../../components/Input";
 
 const Buyer = () => {
 
@@ -94,15 +95,15 @@ const handleUpdate = async(data) =>{
     <div className="justify-center flex flex-col md:flex-row">
     <div className="md:w-3/4 p-3">
 
-    <div className="h-12 font-bold text-3xl my-4 text-center">Manage Buyers</div>
-     <input className="py-3 px-4 border border-black rounded-lg w-full text-black"
+    <div className="h-12 text-3xl my-4 text-center">Manage Buyers</div>
+     <Input className="py-3 px-4 border border-primary rounded-lg w-full"
            type='name' 
             {...register("name")}
      />
       <br />
       <button 
       onClick={handleSubmit(data=>handleCreate(data))}
-      className='my-6 h-10 text-[#f59e0b] bg-black border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
+      className='my-6 h-10 text-[#f59e0b] border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
       <hr className='mt-2'/>
  
     {
@@ -113,7 +114,7 @@ const handleUpdate = async(data) =>{
         {categories?.map((category) => (
           <div key={category._id}>
             <button
-              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
+              className="py-2 px-4 rounded-lg m-3 text-[#f59e0b] border-[#f59e0b] border-2 font-semibold hover:scale-105"
               onClick={() => {
                   setopenBox(true);
                   setcurrentCategory(category);
@@ -132,15 +133,15 @@ const handleUpdate = async(data) =>{
             openBox ? (
               <div className="flex justify-center my-12">
       <div className="space-y-3">
-        <input
+        <Input
           type="name"
           {...register("updatedName")}
-          className="py-3 px-4 border-2 border-black rounded-lg w-full"
+          className="py-3 px-4 border-2 border-primary text-white rounded-lg w-full"
           placeholder= {`${currentCategory.name}`}
         />
 
         <div className="flex justify-between gap-4">
-          <button className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
+          <button className=" py-2 px-4 rounded-lg bg-black hover:scale-105"
           onClick={()=>setopenBox(0)}> 
             Cancel
           </button>
@@ -148,14 +149,14 @@ const handleUpdate = async(data) =>{
           <button
           type='submit'
           onClick={handleSubmit(data=>handleUpdate(data))}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg text-black bg-primary hover:scale-105"
             >
               Update
             </button>
 
             <button
               onClick={handleDelete}
-              className=" py-2 px-4 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
+              className=" py-2 px-4 rounded-lg bg-red-600 hover:scale-105"
             >
               Delete
             </button>
@@ -164,7 +165,7 @@ const handleUpdate = async(data) =>{
       </div>
     </div>
             ) : (
-              <div className='font-semibold text-lg'>Select To Update Or Delete</div>
+              <div className='text-lg'>Select To Update Or Delete</div>
             )
           }
     </div>

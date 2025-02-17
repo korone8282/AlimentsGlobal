@@ -26,7 +26,6 @@ import Production from './pages/Admin/Production'
 import KvF from './pages/Admin/KvF'
 import Inventory from './pages/Admin/Inventory'
 import ProductData from './pages/Admin/ProductData'
-import Report from './pages/Admin/Report'
 import Left from './pages/Admin/Left'
 import DispatchReport from './pages/Admin/DispatchReport'
 import Exports from './pages/Admin/Exports'
@@ -54,15 +53,13 @@ const App = () => {
 
   <Route path='/' element={<Home/>}/>
 
-
   <Route path="/admin" element={<AdminRoute/>}>
-     <Route path='Inventory/Report' element={<Report/>} />
      <Route path='Container-List/:id' element={<Container/>} />
      <Route path='Container-List' element={<ContainerList/>} />
      <Route path='Profile/:id' element={<Profile/>} />
      <Route path='ProductData' element={<ProductData/>} />
      <Route path='Left' element={<Left/>} />
-     <Route path='Inventory' element={<Inventory/>} />
+     <Route path='Filling-List' element={<Inventory/>} />
      <Route path='updateProfile/:id' element={<UpdateProfile/>} />
      <Route path='Monthly-Data' element={<Monthly/>} />
      <Route path='Production-Goal' element={<ProductionGoal/>} />

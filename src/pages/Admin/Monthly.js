@@ -1,9 +1,15 @@
 import React, {useState, useEffect} from 'react'
 import Loader from '../../components/Loader';
-import { MdArrowDropDownCircle } from "react-icons/md";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "../../components/Popover";
+import { Button } from "../../components/Buttons";
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { DATA_URL } from '../../redux/Utils/constants';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 
 const Monthly = () => {
 
@@ -15,8 +21,6 @@ const Monthly = () => {
   const [month, setmonth] = useState(1);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
-  
-  const [val, setVal] = useState(0);
 
   const months = [{month:"January"},
                   {month:"February"},
@@ -61,164 +65,111 @@ const Monthly = () => {
   }
 
   return (
-    <div>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-[100rem] mx-auto space-y-12 text-start">
 
-      <div className='flex items-center relative justify-center font-bold text-2xl h-fit rounded-lg gap-1 my-8'
-      onClick={()=>setVal( !val  )}>   
-         Month 
-          <MdArrowDropDownCircle className='mt-1'/>
-      <div className='mx-20'>
-      {months[month-1].month}
-      </div>
-          {
-          val  ? ( <div className='absolute bg-black border-2 rounded-xl border-[#f59e0b] text-[#f59e0b] sm:max-lg:right-[11.5rem] sm:max-lg:-top-3 top-10 w-72 h-72 flex gap-3 flex-wrap justify-center items-center'>
-              {
-            months.map((val,index)=>(
-              <div key={index}
-              className='text-sm font-bold h-12 w-[4.8rem] bg-black border-2 rounded-lg border-[#f59e0b] text-[#f59e0b] hover:scale-105 text-center cursor-auto pt-2.5 hover:bg-[#f59e0b] hover:text-black'
-              onClick={()=>{
+
+        <div>
+          <h2 className="text-xl font-semibold">Monthly Data For <span className='text-primary'>{months[month-1].month}</span> </h2>
+
+          <div className="flex items-center gap-2 bg-card">
+     <Popover>
+       <PopoverTrigger asChild>
+         <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 my-5">
+           Month
+         </Button>
+       </PopoverTrigger>
+       <PopoverContent className="w-[280px] p-2 bg-card border-primary">
+         <div className="grid grid-cols-3 gap-2">
+           {months.map((month,index) => (
+             <Button
+               key={month.month}
+               variant="ghost"
+               onClick={()=>{
                 setmonth(index+1); 
                }}>
-                {val.month}
-              </div>
-            ))
-          }
-            </div>) : (<div></div>)
-          }
-      </div>
+               {month.month}
+             </Button>
+           ))}
+         </div>
+       </PopoverContent>
+     </Popover>
+   </div>
+        </div>
 
-      {
-        error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found For {months[month-1].month}</div>
-        ) : (
-         <div>
-         {
-  loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit sm:max-lg:mx-2'>
-      <thead>
-        <tr>
-        <th rowSpan={2} className='border-4 border-black p-2'>Pouch Size (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Total (kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted (Filling)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted (Dispatch)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. of Worker</th>
-        </tr>
-      </thead>
-
-      <tbody className='text-center'>
-
-      {
-        pSize.map((ele,index)=>(
-         
-          <tr key={index}>
-          <td className='border-4 border-black font-bold py-4 text-center'> {ele} </td>
-
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
-  }</td>
-  
-         <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    ((ele)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)).toFixed(2)
-  }</td>
-
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) 
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-        data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.filled,0),0).toFixed(2) 
-  }</td>
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.box,0),0)
-  }</td>
-
-{ !index ? (<td  rowSpan={pSize.length+1} className='border-4 text-center border-black font-bold'> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
-  }</td>) : (<td></td>)
-  }
-       </tr> 
-     
-        ))
-      }
-      
-      <tr>
-          <td className='border-4 border-black font-bold '> 
-   Total
-  </td>
-
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
-  }</td>  
-         <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> 
 {
-  pSize.forEach(myFunction)
-}
-{sum.toFixed(2)}
-  </td>
+  error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+  ):(
+    <div>
+      {
+        loading ? (<Loader/>
+        ):(
+          <div className="rounded-lg border bg-card">
+        <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/60">
+                <TableHead className="text-left">Pouch Size (Kg)</TableHead>
+                <TableHead>No. Of Batches</TableHead>
+                <TableHead>Yield (Kg)</TableHead>
+                <TableHead>Pouch Filled</TableHead>
+                <TableHead>Total (kg)</TableHead>
+                <TableHead>Pouch Packed</TableHead>
+                <TableHead>Pouch Wasted (Filling)</TableHead>
+                 <TableHead>Pouch Wasted (Dispatch)</TableHead>
+                <TableHead>Wastage (Kg)</TableHead>
+                <TableHead>No. Of Box</TableHead>
+                <TableHead>No. of Worker</TableHead>
+              </TableRow>
+            </TableHeader>
 
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
-  }</td>
+          <TableBody>
+              {
+                pSize.map((ele,index)=>(
+                <TableRow key={index} className="hover:bg-muted/50">
+                  <TableCell>{ele}</TableCell>
+                  <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)}</TableCell>
+                  <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</TableCell>
+                  <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</TableCell>
+                  <TableCell>{((ele)*data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)).toFixed(2)}</TableCell>
+                  <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</TableCell>
+                  <TableCell>{ data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) }</TableCell>
+                  <TableCell>{
+                    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+                    data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)}</TableCell>
+                  <TableCell>{  data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.filled,0),0).toFixed(2) }</TableCell>
+                  <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.filter(item=>item.packSize === ele).reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</TableCell>
+                  <TableCell>-</TableCell>
+                </TableRow>
+              ))}
+              <TableRow className="font-medium bg-muted/50">
+                <TableCell>Total:</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)}</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</TableCell>
+                <TableCell>{ data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</TableCell>
+                <TableCell>{pSize.forEach(myFunction)} {sum.toFixed(2)}</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)}</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) }</TableCell>
+                <TableCell>{
+                  data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
+                  data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
+                }</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0).toFixed(2)}</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</TableCell>
+                <TableCell>{data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)}</TableCell>
+              </TableRow>
+            </TableBody>
 
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0) 
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.leaked,0),0) +
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.foreignMatter,0),0)
-  }</td>
-
-  <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0).toFixed(2)
-  }</td>
-  
-          <td className='border-4 border-black font-bold '> {
-    data.reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
-  }</td>
-        
-      </tr> 
-      </tbody>
-      </table>)
-}
-         </div> 
+          </Table>
+        </div>
         )
       }
-
-
-    
     </div>
   )
+}
+
+      </div>
+    </div>
+  );
 }
 
 export default Monthly

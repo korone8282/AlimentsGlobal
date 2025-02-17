@@ -1,446 +1,305 @@
 import React, { useEffect, useState } from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
-import { STORE_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { LuClipboardEdit } from "react-icons/lu";
-import { FiSearch } from "react-icons/fi";
-import {toast} from 'react-toastify';
+import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL  } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import {toast} from 'react-toastify';
+import { Input } from "../../components/Input";
+import { Search } from "lucide-react";
 
 const Inventory = () => {
 
     const [data, setData] = useState([]);
-    const [ogData, setogData] = useState([]);
-    const [dummy, setdummy] = useState();
-    const [openBox, setopenBox] = useState(0);
-    const [loading, setLoading] = useState(1);
-    const [error, setError] = useState(0);
-    const [item, setItem] = useState();
-    const [add, setadd] = useState(0);
-    
-    const arr = ["Preparation","Kitchen","Filling","Retort","Dispatch","Utility"];
 
     const [info, setInfo] = useState({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-    });
+      start:"",
+      end:"",
+      buyer:"",
+      product:"",
+  });
+
+    const [loading2, setLoading2] = useState(0);
+    const [search, setsearch] = useState("");
+    const [ogData, setogData] = useState([]);
+    const [dummy, setdummy] = useState();
+    const [products2, setproducts2] = useState([]);
+    const [error, setError] = useState(0);
+    const [products, setproducts] = useState([]);
+    const [categories, setcategories] = useState([]); 
+
+    const inputHandler = async(e) =>{
+      setInfo((prevData) => ({
+        ...prevData,
+        [e.target.name]: e.target.value
+      }));
+    }
 
     const {userinfo} = useSelector(state=>state.auth);
 
     useEffect(() => {
-    
-        async function getData(){
-          try {
-            setError(0);
-            const res = await apiConnector(`${STORE_URL}`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
-            setData(res.data.data);
-            setogData(res.data.data);
-            setdummy(res.data.data);
-            setLoading(0);
-          } catch (error) {
-            setError(1);
-            console.log(error);
-          }
-        }
-    
+
+        async function getProducts(){
+            try {
+      
+          const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
+          setproducts(res.data.data);
+      
+            } catch (error) {
+              console.log(error);
+            }
+            }
+
+    async function getCategories(){
+            try {
+          
+          setError(0);
+      
+          const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
+          setcategories(res.data.data);
+      
+            } catch (error) {
+              setError(1)
+              console.log(error);
+            }
+            }
+        
+      async function getData(){
+
+  setLoading2(1);
+
+    try {
+
+      const res = await apiConnector(`${DATA_URL}/Left`,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
+      setData(res.data.data);
+      setogData(res.data.data);
+      setdummy(res.data.data);
+      setLoading2(0);
+
+    } catch (error) {
+      setLoading2(0);
+      toast(error.response.data.message)
+    }
+  }
+      
+      getCategories();
+      getProducts();
       getData();
+
       }, [userinfo.token]);
 
-async function handleDelete(){
+      function handleSearch(val) {
+
+        if (val === ""){ 
+          setData(dummy)
+          return
+          }
+
+         setsearch(val);
+
+         let filterBySearch = ogData.filter((item) => { 
+          return item.sectionMain === "Filling" && item.dataList.filter((object) => {
+                return object.batch.toLowerCase().startsWith(val.toLowerCase())
+          }).length > 0
+         })
+
+         setogData(dummy)
+         setData(filterBySearch); 
+       }
+       
+ async function getDateData(){
         try {
+        setError(0);
+        setLoading2(1);
+        
+        const res = await apiConnector(`${DATA_URL}/DvN`,"PUT",info,{Authorization: `Bearer ${userinfo.token}`});
 
-          setLoading(1)
-          await apiConnector(`${STORE_URL}/${item._id}`,"DELETE",null,{Authorization: `Bearer ${userinfo.token}`});
-      
-          toast("deleted successfully");
-          setInfo({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-        });
-          setopenBox(0);
-          setLoading(0);
-          window.location.reload();
-      
-        } catch (error) {
-          console.log(error);
-          setLoading(0);
+        setData(res.data.data);
+        setogData(res.data.data);
+        setdummy(res.data.data);
+
+        setLoading2(0);
+        
+
+        } catch (e) {
+          setError(1);
+          console.log(e);
         }
-      }
-      
-async function handleCreate(){
-        try {
-          setLoading(1)
-          await apiConnector(`${STORE_URL}`,"POST",info,{Authorization: `Bearer ${userinfo.token}`});
-      
-          toast("created successfully");
-          setInfo({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-        });
-          setopenBox(0);
-          setLoading(0);
-          window.location.reload();
-          
-        } catch (error) {
-          console.log(error.message)
-          setLoading(0);
-          toast(error.response.data.message)
-        }
-      }
-      
-const handleUpdate = async() =>{
-        try {
-          setLoading(1)
-          await apiConnector(`${STORE_URL}/${item._id}`,"POST",info,{Authorization: `Bearer ${userinfo.token}`});
-      
-          toast("updated successfully");
-          setInfo({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-        });
-          setopenBox(0);
-          setLoading(0);
-          window.location.reload();
-      
-        } catch (error) {
-          setLoading(0);
-          toast(error.response.data.message)
-        }
-      }
-
-const inputHandler = async(e) =>{
-        setInfo((prevData) => ({
-          ...prevData,
-          [e.target.name]: e.target.value
-        }));
-      }
-
-  function handleSearch(val) {
-
-       if (val === ""){ 
-         setData(dummy)
-         return
-         }
-
-        let filterBySearch = ogData.filter((item) => {
-            if (item.name.toLowerCase().startsWith(val.toLowerCase())){ 
-              return item
-             } else {
-              return null 
-             }
-        })
-        setogData(dummy)
-        setData(filterBySearch); 
       }
 
   return (
-    <div >
+        <div className="min-h-screen bg-background p-6">
+          <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+  
+  <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
 
-<div className='flex items-center justify-center gap-80 sm:max-lg:gap-36'>
+  <div className='flex gap-12 md:flex-row'>
+      <div className="mb-4">
+                      <label className="block text-muted-foreground mb-1">Buyer Name</label>
+                      <select
+              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={ e =>{ 
+                              setInfo((prevData) => ({
+                                        ...prevData,
+                                        buyer: e.target.value,
+                                        product:""
+                                      })); 
+                                let p = products.filter(item => item.buyer === e.target.value)
+                                console.log(p)
+                                setproducts2(p)
+                                }}
+          >
+          <option className=' bg-[#2e3138] text-muted-foreground '>Select</option>
+          {
+              categories.map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' 
+                                                   key={index} 
+                                                   value={val.name}> {val.name}</option>))
+          }
+          </select>
+      </div>
 
-<Link 
-      to="report"
-      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] text-center py-2.5 border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Report</Link>
-
-<div className='text-5xl font-bold text-center my-8 '>Inventory</div>
-
-<button 
-      onClick={()=>{
-        setadd(!add)
-        setopenBox(!openBox)
-        }}
-      className='mt-4 h-14 text-[#f59e0b] bg-black border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl font-semibold'>Add</button>
-</div>
-
-{
-error ? (<div className='text-center font-bold text-7xl mt-64 sm:max-lg:mt-4'>No Data Entry Found</div>
-) : ( 
-  <div>
-
-<div className='flex justify-center'>
-<input type='text'
-       onChange={(e)=>handleSearch(e.target.value)}
-       className=' relative w-80 rounded-l-lg h-10 bg-slate-300 focus:outline-none p-4'
-/>
-<i className='mr-2 bg-slate-500 h-10 w-11 rounded-r-lg'>
-<FiSearch className='mt-1.5 ml-2 text-white' size={26}/>
-</i>
-</div>
-
-
-{
-loading ? (<Loader/> 
-) : (
-<div className='sm:max-lg:mx-3'>
-<table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit'>
-<thead>
-  <tr>
-    <th rowSpan={2} className='border-4 border-black p-2'>S no.</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Purchase Date</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Item Name</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Units</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Stock Count</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Rate / Part</th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Equipment </th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Section </th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Last Issued </th>
-    <th rowSpan={2} className='border-4 border-black p-2'>Update</th>
-  </tr>
-</thead>
-
-{   
-  data.length ? (<tbody>
-      {
-        data.map((val,index)=>(
-        <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold  px-4 p-2'>{index+1}</td>
-    <td className='border-4 border-black font-bold '>{val.pDate?.substring(0,10)}</td>
-    <td className='border-4 border-black font-bold '>{val.name}</td>
-    <td className='border-4 border-black font-bold '>{val.unit}</td>
-    <td className='border-4 border-black font-bold '>{val.stock}</td>
-    <td className='border-4 border-black font-bold '>{val.rate}</td>
-    <td className='border-4 border-black font-bold '>{val.equipment}</td>
-    <td className='border-4 border-black font-bold '>{val.section}</td>
-    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10)}</td>
-    <td className='border-4 border-black font-bold hover:bg-slate-400' 
-        onClick={()=>{
-          setopenBox(!openBox)
-          setItem(val)
-        }}>
-        <LuClipboardEdit size={24} className='ml-[1.8rem] sm:max-lg:ml-[1.5rem]'/></td>
-        </tr>
-      ))
-      }
-     
-    </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
-  }
-</table>
-</div>
-)
-}
-</div>
-)
-}
-
-{
-            openBox ? (
-      <div className="fixed top-[9%] sm:max-lg:absolute z-10 flex left-[18%] sm:max-lg:left-6 sm:max-lg:top-20 h-[40rem] backdrop-blur-xl
-    [ bg-gradient-to-b from-white/65 to-white/45 ]
-    [ border-[3px] border-solid border-white border-opacity-30 ]
-    [ shadow-black/70 shadow-2xl ] text-black w-[60rem] sm:max-lg:w-[50rem] rounded-lg">
-              <section className='flex flex-col h-full w-full my-4 font-semibold text-3xl sm:max-lg:text-lg  gap-4 mx-9'>
-              <div className='flex justify-between gap-16'>
-
-
-</div>
-
-
-<div className='flex justify-between sm:max-lg:items-center'>
-<label htmlFor="Date">
-      Purchase Date
-</label>
-<input type='date' 
-       id="Date" 
-       name="pDate" 
-       onChange={ e => inputHandler(e) }
-       className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-       />
-</div>
-
-
-  <div className='flex justify-between'>
-  <label htmlFor="pass" >
-      Name :
-  </label>
-  <input type='text'
-         id="pass" 
-         name='name'
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
+      <div className="mb-4">
+                      <label className="block text-muted-foreground mb-1">Product Name</label>
+                      <select
+              name='product'
+              className="w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onClick={(e)=>inputHandler(e)}
+          >
+          <option className=' bg-[#2e3138] text-muted-foreground'>Select</option>
+          {
+              products2?.filter((product) => product.buyer === info.buyer).map((val,index)=>(<option className=' bg-[#2e3138] text-muted-foreground' 
+                                                                                                         value={val.name} 
+                                                                                                         key={index}> {val.name}</option>))
+          }
+          </select>
+      </div>
   </div>
 
-  <div className='flex justify-between'>
-<label htmlFor="confirPassword">
-     Unit : 
-  </label>
-  <input type='text'
-         id="texty" 
-         name = "unit"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-  
-  <div className='flex justify-between'>
-  <label htmlFor="confirPassword" >
-     Stock :
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "stock"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-  </div>
-  
-<div className='flex justify-between'>
-<label htmlFor="confirPassword">
-     Rate : 
-  </label>
-  <input type='number'
-         id="confirmPassword" 
-         name = "rate"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-
-<div className='flex justify-between'>
-<label htmlFor="confirPassword">
-     Equipment : 
-  </label>
-  <input type='text'
-         id="yoyo" 
-         name = "equipment"
-         onChange={ e => inputHandler(e) }
-         className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-               />
-</div>
-
-<div className='flex justify-between'>
-<label htmlFor="confirPassword">
-     Section : 
-  </label>
-  <select
-                 name='section'
-                 className='hover:border-black hover:border-2 text-xl text-black font-bold h-16 text-center rounded-xl bg-[#f59e0b]'
-                 onChange={ e => inputHandler(e) }
-            >
-            <option className=' bg-[#f59e0b] text-black font-semibold'>Select Section</option>
-            {
-                arr.map((val,index)=>(<option className=' bg-[#f59e0b] text-black font-semibold' value={val} key={index}>{val}</option>))
-            }
-            </select>
-</div>
-
-<div className='flex justify-between sm:max-lg:items-center'>
-<label htmlFor="Datex">
-      Issue Date
-</label>
-<input type='date' 
-       id="Datex" 
-       name="lDate" 
-       onChange={ e => inputHandler(e) }
-       className='bg-transparent border-2 border-[#f59e0b] p-1 placeholder-black'
-       />
-</div>
-
-              {
-                add ? (
-                  <div className="flex justify-between gap-4 text-3xl py-2 mx-24">
-          <button className="px-7 py-2.5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-          onClick={()=>{
-            setopenBox(!openBox)
-            setadd(!add)
-            setInfo({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-        });
-          }}> 
-            Cancel
-          </button>
-          
-          <button
-          onClick={()=>{
-            handleCreate()
-            setopenBox(!openBox)
-            setadd(!add)
-          }}
-          className="px-12 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Add
-            </button>
-
-        </div>
-                ) : (
-                  <div className="flex justify-between gap-4 text-3xl py-2 mx-4">
-          <button className="px-5 py-2.5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-          onClick={()=>{
-            setopenBox(!openBox)
-            setInfo({
-        pDate:"",
-        name:"",
-        unit:"",
-        stock:"",
-        rate:"",
-        equipment:"",
-        section:"",
-        lDate:"",
-        });
-            }}> 
-            Cancel
-          </button>
-          
-          <button
-          onClick={handleUpdate}
-          className="px-5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Update
-            </button>
-
-            <button
-            onClick={handleDelete}
-            className="px-5 rounded-lg text-[#f59e0b] bg-black border-[#f59e0b] border-2 font-semibold hover:scale-105"
-            >
-              Delete
-            </button>
-
-        </div>
-                )
-              }
-
-       
-        </section>
+              <div className="flex flex-col gap-4 md:flex-row md:gap-4 items-center">Start:
+                <Input
+                  type="date"
+                  name="start"
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+                <Input
+                  type="date"
+                  name='end'
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                /> :End
               </div>
-            ) : (
-              <div></div>
+
+              <div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
+                 onClick={getDateData}>
+              <span>Submit</span>
+            </div>
+</div>
+
+        </div>
+
+        <div className="relative mb-6 max-w-96 mx-auto">
+              <Input
+                type="text"
+                placeholder="Search products..."
+                onChange={(e)=>handleSearch(e.target.value)}
+                className="bg-[#2A2A2A] border-none pl-10"
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            </div>
+    {
+      error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+      ):(
+        <div>
+          {
+            loading2 ? (<Loader/>
+            ):(
+              <div className="rounded-lg border bg-card max-h-[35rem] overflow-auto">
+            <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/60">
+                    <TableHead>Date</TableHead>
+                    <TableHead>Shift</TableHead>
+                    <TableHead>Buyer Name</TableHead>
+                    <TableHead>Product Name</TableHead>
+                    <TableHead>Batch Code</TableHead>
+                    <TableHead>Pack Size</TableHead>
+                    <TableHead>Pouch Filled</TableHead>
+                    <TableHead>Pouch Wasted</TableHead>
+                  </TableRow>
+                </TableHeader>
+    
+                {   
+        data.length ? (
+          <TableBody>
+              {
+                data.filter( obj => obj.sectionMain === "Filling").map(val=>(
+          val.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
+            }
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
+            }
+            return matchesSearch;
+          }).map((row,i)=>(
+                <TableRow key={i} className="hover:bg-muted/50">
+                  <TableCell>{val.createdAt.substring(5,10).split('-').reverse().join('-')}</TableCell>
+                  <TableCell>{val.dayTime}</TableCell>
+                  <TableCell>{row.buyerName}</TableCell>
+                  <TableCell>{row.productName}</TableCell>
+                  <TableCell>{row.batch}</TableCell>
+                  <TableCell>{row.packSize}</TableCell>
+                  <TableCell>{row.pouchQuantity}</TableCell>
+                  <TableCell>{row.empty}</TableCell>
+                </TableRow>
+              ))
+            ))
+          }
+              <TableRow className="font-medium bg-muted/50">
+                <TableCell colSpan={5}>Total:</TableCell>
+                <TableCell>-</TableCell>
+                <TableCell>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
+            }
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
+            }
+            return matchesSearch;
+          }).reduce( (accumulator, object) => accumulator + (object.pouchQuantity|| 0),0),0)}</TableCell>
+
+                <TableCell>{data.filter( obj => obj.sectionMain === "Filling").reduce((acc,obj)=> acc+obj.dataList.filter(object => {
+            const matchesSearch = object.batch.toLowerCase().startsWith(search.toLowerCase());
+            if (info.product) {
+              return matchesSearch && object.productName === info.product;
+            }
+            else if (info.buyer) {
+              return matchesSearch && object.buyerName === info.buyer;
+            }
+            return matchesSearch;
+          }).reduce( (accumulator, object) => accumulator + (object.empty || 0),0),0)}</TableCell>
+
+              </TableRow>
+            </TableBody>
+          ) : (
+            <TableCell colSpan={4} className='font-bold text-md text-center'>No Data Entry Found</TableCell>)
+        }
+              </Table>
+            </div>
             )
           }
-
-</div>
-  )
+        </div>
+      )
+    }
+    
+          </div>
+        </div>
+      );
 }
 
 export default Inventory
+

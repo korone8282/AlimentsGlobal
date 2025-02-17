@@ -3,7 +3,8 @@ import Loader from '../../components/Loader';
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { DATA_URL } from '../../redux/Utils/constants';
-import { Link } from 'react-router-dom';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import { Input } from "../../components/Input";
 
 const DvN = () => {
 
@@ -43,140 +44,105 @@ const DvN = () => {
         }
       }
 
-  return (
-    <div>
-      
-      <div className='flex justify-center my-8 text-2xl font-bold gap-24 sm:max-lg:gap-10 sm:max-lg:mx-4'>
-
-      <Link to='/admin/Daily-List' className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
-             >Wastage</Link>
+return (
+        <div className="min-h-screen bg-background p-6">
+          <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
-        <div>
-        <label>Start: </label>
-            <input type='date'
-                   name='start'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div>
-        <label>End: </label>
-            <input type='date'
-                   name='end'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
-             onClick={getData}
-             >Submit</div>
-    </div>
+    
+          <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
 
-      {
-        error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found For</div>
-        ) : (
-         <div>
-         {
-  loading ? (<div><Loader/></div>) : (  
-    <table className='w-[80rem] mx-auto my-12 sm:max-lg:w-fit sm:max-lg:mx-2'>
-      <thead>
-        <tr>
-          <th rowSpan={2} className='border-4 border-black p-2'>Day Time</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Batches</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Yield (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Filled</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Packed</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Pouch Wasted</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>Wastage (Kg)</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. Of Box</th>
-          <th rowSpan={2} className='border-4 border-black p-2'>No. of Worker</th>
-        </tr>
-      </thead>
+              <div className="flex flex-col gap-4 md:flex-row md:gap-4 items-center">Start:
+                <Input
+                  type="date"
+                  name="start"
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+                <Input
+                  type="date"
+                  name='end'
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                /> :End
+              </div>
 
-  {
+              <div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
+                 onClick={getData}>
+              <span>Submit</span>
+            </div>
+</div>
+        </div>
+    
+
+    
+    {
+      error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+      ):(
+        <div>
+          {
+            loading ? (<Loader/>
+            ):(
+              <div className="rounded-lg border bg-card">
+            <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/60">
+                    <TableHead>Day Time</TableHead>
+                    <TableHead>No. Of Batch</TableHead>
+                    <TableHead>Yield (kg)</TableHead>
+                    <TableHead>Pouch Filled</TableHead>
+                    <TableHead>Pouch Packed</TableHead>
+                    <TableHead>Pouch Wasted</TableHead>
+                    <TableHead>Wastage (kg)</TableHead>
+                    <TableHead>Box</TableHead>
+                    <TableHead>Worker Quantity</TableHead>
+                  </TableRow>
+                </TableHeader>
+    
+                {
     data ? (
-      <tbody className='text-center'>
-         
-         <tr>
-         <td className='border-4 border-black font-bold py-4 text-center'> Day </td>
+      <TableBody>
 
-         <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
- }</td>
+                 <TableRow className="hover:bg-muted/50">
+                      <TableCell>Day</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</TableCell>
+                      <TableCell>{(data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) ).toFixed(2)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Day" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)}</TableCell>
+                 </TableRow>
 
- 
-        <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '>{
-  (data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) ).toFixed(2)
- } </td>
-         <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
- }</td>
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Day" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
- }</td>
-         </tr>
-
-         <tr>
-         <td className='border-4 border-black font-bold py-4 text-center'> Night </td>
-
-         <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)
- }</td>
- 
-        <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchPacked,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)
- }</td>
-
- <td className='border-4 border-black font-bold '>{
-  (data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) ).toFixed(2)
- } </td>
-         <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)
- }</td>
- <td className='border-4 border-black font-bold '> {
-   data.filter(item=>item.dayTime === "Night" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)
- }</td>
-         </tr>
-
-     </tbody>
+                 <TableRow className="hover:bg-muted/50">
+                      <TableCell>Night</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.batchQuantity,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.yield*obj.batchQuantity,0),0).toFixed(2)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</TableCell>
+                      <TableCell>{(data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.filled,0),0) ).toFixed(2)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night").reduce((acc,obj)=> acc+obj.dataList.reduce( (accumulator, obj) => accumulator + obj.box,0),0)}</TableCell>
+                      <TableCell>{data.filter(item=>item.dayTime === "Night" && item.sectionMain !== "Dispatch").reduce((acc,obj)=>  acc+obj.dataList.reduce( (accumulator, obj,index) => accumulator + (index===0?obj.workersQuantity:0),0),0)}</TableCell>
+                 </TableRow>
+                 
+               
+      </TableBody>
     ) : (
-      <tbody className='font-bold text-3xl '><tr><td colSpan={10}>No Data Entry Found</td></tr></tbody>
+      <TableCell colSpan={5} className='text-xl'>No Data Entry</TableCell>
     )
   }
-     
-</table>
-  )}       
-    </div>
-  )
-      }
-      </div>
-  )}
+              </Table>
+            </div>
+            )
+          }
+        </div>
+      )
+    }
+    
+          </div>
+        </div>
+      );
+}
 
 
 export default DvN

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import { apiConnector } from '../../redux/Utils/apiConnector';
-import { PRODUCT_URL, CATEGORIES_URL,DISPATCH_URL } from '../../redux/Utils/constants';
+import { DISPATCH_URL } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
-import { TbFilterCog } from "react-icons/tb";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import { Input } from "../../components/Input";
 import { useSelector } from 'react-redux';
 import {toast} from 'react-toastify';
 
@@ -10,43 +11,12 @@ const DispatchReport = () => {
 
     const [loading, setLoading] = useState(0);
     const [data, setData] = useState([]);
-    const [openBox, setopenBox] = useState(0);
     const [error, setError] = useState(0);
-    const [products, setproducts] = useState([]);
-    const [products2, setproducts2] = useState([]);
-    const [categories, setcategories] = useState([]); 
-    const [item, setitem] = useState();
-    const [obj, setobj] = useState();
 
     const {userinfo} = useSelector(state=>state.auth);
 
     useEffect(() => {
-
-        async function getProducts(){
-            try {
-      
-          const res = await apiConnector(`${PRODUCT_URL}/products`,"GET");
-          setproducts(res.data.data);
-      
-            } catch (error) {
-              console.log(error);
-            }
-            }
-
-    async function getCategories(){
-            try {
           
-          setError(0);
-      
-          const res = await apiConnector(`${CATEGORIES_URL}/categories`,"GET");
-          setcategories(res.data.data);
-      
-            } catch (error) {
-              setError(1)
-              console.log(error);
-            }
-            }
-        
 async function getData(){
 
   setLoading(1);
@@ -63,8 +33,6 @@ async function getData(){
     }
   }
       
-      getCategories();
-      getProducts();
       getData();
 
       }, [userinfo.token]);
@@ -94,179 +62,87 @@ async function getReport(){
         }));
       }
 
-  return (
+return (
+        <div className="min-h-screen bg-background p-6">
+          <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
-    <div className='flex gap-6 sm:max-lg:gap-0'>
+    
+          <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
 
-    <div className='bg-[#f59e0b] h-full w-52 sm:max-lg:text-sm sm:max-lg:w-40 flex justify-start flex-col font-bold text-lg  rounded-b-lg sm:max-lg:mb-3'>
-        <div className='text-center text-2xl bg-[#000000] text-white p-1 border-solid border-[#f59e0b] border-t-4  sm:max-lg:text-lg '> Buyer</div>
-        <div> {
-            categories.map((val,ind)=>(
-                <div className={`flex items-center ${val === obj ? "bg-black text-white" : null} hover:bg-black hover:text-white rounded-md p-1`}
-                     key={ind}
-                     name='obj'
-                     onClick={()=>{
-                        let p = products.filter(item => item.buyer === val.name)
-                            setproducts2(p)
-                            setitem("")
-                            setobj(val.name)}}>
-                    ⦿ {val.name}
-                </div>
-           
-            ))
-        }
+              <div className="flex flex-col gap-4 md:flex-row md:gap-4 items-center">Start:
+                <Input
+                  type="date"
+                  name="start"
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                />
+                <Input
+                  type="date"
+                  name='end'
+                  onChange={ e => inputHandler(e) }
+                  className="bg-[#2A2A2A] border-none"
+                /> :End
+              </div>
+
+              <div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-2.5 mx-2 my-3 cursor-pointer hover:bg-orange-500 hover:text-black"
+                 onClick={getReport}>
+              <span>Submit</span>
+            </div>
+</div>
         </div>
-    </div>
+    
 
-    <div >
-    <div className='flex justify-center my-8 text-2xl mx-2 font-bold gap-24 sm:max-lg:gap-4 sm:max-lg:mx-2'>
-
-    <div className='flex select-none relative justify-center items-center text-xl cursor-pointer h-16 w-[9.6rem] sm:max-lg:w-32 sm:max-lg:h-12 hover:bg-black hover:text-white rounded-xl bg-[#f59e0b]'
-    onClick={()=>setopenBox(!openBox)}>
-    <div className='text-3xl p-3 sm:max-lg:text-xl'>Filter</div>
-    <div className='pr-3 sm:max-lg:pr-1'><TbFilterCog size={32}/> </div>
-         </div>
-
-        <div >
-        <label >Start: </label>
-            <input type='date'
-                   name='start'
-                   className='sm:max-lg:max-w-48'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
+    
+    {
+      error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>
+      ):(
         <div>
-        <label>End: </label>
-            <input type='date'
-                   name='end'
-                  className='sm:max-lg:max-w-48'
-                   onChange={ e => inputHandler(e) }
-            />
-        </div>
-        <div className='text-xl select-none font-semibold h-16 w-[9.6rem] text-center hover:bg-black hover:text-white rounded-xl -mt-2 sm:max-lg:mt-0.5 pt-4 bg-[#f59e0b]' 
-             onClick={getReport}
-             >Submit</div>
-    </div>
+          {
+            loading ? (<Loader/>
+            ):(
+              <div className="rounded-lg border bg-card max-h-[35rem] overflow-auto">
+            <Table>
+                <TableHeader>
+                  <TableRow className="bg-muted/60">
+                    <TableHead>Date</TableHead>
+                    <TableHead>Buyer Name</TableHead>
+                    <TableHead>Product Name</TableHead>
+                    <TableHead>Pouch Dispatched</TableHead>
+                    <TableHead>Box</TableHead>
+                  </TableRow>
+                </TableHeader>
 
+  {   
+data.length ? (
+  <TableBody>
 {
-    error ? (
-        <div className='text-center text-6xl font-bold my-40'>Error Fetching Data</div>
-    ):(
-        <div>
-        {
-loading ? (<Loader/> 
+    data.map((val,ind)=>(
+      <TableRow key={ind}>
+        <TableCell>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</TableCell>
+        <TableCell>{val.buyerName} </TableCell>
+        <TableCell>{val.productName} </TableCell>
+        <TableCell>{val.pouchDispatched} </TableCell>
+        <TableCell>{val.box} </TableCell>
+      </TableRow>
+    ))
+  }
+</TableBody>
 ) : (
-
-<div>
-  {
-    !obj && !item ? (
-      <div className='sm:max-lg:mx-3'>
-<table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit'>
-<thead>
-  <tr>
-    <th rowSpan={2} className='border-4 border-black'>Date</th>
-    <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
-    <th rowSpan={2} className='border-4 border-black'>Box</th>
-  </tr>
-</thead>
-
-{   
-  data.length ? (<tbody>
-      {
-        data.map((val,index)=>(
-        <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
-    <td className='border-4 border-black font-bold '>{val.buyerName}</td>
-    <td className='border-4 border-black font-bold '>{val.productName}</td>
-    <td className='border-4 border-black font-bold '>{val.pouchDispatched}</td>
-    <td className='border-4 border-black font-bold '>{val.box}</td>
-        </tr>
-      ))
-      }
-     
-      <tr className='text-center bg-teal-400'>
-    <td colSpan={3} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
-    <td className='border-4 border-black font-bold '>{ data.reduce((acc,obj)=>  acc + obj.pouchDispatched,0)}</td>
-    <td className='border-4 border-black font-bold '>{ data.reduce((acc,obj)=>  acc + obj.box,0)}</td>
-        </tr>
-
-    </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
+  <TableCell colspan={4} className='text-3xl'>No Data Entry Found</TableCell>)
   }
-</table>
-</div>
-    ) : (
-      <div>
-<table className='w-[80rem] mx-auto text-center text-black my-12 sm:max-lg:w-fit'>
-<thead>
-  <tr>
-    <th rowSpan={2} className='border-4 border-black'>Date</th>
-    <th rowSpan={2} className='border-4 border-black'>Buyer Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Product Name</th>
-    <th rowSpan={2} className='border-4 border-black'>Pouch Dispatched</th>
-    <th rowSpan={2} className='border-4 border-black'>Box</th>
-  </tr>
-</thead>
 
-{   
-  data.length ? (<tbody>
-      {
-        data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).map((val,index)=>(
-        <tr key={index} className='text-center'>
-    <td className='border-4 border-black font-bold '>{val.lDate?.substring(0,10).split('-').reverse().join('-')}</td>
-    <td className='border-4 border-black font-bold '>{val.buyerName}</td>
-    <td className='border-4 border-black font-bold '>{val.productName}</td>
-    <td className='border-4 border-black font-bold '>{val.pouchDispatched}</td>
-    <td className='border-4 border-black font-bold '>{val.box}</td>
-        </tr>
-      ))
-      }
-     
-      <tr className='text-center bg-teal-400'>
-    <td colSpan={3} className='border-4 border-black font-bold  px-4 p-2'>Total : </td>
-    <td className='border-4 border-black font-bold '>{ data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce((acc,obj)=>  acc + obj.pouchDispatched,0)}</td>
-    <td className='border-4 border-black font-bold '>{ data.filter(xterm=> item ? (xterm.productName === item) : (xterm.buyerName === obj)).reduce((acc,obj)=>  acc + obj.box,0)}</td>
-        </tr>
-
-    </tbody>) : (<div className='font-bold text-3xl mt-12'>No Data Entry Found</div>)
-  }
-</table>
-</div>
-    )
-  }
-</div>
-
-)
-}
+              </Table>
+            </div>
+            )
+          }
         </div>
-    )
-}
-
-{
-    openBox && obj ? (<div className={`absolute flex-col gap-3 bg-[#f59e0b] text-black text-sm font-bold h-fit sm:max-lg:top-[7.9rem] sm:max-lg:left-[9.9rem] left-[24rem] max-w-60 top-[9rem] rounded-lg border-black border-2 p-2`}>
-        {
-            products2.map((val,ind)=>(
-                <div className='flex items-center  sm:max-lg:text-sm hover:bg-black hover:text-white rounded-md p-1'
-                     key={ind}
-                     name='product'
-                     onClick={()=>{
-                            setitem(val.name)
-                            setopenBox(0)}}>
-                    ⦿ {val.name}
-                </div>
-           
-            ))
-        }
-    </div>
-    ) : null
-}
-
-    </div>
+      )
+    }
     
-
-    </div>
-  )
+          </div>
+        </div>
+      );
 }
 
 export default DispatchReport

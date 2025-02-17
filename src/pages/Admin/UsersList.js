@@ -3,11 +3,12 @@ import { apiConnector } from '../../redux/Utils/apiConnector'
 import { USERINFO_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 
 const UserList = () => {
 
   const [users, setUsers] = useState([]);
-
+  const [error, setError] = useState(0);
   const [loading, setLoading] = useState(1);
 
   const {userinfo} = useSelector(state=>state.auth);
@@ -15,12 +16,14 @@ const UserList = () => {
   useEffect(() => {
 
     async function displayUsers() {
+      setError(0);
       try {
         const res = await apiConnector(USERINFO_URL,"GET",null,{Authorization: `Bearer ${userinfo.token}`});
         setUsers(res.data.users);
 
         setLoading(0);
       } catch (error) {
+        setError(1);
         console.log(error);
       }
     }
@@ -29,43 +32,54 @@ const UserList = () => {
   }, [userinfo.token]);
  
   return (
-    <div className='text-3xl '>
-  {
-    loading ? (<Loader/>
-    ) : (
-      <table className=' border-2 mx-auto  border-black my-12 sm:max-lg:mx-4'>
-<thead>
-<tr className='border-2 border-black text-start'>
-   <th className='border-2 border-black w-48 p-2'>S No.</th>
-   <th className='border-2 border-black w-48'>Name</th>
-   <th className='border-2 border-black w-96'>Email</th>
-   <th className='border-2 border-black w-48'>Edit</th>
-  </tr>
-</thead>
- 
-<tbody>
+    <div className="min-h-screen bg-background p-6">
+      <div className="max-w-[100rem] mx-auto space-y-12 text-start">
+
+      <h3 className='text-center text-2xl my-auto'>UserList</h3>
 {
-          users?.map((element,index)=>(
-            <tr key={index} className='border-2 text-center'>
-              <td className='border-2 text-lg font-bold p-2 border-black'>{index+1}</td>
-              <td className='capitalize  border-2 text-lg font-bold border-black'>{element.fname}</td>
-              <td className='border-2 text-lg font-bold border-black'>{element.email}  </td>
-              <td className=' border-black border-2 font-bold text-lg'>{element.isAdmin?"Admin":"User"}</td>
-            </tr>
-          ))
+  error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'>Check Wifi Connection</div>
+  ):(
+    <div>
+      {
+        loading ? (<Loader/>
+        ):(
+          <div className="rounded-lg border bg-card max-h-[35rem] overflow-auto">
+        <Table>
+            <TableHeader>
+              <TableRow className="bg-muted/60">
+                <TableHead>S No.</TableHead>
+                <TableHead>Name</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Registered On</TableHead>
+                <TableHead>Access Type</TableHead>
+              </TableRow>
+            </TableHeader>
+
+<TableBody>
+{
+users?.map((val,ind)=>(
+  <TableRow key={ind}>
+    <TableCell>{ind+1}</TableCell>
+    <TableCell>{val.fname} </TableCell>
+    <TableCell>{val.email} </TableCell>
+    <TableCell>{val.createdAt?.substring(0,10)} </TableCell>
+    <TableCell>{val.isAdmin?"Admin":"User"} </TableCell>
+  </TableRow>
+))
 }
-</tbody>
-     
-     
+</TableBody>
 
-</table>
-
-    ) 
-  }
-
+          </Table>
+        </div>
+        )
+      }
     </div>
-
   )
+}
+
+      </div>
+    </div>
+  );
 }
 
 export default UserList

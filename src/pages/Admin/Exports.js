@@ -5,7 +5,6 @@ import { CATEGORIES_URL, PRODUCT_URL, EXPORT_URL } from '../../redux/Utils/const
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 import Loader from '../../components/Loader'
 import { CheckCheck, Trash2, Check, CirclePlus } from "lucide-react";
-import { Button } from "../../components/Buttons";
 import { Input } from "../../components/Input";
 import { useSelector } from 'react-redux';
 
@@ -123,10 +122,12 @@ const deleteHandler = (i) =>{
       />
 </div>
 
-<Button variant="outline" className="border-primary text-primary hover:bg-primary/10"
-        onClick={submitHandler}>
-     Submit
-</Button>
+<div className="flex items-center gap-4">
+            <div className="bg-[#1E1E1E] rounded-lg px-6 text-orange-500  border border-orange-500 hover:border-black text-lg p-3 mx-2 cursor-pointer hover:bg-orange-500 hover:text-black"
+                onClick={submitHandler}>
+              <span>Submit</span>
+            </div>
+</div>
 
 </div>
 

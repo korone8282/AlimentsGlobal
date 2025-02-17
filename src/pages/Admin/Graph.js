@@ -20,7 +20,7 @@ const Graph = () => {
 <div class="w-80 h-56 flex justify-center items-center relative hover:translate-y-2">
 
   
-<div class="blur absolute inset-0 rounded-lg -translate-x-1 translate-y-1 bg-gradient-to-br from-primary via-cyan-500 to-violet-400"></div>
+<div class="blur absolute inset-0 rounded-lg -translate-x-1 translate-y-1 bg-gradient-to-br from-cyan-500 to-violet-400"></div>
 
     
 <div class="relative w-[98%] h-[96%] bg-black rounded-lg p-6">
