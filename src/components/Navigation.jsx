@@ -44,7 +44,7 @@ export const Navigation = ({ className }) => {
       {isMobile && (
         <button 
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="fixed z-50 top-44 left-2 p-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 hover:bg-black/50 transition-colors duration-300"
+          className="fixed z-50 top-40 left-2 p-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 hover:bg-black/50 transition-colors duration-300"
         >
           <Menu className="w-6 h-6 text-primary" />
         </button>
@@ -64,13 +64,13 @@ export const Navigation = ({ className }) => {
 
         <nav className="h-full flex flex-col gap-4">
 
-          <div className="flex items-center gap-4 text-white/80 hover:text-white transition-colors duration-300 cursor-pointer">
+          <div className="flex items-center mx-2 gap-4 text-white/80 hover:text-white transition-colors duration-300 cursor-pointer">
 
           <div className="absolute top-5 right-4 bg-black m-4 opacity-100 group-hover/sidebar:opacity-0 transition-opacity">
             <PlusIcon className= {`${ !isMobile ? "w-8 h-8 text-white hover:hidden" : "hidden"}`}  />
           </div>
 
-            <span className="whitespace-nowrap text-2xl mt-20 md:mt-10 md:mb-12 mb-6 md:opacity-0 md:group-hover/sidebar:opacity-100 transition-opacity duration-500">
+            <span className="whitespace-nowrap text-2xl mt-10 md:mb-12 mb-1 md:opacity-0 md:group-hover/sidebar:opacity-100 transition-opacity duration-500">
               Create Data
             </span>
           </div>
