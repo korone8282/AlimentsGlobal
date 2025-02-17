@@ -44,7 +44,7 @@ export const Navigation = ({ className }) => {
       {isMobile && (
         <button 
           onClick={() => setIsMobileOpen(!isMobileOpen)}
-          className="fixed z-50 top-40 left-2 p-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 hover:bg-black/50 transition-colors duration-300"
+          className="fixed z-50 top-[18%] left-2 p-2 rounded-full bg-black/40 backdrop-blur-xl border border-white/10 hover:bg-black/50 transition-colors duration-300"
         >
           <Menu className="w-6 h-6 text-primary" />
         </button>
