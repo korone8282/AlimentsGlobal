@@ -1,20 +1,20 @@
 .radio-container {
     --main-color: #f7e479;
     --main-color-opacity: #f7e4791c;
-  
-    /* change this according inputs count */
     --total-radio: 3;
+    
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
     padding-left: 0.5rem;
-    
   }
+
   .radio-container input {
     cursor: pointer;
     appearance: none;
   }
+
   .radio-container .glider-container {
     position: absolute;
     left: 0;

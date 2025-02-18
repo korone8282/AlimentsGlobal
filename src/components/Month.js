@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,8 @@ import { setDate,setMonth,setDays} from '../redux/Slices/dateSlice';
 
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
 
-const months = [{month:"January",days:31},
+const months = [
+  {month:"January",days:31},
   {month:"February",days:28},
   {month:"March",days:31},
   {month:"April",days:30},
@@ -29,7 +30,11 @@ const Month = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [selectedMonth, setSelectedMonth] = useState(months[0]);
+  const [selectedMonth, setSelectedMonth] = useState(months[new Date().getMonth()]);
+
+  useEffect(() => {
+    dispatch(setMonth(new Date().getMonth()+1));
+  }, [dispatch]);
 
   return (
     <div className="p-6 bg-black backdrop-blur-lg rounded-2xl my-2 max-w-[100rem] mx-auto">

@@ -21,6 +21,7 @@ const Monthly = () => {
   const [month, setmonth] = useState(1);
   const [loading, setLoading] = useState(1);
   const [error, setError] = useState(0);
+  const [isOpen, setIsOpen] = useState(false)
 
   const months = [{month:"January"},
                   {month:"February"},
@@ -73,7 +74,7 @@ const Monthly = () => {
           <h2 className="text-xl font-semibold">Monthly Data For <span className='text-primary'>{months[month-1].month}</span> </h2>
 
           <div className="flex items-center gap-2 bg-card">
-     <Popover>
+     <Popover open={isOpen} onOpenChange={setIsOpen}>
        <PopoverTrigger asChild>
          <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 my-5">
            Month
@@ -86,6 +87,7 @@ const Monthly = () => {
                key={month.month}
                variant="ghost"
                onClick={()=>{
+                setIsOpen(0)
                 setmonth(index+1); 
                }}>
                {month.month}

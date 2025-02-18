@@ -60,7 +60,7 @@ export const Calculator = () => {
       onDragStart={() => setIsDragging(true)}
       onDragEnd={() => setIsDragging(false)}
       className="absolute top-20 right-4 w-64 bg-secondary/95 backdrop-blur-md rounded-xl border border-gray-800 shadow-lg overflow-hidden"
-      style={{ zIndex: isDragging ? 50 : 100 }}
+      style={{ zIndex: isDragging ? 100 : 100 }}
     >
       <div className="p-4 space-y-4">
         <div className="flex items-center justify-between bg-gray-900/50 rounded-lg p-2">

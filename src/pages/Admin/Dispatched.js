@@ -34,6 +34,7 @@ const Dispatched = () => {
         month:"",
         product:""
     });
+    const [isOpen, setIsOpen] = useState(false)
 
   const months = [{month:"January"},
                   {month:"February"},
@@ -145,13 +146,13 @@ const Dispatched = () => {
           <h2 className="text-xl font-semibold">Monthly Data For <span className='text-primary'>{months[month-1].month}</span> </h2>
 
           <div className="flex items-center gap-2 bg-card">
-     <Popover>
+     <Popover open={isOpen} onOpenChange={setIsOpen}>
        <PopoverTrigger asChild>
          <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 my-5">
            Month
          </Button>
        </PopoverTrigger>
-       <PopoverContent className="w-[280px] p-2 bg-card border-primary">
+       <PopoverContent className="w-[280px] p-2 bg-card border-primary" onClick={() =>setIsOpen(0)}>
          <div className="grid grid-cols-3 gap-2">
            {months.map((month,index) => (
              <Button

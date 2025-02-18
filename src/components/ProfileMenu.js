@@ -36,7 +36,7 @@ const ProfileMenu = () => {
 }
 
   return (
-<div className="absolute right-[0.2%] top-[100%] z-30">
+<div className="absolute right-[0.2%] top-[100%]">
         {
             userinfo ? (
          <section className=" radio-container bg-black rounded-b-2xl">
