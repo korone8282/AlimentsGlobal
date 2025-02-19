@@ -79,7 +79,7 @@ const Login = () => {
 
   return (
     <div className='min-h-screen bg-background p-6' >
-    <div className='h-fit flex items-center justify-center'>
+    <div className='h-fit flex items-center justify-center mx-3'>
         <img src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80'
         alt=''
         className='md:h-[40rem] md:w-[35rem] h-0 w-0' />

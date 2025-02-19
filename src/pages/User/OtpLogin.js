@@ -92,7 +92,7 @@ const OtpLogin = () => {
     <div className='min-h-screen bg-background p-6 flex justify-center items-center'>
    
 {showOtp?( 
-<div className='flex flex-col gap-12'>
+<div className='flex flex-col gap-12 mx-3'>
 <div>
 Enter OTP sent to 
 </div>

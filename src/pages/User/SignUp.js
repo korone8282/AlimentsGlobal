@@ -101,7 +101,7 @@ const SignUp = () => {
      <div className='min-h-screen bg-background p-6'>
       { !showOtp? (
         <div>
-      <div className='h-[90vh] flex items-center justify-center'>
+      <div className='h-[90vh] flex items-center justify-center mx-3'>
         <img src='https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80'
         alt=''
         className='md:h-[40rem] md:w-[35rem] h-0 w-0' />
@@ -198,7 +198,7 @@ const SignUp = () => {
       </div>
     </div>
       ):(
-        <div className='min-h-screen bg-background p-6 flex justify-center items-center flex-col gap-12'>
+        <div className='min-h-screen bg-background p-6 flex justify-center items-center flex-col gap-12 mx-3'>
 <div>
 Enter OTP sent to 
 </div>
