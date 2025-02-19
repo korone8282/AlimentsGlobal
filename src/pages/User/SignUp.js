@@ -5,6 +5,7 @@ import { VERIFY_URL, GOOGLE_API, REGISTER_API } from '../../redux/Utils/constant
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { GoogleLogin } from '@react-oauth/google';
+import { Input } from "../../components/Input";
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -97,35 +98,35 @@ const SignUp = () => {
   }
   
     return (
-     <div >
-      {!showOtp?(
+     <div className='min-h-screen bg-background p-6'>
+      { !showOtp? (
         <div>
       <div className='h-[90vh] flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80'
         alt=''
-        className='h-[40rem] w-[35rem] sm:max-lg:h-[28rem] sm:max-lg:w-96 sm:max-lg:mt-36  sm:max-lg:mr-15' />
-        <section className='flex flex-col h-[40rem] w-[35rem] sm:max-lg:w-80 sm:max-lg:mt-20'>
-        <p className='ml-6 mt-16 text-5xl font-semibold sm:max-lg:text-4xl  sm:max-lg:mt-32'>Register Now..</p>
-        <div className='flex flex-col ml-6 mt-8  sm:max-lg:mt-4'>
+        className='md:h-[40rem] md:w-[35rem] h-0 w-0' />
+        <section className='flex flex-col h-[40rem] w-[35rem]'>
+        <p className='ml-6 mt-16 text-5xl font-semibold'>Register Now..</p>
+        <div className='flex flex-col ml-6 mt-8'>
   
         <label htmlFor="name" className='mb-2 text-xl'>
               Name
         </label>
-        <input type='name' 
+        <Input type='name' 
                id="fname" 
                name="fname"
                onChange={(e)=>setformData({...formData, fname: e.target.value})}
-                className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                className='h-8 border-2 border-gray-300 rounded-sm'
                />
   
         <label htmlFor="email" className='mb-2 text-xl'>
               Email
         </label>
-        <input type='email' 
+        <Input type='email' 
                id="email" 
                name="email" 
                onChange={(e)=>setformData({...formData, email: e.target.value})}
-                className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                className='h-8 border-2 border-gray-300 rounded-sm'
                />
   
           <label htmlFor="pass" className='relative mb-2 text-xl mt-2 '>
@@ -141,11 +142,11 @@ const SignUp = () => {
             )}
           </span>
           </label>
-          <input type={showPassword ? "text" : "password"}
+          <Input type={showPassword ? "text" : "password"}
                  id="pass" 
                  name='password'
                  onChange={(e)=>setformData({...formData, password: e.target.value})}
-                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                 className='h-8 border-2 border-gray-300 rounded-sm'
                        />
   
           <label htmlFor="confirPassword" className='relative mb-2 text-xl mt-2'>
@@ -161,15 +162,15 @@ const SignUp = () => {
             )}
           </span>
           </label>
-          <input type={showPassword ? "text" : "password"}
+          <Input type={showPassword ? "text" : "password"}
                  id="confirmPassword" 
                  name = "confirmPassword" 
                  onChange={(e)=>setformData({...formData, confirmPassword: e.target.value})}
-                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                 className='h-8 border-2 border-gray-300 rounded-sm'
                        />
   
            <button onClick={submitHandle}
-                   className='text-xl mt-6 font-semibold h-16 w-[9.6rem] text-center hover:bg-white hover:text-black rounded-xl bg-[#f59e0b]'
+                   className='text-xl mt-6 font-semibold h-16 w-[9.6rem] text-center border-[#f59e0b] border-2 hover:bg-primary hover:text-black rounded-xl'
                    >
             Submit
           </button>
@@ -197,7 +198,7 @@ const SignUp = () => {
       </div>
     </div>
       ):(
-        <div className='flex flex-col justify-center items-center text-3xl gap-12 h-[90vh]'>
+        <div className='min-h-screen bg-background p-6 flex justify-center items-center flex-col gap-12'>
 <div>
 Enter OTP sent to 
 </div>
@@ -220,7 +221,7 @@ Enter OTP sent to
         } 
         </div>
         <div onClick={()=>setshowOtp(0)}
-        className='text-2xl font-semibold h-16 w-[14rem] flex items-center justify-center text-[#f59e0b] rounded-lg bg-black border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>
+        className='text-2xl font-semibold h-16 w-[14rem] flex items-center justify-center text-[#f59e0b] rounded-lg border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>
             Edit Details?
         </div>
   </div>

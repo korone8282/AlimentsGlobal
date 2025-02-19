@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { apiConnector } from '../../redux/Utils/apiConnector'
 import {  useNavigate, useParams } from 'react-router-dom'
 import { PROFILE_URL,UPLOAD_URL} from '../../redux/Utils/constants';
+import { Input } from "../../components/Input";
 
 const UpdateProfile = () => {
 
@@ -76,19 +77,19 @@ async function handleSubmit(){
   }
 
   return (
-    <div className='flex justify-center my-12'>
+    <div className='min-h-screen mx-auto bg-background p-6 w-fit my-16'>
 
-    <div className='w-[40rem] border-2 h-[40rem] bg-black text-[#f59e0b] border-[#f59e0b] rounded-3xl sm:max-lg:h-fit'>
-    <div className=' flex flex-col p-12 gap-10'>
+    <div className='bg-[#22252a] text-white  p-6 rounded-lg shadow-lg w-full max-w-md z-30 h-fit inset-0 m-auto'>
+    <div className=' flex flex-col gap-10'>
 
    <div className='flex w-full justify-between text-2xl font-bold gap-12 items-center'>
               <img
                 src={imageUrl ? imageUrl : "image here"}
                 alt="Profile"
-                className="rounded-full h-24 w-24 object-cover border-[#f59e0b] border-2"
+                className="rounded-full h-20 w-20 object-cover border-black border-2"
               />
-            <label className="border border-[#f59e0b] max-w-96 px-4 block w-full text-center rounded-lg cursor-pointer font-bold py-11">
-              <input
+            <label className="max-w-96 px-4 block w-full text-center rounded-lg cursor-pointer py-11">
+              <Input
                 type="file"
                 name="image"
                 accept="image/*"
@@ -99,49 +100,46 @@ async function handleSubmit(){
             </label>
     </div>
 
-    <div className='flex w-full justify-between text-2xl font-bold'>
+    <div className='flex w-full justify-between gap-10'>
     <label>Name: </label>
-        <input  type='text'
-                className='bg-transparent border-2 border-[#f59e0b] p-1'
+        <Input  type='text'
                 name='fname'
                 onChange={(e)=>inputHandler(e)}
                 />
     </div>
 
-    <div className='flex w-full justify-between text-2xl font-bold'>
+    <div className='flex w-full justify-between gap-10'>
     <label>Gender: </label>
         <select type='text'
-                className=' border-2 border-black p-3 bg-[#f59e0b] text-black text-xl font-semibold rounded-md'
+                className='w-full p-2 bg-[#2e3138] border border-gray-600 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
                 name='gender'
                 onChange={(e)=>inputHandler(e)}
                 >
-                <option className='bg-[#f59e0b] font-semibold' value={"Male"}>Select</option>
-                <option className='bg-[#f59e0b] font-semibold' value={"Male"}>Male  </option>
-                <option className='bg-[#f59e0b] font-semibold' value={"Female"}>Female  </option>
-                <option className='bg-[#f59e0b] font-semibold' value={"Others"}>Others  </option>
+                <option className=' bg-[#2e3138] text-muted-foreground' value={"Male"}>Select</option>
+                <option className=' bg-[#2e3138] text-muted-foreground' value={"Male"}>Male  </option>
+                <option className=' bg-[#2e3138] text-muted-foreground' value={"Female"}>Female  </option>
+                <option className=' bg-[#2e3138] text-muted-foreground' value={"Others"}>Others  </option>
         </select> 
     </div>
 
-    <div className='flex w-full justify-between text-2xl font-bold'>
+    <div className='flex w-full justify-between gap-10'>
     <label>About: </label>
-        <input  type='text'
-                className='bg-transparent border-2 border-[#f59e0b] p-1'
+        <Input  type='text'
                 name='about'
                 onChange={(e)=>inputHandler(e)}
                 />
     </div>
 
-    <div className='flex w-full justify-between text-2xl font-bold'>
+    <div className='flex w-full justify-between gap-10'>
     <label>DOB: </label>
-        <input  type='date'
-                className='bg-transparent border-2 border-[#f59e0b] p-1 dark:[color-scheme:dark]'
+        <Input  type='date'
                 name='dob'
                 onChange={(e)=>inputHandler(e)}
                 />
     </div>
 
         <button  onClick={handleSubmit}
-                className=' hover:scale-95 bg-[#f59e0b] text-black w-1/2 h-12 rounded-md mx-auto text-xl font-bold'>Update Profile</button>
+                className=' hover:scale-95 border-[#f59e0b] border-2 text-primary w-fit h-fit p-4 rounded-md mx-auto text-xl'>Update Profile</button>
       </div>
     </div>
 

@@ -44,7 +44,12 @@ const Header = () => {
           {
             userinfo ? (
               <button className="p-2 hover:bg-secondary/80 rounded-full transition-colors"
-                      onClick={()=>setProfileOpen(!profileOpen)}>
+                      onClick={()=>{
+                                    if(!profileOpen){
+                                      navigate(`/admin/Profile/${userinfo._id}`)
+                                    }
+                                    setProfileOpen(!profileOpen)
+                                      }}>
                 <Settings className="w-7 h-7 text-primary" />
               </button>
             ) : (
@@ -61,9 +66,6 @@ const Header = () => {
         </div>
             </nav>
           </div>
-
-
-
 
         {showCalculator ? <Calculator/> : null}
 

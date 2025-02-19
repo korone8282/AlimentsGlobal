@@ -63,15 +63,15 @@ export const Calculator = () => {
       style={{ zIndex: isDragging ? 100 : 100 }}
     >
       <div className="p-4 space-y-4">
-        <div className="flex items-center justify-between bg-gray-900/50 rounded-lg p-2">
+        <div className="flex items-center justify-between bg-gray-900/50 rounded-lg py-2">
           <input
             type="text"
             value={expression}
             onChange={(e)=> setExpression(e.target.value) }
             onKeyDown={(e)=> editHandle(e)}
-            className="bg-transparent text-white text-right flex-1 outline-none"
+            className="bg-transparent text-white text-right flex-1 outline-none w-5/6"
           />
-          <Mic className="w-12 h-12 text-primary ml-2" 
+          <Mic className="w-11 h-11 text-primary p-3" 
                onClick={speak}
           />
         </div>

@@ -6,6 +6,7 @@ import { GENOTP_URL,OTPLOG_URL } from '../../redux/Utils/constants';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setcredentials } from '../../redux/Slices/authSlice';
+import { Input } from "../../components/Input";
 
 const OtpLogin = () => {
 
@@ -88,7 +89,7 @@ const OtpLogin = () => {
     }
 
   return (
-    <div className='flex flex-col justify-center h-[90vh] items-center text-5xl gap-8'>
+    <div className='min-h-screen bg-background p-6 flex justify-center items-center'>
    
 {showOtp?( 
 <div className='flex flex-col gap-12'>
@@ -98,7 +99,7 @@ Enter OTP sent to
         <div className='flex gap-4'>
         {
             formData.otp.map((key,index)=>(
-                <input type='text'
+                <Input type='text'
                        name='otp'
                        ref={input=>(inputRef.current[index]=input)}
                        key={index}
@@ -119,7 +120,7 @@ Enter OTP sent to
         </div>
 </div> ) : (
         <div>
-         <div className='mb-8 text-center font-bold'>Enter Email</div>
+         <div className='mb-8 text-center text-3xl my-20'>Enter Email</div>
         <div className='flex flex-col justify-center items-center text-3xl gap-8'>
            <input type='text'
            id='field'
@@ -131,7 +132,7 @@ Enter OTP sent to
            />
 
           <button onClick={submitHandle}
-          className='text-2xl font-semibold h-16 w-[9.6rem] text-[#f59e0b] rounded-lg bg-black border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>
+          className='text-2xl font-semibold h-16 w-[9.6rem] text-[#f59e0b] rounded-lg border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>
             Get OTP
           </button>
     </div>

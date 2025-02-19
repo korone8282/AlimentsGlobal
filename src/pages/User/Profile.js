@@ -41,7 +41,7 @@ const Profile = () => {
 {
         loading ? ( <Loader/>
         ) : (
-          <div className='w-[90%] md:w-1/2 flex flex-col gap-5 mx-auto h-auto'>
+          <div className='min-h-screen bg-background p-6 md:w-1/2 flex flex-col gap-5 mx-auto h-auto'>
           <h1 className="mt-7 mb-4 text-3xl text-center"> My Profile </h1>
           <div className="flex flex-col items-center justify-center rounded-md text-[#f59e0b] bg-black border-[#f59e0b] border-2 p-8 px-12">
             <div className="flex flex-col items-center justify-center w-full gap-4">

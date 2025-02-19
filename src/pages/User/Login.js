@@ -9,6 +9,7 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import {LOGIN_API, GOOGLE_API} from '../../redux/Utils/constants';
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { GoogleLogin } from '@react-oauth/google';
+import { Input } from "../../components/Input";
 
 const Login = () => {
 
@@ -77,21 +78,21 @@ const Login = () => {
     }
 
   return (
-    <div >
-    <div className='h-[90vh] flex items-center justify-center'>
+    <div className='min-h-screen bg-background p-6' >
+    <div className='h-fit flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80'
         alt=''
-        className='h-[40rem] w-[35rem] sm:max-lg:h-[28rem] sm:max-lg:w-96  sm:max-lg:mt-36  sm:max-lg:mr-15' />
-        <section className='flex flex-col h-[40rem] w-[35rem]  sm:max-lg:w-80'>
-        <p className='ml-6 mt-32 text-5xl font-semibold  sm:max-lg:mt-44 sm:max-lg:text-3xl'>Sign In..</p>
-        <form onSubmit={handleSubmit((data,e)=>loginHandler(data,e))} className='flex flex-col ml-6 mt-12 sm:max-lg:mt-12' autoComplete='on'>
+        className='md:h-[40rem] md:w-[35rem] h-0 w-0' />
+        <section className='flex flex-col h-[45rem] w-[35rem]'>
+        <p className='ml-6 mt-32 text-5xl font-semibold'>Sign In..</p>
+        <form onSubmit={handleSubmit((data,e)=>loginHandler(data,e))} className='flex flex-col ml-6 mt-12' autoComplete='on'>
         <label htmlFor="email" className='mb-2 text-xl'>
               Email
         </label>
-        <input type='email' 
+        <Input type='email' 
                id="email" 
                {...register("email",{required:true})}
-                className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                className='h-8 border-2 border-gray-300 rounded-sm'
                 autoComplete='on'
                />
         {errors.email && (
@@ -113,10 +114,10 @@ const Login = () => {
           )}
         </span>
           </label>
-          <input type={showPassword ? "text" : "password"}
+          <Input type={showPassword ? "text" : "password"}
                  id="pass" 
                  {...register("password",{required:true})}
-                 className='h-8 border-2 border-gray-300 rounded-sm text-black'
+                 className='h-8 border-2 border-gray-300 rounded-sm'
                        />
           {errors.password && (
             <span>
@@ -125,13 +126,13 @@ const Login = () => {
           )}
 
            <button type='submit'
-                   className='text-xl mt-4 h-16 w-[9.6rem] text-center hover:bg-white hover:text-black rounded-xl bg-[#f59e0b]'
+                   className='text-xl mt-4 h-16 w-[9.6rem] text-center hover:text-black rounded-xl border-[#f59e0b] border-2 hover:bg-primary'
                    >
             Submit
           </button>
         </form>
 
-             <button onClick={()=>navigate("/otpLogin")} className='ml-52 mt-2 h-16 sm:max-lg:-mt-8 bg-[#f59e0b] hover:bg-white hover:text-black w-48 rounded-xl  '>
+             <button onClick={()=>navigate("/otpLogin")} className='ml-52 mt-2 h-16 border-[#f59e0b] border-2 hover:bg-primary hover:text-black w-48 rounded-xl  '>
               Login with OTP
             </button>
 
