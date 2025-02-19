@@ -10,7 +10,7 @@ import Loader from '../../components/Loader';
 const Profile = () => {
   const [user, setUser] = useState({});
   const { userinfo } = useSelector((state) => state.auth);
-  const [loading, setLoading] = useState(true); // Start with loading as true for better UX
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Profile = () => {
         setLoading(false);
       } catch (e) {
         console.log(e);
-        setLoading(false); // Ensure loading stops even if there's an error
+        setLoading(false); 
       }
     };
 
@@ -45,7 +45,6 @@ const Profile = () => {
             My Profile
           </h1>
 
-          {/* Profile Header Section */}
           <div className="flex flex-col items-center justify-center rounded-md text-[#f59e0b] bg-black border-[#f59e0b] border-2 p-4 sm:p-6 md:p-8 shadow-md">
             <div className="flex flex-col sm:flex-row items-center justify-center w-full gap-4 sm:gap-8">
               <div className="flex items-center justify-center">
@@ -65,7 +64,7 @@ const Profile = () => {
               </div>
               <IconBtn
                 text="Edit"
-                onClick={() => {
+                onclick={() => {
                   navigate(`/admin/updateProfile/${userinfo._id}`);
                 }}
                 className="mt-4 sm:mt-0"
@@ -75,13 +74,12 @@ const Profile = () => {
             </div>
           </div>
 
-          {/* About Section */}
           <div className="flex flex-col gap-y-4 rounded-md text-[#f59e0b] border-[#f59e0b] bg-black border-2 p-4 sm:p-6 md:p-8 shadow-md">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg sm:text-xl font-semibold">About</p>
               <IconBtn
                 text="Edit"
-                onClick={() => {
+                onclick={() => {
                   navigate(`/admin/updateProfile/${userinfo._id}`);
                 }}
               >
@@ -93,13 +91,12 @@ const Profile = () => {
             </p>
           </div>
 
-          {/* Personal Details Section */}
           <div className="flex flex-col gap-y-4 rounded-md border-[#f59e0b] border-2 bg-black text-[#f59e0b] p-4 sm:p-6 md:p-8 shadow-md">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg sm:text-xl font-semibold">Personal Details</p>
               <IconBtn
                 text="Edit"
-                onClick={() => {
+                onclick={() => {
                   navigate(`/admin/updateProfile/${userinfo._id}`);
                 }}
               >
