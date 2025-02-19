@@ -45,7 +45,7 @@ const Profile = () => {
           <h1 className="mt-7 mb-4 text-3xl text-center"> My Profile </h1>
           <div className="flex flex-col items-center justify-center rounded-md text-[#f59e0b] bg-black border-[#f59e0b] border-2 p-8 px-12">
             <div className="flex flex-col items-center justify-center w-full gap-4">
-            <div className='flex items-center gap-20'>
+            <div className='flex items-center gap-12 md:justify-around w-full'>
             <img
                 src={user?.image}
                 alt="Profile"
@@ -54,7 +54,7 @@ const Profile = () => {
                 <p className="text-lg font-semibold">
                   {user?.fname}
                 </p>
-                <p className="text-sm">{user?.email}</p>
+                <p className="text-sm max-w-30 overflow-auto">{user?.email}</p>
               </div>
             </div>
          
@@ -86,7 +86,7 @@ const Profile = () => {
               {user?.about ?? "Write Something About Yourself"}
             </p>
           </div>
-          <div className="flex flex-col gap-y-6 rounded-md border-[#f59e0b] border-2 bg-black text-[#f59e0b] p-8 px-12">
+          <div className="flex flex-col flex-wrap gap-y-6 rounded-md border-[#f59e0b] border-2 bg-black text-[#f59e0b] p-8 px-12">
             <div className="flex w-full items-center justify-between">
               <p className="text-lg font-semibold">
                 Personal Details
