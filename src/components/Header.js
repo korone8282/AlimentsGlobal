@@ -26,11 +26,17 @@ const Header = () => {
                 {format(new Date(), "MMMM d, yyyy")}
               </span>
             </div>
-            <nav className="flex items-center space-x-8">
-            <div className="p-2 hover:bg-secondary/80 rounded-full transition-colors text-white font-semibold">
+            <nav>
+     
+              <div>
+          {
+            userinfo ? (
+              <div className="flex items-center space-x-8">
+              <div className="p-2 hover:bg-secondary/80 rounded-full transition-colors text-white font-semibold">
                 {userinfo?.fname}
               </div>
-            <button className="p-2 hover:bg-secondary/80 rounded-full transition-colors"
+              
+              <button className="p-2 hover:bg-secondary/80 rounded-full transition-colors"
                     onClick={()=>{
                                   setShowCalculator(!showCalculator)
                                   setProfileOpen(0)}}>
@@ -40,9 +46,6 @@ const Header = () => {
                      onClick={()=>navigate("/")}>
                 <Home className="w-7 h-7 text-primary" />
               </button>
-              <div>
-          {
-            userinfo ? (
               <button className="p-2 hover:bg-secondary/80 rounded-full transition-colors"
                       onClick={()=>{
                                     if(!profileOpen){
@@ -52,6 +55,8 @@ const Header = () => {
                                       }}>
                 <Settings className="w-7 h-7 text-primary" />
               </button>
+              </div>
+            
             ) : (
               <div className='flex gap-6 items-center'>
               <Link to="/Login" className='hover:translate-y-1 h-10 w-24 flex items-center justify-center text-[#f59e0b] rounded-lg bg-black border-2 hover:scale-105 border-[#f59e0b] text-center cursor-auto hover:bg-[#f59e0b] hover:text-black'>

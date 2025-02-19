@@ -62,8 +62,8 @@ const ProfileMenu = () => {
                       Logout
                     </label>
 
-                  <div class="glider-container">
-                    <div class="glider"></div>
+                  <div className="glider-container">
+                    <div className="glider"></div>
                 </div>
               </motion.div>
         
