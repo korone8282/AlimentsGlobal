@@ -17,7 +17,7 @@ const Header = () => {
 
   return ( 
  
-        <header className="w-full px-6 py-4 bg-black backdrop-blur-md border-b border-gray-800">
+        <header className="w-full px-6 py-4 bg-black backdrop-blur-md border-b border-gray-800 relative z-50">
           <div className="mx-4 flex flex-col lg:flex-row gap-6 items-center justify-between">
             <div className="flex items-center space-x-4 text-xl">
               <h1 className="text-primary font-medium hover:cursor-pointer"

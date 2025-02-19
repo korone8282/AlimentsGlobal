@@ -36,10 +36,10 @@ const ProfileMenu = () => {
 }
 
   return (
-<div className="absolute right-[0.2%] top-[100%]">
+<div className="absolute right-[0.2%] top-[100%] z-20">
         {
             userinfo ? (
-         <section className=" radio-container bg-black rounded-b-2xl">
+         <section className=" radio-container bg-black rounded-b-xl">
             <input type="radio" id="profile" name="menu" />
             <label htmlFor="profile" className="py-2 px-3 block mb-5 rounded-sm" onClick={() => navigate(`/admin/Profile/${userinfo._id}`)}>
               Profile
