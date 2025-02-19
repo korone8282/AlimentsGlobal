@@ -26,7 +26,7 @@ const Header = () => {
                 {format(new Date(), "MMMM d, yyyy")}
               </span>
             </div>
-            <nav className="flex items-center space-x-8">
+            <nav className="flex items-center md:space-x-8 space-x-3">
             <div className="p-2 hover:bg-secondary/80 rounded-full transition-colors text-white font-semibold">
                 {userinfo?.fname}
               </div>

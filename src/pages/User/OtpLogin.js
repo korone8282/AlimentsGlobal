@@ -92,7 +92,7 @@ const OtpLogin = () => {
     <div className='min-h-screen bg-background p-6 flex justify-center items-center'>
    
 {showOtp?( 
-<div className='flex flex-col gap-12 mx-3'>
+<div className='flex flex-col gap-12'>
 <div>
 Enter OTP sent to 
 </div>
@@ -119,14 +119,14 @@ Enter OTP sent to
             Edit Details?
         </div>
 </div> ) : (
-        <div>
+        <div className='w-5/6'>
          <div className='mb-8 text-center text-3xl my-20'>Enter Email</div>
         <div className='flex flex-col justify-center items-center text-3xl gap-8'>
            <input type='text'
            id='field'
            name="email"
            autoComplete='on'
-           className='h-12 border-4 p-4 border-black  rounded-sm bg-transparent'
+           className='h-12 border-4 p-4 border-black md:w-fit w-80 rounded-sm bg-transparent'
            placeholder='Enter Details'
            onChange={(e)=>setformData({...formData, email: e.target.value})}
            />

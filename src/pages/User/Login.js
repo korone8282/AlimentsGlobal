@@ -79,11 +79,11 @@ const Login = () => {
 
   return (
     <div className='min-h-screen bg-background p-6' >
-    <div className='h-fit flex items-center justify-center mx-3'>
+    <div className='h-fit flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80'
         alt=''
         className='md:h-[40rem] md:w-[35rem] h-0 w-0' />
-        <section className='flex flex-col h-[45rem] w-[35rem]'>
+        <section className='flex flex-col h-[45rem] md:w-[35rem] w-[20rem]'>
         <p className='ml-6 mt-32 text-5xl font-semibold'>Sign In..</p>
         <form onSubmit={handleSubmit((data,e)=>loginHandler(data,e))} className='flex flex-col ml-6 mt-12' autoComplete='on'>
         <label htmlFor="email" className='mb-2 text-xl'>
@@ -126,19 +126,19 @@ const Login = () => {
           )}
 
            <button type='submit'
-                   className='text-xl mt-4 h-16 w-[9.6rem] text-center hover:text-black rounded-xl border-[#f59e0b] border-2 hover:bg-primary'
+                   className='mt-4 h-16 w-[9.6rem] md:mx-0 text-center hover:text-black rounded-xl border-[#f59e0b] border-2 hover:bg-primary'
                    >
             Submit
           </button>
         </form>
 
-             <button onClick={()=>navigate("/otpLogin")} className='ml-52 mt-2 h-16 border-[#f59e0b] border-2 hover:bg-primary hover:text-black w-48 rounded-xl  '>
+             <button onClick={()=>navigate("/otpLogin")} className='md:ml-52 md:mx-0 mx-auto mt-5 h-16 border-[#f59e0b] border-2 hover:bg-primary hover:text-black w-48 rounded-xl  '>
               Login with OTP
             </button>
 
-         <div className='flex justify-between mx-5 text-xl mt-6 sm:max-lg:mt-10'>
+         <div className='flex justify-between mx-5 text-xl mt-6 gap-2'>
 
-         <h2 className='sm:max-lg:hidden'>SignUp with Google : </h2>
+         <h2 className='hidden md:block'>Google</h2>
                 <GoogleLogin
                 onSuccess={credentialResponse => { googleLogin(credentialResponse.credential) }}
                 onError={() => {console.log('Login Failed')}}

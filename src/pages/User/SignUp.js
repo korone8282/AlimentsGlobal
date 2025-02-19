@@ -101,11 +101,11 @@ const SignUp = () => {
      <div className='min-h-screen bg-background p-6'>
       { !showOtp? (
         <div>
-      <div className='h-[90vh] flex items-center justify-center mx-3'>
+      <div className='h-[90vh] flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80'
         alt=''
         className='md:h-[40rem] md:w-[35rem] h-0 w-0' />
-        <section className='flex flex-col h-[40rem] w-[35rem]'>
+        <section className='flex flex-col h-[40rem] md:w-[35rem] w-[20rem] mx-1'>
         <p className='ml-6 mt-16 text-5xl font-semibold'>Register Now..</p>
         <div className='flex flex-col ml-6 mt-8'>
   
@@ -176,9 +176,9 @@ const SignUp = () => {
           </button>
         </div>
 
-        <div className='flex justify-between mx-5 text-xl mt-6 sm:max-lg:-mt-9 sm:max-lg:ml-28'>
+        <div className='flex justify-between mx-5 text-xl mt-6 gap-2'>
 
-          <h2 className='sm:max-lg:hidden'>SignUp with Google : </h2>
+          <h2 className='hidden md:block'>Google</h2>
              <GoogleLogin
                  onSuccess={credentialResponse => { googleLogin(credentialResponse.credential) }}
                  onError={() => {console.log('Login Failed')}}

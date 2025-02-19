@@ -133,7 +133,7 @@ const handleUpdate = async(data) =>{
       <br />
       <button 
       onClick={handleSubmit(data=>handleCreate(data))}
-      className='my-6  mx-56 h-10 text-[#f59e0b] border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl'>Add</button>
+      className='my-6 md:mx-56 h-10 text-[#f59e0b] border-[#f59e0b] border-2 w-48 rounded-md hover:scale-105 text-xl'>Add</button>
       <hr className='mt-2'/>
  
     {
