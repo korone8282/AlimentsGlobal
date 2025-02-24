@@ -41,6 +41,7 @@ import Graph from './pages/Admin/Graph'
 import Dispatched from './pages/Admin/Dispatched'
 import Pouch from './pages/Admin/Pouch'
 import Month from './components/Month'
+import { AnimatePresence } from 'framer-motion'
 
 const App = () => {
   
@@ -49,53 +50,58 @@ const App = () => {
 
 <Header/>
 
+<AnimatePresence mode='wait'>
+
 <Routes>
 
-  <Route path='/' element={<Home/>}/>
+<Route path='/' element={<Home/>}/>
 
-  <Route path="/admin" element={<AdminRoute/>}>
-     <Route path='Container-List/:id' element={<Container/>} />
-     <Route path='Container-List' element={<ContainerList/>} />
-     <Route path='Profile/:id' element={<Profile/>} />
-     <Route path='ProductData' element={<ProductData/>} />
-     <Route path='Left' element={<Left/>} />
-     <Route path='Filling-List' element={<Inventory/>} />
-     <Route path='updateProfile/:id' element={<UpdateProfile/>} />
-     <Route path='Monthly-Data' element={<Monthly/>} />
-     <Route path='Production-Goal' element={<ProductionGoal/>} />
-     <Route path='Production' element={<Production/>} />
-     <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
-     <Route path='Create-Exports' element={<Exports/>} />
-     <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
-     <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
-     <Route path='UserList' element={<UsersList/>}></Route>
-     <Route path='Graph/Monthly-Dispatch' element={<MonthlyGraphOne/>}></Route>
-     <Route path='Graph/Monthly-Filling' element={<MonthlyGraphTwo/>}></Route>
-     <Route path='Graph/Monthly-Kitchen' element={<MonthlyGraphThree/>}></Route>
-     <Route path='Kitchen/:month' element={<Kitchen/>} />
-     <Route path='Filling/:month' element={<Filiing/>} />
-     <Route path='Dispatch/:month' element={<Dispatch/>} />
-     <Route path='Month' element={<Month/>} />
-     <Route path=':section/:month' element={<DataLog/>} />
-     <Route path='BuyerList' element={<Buyer/>}></Route>
-     <Route path='ProductList' element={<Product/>}></Route>
-     <Route path='Product-Data' element={<BuyerProducts/>}></Route>
-     <Route path='Day-Night' element={<DvN/>}></Route>
-     <Route path='Pouch' element={<Pouch/>}></Route>
-     <Route path='Daily-List' element={<KvF/>}></Route>
-     <Route path='Dispatched/Dispatch-Report' element={<DispatchReport/>}></Route>
-     <Route path='Graph/Dispatch-Graph' element={<DispGraph/>}></Route>
-     <Route path='Graph/Filling-Graph' element={<FillGraph/>}></Route>
-     <Route path='Graph/Kitchen-Graph' element={<KitchenGraph/>}></Route>
-     <Route path='Graph' element={<Graph/>}></Route>
-     <Route path='Dispatched' element={<Dispatched/>}></Route>
-  </Route>
+<Route path="/admin" element={<AdminRoute/>}>
+   <Route path='Container-List/:id' element={<Container/>} />
+   <Route path='Container-List' element={<ContainerList/>} />
+   <Route path='Profile/:id' element={<Profile/>} />
+   <Route path='ProductData' element={<ProductData/>} />
+   <Route path='Left' element={<Left/>} />
+   <Route path='Filling-List' element={<Inventory/>} />
+   <Route path='updateProfile/:id' element={<UpdateProfile/>} />
+   <Route path='Monthly-Data' element={<Monthly/>} />
+   <Route path='Production-Goal' element={<ProductionGoal/>} />
+   <Route path='Production' element={<Production/>} />
+   <Route path='Create-Data-Kitchen' element={<AllDataKitchen/>} />
+   <Route path='Create-Exports' element={<Exports/>} />
+   <Route path='Create-Data-Dispatch' element={<AllDataDispatch/>} />
+   <Route path='Create-Data-Filling' element={<AllDataFilling/>} />
+   <Route path='UserList' element={<UsersList/>}></Route>
+   <Route path='Graph/Monthly-Dispatch' element={<MonthlyGraphOne/>}></Route>
+   <Route path='Graph/Monthly-Filling' element={<MonthlyGraphTwo/>}></Route>
+   <Route path='Graph/Monthly-Kitchen' element={<MonthlyGraphThree/>}></Route>
+   <Route path='Kitchen/:month' element={<Kitchen/>} />
+   <Route path='Filling/:month' element={<Filiing/>} />
+   <Route path='Dispatch/:month' element={<Dispatch/>} />
+   <Route path='Month' element={<Month/>} />
+   <Route path=':section/:month' element={<DataLog/>} />
+   <Route path='BuyerList' element={<Buyer/>}></Route>
+   <Route path='ProductList' element={<Product/>}></Route>
+   <Route path='Product-Data' element={<BuyerProducts/>}></Route>
+   <Route path='Day-Night' element={<DvN/>}></Route>
+   <Route path='Pouch' element={<Pouch/>}></Route>
+   <Route path='Daily-List' element={<KvF/>}></Route>
+   <Route path='Dispatched/Dispatch-Report' element={<DispatchReport/>}></Route>
+   <Route path='Graph/Dispatch-Graph' element={<DispGraph/>}></Route>
+   <Route path='Graph/Filling-Graph' element={<FillGraph/>}></Route>
+   <Route path='Graph/Kitchen-Graph' element={<KitchenGraph/>}></Route>
+   <Route path='Graph' element={<Graph/>}></Route>
+   <Route path='Dispatched' element={<Dispatched/>}></Route>
+</Route>
 
-  <Route path='Login' element={<Login/>} />
-  <Route path='SignUp' element={<SignUp/>}/>
-  <Route path='OtpLogin' element={<OtpLogin/>}/>
+<Route path='Login' element={<Login/>} />
+<Route path='SignUp' element={<SignUp/>}/>
+<Route path='OtpLogin' element={<OtpLogin/>}/>
 
 </Routes>
+
+</AnimatePresence>
+
 
 </div>
 

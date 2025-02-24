@@ -4,6 +4,7 @@ import Wrapper2 from '../../components/Wrapper2'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { GRAPH_URL } from '../../redux/Utils/constants';
+import PageTransition from '../PageTransition';
 
 const MonthlyGraphThree = () => {
 
@@ -61,25 +62,28 @@ const MonthlyGraphThree = () => {
        }, [userinfo.token,months,arr]);
 
   return (
-    <div>
+    <PageTransition>
+       <div>
 
-    <div></div>
-    {
-        error ? (
-            <div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> Error Fetching Data</div>
-        ):(
+<div></div>
+{
+    error ? (
+        <div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> Error Fetching Data</div>
+    ):(
 <div>
 {
-    loading ? (
-        <Loader/>
-    ):( 
-        <Wrapper2 data={arr.slice(0,12)} dataKey={["Production","Costing"]}/>
+loading ? (
+    <Loader/>
+):( 
+    <Wrapper2 data={arr.slice(0,12)} dataKey={["Production","Costing"]}/>
+)
+}
+</div>
     )
 }
 </div>
-        )
-    }
-    </div>
+    </PageTransition>
+   
   )
 }
 

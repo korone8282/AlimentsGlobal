@@ -10,6 +10,7 @@ import {LOGIN_API, GOOGLE_API} from '../../redux/Utils/constants';
 import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { GoogleLogin } from '@react-oauth/google';
 import { Input } from "../../components/Input";
+import PageTransition from '../PageTransition';
 
 const Login = () => {
 
@@ -78,7 +79,8 @@ const Login = () => {
     }
 
   return (
-    <div className='min-h-screen bg-background p-6' >
+    <PageTransition>
+   <div className='min-h-screen bg-background p-6' >
     <div className='h-fit flex items-center justify-center'>
         <img src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80'
         alt=''
@@ -158,6 +160,8 @@ const Login = () => {
         </section>
       </div>
     </div>
+    </PageTransition>
+ 
   )
 }
 

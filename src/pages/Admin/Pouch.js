@@ -13,6 +13,7 @@ import {
 } from "../../components/Popover";
 import { Button } from "../../components/Buttons";
 import { Input } from "../../components/Input";
+import PageTransition from '../PageTransition';
 
 const Pouch = () => {
 
@@ -117,7 +118,8 @@ const months = [{month:"January"},
     }
 
       return (
-        <div className="min-h-screen bg-background p-6">
+      <PageTransition>
+          <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
   
   <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
@@ -232,7 +234,7 @@ const months = [{month:"January"},
 
 {
             openBox2 ? (
-      <div className="space-y-5 fixed h-fit inset-0 mx-auto my-auto bg-background p-5 shadow-black/70 shadow-2xl w-fit rounded-lg">
+      <div className="space-y-5 fixed h-fit inset-0 mx-auto top-40 bg-background p-5 shadow-black/70 shadow-2xl w-fit rounded-lg">
         <div className='flex justify-between items-center gap-3'>
           <label htmlFor="confirPassword" className='text-md'>
              Pouches 
@@ -269,6 +271,8 @@ const months = [{month:"January"},
     
           </div>
         </div>
+      </PageTransition>
+      
       );
 }
 

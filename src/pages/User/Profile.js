@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { PROFILE_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
+import PageTransition from '../PageTransition';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -40,6 +41,7 @@ const Profile = () => {
       {loading ? (
         <Loader />
       ) : (
+        <PageTransition>
         <div className="max-w-4xl mx-auto flex flex-col gap-6 h-auto">
           <h1 className="mt-6 mb-4 text-2xl sm:text-3xl text-center font-bold text-[#f59e0b]">
             My Profile
@@ -131,6 +133,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        </PageTransition>
+      
       )}
     </div>
   );

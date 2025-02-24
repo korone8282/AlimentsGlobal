@@ -7,6 +7,7 @@ import {toast} from 'react-toastify';
 import Loader from '../../components/Loader';
 import { useSelector } from 'react-redux';
 import { Input } from "../../components/Input";
+import PageTransition from '../PageTransition';
 
 const Product = () => {
 
@@ -107,7 +108,8 @@ const handleUpdate = async(data) =>{
 }
 
   return (
-    <div className="justify-center flex flex-col md:flex-row">
+    <PageTransition>
+          <div className="justify-center flex flex-col md:flex-row">
     <div className="md:w-3/4 p-3">
 
     <div className="h-12 text-3xl my-4 text-center text-[#f59e0b]">Manage Products</div>
@@ -200,6 +202,8 @@ const handleUpdate = async(data) =>{
           }
     </div>
   </div>
+    </PageTransition>
+
   )
 }
 

@@ -7,6 +7,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '.
 import {toast} from 'react-toastify';
 import { Input } from "../../components/Input";
 import { Search } from "lucide-react";
+import PageTransition from '../PageTransition';
 
 const Inventory = () => {
 
@@ -128,6 +129,7 @@ const Inventory = () => {
       }
 
   return (
+    <PageTransition>
         <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
   
@@ -298,6 +300,8 @@ const Inventory = () => {
     
           </div>
         </div>
+    </PageTransition>
+      
       );
 }
 

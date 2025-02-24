@@ -4,6 +4,7 @@ import { apiConnector } from '../../redux/Utils/apiConnector';
 import { useSelector } from 'react-redux';
 import { DATA_URL } from '../../redux/Utils/constants';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import PageTransition from '../PageTransition';
 
 const KvF = () => {
 
@@ -142,7 +143,8 @@ const KvF = () => {
   } 
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <PageTransition>
+      <div className="min-h-screen bg-background p-6">
       <div className="max-w-[100rem] mx-auto space-y-12 text-start">
 
 
@@ -216,6 +218,8 @@ const KvF = () => {
 
       </div>
     </div>
+    </PageTransition>
+    
   );
 }
 

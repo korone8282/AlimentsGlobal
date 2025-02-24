@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { PRODUCT_URL, CATEGORIES_URL,  DATA_URL } from '../../redux/Utils/constants';
 import Loader from '../../components/Loader'
 import {toast} from 'react-toastify';
-
+import PageTransition from '../PageTransition';
 
 const Index = () => {
 
@@ -114,7 +114,8 @@ async function getData(){
  }
 
   return (
-    <div>
+    <PageTransition>
+        <div>
       {
         error ? (<div className='sm:max-lg:mt-4 text-3xl font-bold text-center my-96'> No Data Entry Found</div>):(
           <div>
@@ -317,6 +318,8 @@ async function getData(){
         )
       }
     </div>
+    </PageTransition>
+
   );
 };
 

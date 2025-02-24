@@ -6,6 +6,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '.
 import { Input } from "../../components/Input";
 import { useSelector } from 'react-redux';
 import {toast} from 'react-toastify';
+import PageTransition from '../PageTransition';
 
 const DispatchReport = () => {
 
@@ -63,7 +64,8 @@ async function getReport(){
       }
 
 return (
-        <div className="min-h-screen bg-background p-6">
+  <PageTransition>
+    <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
     
@@ -142,6 +144,8 @@ data.length ? (
     
           </div>
         </div>
+  </PageTransition>
+        
       );
 }
 

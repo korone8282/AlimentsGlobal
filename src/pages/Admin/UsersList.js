@@ -4,6 +4,7 @@ import { USERINFO_URL } from '../../redux/Utils/constants';
 import { useSelector } from 'react-redux';
 import Loader from '../../components/Loader';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import PageTransition from '../PageTransition';
 
 const UserList = () => {
 
@@ -32,6 +33,7 @@ const UserList = () => {
   }, [userinfo.token]);
  
   return (
+    <PageTransition>
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-[100rem] mx-auto space-y-12 text-start">
 
@@ -79,6 +81,8 @@ users?.map((val,ind)=>(
 
       </div>
     </div>
+    </PageTransition>
+
   );
 }
 

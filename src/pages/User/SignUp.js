@@ -6,6 +6,7 @@ import {AiOutlineEyeInvisible,AiOutlineEye} from 'react-icons/ai'
 import { apiConnector } from '../../redux/Utils/apiConnector';
 import { GoogleLogin } from '@react-oauth/google';
 import { Input } from "../../components/Input";
+import PageTransition from '../PageTransition';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -98,6 +99,7 @@ const SignUp = () => {
   }
   
     return (
+      <PageTransition>
      <div className='min-h-screen bg-background p-6'>
       { !showOtp? (
         <div>
@@ -227,6 +229,8 @@ Enter OTP sent to
   </div>
       )}
      </div>
+      </PageTransition>
+
     )
   }
   

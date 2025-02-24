@@ -10,6 +10,7 @@ import {
   PopoverTrigger,
 } from "../../components/Popover";
 import { Button } from "../../components/Buttons";
+import PageTransition from '../PageTransition';
 
 const FillGraph = () => {
 
@@ -67,7 +68,8 @@ const FillGraph = () => {
        }, [months,userinfo.token,month,arr]);
 
   return (
-    <div>
+    <PageTransition>
+          <div>
 
 <div className='flex flex-col my-6 justify-center mx-5'>
           <h2 className="text-xl font-semibold">Monthly Data For <span className='text-primary'>{months[month-1].month}</span> </h2>
@@ -113,6 +115,8 @@ const FillGraph = () => {
         )
     }
     </div>
+    </PageTransition>
+
   )
 }
 

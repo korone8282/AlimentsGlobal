@@ -15,6 +15,7 @@
   #h3 {
     font-weight: 700;
     font-size: larger;
+    color: gray;
   }
   
   #ring {
@@ -26,8 +27,9 @@
   }
   
   #ring:nth-child(1) {
-    border-bottom: 8px solid rgb(255, 141, 249);
+    border-bottom: 8px solid rgb(0,0,0);
     animation: rotate1 2s linear infinite;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
   
   @keyframes rotate1 {
@@ -41,8 +43,9 @@
   }
   
   #ring:nth-child(2) {
-    border-bottom: 8px solid rgb(255,65,106);
+    border-bottom: 8px solid rgb(0,0,0);
     animation: rotate2 2s linear infinite;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
   
   @keyframes rotate2 {
@@ -56,8 +59,9 @@
   }
   
   #ring:nth-child(3) {
-    border-bottom: 8px solid rgb(0,255,255);
+    border-bottom: 8px solid rgb(0,0,0);
     animation: rotate3 2s linear infinite;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
   
   @keyframes rotate3 {
@@ -71,8 +75,9 @@
   }
   
   #ring:nth-child(4) {
-    border-bottom: 8px solid rgb(252, 183, 55);
+    border-bottom: 8px solid rgb(0,0,0);
     animation: rotate4 2s linear infinite;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.4);
   }
   
   @keyframes rotate4 {

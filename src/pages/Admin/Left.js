@@ -7,6 +7,7 @@ import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '.
 import {toast} from 'react-toastify';
 import { Input } from "../../components/Input";
 import { Search } from "lucide-react";
+import PageTransition from '../PageTransition';
 
 const Left = () => {
 
@@ -128,7 +129,8 @@ const Left = () => {
       }
 
   return (
-        <div className="min-h-screen bg-background p-6">
+       <PageTransition>
+         <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
   
   <div className="flex flex-col justify-center items-center mb-6 md:flex-row md:justify-between">
@@ -310,6 +312,7 @@ const Left = () => {
     
           </div>
         </div>
+       </PageTransition>
       );
 }
 

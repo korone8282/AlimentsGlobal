@@ -10,6 +10,7 @@ import { setGoalDate } from '../../redux/Slices/goalSlice';
 import { CATEGORIES_URL  } from '../../redux/Utils/constants';
 import { PRODUCT_URL } from '../../redux/Utils/constants';
 import styled from 'styled-components';
+import PageTransition from '../PageTransition';
 
 const ProductionGoal = () => {
 
@@ -164,7 +165,9 @@ const inputHandler = async(e) =>{
   }
 
   return (
-    <div className={`min-h-screen bg-background p-6 `}>
+
+    <PageTransition>
+          <div className={`min-h-screen bg-background p-6 `}>
       <div className="max-w-[95rem] mx-auto">
         <div className="mb-8 space-y-7">
           <div className="flex justify-between items-center">
@@ -384,6 +387,8 @@ const inputHandler = async(e) =>{
 
       </div>
     </div>
+    </PageTransition>
+
   );
 }
 

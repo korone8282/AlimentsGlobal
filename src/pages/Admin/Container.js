@@ -7,6 +7,7 @@ import Loader from '../../components/Loader'
 import { toast } from 'react-toastify';
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
 import { Input } from "../../components/Input";
+import PageTransition from '../PageTransition';
 
 const Container = () => {
 
@@ -87,7 +88,8 @@ const inputHandler = async(e) =>{
 
 
       return (
-        <div className="min-h-screen bg-background p-6">
+        <PageTransition>
+           <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
     
@@ -179,6 +181,8 @@ const inputHandler = async(e) =>{
     
           </div>
         </div>
+        </PageTransition>
+       
       );
 }
 

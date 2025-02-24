@@ -7,6 +7,7 @@ import { DATA_URL } from '../../redux/Utils/constants';
 import { PRODUCT_URL } from '../../redux/Utils/constants';
 import { Input } from "../../components/Input";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import PageTransition from '../PageTransition';
 
 const BuyerProducts = () => {
 
@@ -81,7 +82,8 @@ const BuyerProducts = () => {
       }
 
       return (
-        <div className="min-h-screen bg-background p-6">
+        <PageTransition>
+      <div className="min-h-screen bg-background p-6">
           <div className="max-w-[100rem] mx-auto space-y-12 text-start">
     
     
@@ -175,6 +177,8 @@ const BuyerProducts = () => {
     
           </div>
         </div>
+        </PageTransition>
+        
       );
 }
 

@@ -7,6 +7,7 @@ import Loader from '../../components/Loader'
 import { Sun, Moon } from "lucide-react";
 import { Button } from "../../components/Buttons";
 import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from '../../components/Table';
+import PageTransition from '../PageTransition';
 
 const Dispatch = () => {
 
@@ -41,7 +42,8 @@ const Dispatch = () => {
   const sectionData = data.length !==0 ? data.filter( item => item.sectionMain === "Dispatch" && item.dayTime === `${dayArray[+!isDayShift]}`) : [];
 
   return (
-    <div className="min-h-screen bg-background p-6">
+    <PageTransition>
+          <div className="min-h-screen bg-background p-6">
       <div className="max-w-[100rem] mx-auto space-y-12 text-start">
 
 
@@ -155,6 +157,8 @@ const Dispatch = () => {
 
       </div>
     </div>
+    </PageTransition>
+
   );
 }
 
