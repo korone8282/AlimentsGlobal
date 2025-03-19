@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        20: "repeat(20, minmax(0, 1fr))",
+      },
       backgroundImage: {
         'hero': "url('../public/images/123.jpeg')",
         'zero': "url('../public/images/dark.png')",

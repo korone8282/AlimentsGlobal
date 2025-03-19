@@ -192,8 +192,8 @@ const months = [{month:"January"},
                     <TableHead>Previous Balance</TableHead>
                     <TableHead>Pouches (IN)</TableHead>
                     <TableHead>Pouch Filled</TableHead>
-                    <TableHead>Balance</TableHead>
                     <TableHead>Waste Pouches</TableHead>
+                    <TableHead>Balance</TableHead>
                     <TableHead>Current Balance</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -215,9 +215,9 @@ const months = [{month:"January"},
                   <TableCell>{element.name}</TableCell>
                   <TableCell>{element.pouches.filter( item => item.month < month).reduce( (accumulator, obj) => accumulator + obj.remain,0)}</TableCell>
                   <TableCell>{element.pouches[month-1].stock}</TableCell>
-                  <TableCell>{element.pouches.filter( item => item.month < month).reduce( (accumulator, obj) => accumulator + obj.remain,0) + element.pouches[month-1].stock}</TableCell>
-                  <TableCell>{sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</TableCell>
                   <TableCell>{sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0)}</TableCell>
+                  <TableCell>{sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0)}</TableCell>
+                  <TableCell>{element.pouches[month-1].stock - (sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.pouchQuantity,0),0) + sectionData.reduce((acc,obj)=> acc+obj.filter(item=>item.productName === element.name).reduce( (accumulator, obj) => accumulator + obj.empty,0),0) )}</TableCell>
                   <TableCell>{element.pouches.filter( item => item.month <= month).reduce( (accumulator, obj) => accumulator + obj.remain,0)}</TableCell>
                 </TableRow>
               ))
