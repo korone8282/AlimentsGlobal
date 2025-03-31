@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
 	cors({
-		origin: "http://alimentsglobal.netlify.app",
+		origin: "https://alimentsglobal.netlify.app/",
 		credentials: true,
 	})
 );
