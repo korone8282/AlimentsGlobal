@@ -232,6 +232,7 @@ const months = [{month:"January"},
       )
     }
 
+{
             openBox2 ? (
       <div className="space-y-5 fixed h-fit inset-0 mx-auto top-40 bg-background p-5 shadow-black/70 shadow-2xl w-fit rounded-lg">
         <div className='flex justify-between items-center gap-3'>
