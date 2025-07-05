@@ -21,7 +21,9 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(
 	cors({
-		origin: "https://alimentsglobal.netlify.app",
+		origin:'https://arthacuisine.netlify.app',
+		methods: ['GET', 'POST', 'PUT', 'DELETE'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
 		credentials: true,
 	})
 );
